@@ -1,19 +1,34 @@
 package edu.esprit.entities;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class User {
     private int id;
     private String nom;
     private String prenom;
+    private String mdp;
+    private String mail;
+    private boolean statut;
+    private int nb_tentative;
+    private byte[] image;
 
-    public User(){
-
+    public User() {
     }
 
     public User(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
+    }
+
+    public User(String nom, String prenom, String mdp, String mail, boolean statut, int nb_tentative, byte[] image) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mdp = mdp;
+        this.mail = mail;
+        this.statut = statut;
+        this.nb_tentative = nb_tentative;
+        this.image = image;
     }
 
     public User(int id, String nom, String prenom) {
@@ -22,6 +37,18 @@ public class User {
         this.prenom = prenom;
     }
 
+    public User(int id, String nom, String prenom, String mdp, String mail, boolean statut, int nb_tentative, byte[] image) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mdp = mdp;
+        this.mail = mail;
+        this.statut = statut;
+        this.nb_tentative = nb_tentative;
+        this.image = image;
+    }
+
+    // Getters and setters
     public int getId() {
         return id;
     }
@@ -46,11 +73,57 @@ public class User {
         this.prenom = prenom;
     }
 
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public boolean isStatut() {
+        return statut;
+    }
+
+    public void setStatut(boolean statut) {
+        this.statut = statut;
+    }
+
+    public int getNb_tentative() {
+        return nb_tentative;
+    }
+
+    public void setNb_tentative(int nb_tentative) {
+        this.nb_tentative = nb_tentative;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "nom='" + nom + '\'' +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
+                ", mdp='" + mdp + '\'' +
+                ", mail='" + mail + '\'' +
+                ", statut=" + statut +
+                ", nb_tentative=" + nb_tentative +
+                ", image=" + Arrays.toString(image) +
                 '}';
     }
 
