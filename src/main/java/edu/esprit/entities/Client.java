@@ -9,6 +9,7 @@ public class Client extends User {
 
     public Client() {
         super();
+        this.setRole("client"); // Définir le rôle comme "client" par défaut
     }
 
     public Client(String nom, String prenom, Date date_inscription, Date date_naissance, int tel) {
@@ -16,6 +17,7 @@ public class Client extends User {
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
+        this.setRole("client"); // Définir le rôle comme "client"
     }
 
     public Client(int id, String nom, String prenom, Date date_inscription, Date date_naissance, int tel) {
@@ -23,6 +25,7 @@ public class Client extends User {
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
+        this.setRole("client"); // Définir le rôle comme "client"
     }
 
     public Date getDate_inscription() {
@@ -47,5 +50,18 @@ public class Client extends User {
 
     public void setTel(int tel) {
         this.tel = tel;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + getId() +
+                ", nom='" + getNom() + '\'' +
+                ", prenom='" + getPrenom() + '\'' +
+                ", date_inscription=" + date_inscription +
+                ", date_naissance=" + date_naissance +
+                ", tel='" + tel + '\'' +
+                ", role='" + getRole() + '\'' +
+                '}';
     }
 }

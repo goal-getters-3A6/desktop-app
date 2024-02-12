@@ -1,6 +1,7 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Admin;
+import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class AdminService {
     }
 
     public void ajouterAdmin(Admin admin) {
-        String req = "INSERT INTO admin (nom, prenom, mdp, mail, statut, nb_tentative, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO user (nom, prenom, mdp, mail, statut, nb_tentative, image, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, admin.getNom());
@@ -29,15 +30,16 @@ public class AdminService {
             ps.setBoolean(5, admin.isStatut());
             ps.setInt(6, admin.getNb_tentative());
             ps.setBytes(7, admin.getImage());
+            ps.setString(8, "ADMIN"); // Ajout du rôle admin
             ps.executeUpdate();
-            System.out.println("Admin added successfully!");
+            System.out.println("Admin ajouté avec succès !");
         } catch (SQLException e) {
-            System.out.println("Error while adding admin: " + e.getMessage());
+            System.out.println("Erreur lors de l'ajout de l'administrateur : " + e.getMessage());
         }
     }
 
     public void modifierAdmin(Admin admin) {
-        String req = "UPDATE admin SET nom=?, prenom=?, mdp=?, mail=?, statut=?, nb_tentative=?, image=? WHERE id=?";
+        String req = "UPDATE user SET nom=?, prenom=?, mdp=?, mail=?, statut=?, nb_tentative=?, image=? WHERE id=? AND role='ADMIN'";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, admin.getNom());
@@ -49,26 +51,26 @@ public class AdminService {
             ps.setBytes(7, admin.getImage());
             ps.setInt(8, admin.getId());
             ps.executeUpdate();
-            System.out.println("Admin updated successfully!");
+            System.out.println("Admin modifié avec succès !");
         } catch (SQLException e) {
-            System.out.println("Error while updating admin: " + e.getMessage());
+            System.out.println("Erreur lors de la modification de l'administrateur : " + e.getMessage());
         }
     }
 
     public void supprimerAdmin(int id) {
-        String req = "DELETE FROM admin WHERE id=?";
+        String req = "DELETE FROM user WHERE id=? AND role='ADMIN'";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Admin deleted successfully!");
+            System.out.println("Admin supprimé avec succès !");
         } catch (SQLException e) {
-            System.out.println("Error while deleting admin: " + e.getMessage());
+            System.out.println("Erreur lors de la suppression de l'administrateur : " + e.getMessage());
         }
     }
 
     public Admin getAdminById(int id) {
-        String req = "SELECT * FROM admin WHERE id=?";
+        String req = "SELECT * FROM user WHERE id=? AND role='ADMIN'";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
@@ -84,14 +86,14 @@ public class AdminService {
                 return new Admin(id, nom, prenom, mdp, mail, statut, nbTentative, image);
             }
         } catch (SQLException e) {
-            System.out.println("Error while getting admin by id: " + e.getMessage());
+            System.out.println("Erreur lors de la récupération de l'administrateur par ID : " + e.getMessage());
         }
         return null;
     }
 
     public Set<Admin> getAllAdmins() {
         Set<Admin> admins = new HashSet<>();
-        String req = "SELECT * FROM admin";
+        String req = "SELECT * FROM user WHERE role='ADMIN'";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ResultSet res = ps.executeQuery();
@@ -108,7 +110,7 @@ public class AdminService {
                 admins.add(admin);
             }
         } catch (SQLException e) {
-            System.out.println("Error while fetching admins: " + e.getMessage());
+            System.out.println("Erreur lors de la récupération des administrateurs : " + e.getMessage());
         }
         return admins;
     }

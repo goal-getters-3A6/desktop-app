@@ -13,24 +13,24 @@ public class ClientService implements IClientService<Client> {
 
     @Override
     public void ajouterClient(Client client) {
-        String req = "INSERT INTO client (nom, prenom, date_inscription, date_naissance, tel) VALUES (?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = cnx.prepareStatement(req);
+        String req = "INSERT INTO user (nom, prenom, date_inscription, date_naissance, tel, role) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = cnx.prepareStatement(req)) {
             ps.setString(1, client.getNom());
             ps.setString(2, client.getPrenom());
             ps.setDate(3, new java.sql.Date(client.getDate_inscription().getTime()));
             ps.setDate(4, new java.sql.Date(client.getDate_naissance().getTime()));
             ps.setInt(5, client.getTel());
+            ps.setString(6, "CLIENT"); // Ajout du rôle client
             ps.executeUpdate();
-            System.out.println("Client added successfully!");
+            System.out.println("Client ajouté avec succès !");
         } catch (SQLException e) {
-            System.out.println("Error while adding client: " + e.getMessage());
+            System.out.println("Erreur lors de l'ajout du client : " + e.getMessage());
         }
     }
 
     @Override
     public void modifierClient(Client client) {
-        String req = "UPDATE client SET nom=?, prenom=?, date_inscription=?, date_naissance=?, tel=? WHERE id=?";
+        String req = "UPDATE user SET nom=?, prenom=?, date_inscription=?, date_naissance=?, tel=? WHERE id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, client.getNom());
@@ -40,28 +40,28 @@ public class ClientService implements IClientService<Client> {
             ps.setInt(5, client.getTel());
             ps.setInt(6, client.getId());
             ps.executeUpdate();
-            System.out.println("Client updated successfully!");
+            System.out.println("Client modifié avec succès !");
         } catch (SQLException e) {
-            System.out.println("Error while updating client: " + e.getMessage());
+            System.out.println("Erreur lors de la modification du client : " + e.getMessage());
         }
     }
 
     @Override
     public void supprimerClient(int id) {
-        String req = "DELETE FROM client WHERE id=?";
+        String req = "DELETE FROM user WHERE id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Client deleted successfully!");
+            System.out.println("Client supprimé avec succès !");
         } catch (SQLException e) {
-            System.out.println("Error while deleting client: " + e.getMessage());
+            System.out.println("Erreur lors de la suppression du client : " + e.getMessage());
         }
     }
 
     @Override
     public Client getClientById(int id) {
-        String req = "SELECT * FROM client WHERE id=?";
+        String req = "SELECT * FROM user WHERE id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
@@ -75,7 +75,7 @@ public class ClientService implements IClientService<Client> {
                 return new Client(id, nom, prenom, dateInscription, dateNaissance, tel);
             }
         } catch (SQLException e) {
-            System.out.println("Error while getting client by id: " + e.getMessage());
+            System.out.println("Erreur lors de l'obtention du client par ID : " + e.getMessage());
         }
         return null;
     }
@@ -83,7 +83,7 @@ public class ClientService implements IClientService<Client> {
     @Override
     public Set<Client> getAllClients() {
         Set<Client> clients = new HashSet<>();
-        String req = "SELECT * FROM client";
+        String req = "SELECT * FROM user WHERE role='CLIENT'";
         try {
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
@@ -98,7 +98,7 @@ public class ClientService implements IClientService<Client> {
                 clients.add(client);
             }
         } catch (SQLException e) {
-            System.out.println("Error while fetching clients: " + e.getMessage());
+            System.out.println("Erreur lors de la récupération des clients : " + e.getMessage());
         }
         return clients;
     }

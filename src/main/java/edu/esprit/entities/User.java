@@ -12,6 +12,7 @@ public class User {
     private boolean statut;
     private int nb_tentative;
     private byte[] image;
+    private String role;
 
     public User() {
     }
@@ -113,6 +114,14 @@ public class User {
         this.image = image;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -124,6 +133,7 @@ public class User {
                 ", statut=" + statut +
                 ", nb_tentative=" + nb_tentative +
                 ", image=" + Arrays.toString(image) +
+                ", role='" + role + '\'' +
                 '}';
     }
 

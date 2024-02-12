@@ -11,6 +11,7 @@ public class Admin extends User {
 
     public Admin() {
         super();
+        this.setRole("admin"); // Définir le rôle comme "admin" par défaut
     }
 
     public Admin(String nom, String prenom, String mdp, String mail, boolean statut, int nb_tentative, byte[] image) {
@@ -20,6 +21,7 @@ public class Admin extends User {
         this.statut = statut;
         this.nb_tentative = nb_tentative;
         this.image = image;
+        this.setRole("admin"); // Définir le rôle comme "admin"
     }
 
     public Admin(int id, String nom, String prenom, String mdp, String mail, boolean statut, int nb_tentative, byte[] image) {
@@ -29,9 +31,11 @@ public class Admin extends User {
         this.statut = statut;
         this.nb_tentative = nb_tentative;
         this.image = image;
+        this.setRole("admin"); // Définir le rôle comme "admin"
     }
 
-    // Getters and setters for additional attributes
+    // Getters and setters pour les attributs supplémentaires
+
     public String getMdp() {
         return mdp;
     }
@@ -83,6 +87,7 @@ public class Admin extends User {
                 ", statut=" + statut +
                 ", nb_tentative=" + nb_tentative +
                 ", image=" + Arrays.toString(image) +
+                ", role='" + getRole() + '\'' +
                 '}';
     }
 }
