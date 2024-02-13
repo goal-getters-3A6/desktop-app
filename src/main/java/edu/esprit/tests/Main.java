@@ -6,28 +6,45 @@ import edu.esprit.services.AdminService;
 import edu.esprit.services.ClientService;
 
 import java.util.Date;
+import java.util.Set;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
+        // Testing AdminService
         AdminService adminService = new AdminService();
+
+        // Adding an admin
+        Admin adminToAdd = new Admin( "John", "Doe", "admin123", "john@example.com", null);
+        adminService.ajouterAdmin(adminToAdd);
+
+        // Getting admin by ID
+        Admin adminById = adminService.getAdminById(1);
+        System.out.println("Admin retrieved by ID: " + adminById);
+
+        // Getting all admins
+        Set<Admin> allAdmins = adminService.getAllAdmins();
+        System.out.println("All admins: ");
+        for (Admin admin : allAdmins) {
+            System.out.println(admin);
+        }
+
+        // Testing ClientService
         ClientService clientService = new ClientService();
 
-        // Test pour récupérer tous les admins
-        System.out.println("Liste des admins :");
-        System.out.println(adminService.getAllAdmins());
+        // Adding a client
 
-        // Test pour ajouter un nouvel admin
-        Admin nouvelAdmin = new Admin("meryem", "boukraa", "mimi", "mimi.boukraa@esprit.tn", true, 0, new byte[]{});
-        adminService.ajouterAdmin(nouvelAdmin);
-        System.out.println("Admin updated successfully!");
+        Client clientToAdd = new Client("Jane", "Doe", "john@doe.com", "client123", "12345678", true, 0, null, new Date("01/01/2000"));
+        clientService.ajouterClient(clientToAdd);
 
-        // Test pour récupérer tous les clients
-        System.out.println("Liste des clients :");
-        System.out.println(clientService.getAllClients());
+        // Getting client by ID
+        Client clientById = clientService.getClientById(1);
+        System.out.println("Client retrieved by ID: " + clientById);
 
-        // Test pour ajouter un nouveau client
-        Client nouveauClient = new Client("chaima", "boukraa", new Date(), new Date(), 123456789);
-        clientService.ajouterClient(nouveauClient);
-        System.out.println("Client ajouté avec succès!");
+        // Getting all clients
+        Set<Client> allClients = clientService.getAllClients();
+        System.out.println("All clients: ");
+        for (Client client : allClients) {
+            System.out.println(client);
+        }
     }
 }

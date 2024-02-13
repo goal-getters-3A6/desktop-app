@@ -4,6 +4,7 @@ import edu.esprit.entities.Client;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,14 +14,19 @@ public class ClientService implements IClientService<Client> {
 
     @Override
     public void ajouterClient(Client client) {
-        String req = "INSERT INTO user (nom, prenom, date_inscription, date_naissance, tel, role) VALUES (?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO user (nom, prenom, mail,mdp,statut,nb_tentative,image,date_naissance,date_inscription, tel, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = cnx.prepareStatement(req)) {
             ps.setString(1, client.getNom());
             ps.setString(2, client.getPrenom());
-            ps.setDate(3, new java.sql.Date(client.getDate_inscription().getTime()));
-            ps.setDate(4, new java.sql.Date(client.getDate_naissance().getTime()));
-            ps.setInt(5, client.getTel());
-            ps.setString(6, "CLIENT"); // Ajout du rôle client
+            ps.setString(3, client.getMail());
+            ps.setString(4, client.getMdp());
+            ps.setBoolean(5, client.getStatut());
+            ps.setInt(6, client.getNb_tentative());
+            ps.setBytes(7, client.getImage());
+            ps.setDate(8, new java.sql.Date(client.getDate_naissance().getTime()));
+            ps.setDate(9, new java.sql.Date(LocalDate.now().toEpochDay()));
+            ps.setString(10, client.getTel());
+            ps.setString(11, "CLIENT");
             ps.executeUpdate();
             System.out.println("Client ajouté avec succès !");
         } catch (SQLException e) {
@@ -30,15 +36,18 @@ public class ClientService implements IClientService<Client> {
 
     @Override
     public void modifierClient(Client client) {
-        String req = "UPDATE user SET nom=?, prenom=?, date_inscription=?, date_naissance=?, tel=? WHERE id=?";
-        try {
-            PreparedStatement ps = cnx.prepareStatement(req);
+        String req = "UPDATE user SET nom=?, prenom=?, mail=?, mdp=?, statut=?, nb_tentative=?, image=?, date_naissance=?, tel=? WHERE id=? AND role='CLIENT'";
+        try (PreparedStatement ps = cnx.prepareStatement(req)) {
             ps.setString(1, client.getNom());
             ps.setString(2, client.getPrenom());
-            ps.setDate(3, new java.sql.Date(client.getDate_inscription().getTime()));
-            ps.setDate(4, new java.sql.Date(client.getDate_naissance().getTime()));
-            ps.setInt(5, client.getTel());
-            ps.setInt(6, client.getId());
+            ps.setString(3, client.getMail());
+            ps.setString(4, client.getMdp());
+            ps.setBoolean(5, client.getStatut());
+            ps.setInt(6, client.getNb_tentative());
+            ps.setBytes(7, client.getImage());
+            ps.setDate(8, new java.sql.Date(client.getDate_naissance().getTime()));
+            ps.setString(9, client.getTel());
+            ps.setInt(10, client.getId());
             ps.executeUpdate();
             System.out.println("Client modifié avec succès !");
         } catch (SQLException e) {
@@ -71,8 +80,10 @@ public class ClientService implements IClientService<Client> {
                 String prenom = res.getString("prenom");
                 Date dateInscription = res.getDate("date_inscription");
                 Date dateNaissance = res.getDate("date_naissance");
-                int tel = res.getInt("tel");
-                return new Client(id, nom, prenom, dateInscription, dateNaissance, tel);
+                byte[] image = res.getBytes("image");
+                String mail = res.getString("mail");
+                String tel = res.getString("tel");
+                return new Client(id, nom, prenom, mail,image, dateInscription, dateNaissance, tel);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'obtention du client par ID : " + e.getMessage());
@@ -93,8 +104,10 @@ public class ClientService implements IClientService<Client> {
                 String prenom = res.getString("prenom");
                 Date dateInscription = res.getDate("date_inscription");
                 Date dateNaissance = res.getDate("date_naissance");
-                int tel = res.getInt("tel");
-                Client client = new Client(id, nom, prenom, dateInscription, dateNaissance, tel);
+                byte[] image = res.getBytes("image");
+                String mail = res.getString("mail");
+                String tel = res.getString("tel");
+                Client client = new Client(id, nom, prenom,mail,image, dateInscription, dateNaissance, tel);
                 clients.add(client);
             }
         } catch (SQLException e) {

@@ -5,27 +5,43 @@ import java.util.Date;
 public class Client extends User {
     private Date date_inscription;
     private Date date_naissance;
-    private int tel;
 
-    public Client() {
-        super();
-        this.setRole("client"); // Définir le rôle comme "client" par défaut
+    private boolean statut;
+    private int nb_tentative;
+    private String tel;
+
+
+
+    public Client(String nom, String prenom, String mdp, String mail, String tel,Boolean statut, int nb_tentative,byte[] image, Date date_naissance) {
+        super(nom, prenom, mail, mdp,image );
+        this.date_naissance = date_naissance;
+        this.tel = tel;
+        this.statut = statut;
+        this.nb_tentative = nb_tentative;
     }
 
-    public Client(String nom, String prenom, Date date_inscription, Date date_naissance, int tel) {
-        super(nom, prenom);
+    public Client(int id, String nom, String prenom, String mdp, String mail, String tel,Boolean statut, int nb_tentative,byte[] image, Date date_inscription, Date date_naissance) {
+        super(id, nom, prenom, mail, mdp, image);
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
-        this.setRole("client"); // Définir le rôle comme "client"
+        this.statut = statut;
+        this.nb_tentative = nb_tentative;
     }
 
-    public Client(int id, String nom, String prenom, Date date_inscription, Date date_naissance, int tel) {
-        super(id, nom, prenom);
+    public Client(int id, String nom, String prenom, String mdp, String mail, String tel,Boolean statut, int nb_tentative,byte[] image, Date date_naissance) {
+        super(id, nom, prenom, mail, mdp, image);
+        this.date_naissance = date_naissance;
+        this.tel = tel;
+        this.statut = statut;
+        this.nb_tentative = nb_tentative;
+    }
+
+    public Client (int id , String nom , String prenom , String mail , byte[] image , Date date_inscription , Date date_naissance , String tel){
+        super(id,nom,prenom,mail,image);
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
-        this.setRole("client"); // Définir le rôle comme "client"
     }
 
     public Date getDate_inscription() {
@@ -44,13 +60,31 @@ public class Client extends User {
         this.date_naissance = date_naissance;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
+
+    public boolean getStatut() {
+        return statut;
+    }
+
+    public void setStatut(boolean statut) {
+        this.statut = statut;
+    }
+
+    public int getNb_tentative() {
+        return nb_tentative;
+    }
+
+    public void setNb_tentative(int nb_tentative) {
+        this.nb_tentative = nb_tentative;
+    }
+
+
 
     @Override
     public String toString() {
@@ -60,8 +94,9 @@ public class Client extends User {
                 ", prenom='" + getPrenom() + '\'' +
                 ", date_inscription=" + date_inscription +
                 ", date_naissance=" + date_naissance +
+                ", statut=" + statut +
+                ", nb_tentative=" + nb_tentative +
                 ", tel='" + tel + '\'' +
-                ", role='" + getRole() + '\'' +
                 '}';
     }
 }

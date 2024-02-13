@@ -20,17 +20,15 @@ public class AdminService {
     }
 
     public void ajouterAdmin(Admin admin) {
-        String req = "INSERT INTO user (nom, prenom, mdp, mail, statut, nb_tentative, image, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO user (nom, prenom, mail, mdp, image, role) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, admin.getNom());
             ps.setString(2, admin.getPrenom());
-            ps.setString(3, admin.getMdp());
-            ps.setString(4, admin.getMail());
-            ps.setBoolean(5, admin.isStatut());
-            ps.setInt(6, admin.getNb_tentative());
-            ps.setBytes(7, admin.getImage());
-            ps.setString(8, "ADMIN"); // Ajout du rôle admin
+            ps.setString(3, admin.getMail());
+            ps.setString(4, admin.getMdp());
+            ps.setBytes(5, admin.getImage());
+            ps.setString(6, "ADMIN"); // Ajout du rôle admin
             ps.executeUpdate();
             System.out.println("Admin ajouté avec succès !");
         } catch (SQLException e) {
@@ -39,17 +37,15 @@ public class AdminService {
     }
 
     public void modifierAdmin(Admin admin) {
-        String req = "UPDATE user SET nom=?, prenom=?, mdp=?, mail=?, statut=?, nb_tentative=?, image=? WHERE id=? AND role='ADMIN'";
+        String req = "UPDATE user SET nom=?, prenom=?, mdp=?, mail=?, image=? WHERE id=? AND role='ADMIN'";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, admin.getNom());
             ps.setString(2, admin.getPrenom());
             ps.setString(3, admin.getMdp());
             ps.setString(4, admin.getMail());
-            ps.setBoolean(5, admin.isStatut());
-            ps.setInt(6, admin.getNb_tentative());
-            ps.setBytes(7, admin.getImage());
-            ps.setInt(8, admin.getId());
+            ps.setBytes(5, admin.getImage());
+            ps.setInt(6, admin.getId());
             ps.executeUpdate();
             System.out.println("Admin modifié avec succès !");
         } catch (SQLException e) {
@@ -80,10 +76,8 @@ public class AdminService {
                 String prenom = res.getString("prenom");
                 String mdp = res.getString("mdp");
                 String mail = res.getString("mail");
-                boolean statut = res.getBoolean("statut");
-                int nbTentative = res.getInt("nb_tentative");
                 byte[] image = res.getBytes("image");
-                return new Admin(id, nom, prenom, mdp, mail, statut, nbTentative, image);
+                return new Admin(id, nom, prenom, mdp, mail, image);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération de l'administrateur par ID : " + e.getMessage());
@@ -103,10 +97,8 @@ public class AdminService {
                 String prenom = res.getString("prenom");
                 String mdp = res.getString("mdp");
                 String mail = res.getString("mail");
-                boolean statut = res.getBoolean("statut");
-                int nbTentative = res.getInt("nb_tentative");
                 byte[] image = res.getBytes("image");
-                Admin admin = new Admin(id, nom, prenom, mdp, mail, statut, nbTentative, image);
+                Admin admin = new Admin(id, nom, prenom, mdp, mail, image);
                 admins.add(admin);
             }
         } catch (SQLException e) {
