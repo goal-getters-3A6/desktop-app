@@ -3,6 +3,8 @@ package edu.esprit.services;
 import edu.esprit.entities.Seance;
 import edu.esprit.utils.DataSource;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,6 +14,8 @@ public class ServiceSeance implements IService  <Seance> {
     Connection cnx= DataSource.getInstance().getCnx();
     @Override
     public void ajouter(Seance s) {
+        //
+
         String req=" INSERT INTO `seance` (`nom`,`horaire`,`jourseance`,`numesalle`,`duree`) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
@@ -32,6 +36,7 @@ public class ServiceSeance implements IService  <Seance> {
 
     @Override
     public void modifier(Seance s) {
+
         String req = "UPDATE `seance` SET nom=?,horaire = ?, jourseance = ? , numesalle=?, duree=? WHERE idseance = ?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
