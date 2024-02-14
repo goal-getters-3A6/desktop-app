@@ -1,9 +1,5 @@
 package edu.esprit.services;
-
-import edu.esprit.entities.Personne;
-
 import java.util.Set;
-
 public interface IService <T>{
     public void ajouter(T p);
     public void modifier(T p);
