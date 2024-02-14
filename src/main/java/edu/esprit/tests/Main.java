@@ -9,12 +9,12 @@ public class Main {
     public static void main(String[] args) {
         ServiceEquipement sp = new ServiceEquipement();
         ServiceAvisEquipement sa = new ServiceAvisEquipement();
-        //System.out.println(sp.getAll());
+        System.out.println(sp.getAll());
         Equipement eq = new Equipement("tapis","behia","doc","ff","cat",16);
         Equipement eq1 = new Equipement(6,"tapisss","behia","doc","hiii","ee",10);
        // sp.ajouter(eq);
        // sp.supprimer(eq1.getIdEq());
-      //  sp.modifier(eq1);
+       //  sp.modifier(eq1);
 
 
      /*  Equipement equipement = sp.getOneById(eq1.getIdEq());

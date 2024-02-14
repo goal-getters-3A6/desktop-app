@@ -75,7 +75,7 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
                 String categEq = res.getString("categEq");
                 int noteEq = res.getInt("noteEq");
 
-                Equipement eq = new Equipement(idEq, nomEq, descEq, docEq, imageEq, categEq, noteEq);
+                Equipement eq = new Equipement(idEq, nomEq, descEq, docEq, imageEq, categEq, noteEq );
 
                 e = new AvisEquipement(idAEq,commAEq, eq);
             }

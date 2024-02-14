@@ -1,10 +1,13 @@
 package edu.esprit.services;
 
+import edu.esprit.entities.AvisEquipement;
 import edu.esprit.entities.Equipement;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ServiceEquipement implements IService<Equipement>{
@@ -97,6 +100,7 @@ public class ServiceEquipement implements IService<Equipement>{
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
+                // À l'intérieur de votre boucle while
                 int idEq = res.getInt(1);
                 String nomEq = res.getString("nomEq");
                 String descEq = res.getString("descEq");
@@ -105,8 +109,16 @@ public class ServiceEquipement implements IService<Equipement>{
                 String categEq = res.getString("categEq");
                 int noteEq = res.getInt("noteEq");
 
-                Equipement eq = new Equipement(idEq,  nomEq,  descEq,  docEq,  imageEq,  categEq,  noteEq);
+
+                Set<AvisEquipement> avisEquipements = getAvisForEquipement(idEq);
+
+
+
+                Equipement eq = new Equipement(idEq,  nomEq,  descEq,  docEq,  imageEq,  categEq,  noteEq ,avisEquipements );
+
+
                 equipement.add(eq);
+
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -115,5 +127,23 @@ public class ServiceEquipement implements IService<Equipement>{
 
         return equipement;
     }
+
+    private Set<AvisEquipement> getAvisForEquipement(int equipementId) {
+        Set<AvisEquipement> avisEquipements = new HashSet<>();
+        String req = "SELECT * FROM avisequipement WHERE idEq = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, equipementId);
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                String commAEq = res.getString("commAEq");
+                avisEquipements.add(new AvisEquipement(commAEq));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return avisEquipements;
+    }
+
 
 }

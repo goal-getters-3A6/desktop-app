@@ -14,7 +14,11 @@ public class AvisEquipement {
         this.commAEq = commAEq;
         this.equipement = equipement;
     }
+    public AvisEquipement(String commAEq) {
 
+        this.commAEq = commAEq;
+
+    }
     public AvisEquipement(String commAEq, Equipement equipement) {
         this.commAEq = commAEq;
         this.equipement = equipement;
