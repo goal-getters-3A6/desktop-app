@@ -2,7 +2,7 @@ package edu.esprit.services;
 
 import java.util.Set;
 
-public interface IAdminService<T>{
+public interface IService<T>{
     //Impl Admin Service
     public void ajouterAdmin(T p);
     public void modifierAdmin(T p);

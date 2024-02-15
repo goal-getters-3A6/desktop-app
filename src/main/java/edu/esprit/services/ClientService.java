@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ClientService implements IAdminService<Client> {
+public class ClientService implements IService<Client> {
 
     Connection cnx = DataSource.getInstance().getCnx();
     private Client client;
