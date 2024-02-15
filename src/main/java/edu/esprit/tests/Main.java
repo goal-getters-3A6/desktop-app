@@ -4,6 +4,7 @@ import edu.esprit.entities.Admin;
 import edu.esprit.entities.Client;
 import edu.esprit.services.AdminService;
 import edu.esprit.services.ClientService;
+import edu.esprit.services.IAdminService;
 
 import java.util.Date;
 import java.util.Set;
@@ -14,7 +15,7 @@ public class Main{
         AdminService adminService = new AdminService();
 
         // Adding an admin
-        Admin adminToAdd = new Admin( "boukraa", "meryem", "admin123", "meryem.boukraa@esprit.tn", null);
+        Admin adminToAdd = new Admin("boukraa", "meryem", "admin123", "meryem.boukraa@esprit.tn", null);
         adminService.ajouterAdmin(adminToAdd);
 
         // Getting admin by ID
@@ -28,23 +29,22 @@ public class Main{
             System.out.println(admin);
         }
 
+
         // Testing ClientService
         ClientService clientService = new ClientService();
 
-        // Adding a client
 
         Client clientToAdd = new Client("boukraa", "mayar", "mayarboukraa@gmail.com", "client123", "12345678", true, 0, null, new Date("01/01/2000"));
-        clientService.ajouterClient(clientToAdd);
+        clientService.ajouterAdmin(clientToAdd);
 
         // Getting client by ID
-        Client clientById = clientService.getClientById(1);
+        Client clientById = clientService.getAdminById(3);
         System.out.println("Client retrieved by ID: " + clientById);
 
         // Getting all clients
-        Set<Client> allClients = clientService.getAllClients();
+        Set<Client> allClients = clientService.getAllAdmins();
         System.out.println("All clients: ");
         for (Client client : allClients) {
             System.out.println(client);
-        }
-    }
-}
+
+    }}}
