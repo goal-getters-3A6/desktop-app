@@ -14,7 +14,7 @@ public class Main{
         AdminService adminService = new AdminService();
 
         // Adding an admin
-        Admin adminToAdd = new Admin( "John", "Doe", "admin123", "john@example.com", null);
+        Admin adminToAdd = new Admin( "boukraa", "meryem", "admin123", "meryem.boukraa@esprit.tn", null);
         adminService.ajouterAdmin(adminToAdd);
 
         // Getting admin by ID
@@ -33,7 +33,7 @@ public class Main{
 
         // Adding a client
 
-        Client clientToAdd = new Client("Jane", "Doe", "john@doe.com", "client123", "12345678", true, 0, null, new Date("01/01/2000"));
+        Client clientToAdd = new Client("boukraa", "mayar", "mayarboukraa@gmail.com", "client123", "12345678", true, 0, null, new Date("01/01/2000"));
         clientService.ajouterClient(clientToAdd);
 
         // Getting client by ID

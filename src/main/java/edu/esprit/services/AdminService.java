@@ -22,14 +22,14 @@ public class AdminService {
     public void ajouterAdmin(Admin admin) {
         String req = "INSERT INTO user (nom, prenom, mail, mdp, image, role) VALUES (?, ?, ?, ?, ?, ?)";
         try {
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, admin.getNom());
-            ps.setString(2, admin.getPrenom());
-            ps.setString(3, admin.getMail());
-            ps.setString(4, admin.getMdp());
-            ps.setBytes(5, admin.getImage());
-            ps.setString(6, "ADMIN"); // Ajout du rôle admin
-            ps.executeUpdate();
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            Ps.setString(1, admin.getNom());
+            Ps.setString(2, admin.getPrenom());
+            Ps.setString(3, admin.getMail());
+            Ps.setString(4, admin.getMdp());
+            Ps.setBytes(5, admin.getImage());
+            Ps.setString(6, "ADMIN"); // Ajout du rôle admin
+            Ps.executeUpdate();
             System.out.println("Admin ajouté avec succès !");
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout de l'administrateur : " + e.getMessage());
@@ -39,14 +39,14 @@ public class AdminService {
     public void modifierAdmin(Admin admin) {
         String req = "UPDATE user SET nom=?, prenom=?, mdp=?, mail=?, image=? WHERE id=? AND role='ADMIN'";
         try {
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, admin.getNom());
-            ps.setString(2, admin.getPrenom());
-            ps.setString(3, admin.getMdp());
-            ps.setString(4, admin.getMail());
-            ps.setBytes(5, admin.getImage());
-            ps.setInt(6, admin.getId());
-            ps.executeUpdate();
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            Ps.setString(1, admin.getNom());
+            Ps.setString(2, admin.getPrenom());
+            Ps.setString(3, admin.getMdp());
+            Ps.setString(4, admin.getMail());
+            Ps.setBytes(5, admin.getImage());
+            Ps.setInt(6, admin.getId());
+            Ps.executeUpdate();
             System.out.println("Admin modifié avec succès !");
         } catch (SQLException e) {
             System.out.println("Erreur lors de la modification de l'administrateur : " + e.getMessage());
@@ -56,9 +56,9 @@ public class AdminService {
     public void supprimerAdmin(int id) {
         String req = "DELETE FROM user WHERE id=? AND role='ADMIN'";
         try {
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, id);
-            ps.executeUpdate();
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            Ps.setInt(1, id);
+            Ps.executeUpdate();
             System.out.println("Admin supprimé avec succès !");
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression de l'administrateur : " + e.getMessage());
@@ -68,9 +68,9 @@ public class AdminService {
     public Admin getAdminById(int id) {
         String req = "SELECT * FROM user WHERE id=? AND role='ADMIN'";
         try {
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, id);
-            ResultSet res = ps.executeQuery();
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            Ps.setInt(1, id);
+            ResultSet res = Ps.executeQuery();
             if (res.next()) {
                 String nom = res.getString("nom");
                 String prenom = res.getString("prenom");
@@ -89,8 +89,8 @@ public class AdminService {
         Set<Admin> admins = new HashSet<>();
         String req = "SELECT * FROM user WHERE role='ADMIN'";
         try {
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ResultSet res = ps.executeQuery();
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            ResultSet res = Ps.executeQuery();
             while (res.next()) {
                 int id = res.getInt("id");
                 String nom = res.getString("nom");
