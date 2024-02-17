@@ -8,13 +8,17 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ClientService implements IService<Client> {
+public class ClientService  {
 
-    Connection cnx = DataSource.getInstance().getCnx();
+    private final Connection cnx;
+
+    public ClientService() {
+        this.cnx = DataSource.getInstance().getCnx();
+    }
+
     private Client client;
 
-    @Override
-    public void ajouterAdmin(Client p) {
+    public void ajouterClient(Client p) {
 
             String req = "INSERT INTO user (nom, prenom, mail,mdp,statut,nb_tentative,image,date_naissance,date_inscription, tel, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement Ps = cnx.prepareStatement(req)) {
@@ -36,8 +40,8 @@ public class ClientService implements IService<Client> {
             }
         }
 
-    @Override
-    public void modifierAdmin(Client p) {
+
+    public void modifierClient(Client p) {
         String req = "UPDATE user SET nom=?, prenom=?, mail=?, mdp=?, statut=?, nb_tentative=?, image=?, date_naissance=?, tel=? WHERE id=? AND role='CLIENT'";
         try (PreparedStatement Ps = cnx.prepareStatement(req)) {
             Ps.setString(1, client.getNom());
@@ -58,8 +62,8 @@ public class ClientService implements IService<Client> {
 
     }
 
-    @Override
-    public void supprimerAdmin(int id) {
+
+    public void supprimerClient(int id) {
         String req = "DELETE FROM user WHERE id=?";
         try {
             PreparedStatement Ps = cnx.prepareStatement(req);
@@ -71,8 +75,8 @@ public class ClientService implements IService<Client> {
         }
     }
 
-    @Override
-    public Client getAdminById(int id) {
+
+    public Client getClientById(int id) {
         String req = "SELECT * FROM user WHERE id=?";
         try {
             PreparedStatement Ps = cnx.prepareStatement(req);
@@ -97,8 +101,8 @@ public class ClientService implements IService<Client> {
 
 
 
-    @Override
-    public Set<Client> getAllAdmins() {
+
+    public Set<Client> getAllClients() {
 
         Set<Client> clients = new HashSet<>();
         String req = "SELECT * FROM user WHERE role='CLIENT'";

@@ -9,5 +9,13 @@ public interface IService<T>{
     public void supprimerAdmin(int id);
     public T getAdminById(int id);
     public Set<T> getAllAdmins();
+    //Impl Client Service
+    public void ajouterClient(T p);
+    public void modifierClient(T p);
+    public void supprimerClient(int id);
+    public T getClientById(int id);
+    public Set<T> getAllClients();
+    //Impl UserService
+    public boolean login(String email, String password);
 
 }

@@ -34,14 +34,14 @@ public class Main{
 
 
         Client clientToAdd = new Client("boukraa", "mayar", "mayarboukraa@gmail.com", "client123", "12345678", true, 0, null, new Date("01/01/2000"));
-        clientService.ajouterAdmin(clientToAdd);
+        clientService.ajouterClient(clientToAdd);
 
         // Getting client by ID
-        Client clientById = clientService.getAdminById(3);
+        Client clientById = clientService.getClientById(3);
         System.out.println("Client retrieved by ID: " + clientById);
 
         // Getting all clients
-        Set<Client> allClients = clientService.getAllAdmins();
+        Set<Client> allClients = clientService.getAllClients();
         System.out.println("All clients: ");
         for (Client client : allClients) {
             System.out.println(client);
