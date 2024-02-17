@@ -6,7 +6,9 @@ import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ServiceReservation implements IService <Reservation>{
@@ -34,13 +36,13 @@ public class ServiceReservation implements IService <Reservation>{
 
     }*/
     @Override
-    public void ajouter(Reservation r)
+    public void ajouter(Reservation r) throws SQLException
     {
         System.out.println("id user dans ajouter"+r.getUser().getId());
         System.out.println(r.getSeance().getIdseance());
 
         String req = "INSERT INTO reservation (ids,nom,prenom,age,poids,taille,sexe,iduser ) VALUES (?,?,?,?,?,?,?,?)";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1,r.getSeance().getIdseance());
             ps.setString(2, r.getNom());
@@ -53,13 +55,11 @@ public class ServiceReservation implements IService <Reservation>{
 
             ps.executeUpdate();
             System.out.println("Réservation ajoutée !");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
     @Override
-    public void modifier(Reservation r) {
+    public void modifier(Reservation r) throws SQLException {
         //1ere methode
        /* System.out.println(r.getNom());
         int idr =getIdReservationByNom(r.getNom());
@@ -77,7 +77,7 @@ public class ServiceReservation implements IService <Reservation>{
         }*/
         //2eme methode
         String req = "UPDATE reservation SET  nom=?, prenom=?, age=?, poids=?, taille=?,sexe=? WHERE idreservation = ?";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             System.out.println(r.getSeance());
           //  ps.setInt(1, r.getSeance().getIdseance());
@@ -91,34 +91,27 @@ public class ServiceReservation implements IService <Reservation>{
 
             ps.executeUpdate();
             System.out.println("reservation mise à jour !");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
 
     }
 
     @Override
-    public void supprimer(int id) {
+    public void supprimer(int id) throws SQLException {
         String req = "DELETE FROM reservation WHERE idreservation = ?";
 
-        try {
+
             PreparedStatement statement = cnx.prepareStatement(req);
             statement.setInt(1, id);
             statement.executeUpdate();
             System.out.println("supprimer saye");
-        }
-
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
 
     }
 
     @Override
-    public Reservation getOneById(int id) {
+    public Reservation getOneById(int id) throws SQLException {
         Reservation r = null;
         String req = "SELECT * FROM reservation WHERE idreservation = ?";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ResultSet res = ps.executeQuery();
@@ -143,17 +136,15 @@ public class ServiceReservation implements IService <Reservation>{
                 u=cs.getClientById(idUser);
                 r = new Reservation(idReservation,s,nom,prenom,age,poids,taille,sexe,u);
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
         return r;
     }
 
     @Override
-    public Set<Reservation> getAll() {
-        Set<Reservation> reservations = new HashSet<>();
+    public List<Reservation> getAll() throws SQLException {
+        List<Reservation> reservations = new ArrayList<>();
         String req = "SELECT * FROM reservation";
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()) {
@@ -178,9 +169,7 @@ public class ServiceReservation implements IService <Reservation>{
 
                   reservations.add(r);
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
         return reservations;
     }
     public int getIdReservationByNom(String nomReservaation) {

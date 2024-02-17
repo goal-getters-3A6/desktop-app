@@ -30,7 +30,14 @@ private User user;
         this.user=user;
 
     }
+    public Reservation( String nom, String prenom, int age, float poids, float taille) {
 
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.poids = poids;
+        this.taille = taille;
+    }
     public Reservation(Seance seance, String nom, String prenom, int age, float poids, float taille, String sexe,User user) {
         this.seance = seance;
         this.nom = nom;

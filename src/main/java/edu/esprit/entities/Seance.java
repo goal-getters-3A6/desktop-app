@@ -8,31 +8,34 @@ public class Seance {
     private int idseance;
     private String nom;
     private Time horaire;
-    private  String jour;
-    private int numsalle;
+    private  String jourseance;
+    private int numesalle;
     private String duree;
+    private String imageseance;
     final private  int nbMax=10;
     public Seance()
     {
 
     }
-    public Seance(int idseance,String nom,Time horaire,String jour,int numsalle,String duree )
+    public Seance(int idseance,String nom,Time horaire,String jour,int numsalle,String duree,String image)
     {
         this.idseance=idseance;
         this.nom=nom;
         this.horaire=horaire;
-        this.jour=jour;
-        this.numsalle=numsalle;
+        this.jourseance=jour;
+        this.numesalle=numsalle;
         this.duree=duree;
+        this.imageseance=image;
 
     }
-    public Seance(String nom,Time horaire,String jour,int numsalle,String duree )
+    public Seance(String nom,Time horaire,String jour,int numsalle,String duree,String image )
     {
         this.nom=nom;
         this.horaire=horaire;
-        this.jour=jour;
-        this.numsalle=numsalle;
+        this.jourseance=jour;
+        this.numesalle=numsalle;
         this.duree=duree;
+        this.imageseance=image;
 
     }
 
@@ -48,17 +51,19 @@ public class Seance {
         return horaire;
     }
 
-    public String getJour() {
-        return jour;
+    public String getJourseance() {
+        return jourseance;
     }
 
-    public int getNumsalle() {
-        return numsalle;
+    public int getNumesalle() {
+        return numesalle;
     }
 
     public String getDuree() {
         return duree;
     }
+
+    public String getImageseance(){return imageseance;}
 
     public int getNbMax() {
         return nbMax;
@@ -76,17 +81,21 @@ public class Seance {
         this.horaire = horaire;
     }
 
-    public void setJour(String jour) {
-        this.jour = jour;
+    public void setJourseance(String jour) {
+        this.jourseance = jour;
     }
 
-    public void setNumsalle(int numsalle) {
-        this.numsalle = numsalle;
+    public void setNumesalle(int numsalle) {
+        this.numesalle = numsalle;
     }
 
     public void setDuree(String duree) {
         this.duree = duree;
     }
+    public void setImageseance(String image) {
+        this.imageseance = image;
+    }
+
 
     @Override
     public String toString() {
@@ -94,9 +103,10 @@ public class Seance {
                 "idseance=" + idseance +
                 ", nom='" + nom + '\'' +
                 ", horaire=" + horaire +
-                ", jour='" + jour + '\'' +
-                ", numsalle=" + numsalle +
+                ", jour='" + jourseance + '\'' +
+                ", numsalle=" + numesalle +
                 ", duree='" + duree + '\'' +
+                ", image='" + imageseance + '\'' +
                 '}';
     }
 
