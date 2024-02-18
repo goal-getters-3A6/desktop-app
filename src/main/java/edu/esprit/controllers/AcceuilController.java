@@ -7,16 +7,23 @@ import javafx.scene.control.TextField;
 
 public class AcceuilController {
     @FXML
+    private TextField nomTxt; // Value injected by FXMLLoader
+    @FXML
+    private TextField prenomTxt;
+    @FXML
     private TextField emailTxt;
     @FXML
     private PasswordField mdpTxt;
-UserService userService = new UserService();
+    UserService userService = new UserService();
+
+
     @FXML
-     void login() throws   Exception{
-        if(userService.login( emailTxt.getText(), mdpTxt.getText())){
+    void login() throws Exception {
+        if (userService.login(emailTxt.getText(), mdpTxt.getText())) {
             System.out.println("Login success");
-        }else{
+        } else {
             System.out.println("Login failed");
         }
     }
+
 }
