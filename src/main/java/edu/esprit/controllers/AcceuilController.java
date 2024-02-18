@@ -6,10 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class AcceuilController {
-    @FXML
-    private TextField nomTxt; // Value injected by FXMLLoader
-    @FXML
-    private TextField prenomTxt;
+
     @FXML
     private TextField emailTxt;
     @FXML

@@ -18,7 +18,7 @@ public class ClientService  {
 
     private Client client;
 
-    public void ajouterClient(Client p) {
+    public boolean ajouterClient(Client p) {
 
             String req = "INSERT INTO user (nom, prenom, mail,mdp,statut,nb_tentative,image,date_naissance,date_inscription, tel, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement Ps = cnx.prepareStatement(req)) {
@@ -30,13 +30,15 @@ public class ClientService  {
                 Ps.setInt(6, p.getNb_tentative());
                 Ps.setBytes(7, p.getImage());
                 Ps.setDate(8, new java.sql.Date(p.getDate_naissance().getTime()));
-                Ps.setDate(9, new java.sql.Date(LocalDate.now().toEpochDay()));
+                Ps.setDate(9, new java.sql.Date(Date.valueOf(LocalDate.now()).getTime()));
                 Ps.setString(10, p.getTel());
                 Ps.setString(11, "CLIENT");
                 Ps.executeUpdate();
                 System.out.println("Client ajouté avec succès !");
+                return true;
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'ajout du client : " + e.getMessage());
+                return false;
             }
         }
 

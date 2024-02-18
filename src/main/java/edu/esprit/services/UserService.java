@@ -1,11 +1,10 @@
 package edu.esprit.services;
 
+import edu.esprit.entities.Client;
 import edu.esprit.utils.DataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 
 public class UserService {
     private final Connection cnx;
@@ -30,19 +29,4 @@ public class UserService {
         return false;
     }
 
-
-    public boolean register(String email, String password) {
-        String req = "INSERT INTO user (mail, mdp, role) VALUES (?, ?, ?)";
-        try {
-            PreparedStatement Ps = cnx.prepareStatement(req);
-            Ps.setString(1, email);
-            Ps.setString(2, password);
-            Ps.setString(3, "CLIENT");
-            Ps.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de l'inscription : " + e.getMessage());
-        }
-        return false;
-    }
 }
