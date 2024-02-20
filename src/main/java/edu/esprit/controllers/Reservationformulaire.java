@@ -6,17 +6,24 @@ import edu.esprit.entities.User;
 import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceReservation;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Reservationformulaire {
@@ -56,6 +63,9 @@ public class Reservationformulaire {
     private TextField Poids;
     @FXML
     private Button btnmesreservations;
+
+    @FXML
+    private Button btnstatistiques;
     @FXML
     private TextField Taille;
     @FXML
@@ -115,6 +125,7 @@ public class Reservationformulaire {
     private Seance seance; // Séance sélectionnée pour la réservation
    private final ServiceReservation sr=new ServiceReservation();
     public void initialize() throws IOException {
+
         // Créer un groupe pour les RadioButton
         sexeToggleGroup = new ToggleGroup();
 
@@ -487,4 +498,11 @@ public class Reservationformulaire {
     void mesreservations(ActionEvent event) {
 
     }
+    @FXML
+    void rechercher(ActionEvent event) {
+
+    }
+
+
+
     }

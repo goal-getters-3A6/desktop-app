@@ -6,10 +6,7 @@ import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ServiceReservation implements IService <Reservation>{
     Connection cnx= DataSource.getInstance().getCnx();
@@ -187,5 +184,80 @@ public class ServiceReservation implements IService <Reservation>{
             System.out.println(e.getMessage());
         }
         return -1;
+    }
+    public Map<String, Integer> getReservationFrequencyMap() {
+        Map<String, Integer> frequencyMap = new HashMap<>();
+
+        // Parcourir la liste de toutes les séances
+        try {
+            for (Reservation reservation : getAll()) {
+                String sex = reservation.getSexe();
+
+                // Mettre à jour la fréquence du nom de séance dans la carte
+                frequencyMap.put(sex, frequencyMap.getOrDefault(sex, 0) + 1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return frequencyMap;
+    }
+
+    public List<Reservation> getAllByNom(String nom) throws SQLException {
+        List<Reservation> reservations = new ArrayList<>();
+        String req = "SELECT * FROM reservation WHERE nompersonne = ?";
+
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, nom);
+
+        ResultSet res = ps.executeQuery();
+        while (res.next()) {
+            int idReservation = res.getInt("idreservation");
+            int idSeance = res.getInt("ids");
+            Seance s= new Seance();
+            ServiceSeance sr=new ServiceSeance();
+            s=  sr.getOneById(idSeance);
+            String prenom = res.getString("prenom");
+            int age = res.getInt("age");
+            float poids = res.getFloat("poids");
+            float taille = res.getFloat("taille");
+            String sexe = res.getString("sexe");
+            int idUser = res.getInt("iduser");
+            User u = new User();
+            ClientService cs = new ClientService();
+            u = cs.getClientById(idUser);
+            Reservation r = new Reservation(idReservation, s, nom, prenom, age, poids, taille, sexe, u);
+            reservations.add(r);
+        }
+
+        return reservations;
+    }
+    public Reservation getReservationByNomPersonne(String nomPersonne) throws SQLException {
+        String req = "SELECT * FROM reservation WHERE nompersonne = ? LIMIT 1";
+
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, nomPersonne);
+
+        ResultSet res = ps.executeQuery();
+        if (res.next()) {
+            int idReservation = res.getInt("idreservation");
+            int idSeance = res.getInt("ids");
+            Seance s = new Seance();
+            ServiceSeance sr = new ServiceSeance();
+            s = sr.getOneById(idSeance);
+            String nom = res.getString("nompersonne");
+            String prenom = res.getString("prenom");
+            int age = res.getInt("age");
+            float poids = res.getFloat("poids");
+            float taille = res.getFloat("taille");
+            String sexe = res.getString("sexe");
+            int idUser = res.getInt("iduser");
+            User u = new User();
+            ClientService cs = new ClientService();
+            u = cs.getClientById(idUser);
+            return new Reservation(idReservation, s, nom, prenom, age, poids, taille, sexe, u);
+        }
+
+        return null; // Aucune réservation trouvée pour le nom de personne spécifié
     }
 }

@@ -80,7 +80,7 @@ public class Tableauseanceclient {
     }
     private void updateSeanceInfo() {
         // Utiliser le service pour récupérer les informations de la séance par son nom
-        ServiceSeance ss = new ServiceSeance();
+        /*ServiceSeance ss = new ServiceSeance();
         Seance seance = ss.getSeanceByNom(nomSeance); // Méthode à implémenter dans ServiceSeance
 
         // Créer une liste observable contenant uniquement la séance actuelle
@@ -93,8 +93,30 @@ public class Tableauseanceclient {
         colonneduree.setCellValueFactory(new PropertyValueFactory<>("duree"));
 
         // Mettre à jour le TableView avec la liste observable
+        tableauseance.setItems(seanceList);*/
+        // Utiliser le service pour récupérer toutes les séances avec le même nom
+        ServiceSeance ss = new ServiceSeance();
+        List<Seance> seances = null; // Méthode à implémenter dans ServiceSeance
+        try {
+            seances = ss.getAllByNom(nomSeance);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Créer une liste observable contenant toutes les séances avec le même nom
+        ObservableList<Seance> seanceList = FXCollections.observableArrayList(seances);
+
+        // Mettre à jour les colonnes avec les informations de toutes les séances
+        colonnehoraire.setCellValueFactory(new PropertyValueFactory<>("horaire"));
+        colonnejour.setCellValueFactory(new PropertyValueFactory<>("jourseance"));
+        colonneduree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+
+        // Mettre à jour le TableView avec la liste observable contenant toutes les séances
         tableauseance.setItems(seanceList);
     }
+
+
+
 
     @FXML
     void abonnement(ActionEvent event) {

@@ -127,5 +127,91 @@ public class ServiceSeance implements IService  <Seance> {
         }
         return null; // Retourner null si la séance n'a pas été trouvée
     }
-}
+    public List<Seance> getAllByNom(String nomSeance) throws SQLException {
+        /*List<Seance> seances = new ArrayList<>();
+        String req = "SELECT * FROM seance WHERE nom = ?";
+        try (PreparedStatement ps = cnx.prepareStatement(req)) {
+            ps.setString(1, nomSeance);
+            try (ResultSet res = ps.executeQuery()) {
+                while (res.next()) {
+                    int id = res.getInt(1);
+                    String nom = res.getString(2);
+                    Time horaire = res.getTime(3);
+                    String jour = res.getString(4);
+                    int numsalle = res.getInt(5);
+                    String duree = res.getString(6);
+                    String imageseance = res.getString(7);
+
+                    Seance s = new Seance(id, nom, horaire, jour, numsalle, duree, imageseance);
+                    seances.add(s);
+                }
+            }
+        }
+        return seances;*/
+        List<Seance> seances = new ArrayList<>();
+        String req = "SELECT * FROM seance WHERE nom = ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, nomSeance);
+        ResultSet res = ps.executeQuery();
+        while (res.next()) {
+            // Récupérez les détails de la séance à partir du résultat de la requête
+            int id = res.getInt("idseance");
+            Time horaire = res.getTime("horaire");
+            String jour = res.getString("jourseance");
+            int numsalle = res.getInt("numesalle");
+            String duree = res.getString("duree");
+            String imageseance = res.getString("imageseance");
+            // Créez une instance de Seance avec les détails récupérés
+            Seance seance = new Seance(id, nomSeance, horaire, jour, numsalle, duree, imageseance);
+            // Ajoutez la séance à la liste
+            seances.add(seance);
+        }
+        return seances;
+    }
+    public List<Seance> getSeancesDataFromDatabase() throws SQLException {
+        List<Seance> seances = new ArrayList<>();
+
+        // Connexion à la base de données
+
+        // Requête SQL pour récupérer les données des séances
+        String query = "SELECT nom, COUNT(*) AS frequency FROM seance GROUP BY nom";
+
+        // Préparation de la requête
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            // Exécution de la requête
+            try (ResultSet resultSet = statement.executeQuery()) {
+                // Parcours des résultats et ajout des données à la liste
+                while (resultSet.next()) {
+                    String nomSeance = resultSet.getString("nom");
+                    int frequency = resultSet.getInt("frequency");
+                    Seance seance = new Seance(nomSeance, frequency);
+                    seances.add(seance);
+                }
+            }
+        }
+
+        // Fermeture de la connexion à la base de données
+        cnx.close();
+
+        return seances;
+    }
+    public Map<String, Integer> getSeanceFrequencyMap() {
+        Map<String, Integer> frequencyMap = new HashMap<>();
+
+        // Parcourir la liste de toutes les séances
+        try {
+            for (Seance seance : getAll()) {
+                String nomSeance = seance.getNom();
+
+                // Mettre à jour la fréquence du nom de séance dans la carte
+                frequencyMap.put(nomSeance, frequencyMap.getOrDefault(nomSeance, 0) + 1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return frequencyMap;
+    }
+
+    }
 

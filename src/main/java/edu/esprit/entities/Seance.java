@@ -13,6 +13,7 @@ public class Seance {
     private String duree;
     private String imageseance;
     final private  int nbMax=3;
+    private int frequency;
     public Seance()
     {
 
@@ -37,6 +38,10 @@ public class Seance {
         this.duree=duree;
         this.imageseance=image;
 
+    }
+    public Seance(String nom, int frequency) {
+        this.nom = nom;
+        this.frequency = frequency;
     }
 
     public int getIdseance() {

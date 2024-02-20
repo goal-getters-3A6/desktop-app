@@ -14,10 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import java.awt.*;
@@ -160,7 +157,7 @@ public class leseancesfront{
     }
     private void setSeanceGridPaneList() {
 
-        HBox hbox = new HBox(30);
+        /*HBox hbox = new HBox(30);
         hbox.setPadding(new Insets(10)); // Optionnel : définir une marge autour du HBox
         for (Seance seance : seanceList) {
             // Créer un VBox pour chaque activité
@@ -214,7 +211,64 @@ public class leseancesfront{
         }
 
         // Ajouter le HBox à votre conteneur parent (par exemple, un ScrollPane ou directement à la scène)
+        grid.getChildren().add(hbox);*/
+        HBox hbox = new HBox(20);
+        hbox.setPadding(new Insets(5));
+
+        // Créez une liste pour stocker les noms des séances déjà ajoutées à l'interface utilisateur
+        List<String> addedSeanceNames = new ArrayList<>();
+
+        for (Seance seance : seanceList) {
+            // Vérifiez d'abord si la séance est déjà affichée dans l'interface utilisateur
+            if (!addedSeanceNames.contains(seance.getNom())) {
+                addedSeanceNames.add(seance.getNom());
+
+                VBox vbox = new VBox();
+                vbox.setAlignment(Pos.CENTER);
+
+                ImageView imageView = new ImageView();
+                Label nomLabel = new Label(seance.getNom());
+                nomLabel.setFont(new Font("Arial", 18));
+
+                Button detailsButton = new Button("Détails");
+                detailsButton.setStyle("-fx-background-color: #db1f48; -fx-text-fill: white;");
+                detailsButton.setOnAction(e -> {
+                    try {
+                        detailSeance(seance);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                detailsButton.setId("btndetailseance");
+
+                Button reserverButton = new Button("Réserver");
+                reserverButton.setStyle("-fx-background-color: #db1f48; -fx-text-fill: white;");
+                reserverButton.setOnAction(e -> {
+                    try {
+                        reserverSeance(seance);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                });
+                reserverButton.setId("btnreserverseance");
+                VBox.setMargin(reserverButton, new Insets(5, 0, 0, 0));
+
+                try {
+                    Image image = new Image(new File(seance.getImageseance()).toURI().toString());
+                    imageView.setImage(image);
+                    imageView.setFitWidth(300);
+                    imageView.setFitHeight(300);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+                vbox.getChildren().addAll(imageView, nomLabel, detailsButton, reserverButton);
+                hbox.getChildren().add(vbox);
+            }
+        }
+
         grid.getChildren().add(hbox);
+
     }
     // Méthode appelée lorsque le bouton "Détails" est cliqué
     public void detailSeance(Seance seance) throws IOException {
