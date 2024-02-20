@@ -14,9 +14,11 @@ public class User {
     public User() {
     }
 
-    public User(String nom, String prenom) {
+    public User(int id,String nom, String prenom, String mail) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+        this.mail = mail;
     }
 
     public User(String nom, String prenom, String mdp, String mail, byte[] image) {

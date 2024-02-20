@@ -1,6 +1,7 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Client;
+import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
@@ -12,6 +13,7 @@ public class UserService {
     public UserService() {
         this.cnx = DataSource.getInstance().getCnx();
     }
+
     public boolean login(String email, String password) {
         String req = "SELECT * FROM user WHERE mail=?";
         try {
@@ -28,5 +30,6 @@ public class UserService {
         }
         return false;
     }
+
 
 }

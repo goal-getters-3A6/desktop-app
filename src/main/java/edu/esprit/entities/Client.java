@@ -36,12 +36,18 @@ public class Client extends User {
         this.statut = statut;
         this.nb_tentative = nb_tentative;
     }
+    public Client(int id, String nom, String prenom,String mail) {
+        super(id, nom, prenom, mail);
+    }
 
     public Client (int id , String nom , String prenom , String mail , byte[] image , Date date_inscription , Date date_naissance , String tel){
         super(id,nom,prenom,mail,image);
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
+    }
+
+    public Client(String    ext, String text1, String text2) {
     }
 
     public Date getDate_inscription() {

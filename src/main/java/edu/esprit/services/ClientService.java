@@ -16,7 +16,6 @@ public class ClientService  {
         this.cnx = DataSource.getInstance().getCnx();
     }
 
-    private Client client;
 
     public boolean ajouterClient(Client p) {
 
@@ -43,37 +42,35 @@ public class ClientService  {
         }
 
 
-    public void modifierClient(Client p) {
-        String req = "UPDATE user SET nom=?, prenom=?, mail=?, mdp=?, statut=?, nb_tentative=?, image=?, date_naissance=?, tel=? WHERE id=? AND role='CLIENT'";
+    public boolean modifierClient(Client p) {
+        String req = "UPDATE user SET nom=? , prenom=? , mail=? WHERE id=? AND role='CLIENT'";
         try (PreparedStatement Ps = cnx.prepareStatement(req)) {
-            Ps.setString(1, client.getNom());
-            Ps.setString(2, client.getPrenom());
-            Ps.setString(3, client.getMail());
-            Ps.setString(4, client.getMdp());
-            Ps.setBoolean(5, client.getStatut());
-            Ps.setInt(6, client.getNb_tentative());
-            Ps.setBytes(7, client.getImage());
-            Ps.setDate(8, new java.sql.Date(client.getDate_naissance().getTime()));
-            Ps.setString(9, client.getTel());
-            Ps.setInt(10, client.getId());
+            Ps.setString(1,p.getNom());
+            Ps.setString(2, p.getPrenom());
+            Ps.setString(3, p.getMail());
+            Ps.setInt(4, p.getId());
             Ps.executeUpdate();
             System.out.println("Client modifié avec succès !");
+            return true;
         } catch (SQLException e) {
             System.out.println("Erreur lors de la modification du client : " + e.getMessage());
+            return false;
         }
 
     }
 
 
-    public void supprimerClient(int id) {
+    public boolean supprimerClient(int id) {
         String req = "DELETE FROM user WHERE id=?";
         try {
             PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setInt(1, id);
             Ps.executeUpdate();
             System.out.println("Client supprimé avec succès !");
+            return true;
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression du client : " + e.getMessage());
+            return false;
         }
     }
 
@@ -96,6 +93,28 @@ public class ClientService  {
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'obtention du client par ID : " + e.getMessage());
+        }
+        return null;
+    }
+
+    public Client getClientByEmail (String email){
+        String req = "SELECT * FROM user WHERE mail=?";
+        try {
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            Ps.setString(1, email);
+            ResultSet res = Ps.executeQuery();
+            if (res.next()) {
+                int id = res.getInt("id");
+                String nom = res.getString("nom");
+                String prenom = res.getString("prenom");
+                Date dateInscription = res.getDate("date_inscription");
+                Date dateNaissance = res.getDate("date_naissance");
+                byte[] image = res.getBytes("image");
+                String tel = res.getString("tel");
+                return new Client(id, nom, prenom, email,image, dateInscription, dateNaissance, tel);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'obtention du client par email : " + e.getMessage());
         }
         return null;
     }
