@@ -12,7 +12,7 @@ public class Seance {
     private int numesalle;
     private String duree;
     private String imageseance;
-    final private  int nbMax=10;
+    final private  int nbMax=3;
     public Seance()
     {
 
@@ -99,15 +99,7 @@ public class Seance {
 
     @Override
     public String toString() {
-        return "Seance{" +
-                "idseance=" + idseance +
-                ", nom='" + nom + '\'' +
-                ", horaire=" + horaire +
-                ", jour='" + jourseance + '\'' +
-                ", numsalle=" + numesalle +
-                ", duree='" + duree + '\'' +
-                ", image='" + imageseance + '\'' +
-                '}';
+        return  nom ;
     }
 
     @Override

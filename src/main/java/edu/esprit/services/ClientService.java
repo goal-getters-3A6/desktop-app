@@ -1,6 +1,8 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Client;
+import edu.esprit.entities.Seance;
+import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;

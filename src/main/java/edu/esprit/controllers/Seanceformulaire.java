@@ -214,7 +214,6 @@ public class Seanceformulaire {
             // Affichez l'image dans l'ImageView
             imageView.setImage(image);
         }
-
     }
 
     @FXML

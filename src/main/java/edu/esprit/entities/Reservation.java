@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Reservation {
 private int IdReservation;
 private Seance seance;
-private String nom;
+private String nompersonne;
 private  String prenom;
 private int age;
 private float poids;
@@ -21,7 +21,7 @@ private User user;
     public Reservation(int idReservation, Seance seance, String nom, String prenom, int age, float poids, float taille, String sexe,User user) {
         IdReservation = idReservation;
         this.seance = seance;
-        this.nom = nom;
+        this.nompersonne = nom;
         this.prenom = prenom;
         this.age = age;
         this.poids = poids;
@@ -32,7 +32,7 @@ private User user;
     }
     public Reservation( String nom, String prenom, int age, float poids, float taille) {
 
-        this.nom = nom;
+        this.nompersonne = nom;
         this.prenom = prenom;
         this.age = age;
         this.poids = poids;
@@ -40,7 +40,7 @@ private User user;
     }
     public Reservation(Seance seance, String nom, String prenom, int age, float poids, float taille, String sexe,User user) {
         this.seance = seance;
-        this.nom = nom;
+        this.nompersonne = nom;
         this.prenom = prenom;
         this.age = age;
         this.poids = poids;
@@ -57,8 +57,8 @@ private User user;
         return seance;
     }
 
-    public String getNom() {
-        return nom;
+    public String getNompersonne() {
+        return nompersonne;
     }
 
     public String getPrenom() {
@@ -86,7 +86,7 @@ private User user;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nompersonne = nom;
     }
 
     public void setPrenom(String prenom) {
@@ -115,7 +115,7 @@ private User user;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
-        return IdReservation == that.IdReservation && Objects.equals(seance, that.seance) && Objects.equals(nom, that.nom) && Objects.equals(prenom, that.prenom) && sexe == that.sexe;
+        return IdReservation == that.IdReservation && Objects.equals(seance, that.seance) && Objects.equals(nompersonne, that.nompersonne) && Objects.equals(prenom, that.prenom) && sexe == that.sexe;
     }
 
     @Override
@@ -128,7 +128,7 @@ private User user;
         return "Reservation{" +
                 "IdReservation=" + IdReservation +
                 ", seance=" + seance +
-                ", nom='" + nom + '\'' +
+                ", nom='" + nompersonne + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", age=" + age +
                 ", poids=" + poids +

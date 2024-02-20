@@ -103,20 +103,29 @@ public class ServiceSeance implements IService  <Seance> {
 
         return seances;
     }
-    public int getIdSeanceByNom(String nomSeance) {
+    public Seance getSeanceByNom(String nomSeance) {
         try {
-            String query = "SELECT idseance FROM seance WHERE nom = ?";
+            String query = "SELECT * FROM seance WHERE nom = ?";
             PreparedStatement ps = cnx.prepareStatement(query);
             ps.setString(1, nomSeance);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getInt("idseance");
+                int id = rs.getInt("idseance");
+                String nom = rs.getString("nom");
+                Time horaire = rs.getTime("horaire");
+                String jour = rs.getString("jourseance");
+                int numSalle = rs.getInt("numesalle");
+                String duree = rs.getString("duree");
+                String image = rs.getString("imageseance");
+
+                // Créez et retournez un objet Seance avec les données récupérées
+                return new Seance(id, nom, horaire, jour, numSalle, duree, image);
             }
-        } catch (SQLException e)
-        {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer l'exception
         }
-        return -1;
+        return null; // Retourner null si la séance n'a pas été trouvée
     }
 }
 

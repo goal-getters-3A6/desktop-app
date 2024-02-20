@@ -198,5 +198,33 @@ public class Afficherlesseances {
     void reserveryoga(ActionEvent event) {
 
     }
+   /* void afficherlesphotos()
+    {
+        String imageUrl = resultSet.getString("image");
+        Produit produit = fetchProductDetailsFromDatabase(imageUrl);
+        Image image = new Image(imageUrl, 200, 200, true, true);
+
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(200);
+
+        Button detailButton = new Button("Détails");
+        detailButton.setOnAction(event -> {
+            System.out.println("Afficher les détails du produit : ");
+        });
+        detailButton.setStyle("-fx-background-color: #56ab2f; -fx-background-radius: 100; -fx-padding: 10px; ");
+
+        imageView.setOnMouseClicked(event -> handleImageClick(produit));
+
+        imagesGrid.add(imageView, column, row);
+        imagesGrid.add(detailButton, column, row + 1);
+
+// Incrémenter les indices de colonne et de ligne
+        column++;
+        if (column > 2) {
+            column = 0;
+            row += 2;
+        }
+    }
+*/
 
 }

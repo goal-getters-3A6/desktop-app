@@ -38,14 +38,14 @@ public class ServiceReservation implements IService <Reservation>{
     @Override
     public void ajouter(Reservation r) throws SQLException
     {
-        System.out.println("id user dans ajouter"+r.getUser().getId());
-        System.out.println(r.getSeance().getIdseance());
+       // System.out.println("id user dans ajouter"+r.getUser().getId());
+       // System.out.println(r.getSeance().getIdseance());
 
-        String req = "INSERT INTO reservation (ids,nom,prenom,age,poids,taille,sexe,iduser ) VALUES (?,?,?,?,?,?,?,?)";
+        String req = "INSERT INTO reservation (ids,nompersonne,prenom,age,poids,taille,sexe,iduser ) VALUES (?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1,r.getSeance().getIdseance());
-            ps.setString(2, r.getNom());
+            ps.setString(2, r.getNompersonne());
             ps.setString(3, r.getPrenom());
             ps.setInt(4, r.getAge());
             ps.setFloat(5, r.getPoids());
@@ -76,12 +76,12 @@ public class ServiceReservation implements IService <Reservation>{
             System.out.println(e.getMessage());
         }*/
         //2eme methode
-        String req = "UPDATE reservation SET  nom=?, prenom=?, age=?, poids=?, taille=?,sexe=? WHERE idreservation = ?";
+        String req = "UPDATE reservation SET  nompersonne=?, prenom=?, age=?, poids=?, taille=?,sexe=? WHERE idreservation = ?";
 
             PreparedStatement ps = cnx.prepareStatement(req);
             System.out.println(r.getSeance());
           //  ps.setInt(1, r.getSeance().getIdseance());
-            ps.setString(1, r.getNom());
+            ps.setString(1, r.getNompersonne());
             ps.setString(2, r.getPrenom());
             ps.setInt(3, r.getAge());
             ps.setFloat(4, r.getPoids());
@@ -124,7 +124,7 @@ public class ServiceReservation implements IService <Reservation>{
                 s=  sr.getOneById((idSeance));
                 // System.out.println("la seance requpere est :"+s);
 
-                String nom=res.getString("nom");
+                String nom=res.getString("nompersonne");
                 String prenom=res.getString("prenom");
                 int age = res.getInt("age");
                 float poids = res.getFloat("poids");
@@ -155,7 +155,7 @@ public class ServiceReservation implements IService <Reservation>{
                 ServiceSeance sr=new ServiceSeance();
                 s=  sr.getOneById((idSeance));
                // System.out.println("la seance requpere est :"+s);
-                String nom = res.getString("nom");
+                String nom = res.getString("nompersonne");
                 String prenom=res.getString("prenom");
                 int age = res.getInt("age");
                 float poids = res.getFloat("poids");

@@ -121,7 +121,7 @@ public class Main {
 
 
         //supprimer reservation
-       int idResasupprimer=sr.getIdReservationByNom(r1.getNom());
+       int idResasupprimer=sr.getIdReservationByNom(r1.getNompersonne());
         System.out.println("l id a supprimer: "+idResasupprimer);
         try {
             sr.supprimer((idResasupprimer));
