@@ -47,6 +47,9 @@ public class Client extends User {
         this.tel = tel;
     }
 
+    public Client() {
+    }
+
     public Client(String    ext, String text1, String text2) {
     }
 

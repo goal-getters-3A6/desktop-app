@@ -15,7 +15,7 @@
          <top>
             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #004369;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="logo" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="log" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imgs/logo.png" />
                      </image>
@@ -60,7 +60,7 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <ImageView fx:id="imageuser" fitHeight="67.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userimage" fitHeight="67.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@imgs/user.jpg" />
                      </image>

@@ -1,11 +1,13 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Client;
+import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ClientService  {
@@ -146,5 +148,32 @@ public class ClientService  {
             System.out.println("Erreur lors de la récupération des clients : " + e.getMessage());
         }
         return clients;
+    }
+    public List<Client> getAllClientsList() {
+        String req = "SELECT * FROM user WHERE role='CLIENT'";
+        List<Client> list = new java.util.ArrayList<>();
+        try {
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Client u = new Client();
+                u.setId(rs.getInt("id"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                u.setMail(rs.getString("mail"));
+                u.setMdp(rs.getString("mdp"));
+                u.setImage(rs.getBytes("image"));
+                u.setRole(rs.getString("role"));
+                u.setTel(rs.getString("tel"));
+                u.setDate_naissance(rs.getDate("date_naissance"));
+                u.setDate_inscription(rs.getDate("date_inscription"));
+
+
+                list.add(u);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
+        }
+        return list;
     }
 }
