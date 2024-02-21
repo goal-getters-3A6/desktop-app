@@ -11,32 +11,33 @@ public class ServicesPlat implements IService<Plat>{
     Connection cnx = DataSource.getInstance().getCnx();
 
     @Override
-    public void ajouter(Plat p) {
-        String req = "INSERT INTO `plat`(`nomP`, `prixP`, `descP`, `alergieP`, `etatP`) VALUES (?, ?, ?, ?, ?)";
-        try {
+    public void ajouter(Plat p)throws SQLException {
+        String req = "INSERT INTO `plat`(`nomP`, `prixP`, `descP`, `alergieP`, `etatP` , `photop` ,`calories`) VALUES (?, ?, ?, ?, ? , ? , ?)";
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, p.getNomP());
             ps.setFloat(2, p.getPrixP());
             ps.setString(3, p.getDescP());
             ps.setString(4, p.getAlergieP());
             ps.setBoolean(5, p.getEtatP());
+        ps.setString(6, p.getPhotop());
+        ps.setInt(7, p.getCalories());
             ps.executeUpdate();
             System.out.println("Plat ajouté !");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
     @Override
-    public void modifier(Plat p) {
-        String req = "UPDATE plat SET nomP = ?, prixP = ?, descP = ?, alergieP = ?, etatP = ? WHERE idP = ?";
-        try {
+    public void modifier(Plat p) throws SQLException{
+        String req = "UPDATE plat SET nomP = ?, prixP = ?, descP = ?, alergieP = ?, etatP = ? , photop =? , calories = ? WHERE idP = ?";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, p.getNomP());
             ps.setFloat(2, p.getPrixP());
             ps.setString(3, p.getDescP());
             ps.setString(4, p.getAlergieP());
             ps.setBoolean(5, p.getEtatP());
-            ps.setInt(6, p.getIdP()); // Assuming idP is the primary key
+            ps.setString(6, p.getPhotop());
+            ps.setInt(7, p.getCalories());
+        ps.setInt(8, p.getIdP());
 
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {
@@ -44,9 +45,7 @@ public class ServicesPlat implements IService<Plat>{
             } else {
                 System.out.println("id incorrect");
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
     @Override
@@ -69,10 +68,10 @@ public class ServicesPlat implements IService<Plat>{
 
 
     @Override
-    public Plat getOneById(int idP) {
+    public Plat getOneById(int idP) throws SQLException{
         Plat plat = null;
         String req = "SELECT * FROM plat WHERE idP = ?";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, idP);
             ResultSet rs = ps.executeQuery();
@@ -83,7 +82,9 @@ public class ServicesPlat implements IService<Plat>{
                 String descP = rs.getString("descP");
                 String alergieP = rs.getString("alergieP");
                 Boolean etatP = rs.getBoolean("etatP");
-                plat = new Plat(id, nomP); // Create a new Plat object with retrieved attributes
+                String photop = rs.getString("photop");
+                int calories= rs.getInt("calories");
+                plat = new Plat(id, nomP,prixP,descP,alergieP,etatP,photop,calories); // Create a new Plat object with retrieved attributes
 
 
                 System.out.println("Plat info:");
@@ -93,22 +94,22 @@ public class ServicesPlat implements IService<Plat>{
                 System.out.println("Description: " + descP);
                 System.out.println("Allergies: " + alergieP);
                 System.out.println("Etat: " + etatP);
+                System.out.println("Photo: " + photop);
+                System.out.println("cals: " + calories);
             } else {
                 System.out.println("id incofrect");
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
         return plat;
     }
 
 
     @Override
-    public Set<Plat> getAll() {
+    public Set<Plat> getAll() throws SQLException{
         Set<Plat> plats = new HashSet<>();
 
         String req = "SELECT * FROM plat";
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()) {
@@ -118,14 +119,12 @@ public class ServicesPlat implements IService<Plat>{
                 String descP = res.getString("descP");
                 String alergieP = res.getString("alergieP");
                 Boolean etatP = res.getBoolean("etatP");
-                Plat p = new Plat(idP, nomP, prixP, descP, alergieP, etatP);
+                String photop = res.getString("photop");
+                int calories = res.getInt("calories");
+                Plat p = new Plat(idP, nomP, prixP, descP, alergieP, etatP, photop, calories);
                 plats.add(p);
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
 
         return plats;
     }
 }
-

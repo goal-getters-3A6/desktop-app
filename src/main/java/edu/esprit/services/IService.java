@@ -1,9 +1,10 @@
 package edu.esprit.services;
+import java.sql.SQLException;
 import java.util.Set;
 public interface IService <T>{
-    public void ajouter(T p);
-    public void modifier(T p);
+    public void ajouter(T p) throws SQLException;
+    public void modifier(T p) throws SQLException;
     public void supprimer(int id);
-    public T getOneById(int id);
-    public Set<T> getAll();
+    public T getOneById(int id) throws SQLException;
+    public Set<T> getAll() throws SQLException;
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierPlat">
+    <children>
+        <Label layoutX="31.0" layoutY="32.0" text="Nom Plat:" />
+        <Label layoutX="31.0" layoutY="80.0" text="Prix Plat:" />
+        <Label layoutX="31.0" layoutY="128.0" text="Allergie Plat:" />
+        <Label layoutX="31.0" layoutY="176.0" text="État Plat:" />
+        <Label layoutX="31.0" layoutY="224.0" text="Description Plat:" />
+        <Label layoutX="31.0" layoutY="272.0" text="Photo Plat:" />
+        <Label layoutX="31.0" layoutY="320.0" text="Calories Plat:" />
+        <TextField fx:id="NomPlatField" layoutX="200.0" layoutY="27.0" />
+        <TextField fx:id="prixPlatField" layoutX="200.0" layoutY="75.0" />
+        <TextField fx:id="alergiePlatField" layoutX="200.0" layoutY="123.0" />
+        <CheckBox fx:id="etatPlatCheckbox" layoutX="200.0" layoutY="172.0" />
+        <TextField fx:id="descPField" layoutX="200.0" layoutY="220.0" />
+        <TextField fx:id="photopField" layoutX="200.0" layoutY="268.0" />
+        <TextField fx:id="caloriesField" layoutX="200.0" layoutY="316.0" />
+        <Button layoutX="281.0" layoutY="358.0" mnemonicParsing="false" onAction="#ModifierPlat" text="Modifier Plat" />
+    </children>
+</AnchorPane>

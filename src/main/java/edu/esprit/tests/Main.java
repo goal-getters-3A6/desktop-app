@@ -1,24 +1,28 @@
 package edu.esprit.tests;
 
 
+import edu.esprit.entities.AvisP;
+import edu.esprit.entities.Plat;
 import edu.esprit.services.ServicesPlat;
 import edu.esprit.services.ServicesAvisPlat;
 
+import java.sql.SQLException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         //ajout plat
-      // Plat plataj = new Plat("salade6", 10.99f, "verte ", "lactose", true);
+        //Plat plataj = new Plat("salade8", 10.99f, "verte ", "lactose", true);
         ServicesPlat servicesPlat = new ServicesPlat();
-       //servicesPlat.ajouter(plataj);
+      // servicesPlat.ajouter(plataj);
         //modif//////////////////////////////
-        /*int newPlatId = 4 ;
-        Plat modifiedPlat = new Plat(newPlatId, "novplat", 15.99f, "novdesc", "novall", false);
-        servicesPlat.modifier(modifiedPlat);*/
+        int newPlatId = 12;
+        Plat modifiedPlat = new Plat(newPlatId, "novplat", 15.99f, "novdesc", "novall", false, "fgfdf",10);
+        servicesPlat.modifier(modifiedPlat);
         //supp/////////////////////////////////
         /* int PlatId = 4 ;
         servicesPlat.supprimer(PlatId);*/
         //aff/////////////////////////////////
-       /* int IDPAFF = 5;
+       /* int IDPAFF = 12;
         Plat plat = servicesPlat.getOneById(IDPAFF);*/
 
         ///aff tous//////////////////////////////////////////
@@ -29,13 +33,13 @@ public class Main {
         }*/
         ServicesAvisPlat servicesAvisPlat = new ServicesAvisPlat();
         //ajoutez avis///////////////////////////////////////////
-       /*AvisP avis = new AvisP();
+      /* AvisP avis = new AvisP();
 
         avis.setCommAP("tres bien!");
         avis.setStar(5);
         avis.setFav(true);
         avis.setIdPlat(5);
-
+        avis.setIduap(1);
         servicesAvisPlat.ajouter(avis);*/
         //modifier avis///////////////////////////////
         /*AvisP avismod = new AvisP();

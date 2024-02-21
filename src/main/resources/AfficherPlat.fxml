@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="389.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherPlat">
+    <children>
+        <TableView fx:id="platTableView" layoutX="181.0" layoutY="92.0" prefHeight="270.0" prefWidth="486.0">
+            <columns>
+                <TableColumn fx:id="nomPlatColumn" prefWidth="100.0" text="Nom Plat" />
+                <TableColumn fx:id="prixPlatColumn" prefWidth="100.0" text="Prix Plat" />
+                <TableColumn fx:id="descPlatColumn" prefWidth="100.0" text="Description Plat" />
+                <TableColumn fx:id="alergiePlatColumn" prefWidth="100.0" text="Allergie Plat" />
+                <TableColumn fx:id="etatPlatColumn" prefWidth="100.0" text="Etat Plat" />
+            </columns>
+        </TableView>
+      <TextField layoutX="436.0" layoutY="59.0" prefHeight="26.0" prefWidth="187.0" style="-fx-background-color: *;" />
+      <Button layoutX="630.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: #37A5AE;" text="⌕" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="181.0" layoutY="49.0" text="NOS PLATS" textFill="#666380">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="430.0" fitWidth="168.0" layoutX="-9.0" layoutY="-24.0">
+         <image>
+            <Image url="@../../../../er.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="177.0" layoutX="-18.0" layoutY="351.0">
+         <image>
+            <Image url="@../../../../er.PNG" />
+         </image>
+      </ImageView>
+      <Button layoutX="581.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: #37A5AE;" text="quittez" textFill="WHITE" />
+      <ImageView fitHeight="136.0" fitWidth="153.0" layoutX="6.0" layoutY="11.0">
+         <image>
+            <Image url="@../../../../etrsdgf.PNG" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

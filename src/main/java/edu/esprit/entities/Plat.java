@@ -8,25 +8,40 @@ public class Plat {
     private String descP;
     private String alergieP;
     private Boolean etatP;
+    private String photop;
+    private int calories;
+
     public Plat(int idP, String nomP){
 
     }
 
-    public Plat(String nomP, Float prixP,String descP, String alergieP, Boolean etatP ) {
+    public Plat(String nomP, Float prixP,String descP, String alergieP, Boolean etatP , String photop , int calories) {
         this.nomP = nomP;
         this.prixP = prixP;
         this.descP = descP;
         this.alergieP = alergieP;
         this.etatP = etatP;
+        this.photop = photop;
+        this.calories = calories;
+    }
+    public Plat(String nomP, Float prixP, String alergieP, Boolean etatP ) {
+        this.nomP = nomP;
+        this.prixP = prixP;
+        this.alergieP = alergieP;
+        this.etatP = etatP;
+
     }
 
-    public Plat( int idP, String nomP, Float prixP,String descP, String alergieP, Boolean etatP ) {
+
+    public Plat( int idP, String nomP, Float prixP,String descP, String alergieP, Boolean etatP , String photop , int calories) {
         this.idP = idP;
         this.nomP = nomP;
         this.prixP = prixP;
         this.descP = descP;
         this.alergieP = alergieP;
         this.etatP = etatP;
+        this.photop = photop;
+        this.calories = calories;
     }
 
 
@@ -48,6 +63,22 @@ public class Plat {
 
     public Float getPrixP() {
         return prixP;
+    }
+
+    public String getPhotop() {
+        return photop;
+    }
+
+    public void setPhotop(String photop) {
+        this.photop = photop;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 
     public void setPrixP(Float prixP) {
@@ -87,6 +118,7 @@ public class Plat {
                 ", descP='" + descP + '\'' +
                 ", alergieP='" + alergieP + '\'' +
                 ", etatP=" + etatP +
+                ", calories=" + calories +
                 '}';
     }
 

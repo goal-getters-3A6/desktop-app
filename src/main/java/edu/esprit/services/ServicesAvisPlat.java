@@ -10,9 +10,8 @@ public class ServicesAvisPlat implements IService<AvisP>{
     private Connection cnx = DataSource.getInstance().getCnx();
 
     @Override
-    public void ajouter(AvisP avis)  {
+    public void ajouter(AvisP avis) throws SQLException {
         String req = "INSERT INTO avisp (commAP, star, fav, idPlat , iduap ) VALUES (?, ?, ?, ?,?)";
-        try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, avis.getCommAP());
             ps.setInt(2, avis.getStar());
@@ -21,9 +20,7 @@ public class ServicesAvisPlat implements IService<AvisP>{
             ps.setInt(5, avis.getIduap());
             ps.executeUpdate();
             System.out.println("avis ajoute au Plat");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
 
