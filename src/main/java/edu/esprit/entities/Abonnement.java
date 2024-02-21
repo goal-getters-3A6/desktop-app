@@ -10,24 +10,27 @@ public class Abonnement {
     private String codePromoAb;
     private String  typeAb;
     private Date dateExpirationAb;
+    private User utilisateur;
 
     public Abonnement(){
     }
 
 
-    public Abonnement(int idA, float montantAb, String codePromoAb, String typeAb, Date dateExpirationAb) {
+    public Abonnement(int idA, float montantAb, String codePromoAb, String typeAb, Date dateExpirationAb,User utilisateur) {
         this.idA = idA;
         this.montantAb = montantAb;
         this.codePromoAb = codePromoAb;
         this.typeAb = typeAb;
         this.dateExpirationAb = dateExpirationAb;
+        this.utilisateur = utilisateur;
     }
 
-    public Abonnement(float montantAb, String codePromoAb, String typeAb, Date dateExpirationAb) {
+    public Abonnement(float montantAb, String codePromoAb, String typeAb, Date dateExpirationAb,User utilisateur) {
         this.montantAb = montantAb;
         this.codePromoAb = codePromoAb;
         this.typeAb = typeAb;
         this.dateExpirationAb = dateExpirationAb;
+        this.utilisateur = utilisateur;
     }
 
     public int getIdA() {
@@ -49,6 +52,9 @@ public class Abonnement {
     public Date getDateExpirationAb() {
         return  dateExpirationAb;
     }
+    public User getUtilisateur() {
+        return utilisateur;
+    }
 
     public void setIdA(int idA) {
         this.idA = idA;
@@ -69,15 +75,25 @@ public class Abonnement {
     public void setDateExpirationAb(Date dateExpirationAb) {
         this.dateExpirationAb = dateExpirationAb;
     }
+    public void setUtilisateur(User utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
 
     @Override
     public String toString() {
-        return "Abonnement{" +
+        String result ="Abonnemnt{" +
                 "montantAb=" + montantAb +
                 ", codePromoAb='" + codePromoAb + '\'' +
                 ", typeAb='" + typeAb + '\'' +
                 ", dateExpirationAb=" + dateExpirationAb +
-                '}';
+                ", utilisateur=[" ;
+        // Concaténer les commentaires des avis
+        result += utilisateur.getNom() + ", ";
+
+        result += "]}";
+
+        return result;
     }
 
     @Override
