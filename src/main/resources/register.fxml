@@ -6,8 +6,75 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
 <AnchorPane fx:id="registerpane" prefHeight="476.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.RegisterController">
    <children>
+
+      <BorderPane fx:id="borderpaneformulairereservaion" layoutX="458.0" layoutY="90.0" prefHeight="638.0" prefWidth="897.0" style="-fx-background-color: #fffaed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #004369;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="log" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnprofil" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <ImageView fx:id="userimage" fitHeight="67.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/user.jpg" />
+                     </image>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
       <TextField fx:id="prenomTxt" layoutX="33.0" layoutY="195.0" prefHeight="26.0" prefWidth="150.0" promptText="prenom" />
       <TextField fx:id="emailTxt" layoutX="33.0" layoutY="252.0" prefHeight="26.0" prefWidth="150.0" promptText="email" />
       <TextField fx:id="nomTxt" layoutX="33.0" layoutY="143.0" prefHeight="26.0" prefWidth="150.0" promptText="nom" />

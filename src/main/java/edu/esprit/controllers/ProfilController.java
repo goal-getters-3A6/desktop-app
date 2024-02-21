@@ -99,8 +99,6 @@ public class ProfilController {
 
     }
 
-
-
     @FXML
     void alimentaire(ActionEvent event) {
 
@@ -132,4 +130,3 @@ public class ProfilController {
 
     }
 }
-

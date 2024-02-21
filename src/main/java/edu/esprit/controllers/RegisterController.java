@@ -57,6 +57,44 @@ public class RegisterController {
             System.out.println("Register failed");
         }
     }
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void accueil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    void planning(ActionEvent event) {
+
+    }
+
+    @FXML
+    void profil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
 }
-
-
