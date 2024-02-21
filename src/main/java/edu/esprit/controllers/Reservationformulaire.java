@@ -1,5 +1,9 @@
 package edu.esprit.controllers;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import edu.esprit.entities.Reservation;
 import edu.esprit.entities.Seance;
 import edu.esprit.entities.User;
@@ -11,26 +15,30 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import com.itextpdf.text.Image;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+//import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.mail.MessagingException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-//import static edu.esprit.Api.EmailSender.sendConfirmationEmail;
-
 public class Reservationformulaire {
 
+    @FXML
+    private Button btnpdf;
     @FXML
     private TableColumn<?, ?> age;
     @FXML
@@ -319,22 +327,6 @@ public class Reservationformulaire {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                /*try {
-                    // Envoyer un e-mail de confirmation au client
-                    sendConfirmationEmail();
-
-                    // Afficher une confirmation à l'utilisateur
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Confirmation");
-                    alert.setContentText("Réservation ajoutée avec succès. Un e-mail de confirmation a été envoyé au client.");
-                    alert.showAndWait();
-                } catch (MessagingException e) {
-                    // Gérer les erreurs liées à l'envoi d'e-mail
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Erreur");
-                    alert.setContentText("Une erreur s'est produite lors de l'envoi de l'e-mail de confirmation. Veuillez réessayer plus tard.");
-                    alert.showAndWait();
-                }*/
             }
         }
 
@@ -527,6 +519,57 @@ public class Reservationformulaire {
             femme.setSelected(true);
         }
     }
+
+
+    @FXML
+    void pdf(ActionEvent event) {
+        // Récupérer les informations de réservation depuis la TableView
+        ObservableList<Reservation> reservations = table.getItems();
+
+        // Créer un nouveau document PDF
+        Document document = new Document();
+        try {
+            // Spécifier le chemin et le nom du fichier PDF
+            PdfWriter.getInstance(document, new FileOutputStream("reservations.pdf"));
+
+            // Ouvrir le document
+            document.open();
+            // Ajouter l'image en haut à gauche de chaque page
+            Image image = Image.getInstance("C:\\gestionPlanningNew\\src\\main\\resources\\imgs\\logo.png");
+            image.scaleAbsolute(100, 50); // Ajustez la taille de l'image selon vos besoins
+            image.setAbsolutePosition(36, 800); // Position de l'image en haut à gauche de la page
+            document.add(image);
+            document.add(image);
+            // Ajouter les informations de réservation au document
+            for (Reservation reservation : reservations) {
+                document.add(new Paragraph("Séance: " + reservation.getSeance().getNom())); // Par exemple, afficher le nom de la séance
+                document.add(new Paragraph("Nom : " + reservation.getNompersonne()));
+                document.add(new Paragraph("Prénom : " + reservation.getPrenom()));
+                document.add(new Paragraph("Âge : " + reservation.getAge()));
+                document.add(new Paragraph("Poids : " + reservation.getPoids()));
+                document.add(new Paragraph("Taille : " + reservation.getTaille()));
+                document.add(new Paragraph("Sexe : " + reservation.getSexe()));
+                document.add(new Paragraph("----------------------------------------"));
+            }
+
+            // Fermer le document
+            document.close();
+
+            // Afficher un message à l'utilisateur indiquant que le PDF a été généré avec succès
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("PDF Generated");
+            alert.setContentText("Reservation information has been saved to reservations.pdf");
+            alert.showAndWait();
+        } catch (FileNotFoundException | DocumentException e) {
+            // Gérer les exceptions
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     void mesreservations(ActionEvent event) {
 

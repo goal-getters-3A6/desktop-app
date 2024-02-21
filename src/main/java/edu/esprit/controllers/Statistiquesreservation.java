@@ -51,6 +51,26 @@ public class Statistiquesreservation implements Initializable {
     private PieChart chart1;
     @FXML
     private Button btnretour;
+    @FXML
+    private ImageView planningimg;
+    @FXML
+    private ImageView planningimg1;
+
+    @FXML
+    private ImageView planningimg11;
+
+    @FXML
+    private ImageView planningimg111;
+
+    @FXML
+    private ImageView planningimg1111;
+
+    @FXML
+    private ImageView planningimg2;
+
+    @FXML
+    private ImageView planningimg3;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

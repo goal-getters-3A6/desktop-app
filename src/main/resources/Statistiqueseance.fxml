@@ -24,6 +24,36 @@
             <Button fx:id="btnevenement" layoutX="30.0" layoutY="392.0" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE" />
             <Button fx:id="btnreclamation" layoutX="33.0" layoutY="447.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE" />
             <Button fx:id="btnplanning" layoutX="27.0" layoutY="233.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5" />
+            <ImageView fx:id="planningimg3" fitHeight="35.0" fitWidth="44.0" layoutX="9.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/elliptique.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg2" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/abonnement.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg11" fitHeight="35.0" fitWidth="44.0" layoutX="9.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/aliments.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg111" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/evenement.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg1111" fitHeight="35.0" fitWidth="44.0" layoutX="9.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/fichier.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg1" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/plan-daffaires.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <PieChart fx:id="chart1" layoutX="198.0" layoutY="75.0" prefHeight="371.0" prefWidth="514.0" />

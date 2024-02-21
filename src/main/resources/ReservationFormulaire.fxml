@@ -19,7 +19,14 @@
 
 <AnchorPane prefHeight="638.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Reservationformulaire">
    <children>
-      <BorderPane fx:id="borderpaneformulairereservaion" layoutX="458.0" layoutY="90.0" prefHeight="638.0" prefWidth="897.0" style="-fx-background-color: #fffaed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <BorderPane fx:id="borderpaneformulairereservaion" layoutX="458.0" layoutY="90.0" prefHeight="638.0" prefWidth="897.0" style="-fx-background-color: #fffaed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <Button fx:id="btnpdf" mnemonicParsing="false" onAction="#pdf" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: db1f48;" text="PDF" textFill="WHITE" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="-90.0" left="-225.0" right="570.0" top="360.0" />
+               </BorderPane.margin>
+            </Button>
+         </center></BorderPane>
       <VBox layoutX="7.0" layoutY="122.0" prefHeight="431.0" prefWidth="138.0" spacing="10.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
@@ -41,7 +48,7 @@
             <RadioButton fx:id="femme" mnemonicParsing="false" text="FEMME" />
           <Button fx:id="btnajouterreservation" minWidth="28.0" mnemonicParsing="false" onAction="#ajouterreservation" prefHeight="31.0" prefWidth="83.0" style="-fx-background-color: db1f48;" text="Ajouter" textFill="WHITE">
                <VBox.margin>
-                  <Insets left="40.0" top="10.0" />
+                  <Insets left="20.0" top="10.0" />
                </VBox.margin>
             </Button>
          </children>

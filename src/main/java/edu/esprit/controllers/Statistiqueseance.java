@@ -65,6 +65,26 @@ public class Statistiqueseance  implements Initializable {
 
     @FXML
     private Button btntdb;
+    @FXML
+    private ImageView planningimg;
+    @FXML
+    private ImageView planningimg1;
+
+    @FXML
+    private ImageView planningimg11;
+
+    @FXML
+    private ImageView planningimg111;
+
+    @FXML
+    private ImageView planningimg1111;
+
+    @FXML
+    private ImageView planningimg2;
+
+    @FXML
+    private ImageView planningimg3;
+
 
     @FXML
     private ImageView logo1;
