@@ -11,37 +11,33 @@ import java.util.Set;
 public class ServiceAvisEquipement implements IService<AvisEquipement> {
     Connection cnx = DataSource.getInstance().getCnx();
     @Override
-    public void ajouter(AvisEquipement p) {
+    public void ajouter(AvisEquipement p) throws SQLException {
         String req = "INSERT INTO `avisequipement`( `commAEq` ,`idEq` ) VALUES (?,?)";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1,p.getCommAEq());
             ps.setInt(2,p.getEquipement().getIdEq());
             ps.executeUpdate();
             System.out.println("Avis ajouté !");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
     @Override
-    public void modifier(AvisEquipement p) {
+    public void modifier(AvisEquipement p) throws SQLException{
         String req = " update avisequipement set commAEq=? , idEq=?  where idAEq=" + p.getIdAEq();
-        try {
+
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, p.getCommAEq());
         ps.setInt(2, p.getEquipement().getIdEq());
 
         ps.executeUpdate();
         System.out.println("Avis modifié !");
-    } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-    }
+
     }
 
     @Override
-    public void supprimer(int idAEq) {
-        try {
+    public void supprimer(int idAEq)  throws SQLException{
+
             String req = "DELETE FROM avisequipement WHERE idAEq = " + idAEq;
 
             PreparedStatement ps  = cnx.prepareStatement(req);
@@ -49,18 +45,16 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
             ste.executeUpdate(req);
             System.out.println("Avis supprimé !");
 
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
+
     }
 
     @Override
-    public AvisEquipement getOneById(int id) {
+    public AvisEquipement getOneById(int id) throws SQLException {
         AvisEquipement e = null;
         String req = "SELECT * FROM avisequipement " +
                 "INNER JOIN equipement ON avisequipement.idEq = equipement.idEq " +
                 "WHERE AvisEquipement.idAEq = " + id;
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
@@ -79,21 +73,19 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
 
                 e = new AvisEquipement(idAEq,commAEq, eq);
             }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+
 
         return e;
     }
 
     @Override
-    public Set<AvisEquipement> getAll() {
+    public Set<AvisEquipement> getAll() throws SQLException {
         Set<AvisEquipement> avisequipement = new HashSet<>();
 
         String req = "SELECT avisequipement.idAEq, avisequipement.commAEq, equipement.idEq, equipement.nomEq, equipement.descEq, equipement.docEq, equipement.imageEq, equipement.categEq, equipement.noteEq " +
                 "FROM avisequipement " +
                 "INNER JOIN equipement ON avisequipement.idEq = equipement.idEq";
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
@@ -113,9 +105,7 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
                 AvisEquipement aeq = new AvisEquipement(idAEq,commAEq, eq);
                 avisequipement.add(aeq);
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
 
 
         return avisequipement;

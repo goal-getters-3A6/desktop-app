@@ -26,6 +26,17 @@ public class Equipement {
         this.noteEq = noteEq;
         this.avisEquipement =  avisEquipement;
     }
+
+
+
+    public Equipement( String imageEq,String nomEq, String categEq , String descEq,  String docEq) {
+        this.nomEq = nomEq;
+        this.descEq = descEq;
+        this.docEq = docEq;
+        this.imageEq = imageEq;
+        this.categEq = categEq;
+
+    }
     public Equipement(String nomEq, String descEq, String docEq, String imageEq, String categEq, int noteEq ) {
         this.nomEq = nomEq;
         this.descEq = descEq;

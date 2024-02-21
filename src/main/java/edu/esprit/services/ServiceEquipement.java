@@ -14,9 +14,9 @@ public class ServiceEquipement implements IService<Equipement>{
 
     Connection cnx = DataSource.getInstance().getCnx();
     @Override
-    public void ajouter(Equipement p) {
+    public void ajouter(Equipement p)  throws SQLException{
         String req = "INSERT INTO `equipement`(`nomEq`, `descEq`, `docEq`, `imageEq`, `categEq`, `noteEq`) VALUES (?,?,?,?,?,?)";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1,p.getNomEq());
             ps.setString(2,p.getDescEq());
@@ -26,14 +26,12 @@ public class ServiceEquipement implements IService<Equipement>{
             ps.setInt(6,p.getNoteEq());
             ps.executeUpdate();
             System.out.println("Equipement ajouté !");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
     @Override
-    public void modifier(Equipement eq) {
-        try {
+    public void modifier(Equipement eq)  throws SQLException{
+
             String req = " update equipement set nomEq=? , descEq=? , docEq=? , imageEq=?, categEq=? ,noteEq=?  where idEq=" + eq.getIdEq() ;
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1,eq.getNomEq());
@@ -44,14 +42,12 @@ public class ServiceEquipement implements IService<Equipement>{
             ps.setInt(6,eq.getNoteEq());
             ps.executeUpdate();
             System.out.println("Equipement modifié !");
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+
     }
 
     @Override
-    public void supprimer(int idEq) {
-        try {
+    public void supprimer(int idEq) throws SQLException {
+
            String req = "DELETE FROM equipement WHERE idEq = " + idEq;
 
             PreparedStatement ps  = cnx.prepareStatement(req);
@@ -59,16 +55,14 @@ public class ServiceEquipement implements IService<Equipement>{
             ste.executeUpdate(req);
             System.out.println("Equipement supprimé !");
 
-        } catch (SQLException e) {
-           System.err.println(e.getMessage());
-       }
+
     }
 
     @Override
-    public Equipement getOneById(int id) {
+    public Equipement getOneById(int id) throws SQLException {
         Equipement e = null;
         String req = "select * from equipement where idEq = " + id;
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
@@ -84,19 +78,17 @@ public class ServiceEquipement implements IService<Equipement>{
 
 
             }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+
 
         return e;
     }
 
     @Override
-    public Set<Equipement> getAll() {
+    public Set<Equipement> getAll() throws SQLException{
         Set<Equipement> equipement = new HashSet<>();
 
         String req = "Select * from equipement";
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
@@ -120,18 +112,16 @@ public class ServiceEquipement implements IService<Equipement>{
                 equipement.add(eq);
 
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
 
 
         return equipement;
     }
 
-    private Set<AvisEquipement> getAvisForEquipement(int equipementId) {
+    private Set<AvisEquipement> getAvisForEquipement(int equipementId) throws SQLException {
         Set<AvisEquipement> avisEquipements = new HashSet<>();
         String req = "SELECT * FROM avisequipement WHERE idEq = ?";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, equipementId);
             ResultSet res = ps.executeQuery();
@@ -139,9 +129,7 @@ public class ServiceEquipement implements IService<Equipement>{
                 String commAEq = res.getString("commAEq");
                 avisEquipements.add(new AvisEquipement(commAEq));
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
         return avisEquipements;
     }
 
