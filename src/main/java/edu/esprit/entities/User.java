@@ -15,6 +15,9 @@ public class User {
     public String getRole() {
         return role;
     }
+    public boolean isAdmin() {
+        return false; // Par défaut, un utilisateur n'est pas un administrateur
+    }
 
     public void setRole(String role) {
         this.role = role;
@@ -106,7 +109,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", mdp='" + mdp + '\'' +

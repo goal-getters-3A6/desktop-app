@@ -10,6 +10,12 @@ public class Admin extends User {
 
     }
 
+
+    @Override
+    public boolean isAdmin() {
+        return true; // Un administrateur est toujours un administrateur
+    }
+
     public Admin(int id, String nom, String prenom, String mdp, String mail, byte[] image) {
         super(id, nom, prenom,mdp,mail,image);
     }

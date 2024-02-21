@@ -106,4 +106,24 @@ public class AdminService {
         }
         return admins;
     }
+    public Admin getAdminByEmail(String email) {
+        String req = "SELECT * FROM admin WHERE mail=?";
+        try {
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            Ps.setString(1, email);
+            ResultSet res = Ps.executeQuery();
+            if (res.next()) {
+                String nom = res.getString("nom");
+                String prenom = res.getString("prenom");
+                String mdp = res.getString("mdp");
+                String mail = res.getString("mail");
+                byte[] image = res.getBytes("image");
+                // Créez un objet Admin en ignorant les attributs absents
+                return new Admin(nom, prenom,mdp,email, image);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'obtention de l'administrateur par email : " + e.getMessage());
+        }
+        return null;
+    }
 }

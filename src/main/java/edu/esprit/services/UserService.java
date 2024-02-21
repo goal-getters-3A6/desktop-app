@@ -31,6 +31,28 @@ public class UserService {
         }
         return false;
     }
+    public User getUserByEmail(String email) {
+        String req = "SELECT * FROM user WHERE mail=?";
+        try {
+            PreparedStatement Ps = cnx.prepareStatement(req);
+            Ps.setString(1, email);
+            ResultSet Rs = Ps.executeQuery();
+            if (Rs.next()) {
+                User u = new User();
+                u.setId(Rs.getInt("id"));
+                u.setNom(Rs.getString("nom"));
+                u.setPrenom(Rs.getString("prenom"));
+                u.setMail(Rs.getString("mail"));
+                u.setMdp(Rs.getString("mdp"));
+                u.setImage(Rs.getBytes("image"));
+                u.setRole(Rs.getString("role"));
+                return u;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());
+        }
+        return null;
+    }
 
 
     public List<User> findAll() {

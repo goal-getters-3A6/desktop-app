@@ -88,6 +88,13 @@ public class ProfilController {
             System.out.println("Modify failed");
         }
     }
+    // Champ pour stocker l'e-mail de l'utilisateur
+    private String userEmail;
+    public void initData(String email) {
+        this.userEmail = email;
+        // Vous pouvez faire d'autres traitements avec l'e-mail si nécessaire
+        // Par exemple, afficher l'e-mail dans un champ de texte ou effectuer des requêtes supplémentaires avec cet e-mail
+    }
 
     @FXML
     void abonnement(ActionEvent event) {
