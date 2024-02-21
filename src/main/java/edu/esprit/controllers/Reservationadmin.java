@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,6 +44,26 @@ public class Reservationadmin {
 
     @FXML
     private Button btnrefraichir;
+    @FXML
+    private Button btntdb;
+    @FXML
+    private Button btnabonnement;
+    @FXML
+    private Button btnalimentaire;
+
+    @FXML
+    private Button btnequipement;
+
+    @FXML
+    private Button btnevenement;
+
+    @FXML
+    private Button btnplanning;
+
+    @FXML
+    private Button btnreclamation;
+    @FXML
+    private ImageView logo;
     @FXML
     private TableColumn<?, ?> nom;
 
@@ -283,6 +304,51 @@ public class Reservationadmin {
             // Cast ticket_tableview to TableView<Ticket> and set its items
             ((TableView<Reservation>) table).setItems(FXCollections.observableArrayList(filtredResList));
         }
+
+    }
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+    @FXML
+    void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SeanceFormulaire.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableaudebord(ActionEvent event) {
 
     }
 

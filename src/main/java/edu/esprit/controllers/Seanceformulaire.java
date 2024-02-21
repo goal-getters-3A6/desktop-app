@@ -37,11 +37,36 @@ public class Seanceformulaire {
     private String imageUrl;
     @FXML
     private Button btnrefraichir;
+    @FXML
+    private Button btnabonnement;
+    @FXML
+    private Button btnalimentaire;
 
     @FXML
+    private Button btnequipement;
+
+    @FXML
+    private Button btnevenement;
+
+    @FXML
+    private Button btnplanning;
+
+    @FXML
+    private Button btnreclamation;
+
+    @FXML
+    private Button btnreservation;
+    @FXML
+    private Button btntdb;
+
+    @FXML
+    private ImageView logo;
+    @FXML
     private Button btnchercher;
+
     @FXML
     private Button btnstats;
+
     @FXML
     private TextField chercherfield;
 
@@ -467,6 +492,25 @@ public class Seanceformulaire {
 
     }
     @FXML
+    void reservation(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationadmin.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnreservation.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
+    }
+
+
+    @FXML
     void refraichir(ActionEvent event) {
         try {
             seanceList = ss.getAll(); // Récupérer les données de la base de données
@@ -491,6 +535,51 @@ public class Seanceformulaire {
         if (tableseance != null && tableseance instanceof TableView) {
             ((TableView<Seance>) tableseance).setItems(FXCollections.observableArrayList(seanceList));
         }
+
+    }
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+    @FXML
+    void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SeanceFormulaire.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableaudebord(ActionEvent event) {
 
     }
     }

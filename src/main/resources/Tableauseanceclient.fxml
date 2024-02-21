@@ -1,89 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Tableauseanceclient">
+<AnchorPane prefHeight="511.0" prefWidth="927.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Tableauseanceclient">
    <children>
-      <TableView fx:id="tableauseance" layoutX="300.0" layoutY="145.0" prefHeight="241.0" prefWidth="621.0">
-        <columns>
-          <TableColumn fx:id="colonnehoraire" prefWidth="212.79998779296875" text="horaire" />
-          <TableColumn fx:id="colonnejour" prefWidth="180.79998779296875" text="jourseance" />
-            <TableColumn fx:id="colonneduree" prefWidth="228.0" text="duree" />
-        </columns>
-      </TableView>
-      <HBox fx:id="hboxtopseancefront" layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="1314.0" style="-fx-background-color: #004369;">
+      <AnchorPane layoutX="176.0" layoutY="100.0" prefHeight="396.0" prefWidth="574.0" style="-fx-background-color: #38afb5;">
          <children>
-            <ImageView fx:id="logo" fitHeight="99.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imgs/logo.png" />
-               </image>
-            </ImageView>
-            <Separator orientation="VERTICAL" prefHeight="99.0" prefWidth="63.0" visible="false" />
-            <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-            <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-            <Separator orientation="VERTICAL" prefHeight="99.0" prefWidth="61.0" visible="false" />
-            <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-            <Separator orientation="VERTICAL" prefHeight="99.0" prefWidth="54.0" visible="false" />
-            <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-            <ImageView fx:id="imageuser" fitHeight="67.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets left="330.0" right="6.0" />
-               </HBox.margin>
-               <image>
-                  <Image url="@imgs/user.jpg" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnprofil" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="15.0" />
-               </HBox.margin>
-            </Button>
+            <Label layoutX="14.0" layoutY="22.0" text="Le planning" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Label>
+            <TableView fx:id="tableauseance" layoutY="75.0" prefHeight="252.0" prefWidth="574.0" style="-fx-background-color: #fffaed;">
+              <columns>
+                <TableColumn fx:id="colonnehoraire" prefWidth="184.00006103515625" text="horaire" />
+                <TableColumn fx:id="colonnejour" prefWidth="175.20001220703125" text="jourseance" />
+                  <TableColumn fx:id="colonneduree" prefWidth="263.199951171875" text="duree" />
+              </columns>
+            </TableView>
+            <Button fx:id="retour" layoutX="508.0" layoutY="362.0" mnemonicParsing="false" onAction="#retourner" style="-fx-background-color: db1f48;" text="Retour" textFill="WHITE" />
          </children>
-      </HBox>
-      <Button fx:id="retour" layoutX="952.0" layoutY="352.0" mnemonicParsing="false" onAction="#retourner" style="-fx-background-color: db1f48;" text="Retour" textFill="WHITE" />
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorpanedash" prefHeight="94.0" prefWidth="927.0" style="-fx-background-color: #004369;">
+         <children>
+            <Button fx:id="btnprofil" layoutX="842.0" layoutY="11.0" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE" />
+            <Button fx:id="btnreclamation" layoutX="687.0" layoutY="50.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE" />
+            <Button fx:id="btnevenement" layoutX="589.0" layoutY="50.0" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE" />
+            <Button fx:id="btnalimentaire" layoutX="500.0" layoutY="50.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE" />
+            <Button fx:id="btnabonnement" layoutX="393.0" layoutY="50.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE" />
+            <Button fx:id="btnplanning" layoutX="310.0" layoutY="50.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5" />
+            <Button fx:id="btnequipement" layoutX="206.0" layoutY="50.0" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE" />
+            <Button fx:id="btnaccueil" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="logo" fitHeight="98.0" fitWidth="152.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

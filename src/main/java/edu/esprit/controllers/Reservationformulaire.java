@@ -19,12 +19,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+//import static edu.esprit.Api.EmailSender.sendConfirmationEmail;
 
 public class Reservationformulaire {
 
@@ -316,6 +319,22 @@ public class Reservationformulaire {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                /*try {
+                    // Envoyer un e-mail de confirmation au client
+                    sendConfirmationEmail();
+
+                    // Afficher une confirmation à l'utilisateur
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Confirmation");
+                    alert.setContentText("Réservation ajoutée avec succès. Un e-mail de confirmation a été envoyé au client.");
+                    alert.showAndWait();
+                } catch (MessagingException e) {
+                    // Gérer les erreurs liées à l'envoi d'e-mail
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setContentText("Une erreur s'est produite lors de l'envoi de l'e-mail de confirmation. Veuillez réessayer plus tard.");
+                    alert.showAndWait();
+                }*/
             }
         }
 
@@ -393,6 +412,20 @@ public class Reservationformulaire {
 
     @FXML
     void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/leseancesfront.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
 
     }
 

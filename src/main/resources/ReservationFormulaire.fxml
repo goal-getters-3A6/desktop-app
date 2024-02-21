@@ -2,102 +2,28 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="638.0" prefWidth="897.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Reservationformulaire">
    <children>
-      <BorderPane fx:id="borderpaneformulairereservaion" layoutX="458.0" layoutY="90.0" prefHeight="638.0" prefWidth="897.0" style="-fx-background-color: #fffaed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #004369;" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fx:id="logo" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@imgs/logo.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets top="70.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets top="70.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
-                     <HBox.margin>
-                        <Insets top="70.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets top="70.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets top="70.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets top="70.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets top="70.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnprofil" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <ImageView fx:id="imageuser" fitHeight="67.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@imgs/user.jpg" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-            </HBox>
-         </top>
-         <right>
-            <TableView fx:id="table" prefHeight="466.0" prefWidth="510.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="nomseance" prefWidth="75.0" text="nomseance" />
-                <TableColumn fx:id="nompersonne" prefWidth="75.0" text="nompersonne" />
-                  <TableColumn fx:id="prenom" prefWidth="75.0" text="prenom" />
-                  <TableColumn fx:id="age" prefWidth="75.0" text="age" />
-                  <TableColumn fx:id="poids" prefWidth="75.0" text="poids" />
-                  <TableColumn fx:id="taille" prefWidth="75.0" text="taille" />
-                  <TableColumn fx:id="sexe" prefWidth="75.0" text="sexe" />
-              </columns>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-            </TableView>
-         </right>
-      </BorderPane>
-      <VBox layoutX="7.0" layoutY="122.0" prefHeight="405.0" prefWidth="182.0" spacing="10.0">
+      <BorderPane fx:id="borderpaneformulairereservaion" layoutX="458.0" layoutY="90.0" prefHeight="638.0" prefWidth="897.0" style="-fx-background-color: #fffaed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox layoutX="7.0" layoutY="122.0" prefHeight="431.0" prefWidth="138.0" spacing="10.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
-            <TextField fx:id="Lastname" prefHeight="23.0" prefWidth="155.0">
+            <TextField fx:id="Lastname" prefHeight="23.0" prefWidth="94.0">
                <font>
                   <Font name="ACaslonPro-Semibold" size="12.0" />
                </font>
@@ -120,5 +46,48 @@
             </Button>
          </children>
       </VBox>
+      <AnchorPane layoutX="385.0" layoutY="100.0" prefHeight="625.0" prefWidth="510.0" style="-fx-background-color: #38afb5;">
+         <children>
+            <Label layoutY="14.0" text="Mes Reservations" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Label>
+            <TableView fx:id="table" layoutX="-1.0" layoutY="57.0" prefHeight="549.0" prefWidth="510.0" style="-fx-background-color: #fffaed;">
+              <columns>
+                <TableColumn fx:id="nomseance" prefWidth="75.0" text="nomseance" />
+                <TableColumn fx:id="nompersonne" prefWidth="75.0" text="nompersonne" />
+                  <TableColumn fx:id="prenom" prefWidth="75.0" text="prenom" />
+                  <TableColumn fx:id="age" prefWidth="75.0" text="age" />
+                  <TableColumn fx:id="poids" prefWidth="75.0" text="poids" />
+                  <TableColumn fx:id="taille" prefWidth="75.0" text="taille" />
+                  <TableColumn fx:id="sexe" prefWidth="75.0" text="sexe" />
+              </columns>
+            </TableView>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorpanedash" layoutY="-1.0" prefHeight="84.0" prefWidth="938.0" style="-fx-background-color: #004369;">
+         <children>
+            <Button fx:id="btnprofil" layoutX="842.0" layoutY="11.0" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE" />
+            <Button fx:id="btnreclamation" layoutX="687.0" layoutY="50.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE" />
+            <Button fx:id="btnevenement" layoutX="589.0" layoutY="50.0" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE" />
+            <Button fx:id="btnalimentaire" layoutX="500.0" layoutY="50.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE" />
+            <Button fx:id="btnabonnement" layoutX="393.0" layoutY="50.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE" />
+            <Button fx:id="btnplanning" layoutX="310.0" layoutY="50.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5" />
+            <Button fx:id="btnequipement" layoutX="206.0" layoutY="50.0" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE" />
+            <Button fx:id="btnaccueil" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE" />
+            <ImageView fx:id="logo1" fitHeight="89.0" fitWidth="107.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

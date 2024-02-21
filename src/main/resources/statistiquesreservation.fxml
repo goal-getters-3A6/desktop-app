@@ -3,13 +3,28 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="546.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Statistiquesreservation">
+<AnchorPane prefHeight="546.0" prefWidth="846.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Statistiquesreservation">
    <children>
-      <AnchorPane layoutX="-13.0" layoutY="-5.0" prefHeight="647.0" prefWidth="188.0" style="-fx-background-color: #004369;" />
+      <AnchorPane layoutX="-13.0" layoutY="-5.0" prefHeight="647.0" prefWidth="174.0" style="-fx-background-color: #004369;">
+         <children>
+            <ImageView fx:id="logo" fitHeight="98.0" fitWidth="155.0" layoutX="40.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/logo.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btntdb" layoutX="31.0" layoutY="135.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE" />
+            <Button fx:id="btnequipement" layoutX="27.0" layoutY="184.0" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE" />
+            <Button fx:id="btnabonnement" layoutX="29.0" layoutY="283.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE" />
+            <Button fx:id="btnalimentaire" layoutX="27.0" layoutY="339.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE" />
+            <Button fx:id="btnevenement" layoutX="30.0" layoutY="392.0" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE" />
+            <Button fx:id="btnreclamation" layoutX="33.0" layoutY="447.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE" />
+            <Button fx:id="btnplanning" layoutX="27.0" layoutY="233.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5" />
+         </children></AnchorPane>
       <PieChart fx:id="chart1" layoutX="247.0" layoutY="102.0" />
       <Label layoutX="294.0" layoutY="45.0" text="Les statistiques des reservations">
          <font>

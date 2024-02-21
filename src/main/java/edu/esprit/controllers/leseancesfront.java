@@ -39,6 +39,8 @@ public class leseancesfront{
 
     @FXML
     private Button btnabonnement;
+    @FXML
+    private Button btnmesreservations;
 
     @FXML
     private Button btnaccueil;
@@ -115,6 +117,20 @@ public class leseancesfront{
 
     @FXML
     void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/leseancesfront.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
 
     }
 
@@ -146,8 +162,6 @@ public class leseancesfront{
         }
 
     }
-    @FXML
-    private Button btnmesreservations;
 
     private final ServiceSeance ss=new ServiceSeance();
      List<Seance> seanceList=ss.getAll();

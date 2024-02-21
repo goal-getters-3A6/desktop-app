@@ -32,6 +32,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -42,7 +43,31 @@ public class Statistiqueseance  implements Initializable {
     @FXML
     private PieChart chart1;
     @FXML
+    private Button btnabonnement;
+
+    @FXML
+    private Button btnalimentaire;
+
+    @FXML
+    private Button btnequipement;
+
+    @FXML
+    private Button btnevenement;
+
+    @FXML
+    private Button btnplanning;
+
+    @FXML
+    private Button btnreclamation;
+
+    @FXML
     private Button btnretour;
+
+    @FXML
+    private Button btntdb;
+
+    @FXML
+    private ImageView logo1;
 
     @FXML
     private PieChart chart2;
@@ -98,5 +123,52 @@ public class Statistiqueseance  implements Initializable {
             ex.printStackTrace();
             // Gérer l'exception si le chargement de la vue échoue
         }
+    }
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SeanceFormulaire.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableaudebord(ActionEvent event) {
+
     }
 }

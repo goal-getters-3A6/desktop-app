@@ -7,9 +7,13 @@ import edu.esprit.services.ServiceReservation;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,6 +27,25 @@ public class Mesreservations {
 
     @FXML
     private Button btnaccueil;
+    @FXML
+    private Button btnabonnement;
+    @FXML
+    private Button btnalimentaire;
+
+    @FXML
+    private Button btnequipement;
+
+    @FXML
+    private Button btnevenement;
+
+    @FXML
+    private Button btnplanning;
+
+    @FXML
+    private Button btnprofil;
+
+    @FXML
+    private Button btnreclamation;
 
     @FXML
     private Button btnmodifier;
@@ -75,6 +98,52 @@ public class Mesreservations {
     private ToggleGroup sexeToggleGroup;
     @FXML
     void accueil(ActionEvent event) {
+
+    }
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/leseancesfront.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
+    }
+
+    @FXML
+    void profil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
 
     }
     public void initialize() throws IOException {
