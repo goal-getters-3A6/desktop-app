@@ -44,6 +44,9 @@ public class User {
         this.image = image;
     }
 
+    public User(Object userData) {
+    }
+
     // Getters and setters
     public int getId() {
         return id;

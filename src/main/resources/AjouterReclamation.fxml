@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="619.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterReclamation">
+   <children>
+      <Label layoutX="42.0" layoutY="14.0" prefHeight="54.0" prefWidth="240.0" text="Réclamation">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="77.0" prefHeight="18.0" prefWidth="82.0" text="Catégorie" />
+      <Label layoutX="41.0" layoutY="123.0" text="Description " />
+      <Label layoutX="41.0" layoutY="319.0" text="Piéce Jointe" />
+      <TextArea fx:id="descriptionRecid" layoutX="113.0" layoutY="120.0" prefHeight="162.0" prefWidth="158.0" />
+      <TextField fx:id="oddRecid" layoutX="388.0" layoutY="73.0" />
+      <TextField fx:id="piéceJointeRecid" layoutX="115.0" layoutY="307.0" />
+      <Label layoutX="339.0" layoutY="76.0" prefHeight="18.0" prefWidth="38.0" text="ODD" />
+      <Label layoutX="330.0" layoutY="132.0" text="Service" />
+      <ComboBox fx:id="categorieRecid" layoutX="117.0" layoutY="73.0" prefWidth="150.0" />
+      <ComboBox fx:id="serviceRecid" layoutX="387.0" layoutY="128.0" prefWidth="150.0" />
+      <Button layoutX="321.0" layoutY="211.0" mnemonicParsing="false" onAction="#Ajouter" text="Ajouter" />
+      <Button layoutX="387.0" layoutY="211.0" mnemonicParsing="false" onAction="#AfficherRec" text="Afficher" />
+      <ScrollPane layoutX="528.0" layoutY="248.0" prefHeight="200.0" prefWidth="200.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="recaffiche" prefHeight="186.0" prefWidth="187.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

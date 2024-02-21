@@ -37,6 +37,16 @@ public class Reclamation {
         this.etatRec = etatRec;
         this.utilisateur = utilisateur;
     }
+    public Reclamation(String categorieRec, String descriptionRec, String piéceJointeRec, String oddRec, String serviceRec ,User utilisateur) {
+        this.categorieRec = categorieRec;
+        this.descriptionRec = descriptionRec;
+        this.piéceJointeRec = piéceJointeRec;
+        this.oddRec = oddRec;
+        this.serviceRec = serviceRec;
+        this.utilisateur = utilisateur;
+
+
+    }
 
     public int getIdRec() {
         return idRec;
@@ -104,15 +114,23 @@ public class Reclamation {
 
     @Override
     public String toString() {
-        return "Reclamation{" +
+        String result ="Reclamation{" +
                 "categorieRec='" + categorieRec + '\'' +
                 ", descriptionRec='" + descriptionRec + '\'' +
                 ", piéceJointeRec='" + piéceJointeRec + '\'' +
                 ", oddRec='" + oddRec + '\'' +
                 ", serviceRec='" + serviceRec + '\'' +
                 ", etatRec=" + etatRec +
-                ", utilisateur=" + utilisateur +
-                '}';
+                ", utilisateur=[" ;
+
+
+        // Concaténer les commentaires des avis
+
+            result += utilisateur.getNom() + ", ";
+
+        result += "]}";
+
+        return result;
     }
 
     @Override
