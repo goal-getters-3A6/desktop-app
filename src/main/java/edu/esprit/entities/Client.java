@@ -12,7 +12,7 @@ public class Client extends User {
 
 
 
-    public Client(String nom, String prenom, String mdp, String mail, String tel,Boolean statut, int nb_tentative,byte[] image, Date date_naissance) {
+    public Client(String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance) {
         super(nom, prenom, mail, mdp,image );
         this.date_naissance = date_naissance;
         this.tel = tel;
@@ -20,7 +20,7 @@ public class Client extends User {
         this.nb_tentative = nb_tentative;
     }
 
-    public Client(int id, String nom, String prenom, String mdp, String mail, String tel,Boolean statut, int nb_tentative,byte[] image, Date date_inscription, Date date_naissance) {
+    public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_inscription, Date date_naissance) {
         super(id, nom, prenom, mail, mdp, image);
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
@@ -29,7 +29,7 @@ public class Client extends User {
         this.nb_tentative = nb_tentative;
     }
 
-    public Client(int id, String nom, String prenom, String mdp, String mail, String tel,Boolean statut, int nb_tentative,byte[] image, Date date_naissance) {
+    public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance) {
         super(id, nom, prenom, mail, mdp, image);
         this.date_naissance = date_naissance;
         this.tel = tel;
@@ -40,7 +40,7 @@ public class Client extends User {
         super(id, nom, prenom, mail);
     }
 
-    public Client (int id , String nom , String prenom , String mail , byte[] image , Date date_inscription , Date date_naissance , String tel){
+    public Client (int id , String nom , String prenom , String mail , String image , Date date_inscription , Date date_naissance , String tel){
         super(id,nom,prenom,mail,image);
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;

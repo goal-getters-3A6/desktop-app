@@ -1,44 +1,23 @@
 package edu.esprit.controllers;
 
 
-
-import java.io.IOException;
-import java.net.URL;
-import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import edu.esprit.entities.Client;
 import edu.esprit.entities.User;
 import edu.esprit.services.ClientService;
-import edu.esprit.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+
+import java.net.URL;
+import java.text.DateFormatSymbols;
+import java.util.*;
 
 
 public class DashboardController implements Initializable {
@@ -66,8 +45,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableView tableviewuser;
-    @FXML
-    private ListView<?> reportslistview;
+
 
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
     @FXML
@@ -75,12 +53,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private CategoryAxis xAxis;
-    @FXML
-    private Button managegames;
-    @FXML
-    private Button managehappyhours;
-    @FXML
-    private AnchorPane DashborardPane;
+
 
 
     @Override
@@ -130,6 +103,5 @@ public class DashboardController implements Initializable {
         tableviewuser.refresh();
 
     }
-
 
 }

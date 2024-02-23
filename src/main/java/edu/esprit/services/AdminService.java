@@ -1,8 +1,8 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Admin;
-import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
+import edu.esprit.utils.HashWithMD5;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,8 +26,8 @@ public class AdminService {
             Ps.setString(1, admin.getNom());
             Ps.setString(2, admin.getPrenom());
             Ps.setString(3, admin.getMail());
-            Ps.setString(4, admin.getMdp());
-            Ps.setBytes(5, admin.getImage());
+            Ps.setString(4, HashWithMD5.hashWithMD5(admin.getMdp()));
+            Ps.setString(5, admin.getImage());
             Ps.setString(6, "ADMIN"); // Ajout du rôle admin
             Ps.executeUpdate();
             System.out.println("Admin ajouté avec succès !");
@@ -42,9 +42,9 @@ public class AdminService {
             PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setString(1, admin.getNom());
             Ps.setString(2, admin.getPrenom());
-            Ps.setString(3, admin.getMdp());
+            Ps.setString(3,HashWithMD5.hashWithMD5(admin.getMdp()));
             Ps.setString(4, admin.getMail());
-            Ps.setBytes(5, admin.getImage());
+            Ps.setString(5, admin.getImage());
             Ps.setInt(6, admin.getId());
             Ps.executeUpdate();
             System.out.println("Admin modifié avec succès !");
@@ -76,7 +76,7 @@ public class AdminService {
                 String prenom = res.getString("prenom");
                 String mdp = res.getString("mdp");
                 String mail = res.getString("mail");
-                byte[] image = res.getBytes("image");
+                String image = res.getString("image");
                 return new Admin(id, nom, prenom, mdp, mail, image);
             }
         } catch (SQLException e) {
@@ -97,7 +97,7 @@ public class AdminService {
                 String prenom = res.getString("prenom");
                 String mdp = res.getString("mdp");
                 String mail = res.getString("mail");
-                byte[] image = res.getBytes("image");
+                String image = res.getString("image");
                 Admin admin = new Admin(id, nom, prenom, mdp, mail, image);
                 admins.add(admin);
             }
@@ -117,7 +117,7 @@ public class AdminService {
                 String prenom = res.getString("prenom");
                 String mdp = res.getString("mdp");
                 String mail = res.getString("mail");
-                byte[] image = res.getBytes("image");
+                String image = res.getString("image");
                 // Créez un objet Admin en ignorant les attributs absents
                 return new Admin(nom, prenom,mdp,email, image);
             }

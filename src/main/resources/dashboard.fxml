@@ -29,7 +29,7 @@
                 <TableColumn fx:id="ttel" minWidth="0.0" prefWidth="69.5999755859375" text="tel" />
                 <TableColumn fx:id="tdate_naissance" prefWidth="92.79998779296875" text="date_naissance" />
                 <TableColumn fx:id="tdate_inscription" prefWidth="67.20001220703125" text="date_inscri" />
-            <TableColumn fx:id="tmdp" prefWidth="102.4000244140625" text="mot_de_passe" />
+
             </columns>
         </TableView>
         <Label layoutX="329.0" layoutY="254.0" text="Reports Management" textFill="WHITE">

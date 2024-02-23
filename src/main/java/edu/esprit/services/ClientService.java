@@ -3,6 +3,7 @@ package edu.esprit.services;
 import edu.esprit.entities.Client;
 import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
+import edu.esprit.utils.HashWithMD5;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -26,10 +27,10 @@ public class ClientService  {
                 Ps.setString(1, p.getNom());
                 Ps.setString(2, p.getPrenom());
                 Ps.setString(3, p.getMail());
-                Ps.setString(4, p.getMdp());
+                Ps.setString(4, HashWithMD5.hashWithMD5(p.getMdp() ));
                 Ps.setBoolean(5, p.getStatut());
                 Ps.setInt(6, p.getNb_tentative());
-                Ps.setBytes(7, p.getImage());
+                Ps.setString(7, p.getImage());
                 Ps.setDate(8, new java.sql.Date(p.getDate_naissance().getTime()));
                 Ps.setDate(9, new java.sql.Date(Date.valueOf(LocalDate.now()).getTime()));
                 Ps.setString(10, p.getTel());
@@ -88,7 +89,7 @@ public class ClientService  {
                 String prenom = res.getString("prenom");
                 Date dateInscription = res.getDate("date_inscription");
                 Date dateNaissance = res.getDate("date_naissance");
-                byte[] image = res.getBytes("image");
+                String image = res.getString("image");
                 String mail = res.getString("mail");
                 String tel = res.getString("tel");
                 return new Client(id, nom, prenom, mail,image, dateInscription, dateNaissance, tel);
@@ -111,7 +112,7 @@ public class ClientService  {
                 String prenom = res.getString("prenom");
                 Date dateInscription = res.getDate("date_inscription");
                 Date dateNaissance = res.getDate("date_naissance");
-                byte[] image = res.getBytes("image");
+                String image = res.getString("image");
                 String tel = res.getString("tel");
                 return new Client(id, nom, prenom, email,image, dateInscription, dateNaissance, tel);
             }
@@ -138,7 +139,7 @@ public class ClientService  {
                 String prenom = res.getString("prenom");
                 Date dateInscription = res.getDate("date_inscription");
                 Date dateNaissance = res.getDate("date_naissance");
-                byte[] image = res.getBytes("image");
+               String image = res.getString("image");
                 String mail = res.getString("mail");
                 String tel = res.getString("tel");
                 Client client = new Client(id, nom, prenom,mail,image, dateInscription, dateNaissance, tel);
@@ -162,7 +163,7 @@ public class ClientService  {
                 u.setPrenom(rs.getString("prenom"));
                 u.setMail(rs.getString("mail"));
                 u.setMdp(rs.getString("mdp"));
-                u.setImage(rs.getBytes("image"));
+                u.setImage(rs.getString("image"));
                 u.setRole(rs.getString("role"));
                 u.setTel(rs.getString("tel"));
                 u.setDate_naissance(rs.getDate("date_naissance"));

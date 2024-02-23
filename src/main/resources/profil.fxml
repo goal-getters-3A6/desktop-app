@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.geometry.Insets?>
 
 <AnchorPane prefHeight="483.0" prefWidth="723.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ProfilController">
    <children>
-      <BorderPane fx:id="borderpaneformulairereservaion" layoutX="458.0" layoutY="90.0" prefHeight="638.0" prefWidth="897.0" style="-fx-background-color: #fffaed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="borderpaneprofil" layoutX="458.0" layoutY="90.0" prefHeight="638.0" prefWidth="897.0" style="-fx-background-color: #fffaed;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #004369;" BorderPane.alignment="CENTER">
                <children>
@@ -55,28 +55,30 @@
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnprofil" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
-                  <ImageView fx:id="userimage" fitHeight="67.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@imgs/user.jpg" />
-                     </image>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </ImageView>
                </children>
             </HBox>
          </top>
+         <right>
+            <ImageView fx:id="userimage" fitHeight="67.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/user.jpg" />
+               </image>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="30.0" top="10.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </right>
+         <bottom>
+            <Button fx:id="modifierBtn" mnemonicParsing="false" onAction="#modify" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #db1f48;" text="Modifier" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="50.0" right="40.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
       </BorderPane>
 
-      <TextField fx:id="nomTxt" layoutX="192.0" layoutY="155.0" prefHeight="26.0" prefWidth="286.0" promptText="nom" style="-fx-background-color: #E8E4CE;"/>
-      <TextField fx:id="prenomTxt" layoutX="192.0" layoutY="215.0" prefHeight="26.0" prefWidth="286.0" promptText="prénom" style="-fx-background-color: #E8E4CE;"/>
-      <TextField fx:id="emailTxt" layoutX="192.0" layoutY="275.0" prefHeight="26.0" prefWidth="286.0" promptText="email" style="-fx-background-color: #E8E4CE;"/>
-      <Button fx:id="modifierBtn" layoutX="346.0" layoutY="349.0" mnemonicParsing="false" onAction="#modify" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #db1f48;" text="Modifier" />
-      <ImageView fx:id="imageView" fitHeight="88.0" fitWidth="149.0" layoutX="261.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="nomTxt" layoutX="192.0" layoutY="155.0" prefHeight="26.0" prefWidth="286.0" promptText="nom" style="-fx-background-color: #E8E4CE;" />
+      <TextField fx:id="prenomTxt" layoutX="192.0" layoutY="215.0" prefHeight="26.0" prefWidth="286.0" promptText="prénom" style="-fx-background-color: #E8E4CE;" />
+      <TextField fx:id="emailTxt" layoutX="192.0" layoutY="275.0" prefHeight="26.0" prefWidth="286.0" promptText="email" style="-fx-background-color: #E8E4CE;" />
    </children>
 </AnchorPane>

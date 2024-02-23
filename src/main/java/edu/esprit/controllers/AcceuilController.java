@@ -1,20 +1,24 @@
 package edu.esprit.controllers;
 
-import edu.esprit.entities.Admin;
-import edu.esprit.entities.Client;
 import edu.esprit.entities.User;
-import edu.esprit.services.AdminService;
-import edu.esprit.services.ClientService;
 import edu.esprit.services.UserService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
+
 
 import java.io.IOException;
+
+import static edu.esprit.utils.SessionManagement.*;
 
 public class AcceuilController {
 
@@ -22,62 +26,126 @@ public class AcceuilController {
     private TextField emailTxt;
     @FXML
     private PasswordField mdpTxt;
-    UserService userService = new UserService();
-
-
-   /* @FXML
-    void login() throws Exception {
-        if (userService.login(emailTxt.getText(), mdpTxt.getText())) {
-            System.out.println("Login success");
-        } else {
-            System.out.println("Login failed");
-        }
-    }*/
-        // AdminService adminService = new AdminService();
 
     @FXML
-    void login() {
-        try {
-            boolean loginSuccess = userService.login(emailTxt.getText(), mdpTxt.getText());
-            if (loginSuccess) {
-               User user=userService.getUserByEmail(emailTxt.getText());
-                if (user.isAdmin()) {
-                    redirectToAdminDashboard();
-                } else {
-                    redirectToUserProfile();
-                }
-            } else {
-                System.out.println("Login failed");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    private AnchorPane acceuilpane;
+    @FXML
+    public Hyperlink toRegister;
+    @FXML
+    private Hyperlink forgot;
+    UserService userService = new UserService();
+
+    @FXML
+    public void toRegister(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/register.fxml"));
+        acceuilpane.getChildren().setAll(pane);
+    }
+
+    public void initialize() {
+        if (checkFile() == true) {
+            emailTxt.setText(getEmail());
+            mdpTxt.setText(getPassword());
         }
     }
 
-    private void redirectToAdminDashboard() {
-            try {
-                Parent adminDashboard = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
-                Stage stage = new Stage();
-                stage.setScene(new Scene(adminDashboard));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    @FXML
+    void login() throws IOException {
+        if ((Id.user = userService.checklogin(emailTxt.getText(), mdpTxt.getText())) != null) {
+            User u = userService.findUserById(Id.user);
+            if (u.getRole().equals("ADMIN")) {
+                AnchorPane panee = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
+                acceuilpane.getChildren().setAll(panee);
+                String title = "Welcome!";
+                String message = "";
+                NotificationType notification = NotificationType.SUCCESS;
+                TrayNotification tray = new TrayNotification();
+                tray.setTitle(title);
+                tray.setMessage(message);
+                tray.setNotificationType(notification);
+                tray.showAndDismiss(Duration.seconds(4));
+                if (checkFile()==false) {
+                    saveSession(emailTxt.getText(), mdpTxt.getText());
+                }
 
-        }
+            } else {
+                AnchorPane panee = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+                acceuilpane.getChildren().setAll(panee);
+                String title = "Welcome!";
+                String message = "";
+                NotificationType notification = NotificationType.SUCCESS;
 
-        private void redirectToUserProfile() {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/profil.fxml"));
-                Parent userProfile = loader.load();
-                ProfilController profilController = loader.getController();
-                profilController.initData(emailTxt.getText()); // Passer l'email de l'utilisateur au profil
-                Stage stage = new Stage();
-                stage.setScene(new Scene(userProfile));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+                TrayNotification tray = new TrayNotification();
+                tray.setTitle(title);
+                tray.setMessage(message);
+                tray.setNotificationType(notification);
+                tray.showAndDismiss(Duration.seconds(4));
+                if (checkFile()==false) {
+                    saveSession(emailTxt.getText(), mdpTxt.getText());
+                }
             }
+        } else {
+            String title = "Something went wrong!";
+            String message = "Verify your informations !";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(4));
         }
+ 
+
+    }
+
+
+    @FXML
+    private void forgotPassword(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/forgotPassword.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Recover Password");
+        newWindow.setScene(scene);
+        newWindow.show();
+    }
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void accueil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    void planning(ActionEvent event) {
+
+    }
+
+    @FXML
+    void profil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
 
 }

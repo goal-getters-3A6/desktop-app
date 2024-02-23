@@ -1,24 +1,16 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Client;
-import edu.esprit.entities.User;
 import edu.esprit.services.ClientService;
-import edu.esprit.services.UserService;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.shape.Rectangle;
 
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Date;
 
 public class ProfilController {
 
@@ -71,7 +63,7 @@ public class ProfilController {
 
     @FXML
     private void initialize() {
-        Client client = clientService.getClientByEmail("mayarboukraa@gmail.com");
+        Client client = clientService.getClientById(Id.user);
         nomTxt.setText(client.getNom());
         prenomTxt.setText(client.getPrenom());
         emailTxt.setText(client.getMail());

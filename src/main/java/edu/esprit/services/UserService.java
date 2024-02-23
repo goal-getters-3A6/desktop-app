@@ -1,12 +1,14 @@
 package edu.esprit.services;
 
-import edu.esprit.entities.Client;
 import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static edu.esprit.utils.HashWithMD5.hashWithMD5;
 
 public class UserService {
     private final Connection cnx;
@@ -15,22 +17,46 @@ public class UserService {
         this.cnx = DataSource.getInstance().getCnx();
     }
 
-    public boolean login(String email, String password) {
-        String req = "SELECT * FROM user WHERE mail=?";
+
+    public Integer checklogin(String email, String password) {
+        try {
+
+            Statement st = cnx.createStatement();
+            String query = "SELECT `id` FROM `user` WHERE `mail`='" + email + "' AND `mdp`='" + hashWithMD5(password) + "'";
+            ResultSet rs = st.executeQuery(query);
+            if (rs.next()) {
+                return rs.getObject(1, Integer.class);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public User findUserById (int id) {
+        String req = "SELECT * FROM user WHERE id=?";
         try {
             PreparedStatement Ps = cnx.prepareStatement(req);
-            Ps.setString(1, email);
+            Ps.setInt(1, id);
             ResultSet Rs = Ps.executeQuery();
             if (Rs.next()) {
-                if (Rs.getString("mdp").equals(password)) {
-                    return true;
-                }
+                User u = new User();
+                u.setId(Rs.getInt("id"));
+                u.setNom(Rs.getString("nom"));
+                u.setPrenom(Rs.getString("prenom"));
+                u.setMail(Rs.getString("mail"));
+                u.setMdp(Rs.getString("mdp"));
+                u.setImage(Rs.getString("image"));
+                u.setRole(Rs.getString("role"));
+                return u;
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la connexion : " + e.getMessage());
+            System.out.println("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());
         }
-        return false;
+        return null;
     }
+
     public User getUserByEmail(String email) {
         String req = "SELECT * FROM user WHERE mail=?";
         try {
@@ -44,7 +70,7 @@ public class UserService {
                 u.setPrenom(Rs.getString("prenom"));
                 u.setMail(Rs.getString("mail"));
                 u.setMdp(Rs.getString("mdp"));
-                u.setImage(Rs.getBytes("image"));
+                u.setImage(Rs.getString("image"));
                 u.setRole(Rs.getString("role"));
                 return u;
             }
@@ -68,7 +94,7 @@ public class UserService {
                 u.setPrenom(rs.getString("prenom"));
                 u.setMail(rs.getString("mail"));
                 u.setMdp(rs.getString("mdp"));
-                u.setImage(rs.getBytes("image"));
+                u.setImage(rs.getString("image"));
                 u.setRole(rs.getString("role"));
                 list.add(u);
             }
