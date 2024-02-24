@@ -66,7 +66,7 @@ public class DashboardController implements Initializable {
         Calendar cal = Calendar.getInstance();
         List<Client> usersdata= new ArrayList<>();
         try {
-          usersdata   = new ClientService().getAllList();
+          usersdata   = new ClientService().getAll();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

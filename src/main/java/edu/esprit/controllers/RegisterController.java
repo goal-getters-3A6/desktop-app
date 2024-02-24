@@ -96,7 +96,7 @@ public class RegisterController {
         photoURL = uploadPhoto(path, name);
     }
     @FXML
-    void register() throws SQLException, IOException{
+    void register() throws  IOException{
         if ((emailTxt.getText().isBlank())
                 || (nomTxt.getText().isBlank())
                 || (prenomTxt.getText().isBlank())

@@ -1,18 +1,15 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Admin;
-import edu.esprit.utils.DataSource;
 import edu.esprit.utils.HashWithMD5;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public class AdminService implements IService<Admin>, IOtherServices<Admin>{
+public class AdminService implements IService<Admin>{
     @Override
     public void ajouter(Admin admin) throws SQLException{
         String req = "INSERT INTO user (nom, prenom, mail, mdp, image, role) VALUES (?, ?, ?, ?, ?, ?)";
@@ -54,6 +51,7 @@ public class AdminService implements IService<Admin>, IOtherServices<Admin>{
 
     }
 
+    @Override
     public Admin getOneById(int id) throws SQLException{
         String req = "SELECT * FROM user WHERE id=? AND role='ADMIN'";
 
@@ -71,8 +69,8 @@ public class AdminService implements IService<Admin>, IOtherServices<Admin>{
         return null;
     }
 
-    public Set<Admin> getAll()  throws SQLException {
-        Set<Admin> admins = new HashSet<>();
+    public List<Admin> getAll()  throws SQLException {
+        List<Admin> admins = new ArrayList<>();
         String req = "SELECT * FROM user WHERE role='ADMIN'";
             PreparedStatement Ps = cnx.prepareStatement(req);
             ResultSet res = Ps.executeQuery();
@@ -89,11 +87,8 @@ public class AdminService implements IService<Admin>, IOtherServices<Admin>{
         return admins;
     }
 
-    @Override
-    public List<Admin> getAllList() throws SQLException {
-        return null;
-    }
-    @Override
+
+
     public Admin getOneByEmail(String email) throws SQLException {
         String req = "SELECT * FROM admin WHERE mail=?";
 

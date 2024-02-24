@@ -6,11 +6,12 @@ import edu.esprit.utils.HashWithMD5;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ClientService implements IService<Client>, IOtherServices<Client>{
+public class ClientService implements IService<Client>{
 
     @Override
     public void ajouter(Client p) throws SQLException{
@@ -81,7 +82,6 @@ public class ClientService implements IService<Client>, IOtherServices<Client>{
 
         return null;
     }
-    @Override
     public Client getOneByEmail (String email) throws SQLException{
         String req = "SELECT * FROM user WHERE mail=?";
 
@@ -106,9 +106,9 @@ public class ClientService implements IService<Client>, IOtherServices<Client>{
 
 
     @Override
-    public Set<Client> getAll() throws SQLException {
+    public List<Client> getAll() throws SQLException {
 
-        Set<Client> clients = new HashSet<>();
+        List<Client> clients = new ArrayList<>();
         String req = "SELECT * FROM user WHERE role='CLIENT'";
 
             Statement st = cnx.createStatement();
@@ -129,27 +129,5 @@ public class ClientService implements IService<Client>, IOtherServices<Client>{
         return clients;
     }
 
-    @Override
-    public List<Client> getAllList() throws SQLException {
-        String req = "SELECT * FROM user WHERE role='CLIENT'";
-        List<Client> list = new java.util.ArrayList<>();
 
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()) {
-                Client u = new Client();
-                u.setId(rs.getInt("id"));
-                u.setNom(rs.getString("nom"));
-                u.setPrenom(rs.getString("prenom"));
-                u.setMail(rs.getString("mail"));
-                u.setMdp(rs.getString("mdp"));
-                u.setImage(rs.getString("image"));
-                u.setRole(rs.getString("role"));
-                u.setTel(rs.getString("tel"));
-                u.setDate_naissance(rs.getDate("date_naissance"));
-                u.setDate_inscription(rs.getDate("date_inscription"));
-                list.add(u);
-            }
-        return list;
-    }
 }

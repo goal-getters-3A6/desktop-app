@@ -1,17 +1,18 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.User;
-import edu.esprit.utils.DataSource;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static edu.esprit.utils.HashWithMD5.hashWithMD5;
 
-public class UserService implements IService<User>, IOtherServices<User> {
+public class UserService implements IService<User> {
 
 
     public Integer checklogin(String email, String password) throws SQLException {
@@ -69,12 +70,7 @@ public class UserService implements IService<User>, IOtherServices<User> {
         return null;
     }
 
-    @Override
-    public Set<User> getAll() throws SQLException {
-        return null;
-    }
 
-    @Override
     public User getOneByEmail(String email) {
         String req = "SELECT * FROM user WHERE mail=?";
         try {
@@ -99,7 +95,7 @@ public class UserService implements IService<User>, IOtherServices<User> {
     }
 
 @Override
-    public List<User> getAllList() {
+    public List<User> getAll() {
         String req = "SELECT * FROM user";
         List<User> list = null;
         try {
