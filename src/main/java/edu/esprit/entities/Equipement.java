@@ -1,6 +1,5 @@
 package edu.esprit.entities;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ public class Equipement {
 
     private Set<AvisEquipement> avisEquipement;
 
-    public Equipement (){}
+    public Equipement (String text){}
 
     public Equipement(String nomEq, String descEq, String docEq, String imageEq, String categEq, int noteEq ,Set<AvisEquipement> avisEquipement ) {
         this.nomEq = nomEq;

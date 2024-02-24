@@ -8,43 +8,33 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
+
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
-public class AjouterEquipement {
+public class ModifierEquipementBack {
 
     private final ServiceEquipement ES = new ServiceEquipement();
-
     @FXML
     private ImageView ImageViewerEq;
-    @FXML
-    private AnchorPane EquipementFX;
 
     @FXML
     private ComboBox<String> categEqId;
 
+    @FXML
+    private AnchorPane EquipementFX;
 
     @FXML
     private TextArea descEqId;
-
 
     @FXML
     private TextArea docEqId;
@@ -52,11 +42,8 @@ public class AjouterEquipement {
     @FXML
     private TextField imageEqId;
 
-
     @FXML
     private TextField nomEqId;
-
-
 
     ObservableList<String> list = FXCollections.observableArrayList("Fitness", "Cardio-training", "Musculation");
 
@@ -67,35 +54,39 @@ public class AjouterEquipement {
     }
 
 
+
+    private Equipement equipement;
+    private AfficherEquipementBack AfficherEquipementBack;
+
+
+
+    public void setParentController(AfficherEquipementBack parentController) {
+        this.AfficherEquipementBack = parentController;
+    }
+
     @FXML
-    void AjouterEquipement(ActionEvent event) {
-
+    void ModifierEquipement(ActionEvent event) {
         try {
+            equipement.setNomEq(nomEqId.getText());
+            equipement.setImageEq(imageEqId.getText());
+            equipement.setCategEq(categEqId.getValue());
+            equipement.setDescEq(descEqId.getText());
+            equipement.setDocEq(docEqId.getText());
 
-
-            ES.ajouter(new Equipement(imageEqId.getText(), nomEqId.getText(), categEqId.getValue(), descEqId.getText(), docEqId.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Validation");
-            alert.setContentText("Equipement added succesfully");
-            alert.showAndWait();
-
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
-            Parent root=loader.load();
+            ES.modifier(equipement);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
+            Parent root = loader.load();
             nomEqId.getScene().setRoot(root);
-
-
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("SQL Exeption");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+
     @FXML
-    private void insert_image(ActionEvent event) {
+    void insert_image(ActionEvent event) {
         FileChooser open = new FileChooser();
         Stage stage = (Stage) EquipementFX.getScene().getWindow();
         File file = open.showOpenDialog(stage);
@@ -110,15 +101,24 @@ public class AjouterEquipement {
         }
     }
 
-
+    public void initData(Equipement equipement) {
+        this.equipement = equipement;
+        // Remplissez les champs avec les données de l'équipement
+        nomEqId.setText(equipement.getNomEq());
+        categEqId.setValue(equipement.getCategEq());
+        descEqId.setText(equipement.getDescEq());
+        docEqId.setText(equipement.getDocEq());
+        imageEqId.setText(equipement.getImageEq());
+        // Remplissez l'ImageViewerEq avec l'image de l'équipement, si nécessaire
+    }
 
     @FXML
-    void AfficherEquipement(ActionEvent event) {
-try{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
-        Parent root = loader.load();
-        nomEqId.getScene().setRoot(root);
-    }catch (IOException e) {
+    void AnnulerEquipement(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
+            Parent root = loader.load();
+            nomEqId.getScene().setRoot(root);
+        }catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

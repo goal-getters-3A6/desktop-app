@@ -7,7 +7,7 @@ public class AvisEquipement {
     private String commAEq ;
     private Equipement equipement;
 
-    public AvisEquipement(){}
+    public AvisEquipement(String text, int idEq){}
 
     public AvisEquipement(int idAEq, String commAEq, Equipement equipement) {
         this.idAEq = idAEq;
@@ -23,6 +23,8 @@ public class AvisEquipement {
         this.commAEq = commAEq;
         this.equipement = equipement;
     }
+
+
 
     public int getIdAEq() {
         return idAEq;
