@@ -6,16 +6,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
 import static edu.esprit.utils.SessionManagement.*;
@@ -29,10 +30,21 @@ public class AcceuilController {
 
     @FXML
     private AnchorPane acceuilpane;
+
     @FXML
-    public Hyperlink toRegister;
+    private Hyperlink forgotpassword;
     @FXML
-    private Hyperlink forgot;
+    private Hyperlink toregister;
+    @FXML
+    private ImageView imageuser;
+    @FXML
+    private MenuButton profilbuttonmenu;
+    @FXML
+    private MenuItem profilitem;
+    @FXML
+    private MenuItem logoutitem;
+    @FXML
+            private Button loginbtn;
     UserService userService = new UserService();
 
     @FXML
@@ -42,9 +54,26 @@ public class AcceuilController {
     }
 
     public void initialize() {
-        if (checkFile() == true) {
-            emailTxt.setText(getEmail());
-            mdpTxt.setText(getPassword());
+        if (checkFile()) {
+            mdpTxt.setVisible(false);
+            emailTxt.setVisible(false);
+            forgotpassword.setVisible(false);
+            toregister.setVisible(false);
+            loginbtn.setVisible(false);
+            String imageURL = userService.getUserByEmail(getEmail()).getImage();
+            Image image = new Image(imageURL);
+            javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
+            imageView.setFitHeight(50);
+            imageView.setFitWidth(50);
+            profilbuttonmenu.setGraphic(imageView);
+            profilbuttonmenu.setText(getEmail());
+        } else {
+            mdpTxt.setVisible(true);
+            emailTxt.setVisible(true);
+            forgotpassword.setVisible(true);
+            toregister.setVisible(true);
+            profilbuttonmenu.setVisible(false);
+
         }
     }
 
@@ -63,12 +92,13 @@ public class AcceuilController {
                 tray.setMessage(message);
                 tray.setNotificationType(notification);
                 tray.showAndDismiss(Duration.seconds(4));
-                if (checkFile()==false) {
+                if (!checkFile()) {
                     saveSession(emailTxt.getText(), mdpTxt.getText());
+
                 }
 
             } else {
-                AnchorPane panee = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+                AnchorPane panee = FXMLLoader.load(getClass().getResource("/profil.fxml"));
                 acceuilpane.getChildren().setAll(panee);
                 String title = "Welcome!";
                 String message = "";
@@ -79,7 +109,7 @@ public class AcceuilController {
                 tray.setMessage(message);
                 tray.setNotificationType(notification);
                 tray.showAndDismiss(Duration.seconds(4));
-                if (checkFile()==false) {
+                if (!checkFile()) {
                     saveSession(emailTxt.getText(), mdpTxt.getText());
                 }
             }
@@ -107,6 +137,21 @@ public class AcceuilController {
         newWindow.setScene(scene);
         newWindow.show();
     }
+    @FXML
+    private void toProfile(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/profil.fxml"));
+        acceuilpane.getChildren().setAll(pane);
+    }
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        if (checkFile()) {
+            deleteSession();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+            acceuilpane.getChildren().setAll(pane);
+        }
+    }
+
+
     @FXML
     void abonnement(ActionEvent event) {
 

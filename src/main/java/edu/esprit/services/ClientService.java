@@ -22,7 +22,7 @@ public class ClientService  {
 
     public boolean ajouterClient(Client p) {
 
-            String req = "INSERT INTO user (nom, prenom, mail,mdp,statut,nb_tentative,image,date_naissance,date_inscription, tel, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String req = "INSERT INTO user (nom, prenom, mail,mdp,statut,nb_tentative,image,date_naissance,date_inscription, tel, role, poids,taille,sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement Ps = cnx.prepareStatement(req)) {
                 Ps.setString(1, p.getNom());
                 Ps.setString(2, p.getPrenom());
@@ -35,6 +35,9 @@ public class ClientService  {
                 Ps.setDate(9, new java.sql.Date(Date.valueOf(LocalDate.now()).getTime()));
                 Ps.setString(10, p.getTel());
                 Ps.setString(11, "CLIENT");
+                Ps.setFloat(12, p.getPoids());
+                Ps.setFloat(13, p.getTaille());
+                Ps.setString(14, p.getSexe());
                 Ps.executeUpdate();
                 System.out.println("Client ajouté avec succès !");
                 return true;

@@ -33,7 +33,7 @@ public class Main{
         ClientService clientService = new ClientService();
 
 
-        Client clientToAdd = new Client("boukraa", "meryem", "mahdiboukraa@gmail.com", "mdp123", "12345678", true, 0, null, new Date("29/05/2006"));
+        Client clientToAdd = new Client("boukraa", "meryem", "mahdiboukraa@gmail.com", "mdp123", "12345678", true, 0, null, new Date("29/05/2006"), 60, 1.65f, "Femme");
         clientService.ajouterClient(clientToAdd);
 
         // Getting client by ID

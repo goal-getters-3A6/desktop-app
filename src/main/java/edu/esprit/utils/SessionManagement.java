@@ -96,4 +96,11 @@ public class SessionManagement {
             e.printStackTrace();
         }
     }
+
+    public static void deleteSession() {
+        File f = new File(path);
+        if (f.exists() && f.isFile()) {
+            f.delete();
+        }
+    }
 }

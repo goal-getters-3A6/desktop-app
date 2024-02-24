@@ -9,32 +9,47 @@ public class Client extends User {
     private boolean statut;
     private int nb_tentative;
     private String tel;
+    private float poids;
+    private float taille;
+    private String sexe;
 
 
 
-    public Client(String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance) {
-        super(nom, prenom, mail, mdp,image );
+
+
+
+    public Client(String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance, float poids, float taille, String sexe) {
+        super(nom, prenom, mdp, mail,image );
         this.date_naissance = date_naissance;
         this.tel = tel;
         this.statut = statut;
         this.nb_tentative = nb_tentative;
+        this.poids = poids;
+        this.taille = taille;
+        this.sexe = sexe;
     }
 
-    public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_inscription, Date date_naissance) {
+    public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_inscription, Date date_naissance, float poids, float taille, String sexe) {
         super(id, nom, prenom, mail, mdp, image);
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
         this.statut = statut;
         this.nb_tentative = nb_tentative;
+        this.poids = poids;
+        this.taille = taille;
+        this.sexe = sexe;
     }
 
-    public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance) {
+    public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance, float poids, float taille, String sexe) {
         super(id, nom, prenom, mail, mdp, image);
         this.date_naissance = date_naissance;
         this.tel = tel;
         this.statut = statut;
         this.nb_tentative = nb_tentative;
+        this.poids = poids;
+        this.taille = taille;
+        this.sexe = sexe;
     }
     public Client(int id, String nom, String prenom,String mail) {
         super(id, nom, prenom, mail);
@@ -92,6 +107,31 @@ public class Client extends User {
     public void setNb_tentative(int nb_tentative) {
         this.nb_tentative = nb_tentative;
     }
+    public float getPoids() {
+        return poids;
+    }
+
+    public void setPoids(float poids) {
+        this.poids = poids;
+    }
+
+    public float getTaille() {
+        return taille;
+    }
+
+    public void setTaille(float taille) {
+        this.taille = taille;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+
 
 
 
