@@ -1,6 +1,7 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Client;
+import edu.esprit.entities.Id;
 import edu.esprit.services.ClientService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

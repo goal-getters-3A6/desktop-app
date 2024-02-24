@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49e1918-2662-4c36-8b46-f23f815cab66" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/Modsupprseance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/Tableauseanceclient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Tableauseanceclient.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/imgs/bin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/imgs/pen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/imgs/search.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/modsupprseance.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/tests/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/tests/MainFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/profil.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/profil.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +138,7 @@
       <workItem from="1708686960766" duration="597000" />
       <workItem from="1708687931760" duration="11699000" />
       <workItem from="1708765921494" duration="214000" />
-      <workItem from="1708766208957" duration="25844000" />
+      <workItem from="1708766208957" duration="26655000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,5 @@
 package edu.esprit.utils;
-import edu.esprit.controllers.Id;
+import edu.esprit.entities.Id;
 
 import java.util.Properties;
 

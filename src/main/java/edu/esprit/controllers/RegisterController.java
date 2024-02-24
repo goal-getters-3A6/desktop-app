@@ -2,6 +2,7 @@ package edu.esprit.controllers;
 
 import com.dlsc.phonenumberfx.PhoneNumberField;
 import edu.esprit.entities.Client;
+import edu.esprit.entities.Id;
 import edu.esprit.services.ClientService;
 import edu.esprit.utils.SessionManagement;
 import javafx.beans.binding.Bindings;

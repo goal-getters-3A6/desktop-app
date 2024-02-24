@@ -1,4 +1,4 @@
-package edu.esprit.controllers;
+package edu.esprit.entities;
 
 public class Id {
     protected static Integer user;
