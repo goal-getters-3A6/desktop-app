@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49e1918-2662-4c36-8b46-f23f815cab66" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/tests/MainFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/tests/MainFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Id.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Id.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +69,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Meryem\IdeaProjects\desktop-app\src\main\resources" />
       <recent name="C:\Users\Meryem\IdeaProjects\desktop-app\src\main\resources\imgs" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="edu.esprit.entities" />
     </key>
   </component>
   <component name="RunManager" selected="JAR Application.TrayNotification.jar">
@@ -138,7 +140,7 @@
       <workItem from="1708686960766" duration="597000" />
       <workItem from="1708687931760" duration="11699000" />
       <workItem from="1708765921494" duration="214000" />
-      <workItem from="1708766208957" duration="26655000" />
+      <workItem from="1708766208957" duration="26925000" />
     </task>
     <servers />
   </component>
