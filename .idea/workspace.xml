@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49e1918-2662-4c36-8b46-f23f815cab66" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/services/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/tests/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/tests/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/SessionManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/SessionManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/UploadToDropBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/UploadToDropBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/acceuil.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/acceuil.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/imgs/user.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/register.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +131,7 @@
       <workItem from="1708686960766" duration="597000" />
       <workItem from="1708687931760" duration="11699000" />
       <workItem from="1708765921494" duration="214000" />
-      <workItem from="1708766208957" duration="17788000" />
+      <workItem from="1708766208957" duration="17960000" />
     </task>
     <servers />
   </component>

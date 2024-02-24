@@ -60,7 +60,7 @@ public class AcceuilController {
             forgotpassword.setVisible(false);
             toregister.setVisible(false);
             loginbtn.setVisible(false);
-            String imageURL = userService.getUserByEmail(getEmail()).getImage();
+            String imageURL = "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png";
             Image image = new Image(imageURL);
             javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
             imageView.setFitHeight(50);
