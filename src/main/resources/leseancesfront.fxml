@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,103 +14,65 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="845.0" prefWidth="1325.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.leseancesfront">
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.leseancesfront">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1315.0">
+      <AnchorPane fx:id="anchorpanedash" prefHeight="98.0" prefWidth="1528.0" style="-fx-background-color: #004369;">
          <children>
-            <BorderPane fx:id="borderpane" layoutX="6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="btnprofil" layoutX="1436.0" layoutY="14.0" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE" />
+            <Button fx:id="btnreclamation" layoutX="1174.0" layoutY="50.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE" />
+            <Button fx:id="btnevenement" layoutX="986.0" layoutY="50.0" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE" />
+            <Button fx:id="btnalimentaire" layoutX="809.0" layoutY="50.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE" />
+            <Button fx:id="btnabonnement" layoutX="596.0" layoutY="50.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE" />
+            <Button fx:id="btnplanning" layoutX="433.0" layoutY="50.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5" />
+            <Button fx:id="btnequipement" layoutX="245.0" layoutY="50.0" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE" />
+            <Button fx:id="btnaccueil" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE" />
+            <ImageView fx:id="logo1" fitHeight="89.0" fitWidth="107.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="2.0" layoutY="98.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="722.0" prefWidth="1323.0">
+         <children>
+            <BorderPane fx:id="borderpane" layoutX="6.0" prefHeight="810.0" prefWidth="1517.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-202.0" AnchorPane.topAnchor="0.0">
                <center>
-                  <VBox fx:id="vbox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                  <VBox fx:id="vbox" prefHeight="654.0" prefWidth="1487.0" BorderPane.alignment="CENTER">
                      <children>
-                        <HBox fx:id="hbox1" alignment="CENTER" prefHeight="97.0" prefWidth="1286.0">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
+                        <VBox prefHeight="627.0" prefWidth="1315.0">
                            <children>
-                              <HBox fx:id="hboxtopseancefront" prefHeight="122.0" prefWidth="1315.0" style="-fx-background-color: #004369;">
+                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="1313.0" text="nnnn" textAlignment="CENTER" />
+                              <HBox fx:id="hbox2" alignment="CENTER" prefHeight="542.0" prefWidth="1509.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <ImageView fx:id="logo" fitHeight="99.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@imgs/logo.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Separator orientation="VERTICAL" prefHeight="99.0" prefWidth="63.0" visible="false" />
-                                    <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+                                    <ScrollPane fx:id="scroll" prefHeight="681.0" prefWidth="1198.0" style="-fx-background-color: #fffaed;" styleClass="transparant">
+                                       <content>
+                                          <GridPane fx:id="grid" alignment="CENTER" prefHeight="612.0" prefWidth="1351.0" style="-fx-background-color: #fffaed;">
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                             </rowConstraints>
+                                             <columnConstraints>
+                                                <ColumnConstraints />
+                                             </columnConstraints>
+                                          </GridPane>
+                                       </content>
                                        <HBox.margin>
-                                          <Insets top="70.0" />
+                                          <Insets top="60.0" />
                                        </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets top="70.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
-                                       <HBox.margin>
-                                          <Insets top="70.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets top="70.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets top="70.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets top="70.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets top="70.0" />
-                                       </HBox.margin>
-                                    </Button>
-                                    <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                                    <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                                    <Separator orientation="VERTICAL" prefHeight="99.0" prefWidth="61.0" visible="false" />
-                                    <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                                    <Separator orientation="VERTICAL" prefHeight="99.0" prefWidth="54.0" visible="false" />
-                                    <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                                    <Button fx:id="btnprofil" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="60.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
-                                       <HBox.margin>
-                                          <Insets bottom="15.0" left="300.0" right="15.0" top="15.0" />
-                                       </HBox.margin>
-                                    </Button>
+                                    </ScrollPane>
                                  </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
                               </HBox>
                            </children>
-                        </HBox>
-                        <HBox fx:id="hbox2" alignment="CENTER" prefHeight="500.0" prefWidth="710.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <ScrollPane fx:id="scroll" prefHeight="681.0" prefWidth="1198.0" style="-fx-background-color: #fffaed;" styleClass="transparant">
-                                 <content>
-                                    <GridPane fx:id="grid" alignment="CENTER" prefHeight="632.0" prefWidth="1308.0" style="-fx-background-color: #fffaed;">
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                                       </rowConstraints>
-                                       <columnConstraints>
-                                          <ColumnConstraints />
-                                       </columnConstraints>
-                                    </GridPane>
-                                 </content>
-                                 <HBox.margin>
-                                    <Insets top="60.0" />
-                                 </HBox.margin>
-                              </ScrollPane>
-                              <Button fx:id="btnmesreservations" mnemonicParsing="false" onAction="#mesreservations" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: db1f48;" text="Mes reservations" textFill="WHITE" />
-                           </children>
-                        </HBox>
+                        </VBox>
                      </children>
                   </VBox>
                </center>
+               <bottom>
+                  <AnchorPane prefHeight="82.0" prefWidth="1315.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="btnmesreservations" layoutX="579.0" layoutY="28.0" mnemonicParsing="false" onAction="#mesreservations" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: db1f48;" text="Mes reservations" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </bottom>
             </BorderPane>
          </children>
       </AnchorPane>

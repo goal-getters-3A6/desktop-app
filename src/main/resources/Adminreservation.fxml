@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane prefHeight="496.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Adminreservation">
+   <children>
+      <ListView fx:id="listview" layoutX="167.0" layoutY="50.0" prefHeight="350.0" prefWidth="492.0" />
+      <GridPane fx:id="gridpane" layoutX="3.0" layoutY="-27.0" prefHeight="26.0" prefWidth="21.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="6.199951171875" minWidth="0.5999755859375" prefWidth="0.5999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="21.4000244140625" minWidth="10.0" prefWidth="21.4000244140625" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <ScrollPane fx:id="scrollpane" layoutX="-36.0" layoutY="460.0" prefHeight="26.0" prefWidth="29.0" />
+      <Button fx:id="btnannuler" layoutX="601.0" layoutY="408.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
+      <Button fx:id="btnrecherche" layoutX="383.0" layoutY="447.0" mnemonicParsing="false" onAction="#recherche" text="Recherche" />
+      <TextField fx:id="textfieldrecherche" layoutX="466.0" layoutY="446.0" prefHeight="26.0" prefWidth="163.0" promptText="chercher" />
+      <Button fx:id="btntri" layoutX="177.0" layoutY="447.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
+      <ComboBox fx:id="comboboxtri" layoutX="220.0" layoutY="446.0" prefWidth="150.0" />
+      <Button fx:id="btnstats" layoutX="315.0" layoutY="408.0" mnemonicParsing="false" onAction="#stats" text="Statistiques" />
+      <Label layoutX="167.0" layoutY="412.0" prefHeight="18.0" prefWidth="140.0" text="Consultez les Statistiques" />
+      <Button fx:id="btnrefraichir" layoutX="592.0" layoutY="24.0" mnemonicParsing="false" onAction="#refraichir" text="Refraichir" />
+   </children>
+</AnchorPane>

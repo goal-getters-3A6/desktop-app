@@ -1,6 +1,8 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.Seance;
+import edu.esprit.entities.User;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceSeance;
 import edu.esprit.utils.DataSource;
 import javafx.event.ActionEvent;
@@ -148,9 +150,9 @@ public class leseancesfront{
         try {
 
             // Charger le fichier FXML correspondant à la nouvelle page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/mesreservations.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationsclient.fxml"));
             Parent root = loader.load();
-            Mesreservations controller = loader.getController();
+            Reservationsclient controller = loader.getController();
             // Créer une nouvelle scène avec la vue chargée
             Scene scene = new Scene(root);
             Stage stage = (Stage) grid.getScene().getWindow(); // Obtenez la scène actuelle du bouton ou de tout autre nœud
@@ -308,13 +310,13 @@ public class leseancesfront{
     // Méthode appelée lorsque le bouton "Réserver" est cliqué
     private void reserverSeance(Seance seance) throws IOException {
         try {
-            int idSeance = seance.getIdseance(); // Récupérer l id de la séance
-
+            int idSeance = seance.getIdseance();
+            // Récupérer l id de la séance
             // Charger le fichier FXML correspondant à la nouvelle page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReservationFormulaire.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resformualire.fxml"));
             Parent root = loader.load();
             // Créer une nouvelle scène avec la vue chargée
-            Reservationformulaire controller = loader.getController();
+            Resformualire controller = loader.getController();
             controller.setSeance(seance);
             Scene scene = new Scene(root);
             Stage stage = (Stage) grid.getScene().getWindow(); // Obtenez la scène actuelle du bouton ou de tout autre nœud
