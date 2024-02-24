@@ -11,7 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
@@ -22,30 +23,12 @@ import java.util.*;
 
 
 public class DashboardController implements Initializable {
-
-    ArrayList datareports = new ArrayList();
     ObservableList<User> datauser = FXCollections.observableArrayList();
     @FXML
     private TextField search;
-    @FXML
-    private TableColumn<?, ?> tid;
-    @FXML
-    private TableColumn<?, ?> tnom;
-    @FXML
-    private TableColumn<?, ?> tprenom;
-    @FXML
-    private TableColumn<?, ?> tmdp;
-    @FXML
-    private TableColumn<?, ?> temail;
-    @FXML
-    private TableColumn<?, ?> ttel;
-    @FXML
-    private TableColumn<?, ?> tdate_naissance;
-    @FXML
-    private TableColumn<?, ?> tdate_inscription;
 
     @FXML
-    private TableView tableviewuser;
+    private ListView userslistview;
 
 
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
@@ -85,34 +68,25 @@ public class DashboardController implements Initializable {
 
 
         datauser.clear();
-        datareports.clear();
         ClientService us = new ClientService();
         try {
             datauser = FXCollections.observableArrayList(us.getAll());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        userslistview.setItems(datauser);
 
-        tprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        tnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        temail.setCellValueFactory(new PropertyValueFactory<>("mail"));
-        tid.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tmdp.setCellValueFactory(new PropertyValueFactory<>("mdp"));
-        ttel.setCellValueFactory(new PropertyValueFactory<>("tel"));
-        tdate_naissance.setCellValueFactory(new PropertyValueFactory<>("date_naissance"));
-        tdate_inscription.setCellValueFactory(new PropertyValueFactory<>("date_inscription"));
 
-        tableviewuser.setItems(datauser);
 
     }
 
 
     @FXML
     private void search(KeyEvent event) throws SQLException{
-        tableviewuser.getItems().clear();
+        userslistview.getItems().clear();
         new ClientService().getAll().stream().filter(u -> u.getNom().indexOf(search.getText()) != -1)
-                .forEach(u -> tableviewuser.getItems().add(u));
-        tableviewuser.refresh();
+                .forEach(u -> userslistview.getItems().add(u));
+        userslistview.refresh();
 
     }
 

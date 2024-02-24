@@ -18,6 +18,7 @@ import tray.notification.TrayNotification;
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 import static edu.esprit.utils.SessionManagement.*;
 
@@ -46,6 +47,8 @@ public class AcceuilController {
     @FXML
             private Button loginbtn;
     UserService userService = new UserService();
+    User u = new User();
+
 
     @FXML
     public void toRegister(ActionEvent event) throws IOException {
@@ -67,13 +70,18 @@ public class AcceuilController {
             imageView.setFitWidth(50);
             profilbuttonmenu.setGraphic(imageView);
             profilbuttonmenu.setText(getEmail());
+            u = userService.getOneByEmail(getEmail());
+            if (u.getRole().equals("ADMIN")) {
+                profilitem.setText("Dashboard");
+            } else {
+                profilitem.setText("Profile");
+            }
         } else {
             mdpTxt.setVisible(true);
             emailTxt.setVisible(true);
             forgotpassword.setVisible(true);
             toregister.setVisible(true);
             profilbuttonmenu.setVisible(false);
-
         }
     }
 
@@ -123,10 +131,7 @@ public class AcceuilController {
             tray.setNotificationType(notification);
             tray.showAndDismiss(Duration.seconds(4));
         }
- 
-
     }
-
 
     @FXML
     private void forgotPassword(ActionEvent event) throws Exception {
@@ -139,8 +144,13 @@ public class AcceuilController {
     }
     @FXML
     private void toProfile(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/profil.fxml"));
-        acceuilpane.getChildren().setAll(pane);
+        if (u.getRole().equals("ADMIN")) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
+            acceuilpane.getChildren().setAll(pane);
+        } else{
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/profil.fxml"));
+            acceuilpane.getChildren().setAll(pane);
+        }
     }
     @FXML
     private void logout(ActionEvent event) throws IOException {

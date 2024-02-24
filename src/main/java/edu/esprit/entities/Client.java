@@ -135,17 +135,22 @@ public class Client extends User {
 
 
 
+
+
     @Override
     public String toString() {
-        return "Client{" +
-                "id=" + getId() +
-                ", nom='" + getNom() + '\'' +
-                ", prenom='" + getPrenom() + '\'' +
-                ", date_inscription=" + date_inscription +
-                ", date_naissance=" + date_naissance +
-                ", statut=" + statut +
-                ", nb_tentative=" + nb_tentative +
-                ", tel='" + tel + '\'' +
+        return "" +
+                "  Nom:'" + getNom() + '\'' +
+                ", Prénom:'" + getPrenom() + '\'' +
+                ", MDP:'" + getMdp() + '\'' +
+                ", E-mail:'" + getMail() + '\'' +
+                ", Poids:" + poids +
+                ", Taille:" + taille +
+                ", Sexe:" + sexe +
+                ", Date d'inscription:" + date_inscription +
+                ", Date de naissance:" + date_naissance +
+                ", Statut:" + statut +
+                ", Tel:'" + tel + '\'' +
                 '}';
     }
 }
