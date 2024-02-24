@@ -1,21 +1,18 @@
 package edu.esprit.services;
 
+import edu.esprit.utils.DataSource;
+
+import java.sql.Connection;
+import java.util.List;
 import java.util.Set;
+import java.sql.SQLException;
+public interface IService <T>{
+    static final Connection cnx = DataSource.getInstance().getCnx();
 
-public interface IService<T>{
-    //Impl Admin Service
-    public void ajouterAdmin(T p);
-    public void modifierAdmin(T p);
-    public void supprimerAdmin(int id);
-    public T getAdminById(int id);
-    public Set<T> getAllAdmins();
-    //Impl Client Service
-    public void ajouterClient(T p);
-    public void modifierClient(T p);
-    public void supprimerClient(int id);
-    public T getClientById(int id);
-    public Set<T> getAllClients();
-    //Impl UserService
-    public boolean login(String email, String password);
-
+    public void ajouter (T x) throws SQLException;
+    public void modifier(T x) throws SQLException;
+    public void supprimer(int id) throws SQLException;
+    public T getOneById(int id)throws SQLException;
+    public Set<T> getAll() throws SQLException;
+    public List<T> getAllList() throws SQLException;
 }

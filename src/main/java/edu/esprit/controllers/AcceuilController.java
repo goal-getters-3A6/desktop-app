@@ -9,15 +9,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
-
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import static edu.esprit.utils.SessionManagement.*;
 
@@ -78,9 +77,9 @@ public class AcceuilController {
     }
 
     @FXML
-    void login() throws IOException {
+    void login() throws SQLException, IOException{
         if ((Id.user = userService.checklogin(emailTxt.getText(), mdpTxt.getText())) != null) {
-            User u = userService.findUserById(Id.user);
+            User u = userService.getOneById(Id.user);
             if (u.getRole().equals("ADMIN")) {
                 AnchorPane panee = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
                 acceuilpane.getChildren().setAll(panee);

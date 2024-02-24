@@ -7,10 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
+import tray.notification.TrayNotification;
 
 import javax.swing.text.html.ImageView;
-import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class ProfilController {
 
@@ -59,34 +60,42 @@ public class ProfilController {
     private ImageView logo;
 
     private ClientService clientService = new ClientService();
-
+    Client client = new Client();
 
     @FXML
     private void initialize() {
-        Client client = clientService.getClientById(Id.user);
+        try {
+          client    = clientService.getOneById(Id.user);
+        } catch (SQLException e) {
+            Logger.getLogger(e.getMessage());
+        }
+
         nomTxt.setText(client.getNom());
         prenomTxt.setText(client.getPrenom());
         emailTxt.setText(client.getMail());
     }
 
     @FXML
-    private void modify(ActionEvent modify) throws IOException {
-        int userId = clientService.getClientByEmail(emailTxt.getText()).getId();
+    private void modify(ActionEvent modify) throws SQLException {
+        int userId = clientService.getOneByEmail(emailTxt.getText()).getId();
         System.out.println(userId);
         Client client = new Client(userId,nomTxt.getText(), prenomTxt.getText(), emailTxt.getText());
-        if (clientService.modifierClient(client)) {
-            System.out.println("Modify success");
-        } else {
-            System.out.println("Modify failed");
+        try {
+            clientService.modifier(client);
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle("Success");
+            tray.setMessage("Profile updated successfully");
+            tray.showAndDismiss(javafx.util.Duration.seconds(2));
+
+        } catch (SQLException e) {
+            Logger.getLogger(e.getMessage());
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle("Error");
+            tray.setMessage("Profile not updated");
+            tray.showAndDismiss(javafx.util.Duration.seconds(2));
         }
     }
-    // Champ pour stocker l'e-mail de l'utilisateur
-    private String userEmail;
-    public void initData(String email) {
-        this.userEmail = email;
-        // Vous pouvez faire d'autres traitements avec l'e-mail si nécessaire
-        // Par exemple, afficher l'e-mail dans un champ de texte ou effectuer des requêtes supplémentaires avec cet e-mail
-    }
+
 
     @FXML
     void abonnement(ActionEvent event) {

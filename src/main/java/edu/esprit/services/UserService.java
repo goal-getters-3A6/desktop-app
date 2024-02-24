@@ -5,20 +5,16 @@ import edu.esprit.utils.DataSource;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static edu.esprit.utils.HashWithMD5.hashWithMD5;
 
-public class UserService {
-    private final Connection cnx;
-
-    public UserService() {
-        this.cnx = DataSource.getInstance().getCnx();
-    }
+public class UserService implements IService<User>, IOtherServices<User> {
 
 
-    public Integer checklogin(String email, String password) {
+    public Integer checklogin(String email, String password) throws SQLException {
         try {
 
             Statement st = cnx.createStatement();
@@ -34,7 +30,23 @@ public class UserService {
         return null;
     }
 
-    public User findUserById (int id) {
+    @Override
+    public void ajouter(User x) throws SQLException {
+
+    }
+
+    @Override
+    public void modifier(User x) throws SQLException {
+
+    }
+
+    @Override
+    public void supprimer(int id) throws SQLException {
+
+    }
+
+    @Override
+    public User getOneById (int id) throws SQLException {
         String req = "SELECT * FROM user WHERE id=?";
         try {
             PreparedStatement Ps = cnx.prepareStatement(req);
@@ -57,7 +69,13 @@ public class UserService {
         return null;
     }
 
-    public User getUserByEmail(String email) {
+    @Override
+    public Set<User> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public User getOneByEmail(String email) {
         String req = "SELECT * FROM user WHERE mail=?";
         try {
             PreparedStatement Ps = cnx.prepareStatement(req);
@@ -80,8 +98,8 @@ public class UserService {
         return null;
     }
 
-
-    public List<User> findAll() {
+@Override
+    public List<User> getAllList() {
         String req = "SELECT * FROM user";
         List<User> list = null;
         try {

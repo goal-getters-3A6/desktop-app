@@ -1,7 +1,6 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Client;
-import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 import edu.esprit.utils.HashWithMD5;
 
@@ -11,19 +10,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ClientService  {
+public class ClientService implements IService<Client>, IOtherServices<Client>{
 
-    private final Connection cnx;
-
-    public ClientService() {
-        this.cnx = DataSource.getInstance().getCnx();
-    }
-
-
-    public boolean ajouterClient(Client p) {
+    @Override
+    public void ajouter(Client p) throws SQLException{
 
             String req = "INSERT INTO user (nom, prenom, mail,mdp,statut,nb_tentative,image,date_naissance,date_inscription, tel, role, poids,taille,sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement Ps = cnx.prepareStatement(req)) {
+            PreparedStatement Ps = cnx.prepareStatement(req);
+
                 Ps.setString(1, p.getNom());
                 Ps.setString(2, p.getPrenom());
                 Ps.setString(3, p.getMail());
@@ -40,50 +34,37 @@ public class ClientService  {
                 Ps.setString(14, p.getSexe());
                 Ps.executeUpdate();
                 System.out.println("Client ajouté avec succès !");
-                return true;
-            } catch (SQLException e) {
-                System.out.println("Erreur lors de l'ajout du client : " + e.getMessage());
-                return false;
-            }
+
         }
 
-
-    public boolean modifierClient(Client p) {
+    @Override
+    public void modifier(Client p) throws SQLException{
         String req = "UPDATE user SET nom=? , prenom=? , mail=? WHERE id=? AND role='CLIENT'";
-        try (PreparedStatement Ps = cnx.prepareStatement(req)) {
+      PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setString(1,p.getNom());
             Ps.setString(2, p.getPrenom());
             Ps.setString(3, p.getMail());
             Ps.setInt(4, p.getId());
             Ps.executeUpdate();
             System.out.println("Client modifié avec succès !");
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la modification du client : " + e.getMessage());
-            return false;
-        }
 
     }
 
-
-    public boolean supprimerClient(int id) {
+    @Override
+    public void supprimer(int id) throws SQLException{
         String req = "DELETE FROM user WHERE id=?";
-        try {
+
             PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setInt(1, id);
             Ps.executeUpdate();
             System.out.println("Client supprimé avec succès !");
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppression du client : " + e.getMessage());
-            return false;
-        }
+
     }
 
-
-    public Client getClientById(int id) {
+    @Override
+    public Client getOneById(int id) throws SQLException{
         String req = "SELECT * FROM user WHERE id=?";
-        try {
+
             PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setInt(1, id);
             ResultSet res = Ps.executeQuery();
@@ -97,15 +78,13 @@ public class ClientService  {
                 String tel = res.getString("tel");
                 return new Client(id, nom, prenom, mail,image, dateInscription, dateNaissance, tel);
             }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de l'obtention du client par ID : " + e.getMessage());
-        }
+
         return null;
     }
-
-    public Client getClientByEmail (String email){
+    @Override
+    public Client getOneByEmail (String email) throws SQLException{
         String req = "SELECT * FROM user WHERE mail=?";
-        try {
+
             PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setString(1, email);
             ResultSet res = Ps.executeQuery();
@@ -119,21 +98,19 @@ public class ClientService  {
                 String tel = res.getString("tel");
                 return new Client(id, nom, prenom, email,image, dateInscription, dateNaissance, tel);
             }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de l'obtention du client par email : " + e.getMessage());
-        }
+
         return null;
     }
 
 
 
 
-
-    public Set<Client> getAllClients() {
+    @Override
+    public Set<Client> getAll() throws SQLException {
 
         Set<Client> clients = new HashSet<>();
         String req = "SELECT * FROM user WHERE role='CLIENT'";
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()) {
@@ -148,15 +125,15 @@ public class ClientService  {
                 Client client = new Client(id, nom, prenom,mail,image, dateInscription, dateNaissance, tel);
                 clients.add(client);
             }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération des clients : " + e.getMessage());
-        }
+
         return clients;
     }
-    public List<Client> getAllClientsList() {
+
+    @Override
+    public List<Client> getAllList() throws SQLException {
         String req = "SELECT * FROM user WHERE role='CLIENT'";
         List<Client> list = new java.util.ArrayList<>();
-        try {
+
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
@@ -171,13 +148,8 @@ public class ClientService  {
                 u.setTel(rs.getString("tel"));
                 u.setDate_naissance(rs.getDate("date_naissance"));
                 u.setDate_inscription(rs.getDate("date_inscription"));
-
-
                 list.add(u);
             }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération des utilisateurs : " + e.getMessage());
-        }
         return list;
     }
 }

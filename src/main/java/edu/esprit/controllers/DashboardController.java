@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DateFormatSymbols;
 import java.util.*;
 
@@ -57,13 +58,19 @@ public class DashboardController implements Initializable {
 
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)  {
 
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
         monthNames.addAll(Arrays.asList(months));
         xAxis.setCategories(monthNames);
         Calendar cal = Calendar.getInstance();
-        List<Client> usersdata = new ClientService().getAllClientsList();
+        List<Client> usersdata= new ArrayList<>();
+        try {
+          usersdata   = new ClientService().getAllList();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         int[] monthCounter = new int[12];
         for (Client u : usersdata) {
             cal.setTime(u.getDate_naissance());
@@ -80,7 +87,12 @@ public class DashboardController implements Initializable {
         datauser.clear();
         datareports.clear();
         ClientService us = new ClientService();
-        datauser = FXCollections.observableArrayList(us.getAllClients());
+        try {
+            datauser = FXCollections.observableArrayList(us.getAll());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         tprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         tnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         temail.setCellValueFactory(new PropertyValueFactory<>("mail"));
@@ -96,9 +108,9 @@ public class DashboardController implements Initializable {
 
 
     @FXML
-    private void search(KeyEvent event) {
+    private void search(KeyEvent event) throws SQLException{
         tableviewuser.getItems().clear();
-        new ClientService().getAllClients().stream().filter(u -> u.getNom().indexOf(search.getText()) != -1)
+        new ClientService().getAll().stream().filter(u -> u.getNom().indexOf(search.getText()) != -1)
                 .forEach(u -> tableviewuser.getItems().add(u));
         tableviewuser.refresh();
 

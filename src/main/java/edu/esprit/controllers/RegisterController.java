@@ -8,10 +8,8 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -20,7 +18,7 @@ import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 import java.io.IOException;
-import java.text.ParseException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -58,12 +56,7 @@ public class RegisterController {
     @FXML
     private VBox registervbox;
 
-
-
     PhoneNumberField phoneNumberField = new PhoneNumberField();
-
-
-
     ClientService clientService = new ClientService();
     String photoURL = "";
 
@@ -90,8 +83,6 @@ public class RegisterController {
                 )
         );
 
-
-
     }
     @FXML
     private void importProfilePic(ActionEvent event) {
@@ -105,7 +96,7 @@ public class RegisterController {
         photoURL = uploadPhoto(path, name);
     }
     @FXML
-    void register() throws ParseException, IOException{
+    void register() throws SQLException, IOException{
         if ((emailTxt.getText().isBlank())
                 || (nomTxt.getText().isBlank())
                 || (prenomTxt.getText().isBlank())
@@ -130,7 +121,8 @@ public class RegisterController {
             LocalDate localDate = dateNaissance.getValue();
             Date date = java.sql.Date.valueOf(localDate);
             Client client = new Client(nomTxt.getText(), prenomTxt.getText(), mdpRegisterTxt.getText(), emailTxt.getText(), phoneNumberField.getRawPhoneNumber(), true, 0,photoURL , date, (float) poids.getValue(), (float) taille.getValue(), radioH.isSelected() ? "Homme" : "Femme");
-           if( clientService.ajouterClient(client)) {
+           try {
+               clientService.ajouter(client);
                String title = "Welcome!";
                String message = "You have been registered successfully!";
                NotificationType notification = NotificationType.SUCCESS;
@@ -139,11 +131,13 @@ public class RegisterController {
                tray.setMessage(message);
                tray.setNotificationType(notification);
                tray.showAndDismiss(Duration.seconds(3));
-               Id.user = clientService.getClientByEmail(emailTxt.getText()).getId();
+               Id.user = clientService.getOneByEmail(emailTxt.getText()).getId();
                SessionManagement.saveSession(emailTxt.getText(), mdpRegisterTxt.getText());
                AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
                registerpane.getChildren().setAll(pane);
-           } else {
+
+           } catch (SQLException e){
+
                String title = "Something went wrong!";
                String message = "Verify your informations !";
                NotificationType notification = NotificationType.ERROR;
@@ -152,12 +146,9 @@ public class RegisterController {
                tray.setMessage(message);
                tray.setNotificationType(notification);
                tray.showAndDismiss(Duration.seconds(3));
-
            }
         }
-
     }
-
 
     @FXML
     void abonnement(ActionEvent event) {
