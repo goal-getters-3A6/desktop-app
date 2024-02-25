@@ -100,6 +100,7 @@
             <Button fx:id="btnreclamation1" layoutX="41.0" layoutY="641.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
                <font>
                   <Font size="20.0" />
+
                </font></Button>
             <Button fx:id="btnplanning1" layoutX="42.0" layoutY="296.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
                <font>

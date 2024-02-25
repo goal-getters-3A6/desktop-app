@@ -6,11 +6,13 @@ import edu.esprit.entities.User;
 import edu.esprit.services.ClientService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -38,10 +40,15 @@ public class DashboardController implements Initializable {
     @FXML
     private CategoryAxis xAxis;
 
+    @FXML
+    private ComboBox<String> AddUserBox;
+    ObservableList<String> list = FXCollections.observableArrayList("ADMIN", "CLIENT");
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
+        AddUserBox.setItems(list);
+        AddUserBox.getValue();
 
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
         monthNames.addAll(Arrays.asList(months));
@@ -90,4 +97,24 @@ public class DashboardController implements Initializable {
 
     }
 
+    public void tableaudebord(ActionEvent actionEvent) {
+    }
+
+    public void evenement(ActionEvent actionEvent) {
+    }
+
+    public void equipement(ActionEvent actionEvent) {
+    }
+
+    public void abonnement(ActionEvent actionEvent) {
+    }
+
+    public void alimentaire(ActionEvent actionEvent) {
+    }
+
+    public void reclamation(ActionEvent actionEvent) {
+    }
+
+    public void planning(ActionEvent actionEvent) {
+    }
 }
