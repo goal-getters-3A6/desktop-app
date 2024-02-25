@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -25,13 +26,34 @@ public class ModifierEquipementBack {
 
     private final ServiceEquipement ES = new ServiceEquipement();
     @FXML
+    private AnchorPane EquipementFX;
+
+    @FXML
     private ImageView ImageViewerEq;
 
     @FXML
-    private ComboBox<String> categEqId;
+    private Button btnabonnement1;
 
     @FXML
-    private AnchorPane EquipementFX;
+    private Button btnalimentaire1;
+
+    @FXML
+    private Button btnequipement1;
+
+    @FXML
+    private Button btnevenement1;
+
+    @FXML
+    private Button btnplanning1;
+
+    @FXML
+    private Button btnreclamation1;
+
+    @FXML
+    private Button btntdb1;
+
+    @FXML
+    private ComboBox<String> categEqId;
 
     @FXML
     private TextArea descEqId;
@@ -43,7 +65,28 @@ public class ModifierEquipementBack {
     private TextField imageEqId;
 
     @FXML
+    private ImageView logo1;
+
+    @FXML
     private TextField nomEqId;
+
+    @FXML
+    private ImageView planningimg1;
+
+    @FXML
+    private ImageView planningimg111;
+
+    @FXML
+    private ImageView planningimg1111;
+
+    @FXML
+    private ImageView planningimg11111;
+
+    @FXML
+    private ImageView planningimg21;
+
+    @FXML
+    private ImageView planningimg31;
 
     ObservableList<String> list = FXCollections.observableArrayList("Fitness", "Cardio-training", "Musculation");
 
@@ -110,6 +153,10 @@ public class ModifierEquipementBack {
         docEqId.setText(equipement.getDocEq());
         imageEqId.setText(equipement.getImageEq());
         // Remplissez l'ImageViewerEq avec l'image de l'équipement, si nécessaire
+
+        String imagePath = equipement.getImageEq();
+        Image image = new Image("file:" + imagePath); // Supposant que le chemin est absolu, sinon ajustez-le en conséquence
+        ImageViewerEq.setImage(image);
     }
 
     @FXML
@@ -122,5 +169,39 @@ public class ModifierEquipementBack {
             throw new RuntimeException(e);
         }
     }
+    @FXML
+    void abonnement(ActionEvent event) {
 
+    }
+
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    void planning(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableaudebord(ActionEvent event) {
+
+    }
 }

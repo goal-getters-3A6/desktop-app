@@ -4,6 +4,7 @@ import edu.esprit.entities.Equipement;
 import edu.esprit.services.ServiceEquipement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +35,48 @@ public class AfficherEquipementBack {
     private ListView<Equipement> ListViewEqId;
 
     @FXML
+    private Button btnabonnement1;
+
+    @FXML
+    private Button btnalimentaire1;
+
+    @FXML
+    private Button btnequipement1;
+
+    @FXML
+    private Button btnevenement1;
+
+    @FXML
+    private Button btnplanning1;
+
+    @FXML
+    private Button btnreclamation1;
+
+    @FXML
+    private Button btntdb1;
+
+    @FXML
+    private ImageView logo1;
+
+    @FXML
+    private ImageView planningimg1;
+
+    @FXML
+    private ImageView planningimg111;
+
+    @FXML
+    private ImageView planningimg1111;
+
+    @FXML
+    private ImageView planningimg11111;
+
+    @FXML
+    private ImageView planningimg21;
+
+    @FXML
+    private ImageView planningimg31;
+
+    @FXML
     void initialize() {
         try {
 
@@ -62,6 +105,7 @@ public class AfficherEquipementBack {
                         detailButton.setOnAction(event -> {
                             afficherDetail(detailButton); // Appeler la méthode supprimerEquipement avec l'équipement associé
                         });
+                        detailButton.setUserData(item);
 
                         ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/bin.png")));
                         Button deleteButton = new Button("", deleteIcon);
@@ -109,18 +153,24 @@ public class AfficherEquipementBack {
     // Méthodes pour gérer les actions des boutons
     private void afficherDetail(Button detailButton) {
         try {
+            // Récupérer l'équipement associé au bouton editButton
+            Equipement equipement = (Equipement) detailButton.getUserData();
+
             // Charger le fichier FXML de la nouvelle interface
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsEquipementBack.fxml"));
             Parent root = loader.load();
 
-            // Récupérer le contrôleur de la nouvelle interface si nécessaire
+
+            // Récupérer le contrôleur de la nouvelle interface
             DetailsEquipementBack controller = loader.getController();
 
-            // Accéder à la scène actuelle à partir du bouton
-            Scene scene = detailButton.getScene();
+            // Passer une référence à ce contrôleur (AfficherEquipementBack)
+            controller.setParentController(this);
 
-            // Définir la nouvelle interface en tant que racine de la scène
-            scene.setRoot(root);
+            // Initialiser les données de l'équipement dans ModifierEquipementBack
+            controller.initData(equipement);
+
+            detailButton.getScene().setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -172,5 +222,43 @@ public class AfficherEquipementBack {
     }
 
 
+
+
+    @FXML
+    void abonnement(javafx.event.ActionEvent event) {
+
+    }
+
+    @FXML
+    void alimentaire(javafx.event.ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(javafx.event.ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(javafx.event.ActionEvent event) {
+
+    }
+
+
+
+    @FXML
+    void planning(javafx.event.ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(javafx.event.ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableaudebord(ActionEvent event) {
+
+    }
 
 }

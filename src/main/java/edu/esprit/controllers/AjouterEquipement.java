@@ -11,40 +11,52 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
+
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class AjouterEquipement {
 
     private final ServiceEquipement ES = new ServiceEquipement();
 
     @FXML
-    private ImageView ImageViewerEq;
-    @FXML
     private AnchorPane EquipementFX;
+
+    @FXML
+    private ImageView ImageViewerEq;
+
+    @FXML
+    private Button btnabonnement1;
+
+    @FXML
+    private Button btnalimentaire1;
+
+    @FXML
+    private Button btnequipement1;
+
+    @FXML
+    private Button btnevenement1;
+
+    @FXML
+    private Button btnplanning1;
+
+    @FXML
+    private Button btnreclamation1;
+
+    @FXML
+    private Button btntdb1;
 
     @FXML
     private ComboBox<String> categEqId;
 
-
     @FXML
     private TextArea descEqId;
-
 
     @FXML
     private TextArea docEqId;
@@ -52,10 +64,29 @@ public class AjouterEquipement {
     @FXML
     private TextField imageEqId;
 
+    @FXML
+    private ImageView logo1;
 
     @FXML
     private TextField nomEqId;
 
+    @FXML
+    private ImageView planningimg1;
+
+    @FXML
+    private ImageView planningimg111;
+
+    @FXML
+    private ImageView planningimg1111;
+
+    @FXML
+    private ImageView planningimg11111;
+
+    @FXML
+    private ImageView planningimg21;
+
+    @FXML
+    private ImageView planningimg31;
 
 
     ObservableList<String> list = FXCollections.observableArrayList("Fitness", "Cardio-training", "Musculation");
@@ -122,5 +153,43 @@ try{
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+
+
+
+    @FXML
+    void planning(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
+
+    @FXML
+    void tableaudebord(ActionEvent event) {
+
+    }
+
 
 }
