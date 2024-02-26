@@ -1,19 +1,20 @@
 package edu.esprit.entities;
 
 import java.util.Objects;
+import edu.esprit.entities.Plat;
 
 public class AvisP {
     private int idAP;
     private String commAP;
     private int star;
     private boolean fav;
-    private int idPlat;
+    private Plat idPlat;
     private int iduap;
 
     public AvisP() {
     }
 
-    public AvisP(int idAP, String commAP, int star, boolean fav, int idPlat , int iduap ) {
+    public AvisP(int idAP, String commAP, int star, boolean fav, Plat idPlat , int iduap ) {
         this.idAP = idAP;
         this.commAP = commAP;
         this.star = star;
@@ -21,12 +22,18 @@ public class AvisP {
         this.idPlat = idPlat;
         this.iduap = iduap;
     }
-    public AvisP( String commAP, int star, boolean fav, int idPlat , int iduap ) {
+    public AvisP( String commAP, int star, boolean fav, Plat idPlat , int iduap ) {
         this.commAP = commAP;
         this.star = star;
         this.fav = fav;
         this.idPlat = idPlat;
         this.iduap = iduap;
+    }
+    public AvisP(int idAP, String commAP, int star, boolean fav) {
+        this.idAP = idAP;
+        this.commAP = commAP;
+        this.star = star;
+        this.fav = fav;
     }
 
     // Getters and setters
@@ -70,11 +77,10 @@ public class AvisP {
         this.iduap = iduap;
     }
 
-    public int getIdPlat() {
-        return idPlat;
-    }
 
-    public void setIdPlat(int idPlat) {
+    public Plat getPlat() {return idPlat; }
+
+    public void setPlat(Plat idPlat) {
         this.idPlat = idPlat;
     }
 

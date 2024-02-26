@@ -4,24 +4,41 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierPlat">
+<AnchorPane prefHeight="476.0" prefWidth="694.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierPlat">
     <children>
-        <Label layoutX="31.0" layoutY="32.0" text="Nom Plat:" />
-        <Label layoutX="31.0" layoutY="80.0" text="Prix Plat:" />
-        <Label layoutX="31.0" layoutY="128.0" text="Allergie Plat:" />
-        <Label layoutX="31.0" layoutY="176.0" text="État Plat:" />
-        <Label layoutX="31.0" layoutY="224.0" text="Description Plat:" />
-        <Label layoutX="31.0" layoutY="272.0" text="Photo Plat:" />
-        <Label layoutX="31.0" layoutY="320.0" text="Calories Plat:" />
-        <TextField fx:id="NomPlatField" layoutX="200.0" layoutY="27.0" />
-        <TextField fx:id="prixPlatField" layoutX="200.0" layoutY="75.0" />
-        <TextField fx:id="alergiePlatField" layoutX="200.0" layoutY="123.0" />
-        <CheckBox fx:id="etatPlatCheckbox" layoutX="200.0" layoutY="172.0" />
-        <TextField fx:id="descPField" layoutX="200.0" layoutY="220.0" />
-        <TextField fx:id="photopField" layoutX="200.0" layoutY="268.0" />
-        <TextField fx:id="caloriesField" layoutX="200.0" layoutY="316.0" />
-        <Button layoutX="281.0" layoutY="358.0" mnemonicParsing="false" onAction="#ModifierPlat" text="Modifier Plat" />
+        <Label layoutX="347.0" layoutY="155.0" text="Nom Plat:" />
+        <Label layoutX="351.0" layoutY="188.0" text="Prix Plat:" />
+        <Label layoutX="349.0" layoutY="222.0" text="Allergie Plat:" />
+        <Label layoutX="596.0" layoutY="322.0" text="État Plat:" />
+        <Label layoutX="339.0" layoutY="256.0" text="Description Plat:" />
+        <Label layoutX="340.0" layoutY="290.0" text="Calories Plat:" />
+        <TextField fx:id="NomPlatField" layoutX="420.0" layoutY="151.0" prefHeight="26.0" prefWidth="247.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="prixPlatField" layoutX="403.0" layoutY="184.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="alergiePlatField" layoutX="420.0" layoutY="218.0" prefHeight="26.0" prefWidth="247.0" style="-fx-background-color: #E8E4CE;" />
+        <CheckBox fx:id="etatPlatCheckbox" layoutX="650.0" layoutY="322.0" />
+        <TextField fx:id="descPField" layoutX="431.0" layoutY="252.0" prefHeight="26.0" prefWidth="236.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="caloriesField" layoutX="420.0" layoutY="285.0" prefHeight="26.0" prefWidth="247.0" style="-fx-background-color: #E8E4CE;" />
+        <Button layoutX="503.0" layoutY="384.0" mnemonicParsing="false" onAction="#ModifierPlat" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: #db1f48;" text="enregistrer modifications" textFill="WHITE" />
+      <ImageView fitHeight="83.0" fitWidth="694.0" layoutY="-3.0">
+         <image>
+            <Image url="@../../../../zefsd.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="307.0" fitWidth="283.0" layoutX="27.0" layoutY="150.0">
+         <image>
+            <Image url="@../../../../sessfdzesdq.PNG" />
+         </image>
+      </ImageView>
+      <Label layoutX="27.0" layoutY="95.0" text="MODIFIEZ PLAT :" textFill="#3b6cac">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <Button layoutX="504.0" layoutY="422.0" mnemonicParsing="false" onAction="#SupprimerPlat" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #db1f48;" text="supprimer plat" textFill="WHITE" />
     </children>
 </AnchorPane>

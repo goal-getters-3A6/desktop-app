@@ -5,19 +5,21 @@ import edu.esprit.entities.AvisP;
 import edu.esprit.entities.Plat;
 import edu.esprit.services.ServicesPlat;
 import edu.esprit.services.ServicesAvisPlat;
+import edu.esprit.utils.DataSource;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
         //ajout plat
-        //Plat plataj = new Plat("salade8", 10.99f, "verte ", "lactose", true);
+       // Plat plataj = new Plat(10,"salade8", 10.99f, "verte ", "lactose", true,"fghguh",105);
         ServicesPlat servicesPlat = new ServicesPlat();
-      // servicesPlat.ajouter(plataj);
+        //servicesPlat.ajouter(plataj);
         //modif//////////////////////////////
-        int newPlatId = 12;
-        Plat modifiedPlat = new Plat(newPlatId, "novplat", 15.99f, "novdesc", "novall", false, "fgfdf",10);
-        servicesPlat.modifier(modifiedPlat);
+       /* int newPlatId = 12;
+        Plat modifiedPlat = new Plat(newPlatId, "SMOOTHIE", 15.99f, "novdesc", "lactose intolerance", false, "fgfdf",105);
+        servicesPlat.modifier(modifiedPlat);*/
         //supp/////////////////////////////////
         /* int PlatId = 4 ;
         servicesPlat.supprimer(PlatId);*/
@@ -33,22 +35,22 @@ public class Main {
         }*/
         ServicesAvisPlat servicesAvisPlat = new ServicesAvisPlat();
         //ajoutez avis///////////////////////////////////////////
-      /* AvisP avis = new AvisP();
+       AvisP avis = new AvisP();
 
-        avis.setCommAP("tres bien!");
+        /*avis.setCommAP("tres bien!");
         avis.setStar(5);
         avis.setFav(true);
-        avis.setIdPlat(5);
+        avis.setPlat(plataj);
         avis.setIduap(1);
         servicesAvisPlat.ajouter(avis);*/
         //modifier avis///////////////////////////////
-        /*AvisP avismod = new AvisP();
-        avismod.setIdAP(12);
+        AvisP avismod = new AvisP();
+        avismod.setIdAP(32);
         avismod.setCommAP("modifi");
         avismod.setStar(4);
         avismod.setFav(true);
 
-        servicesAvisPlat.modifier(avismod);*/
+        servicesAvisPlat.modifier(avismod);
 
         ////supp avis///////////////////////////////
         /*int PlatId = 12 ;
@@ -59,12 +61,28 @@ public class Main {
         AvisP avisp = servicesAvisPlat.getOneById(idav);
         System.out.println(avisp);*/
         ///aff tous//////////////////////////////////////////
-      /* Set<AvisP> tous = servicesAvisPlat.getAll();
+       /* Set<AvisP> tous = servicesAvisPlat.getAll();
         for (AvisP avisp :tous) {
             System.out.println(avisp);
         }*/
 
 
+        // Specify the idPlat for which you want to retrieve comments
+       /*int idPlat = 11; // Example: Change 5 to the actual idPlat you want to query
+
+        // Call the getAllCommentsForPlat method to retrieve comments for the specified idPlat
+        Set<AvisP> commentsForPlat = servicesAvisPlat.getAllP(idPlat);
+
+        // Print the retrieved comments
+        System.out.println("Comments for Plat with ID " + idPlat + ":");
+        for (AvisP avis : commentsForPlat) {
+            System.out.println("ID: " + avis.getIdAP());
+            System.out.println("Comment: " + avis.getCommAP());
+            System.out.println("Star: " + avis.getStar());
+            System.out.println("Favorite: " + avis.isFav());
+            System.out.println("-----------------------------------------");
+        }
+*/
 
     }
 

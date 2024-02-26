@@ -2,6 +2,7 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Plat;
 import edu.esprit.services.ServicesPlat;
+import edu.esprit.services.ServicesAvisPlat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 public class ModifierPlat {
 
     private final ServicesPlat servicePlat = new ServicesPlat();
+    private final ServicesAvisPlat serviceAvisPlat = new ServicesAvisPlat();
     private Plat platToModify;
 
     @FXML
@@ -37,7 +39,7 @@ public class ModifierPlat {
 
     // Method to initialize the controller with the Plat to modify
     public void initialize() {
-        int platId = 12; // Set the ID directly
+        int platId = 5; // Set the ID directly
         try {
             platToModify = servicePlat.getOneById(platId); // Retrieve the Plat by ID
             if (platToModify != null) {
@@ -80,6 +82,25 @@ public class ModifierPlat {
             showAlert("Error", e.getMessage());
         }
     }
+    @FXML
+    void SupprimerPlat(ActionEvent event) {
+        int platId = 5;
+        try {
+            if (platToModify != null) {
+                // Delete associated AvisP entities first
+                serviceAvisPlat.deleteByPlatId(platId);
+
+                // Then delete the Plat entity
+                servicePlat.supprimer(platToModify.getIdP());
+
+                showAlert("Information", "Plat deleted successfully");
+            } else {
+                showAlert("Error", "No Plat selected for deletion");
+            }
+        } catch (SQLException e) {
+            showAlert("Error", e.getMessage());
+        }
+    }
 
     // Method to show an alert dialog
     private void showAlert(String title, String content) {
@@ -88,4 +109,6 @@ public class ModifierPlat {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+
 }

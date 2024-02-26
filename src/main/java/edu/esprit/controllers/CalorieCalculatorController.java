@@ -1,6 +1,6 @@
 package edu.esprit.controllers;
 
-import edu.esprit.entities.CalorieCalculator;
+import edu.esprit.utils.CalorieCalculator;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;

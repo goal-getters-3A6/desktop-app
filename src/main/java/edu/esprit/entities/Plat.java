@@ -11,9 +11,7 @@ public class Plat {
     private String photop;
     private int calories;
 
-    public Plat(int idP, String nomP){
 
-    }
 
     public Plat(String nomP, Float prixP,String descP, String alergieP, Boolean etatP , String photop , int calories) {
         this.nomP = nomP;

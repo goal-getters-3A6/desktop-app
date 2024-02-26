@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class ServicesAvisPlat implements IService<AvisP>{
     private Connection cnx = DataSource.getInstance().getCnx();
-
     @Override
     public void ajouter(AvisP avis) throws SQLException {
         String req = "INSERT INTO avisp (commAP, star, fav, idPlat , iduap ) VALUES (?, ?, ?, ?,?)";
@@ -16,7 +15,7 @@ public class ServicesAvisPlat implements IService<AvisP>{
             ps.setString(1, avis.getCommAP());
             ps.setInt(2, avis.getStar());
             ps.setBoolean(3, avis.isFav());
-            ps.setInt(4, avis.getIdPlat());
+            ps.setInt(4, avis.getPlat().getIdP());
             ps.setInt(5, avis.getIduap());
             ps.executeUpdate();
             System.out.println("avis ajoute au Plat");
@@ -45,9 +44,9 @@ public class ServicesAvisPlat implements IService<AvisP>{
 
 
     @Override
-    public void modifier(AvisP avis) {
+    public void modifier(AvisP avis) throws SQLException{
         String req = "UPDATE avisp SET commAP = ?, star = ?, fav = ? WHERE idAP = ?";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, avis.getCommAP());
             ps.setInt(2, avis.getStar());
@@ -60,9 +59,7 @@ public class ServicesAvisPlat implements IService<AvisP>{
             } else {
                 System.out.println("ressayez");
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
     @Override
     public AvisP getOneById(int id) {
@@ -77,10 +74,8 @@ public class ServicesAvisPlat implements IService<AvisP>{
                 String commAP = rs.getString("commAP");
                 int star = rs.getInt("star");
                 boolean fav = rs.getBoolean("fav");
-                int idPlat = rs.getInt("idPlat");
-                int iduap = rs.getInt("iduap");
 
-                avis = new AvisP(idAP, commAP, star, fav, idPlat , iduap );
+                avis = new AvisP(idAP, commAP, star, fav);
             }
         } catch (SQLException e) {
             System.out.println("Error retrieving review: " + e.getMessage());
@@ -100,10 +95,8 @@ public class ServicesAvisPlat implements IService<AvisP>{
                 String commAP = rs.getString("commAP");
                 int star = rs.getInt("star");
                 boolean fav = rs.getBoolean("fav");
-                int idPlat = rs.getInt("idPlat");
-                int iduap = rs.getInt("iduap");
 
-                AvisP avis = new AvisP(idAP, commAP, star, fav, idPlat , iduap );
+                AvisP avis = new AvisP(idAP, commAP, star, fav);
                 avisList.add(avis);
             }
         } catch (SQLException e) {
@@ -111,4 +104,35 @@ public class ServicesAvisPlat implements IService<AvisP>{
         }
         return avisList;
     }
+    public void deleteByPlatId(int platId) throws SQLException {
+        String query = "DELETE FROM avisp WHERE idPlat = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, platId);
+            statement.executeUpdate();
+        }
+    }
+
+
+    public Set<AvisP> getAllP(int ID) {
+        Set<AvisP> avisList = new HashSet<>();
+        String req = "SELECT * FROM avisp WHERE idPlat = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int idAP = rs.getInt("idAP");
+                String commAP = rs.getString("commAP");
+                int star = rs.getInt("star");
+                boolean fav = rs.getBoolean("fav");
+
+                AvisP avis = new AvisP(idAP, commAP, star, fav);
+                avisList.add(avis);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving reviews: " + e.getMessage());
+        }
+        return avisList;
+    }
+
 }

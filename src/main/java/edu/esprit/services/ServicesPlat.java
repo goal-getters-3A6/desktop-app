@@ -49,9 +49,9 @@ public class ServicesPlat implements IService<Plat>{
     }
 
     @Override
-    public void supprimer(int idP) {
+    public void supprimer(int idP)  throws SQLException {
         String req = "DELETE FROM plat WHERE idP = ?";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, idP);
 
@@ -61,9 +61,7 @@ public class ServicesPlat implements IService<Plat>{
             } else {
                 System.out.println("id incorrect");
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
 
