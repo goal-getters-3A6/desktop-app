@@ -10,8 +10,8 @@ public class Main {
         ServiceEquipement sp = new ServiceEquipement();
         ServiceAvisEquipement sa = new ServiceAvisEquipement();
        // System.out.println(sp.getAll());
-        Equipement eq = new Equipement("tapis","behia","doc","ff","cat",16);
-        Equipement eq1 = new Equipement(6,"tapisss","behia","doc","hiii","ee",10);
+        //Equipement eq = new Equipement("tapis","behia","doc","ff","cat",16);
+       // Equipement eq1 = new Equipement(6,"tapisss","behia","doc","hiii","ee",10);
        // sp.ajouter(eq);
        // sp.supprimer(eq1.getIdEq());
        //  sp.modifier(eq1);
@@ -27,8 +27,8 @@ public class Main {
             System.out.println("Aucun équipement trouvé avec l'ID spécifié.");
         }
 */
-        AvisEquipement av = new AvisEquipement("lala",eq1);
-        AvisEquipement av1 = new AvisEquipement(11,"cv",eq1);
+       // AvisEquipement av = new AvisEquipement("lala",eq1);
+       // AvisEquipement av1 = new AvisEquipement(11,"cv",eq1);
 
 
       // sa.ajouter(av);

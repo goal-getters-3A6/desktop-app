@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -38,7 +41,7 @@ public class DetailsEquipement {
     private ImageView imageViewF;
 
     @FXML
-    private ListView<String> listViewAEqF;
+    private ListView<AvisEquipement> listViewAEqF;
 
     @FXML
     private Label nomEqF1;
@@ -64,6 +67,8 @@ public class DetailsEquipement {
     void initialize(int idEq) {
         try {
 
+
+
             Equipement equipement1 = ES.getOneById(idEq);
             if (equipement1 != null) {
                 nomEqF1.setText(equipement1.getNomEq());
@@ -82,41 +87,82 @@ public class DetailsEquipement {
             } else {
                 // Handle case where Plat is not found
             }
+            //  Equipement equipement = ES.getOneById(equipement.getIdEq());
+            // List<AvisEquipement> Ps = new ArrayList<>(AES.getOneById(equipement.getIdEq()).getIdAEq());
+
+            List<AvisEquipement> listeAvis = AES.getAllByEquipement(idEq);
+
+            ObservableList<AvisEquipement> observableList = FXCollections.observableList(listeAvis);
+            listViewAEqF.setItems(observableList);
+
+            // ObservableList<AvisEquipement> observableList = FXCollections.observableList(Ps);
+            //  listViewAEqF.setItems(observableList);
+
+            // Configuration de la cell factory pour afficher le nom de l'équipement avec des boutons
+            listViewAEqF.setCellFactory(param -> new ListCell<>() {
+                @Override
+                protected void updateItem(AvisEquipement item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+
+
+
+                        ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/bin.png")));
+                        Button deleteButton = new Button("", deleteIcon);
+                        deleteIcon.setFitWidth(25);
+                        deleteIcon.setFitHeight(25);
+                        deleteButton.getStyleClass().add("icon-button");
+                        deleteButton.setUserData(item);
+                        deleteButton.setOnAction(event -> {
+                            supprimerAEquipement(deleteButton); // Appeler la méthode supprimerEquipement avec l'équipement associé
+                        });
+
+
+                        ImageView editIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/pen.png")));
+                        Button editButton = new Button("", editIcon);
+                        editIcon.setFitWidth(25);
+                        editIcon.setFitHeight(25);
+                        editButton.getStyleClass().add("icon-button");
+                        editButton.setOnAction(event -> modifierAEquipement(editButton)); // Appeler la méthode modifierEquipement avec l'équipement associé
+
+                        // Définir les données utilisateur du bouton editButton avec l'équipement associé
+                        editButton.setUserData(item);
+
+                        Label label = new Label();
+                        label.setText(item.getCommAEq());
+
+
+
+                        HBox iconsContainer = new HBox(label, new Region(), deleteButton, editButton);
+                        iconsContainer.setSpacing(150); // Espacement entre les éléments
+
+// Configurer l'espace flexible pour pousser les boutons à la fin de la ligne
+                        HBox.setHgrow(new Region(), Priority.ALWAYS);
+                        setGraphic(iconsContainer); // Définit le conteneur d'icônes comme élément graphique de la cellule
+
+
+
+                    }
+                }
+            });
+
+
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
 
-        List<AvisEquipement> comments = null;
-        try {
-            comments = AES.getAllByEquipement(idEq);
 
 
-            ObservableList<String> commentsList = FXCollections.observableArrayList();
-            for (AvisEquipement avisEq : comments) {
-                commentsList.add(avisEq.getCommAEq());
-            }
-            listViewAEqF.setItems(commentsList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+
 
     }
 
     public void setParentController(AfficherEquipementFront parentController) {
         this.AfficherEquipementFront = parentController;
-    }
-    private void refreshReviews(int idEq) {
-        try {
-            List<AvisEquipement> comments = AES.getAllByEquipement(idEq);
-
-            ObservableList<String> commentsList = FXCollections.observableArrayList();
-            for (AvisEquipement avisEq : comments) {
-                commentsList.add(avisEq.getCommAEq());
-            }
-            listViewAEqF.setItems(commentsList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
@@ -125,10 +171,10 @@ public class DetailsEquipement {
             this.equipement = equipement;
 // Récupérer l'équipement correspondant à l'avis
             Equipement eq = ES.getOneById(equipement.getIdEq()); // ou utilisez une autre méthode pour obtenir l'équipement
-            System.out.println(equipement.getIdEq());
+          //  System.out.println(equipement.getIdEq());
             if (eq != null) {
                 AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq));
-                refreshReviews(eq.getIdEq()); // Refresh only the reviews section
+                initialize(eq.getIdEq()); // Refresh only the reviews section
                 CommIdAEq.clear();
             } else {
                 // Afficher un message d'erreur si l'équipement n'existe pas
@@ -147,6 +193,38 @@ public class DetailsEquipement {
             // Gérer les autres exceptions
             throw new RuntimeException(ex);
         }
+    }
+    private void supprimerAEquipement(Button deleteButton) {
+        try {
+            // Récupérer l'équipement associé au bouton de suppression
+            AvisEquipement Aequipement = (AvisEquipement) deleteButton.getUserData();
+
+            // Supprimer l'équipement de la base de données et de la liste
+            AES.supprimer(Aequipement.getIdAEq());
+            listViewAEqF.getItems().remove(Aequipement);
+        } catch (SQLException e) {
+            e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
+        }
+    }
+
+
+    private void modifierAEquipement(Button editButton) {
+        // Récupérer l'équipement associé au bouton editButton
+       /* AvisEquipement Aequipement = (AvisEquipement) editButton.getUserData();
+
+        try {
+            this.equipement = equipement;
+            ObservableList<AvisEquipement> all, Single;
+            all = listViewAEqF.getItems();
+            Single = listViewAEqF.getSelectionModel().getSelectedItems();
+            AvisEquipement aeqMod = Single.get(0);
+
+            aeqMod.setCommAEq(CommIdAEq.getText());
+            CommIdAEq.setText(aeqMod.getCommAEq());
+            AES.modifier(aeqMod);
+            //initialize();
+            CommIdAEq.clear();
+        } catch (SQLException e) {}*/
     }
 
 
