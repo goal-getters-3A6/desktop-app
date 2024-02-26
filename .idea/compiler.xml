@@ -9,5 +9,8 @@
         <module name="PidevAbonnement" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PidevReclamation" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,5 +1,6 @@
 package edu.esprit.services;
 
+import java.util.List;
 import java.util.Set;
 import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
@@ -29,7 +30,13 @@ public class ServiceUser implements IService <User>{
     }
 
     @Override
-    public Set<User> getAll() {
+    public List<User> getAll() throws SQLException {
         return null;
     }
+
+
+    /*@Override
+    public Set<User> getAll() {
+        return null;
+    }*/
 }

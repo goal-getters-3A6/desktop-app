@@ -15,9 +15,9 @@ public class ServiceAbonnement implements IService<Abonnement> {
 
     Connection cnx = DataSource.getInstance().getCnx();
     @Override
-    public void ajouter(Abonnement ab) {
+    public void ajouter(Abonnement ab) throws SQLException {
         String req = "INSERT INTO `abonnement`(`montantAb`, `dateExpirationAb`, `codePromoAb`, `typeAb`,`idU`) VALUES (?,?,?,?,?)";
-        try {
+
             PreparedStatement ps = cnx.prepareStatement(req);
 
             ps.setFloat(1,ab.getMontantAb());
@@ -28,14 +28,11 @@ public class ServiceAbonnement implements IService<Abonnement> {
 
             ps.executeUpdate();
             System.out.println("Abonnement added !");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
 
     }
 
     @Override
-    public void modifier(Abonnement ab) {
+    public void modifier(Abonnement ab)  {
         try {
             String req ="update `abonnement` set montantAb=?,dateExpirationAb=?,codePromoAb=?,typeAb=?,idU=? where idAb=" +ab.getIdA();
             PreparedStatement ps = cnx.prepareStatement(req);
@@ -60,7 +57,7 @@ public class ServiceAbonnement implements IService<Abonnement> {
             PreparedStatement ps  = cnx.prepareStatement(req3);
             Statement ste  = cnx.createStatement();
             ste.executeUpdate(req3);
-            System.out.println("Equipement supprimé !");
+            System.out.println("Abonnement supprimé !");
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -68,7 +65,7 @@ public class ServiceAbonnement implements IService<Abonnement> {
     }
 
     @Override
-    public Abonnement getOneById(int id1) {
+    public Abonnement getOneById(int id1)  {
 
         Abonnement a = null;
         String req = "SELECT * FROM abonnement " +
@@ -90,7 +87,7 @@ public class ServiceAbonnement implements IService<Abonnement> {
                 Date dateExpirationAb = res.getDate("dateExpirationAb");
                 String codePromoAb = res.getString("codePromoAb");
                 String typeAb = res.getString("typeAb");
-                User e = new User(id, nom, prenom,mail,image);
+                User e = new User();
                  a = new Abonnement(idA, montantAb,codePromoAb, typeAb, dateExpirationAb,e);
 
 
@@ -102,9 +99,8 @@ public class ServiceAbonnement implements IService<Abonnement> {
         return a;
         }
         @Override
-    public Set<Abonnement> getAll() {
-        Set<Abonnement> abonnements = new HashSet<>();
-
+    public List<Abonnement> getAll()  {
+        List<Abonnement> abonnements = new ArrayList<>();
             String req = "SELECT abonnement.idAb, abonnement.montantAb, abonnement.dateExpirationAb, abonnement.codePromoAb, abonnement.typeAb, user.id, user.nom, user.prenom, user.mdp, user.mail, user.image FROM abonnement INNER JOIN user ON abonnement.idU = user.id ";
         try {
             Statement st = cnx.createStatement();
@@ -122,7 +118,7 @@ public class ServiceAbonnement implements IService<Abonnement> {
                 String codePromoAb = res.getString("codePromoAb");
                 String typeAb = res.getString("typeAb");
 
-                User e = new User(id, nom, prenom,mail,image);
+                User e = new User();
                 Abonnement a = new Abonnement(idA, montantAb,codePromoAb, typeAb, dateExpirationAb,e);
                 abonnements.add(a);
             }

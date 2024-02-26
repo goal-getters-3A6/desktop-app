@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterAbonnmentP">
+   <children>
+      <AnchorPane layoutX="-4.0" layoutY="-13.0" prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;">
+         <children>
+            <Label layoutX="823.0" layoutY="307.0" prefHeight="18.0" prefWidth="42.0" text="Email" />
+            <TextField fx:id="nomid" layoutX="896.0" layoutY="303.0" />
+            <TextField fx:id="montantid" layoutX="1108.0" layoutY="436.0" />
+            <Label layoutX="841.0" layoutY="202.0" prefHeight="45.0" prefWidth="327.0" text="Saisissez vos données de paiement">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="1014.0" layoutY="440.0" prefHeight="18.0" prefWidth="67.0" text="Montant" />
+            <Label layoutX="1121.0" layoutY="306.0" prefHeight="18.0" prefWidth="98.0" text="Date d'expiration " />
+            <Button layoutX="1062.0" layoutY="528.0" mnemonicParsing="false" onAction="#AjoutAbonnement" prefHeight="26.0" prefWidth="91.0" text="Ajouter" />
+            <DatePicker fx:id="dateid" layoutX="1246.0" layoutY="302.0" />
+            <AnchorPane fx:id="anchorpanedash" layoutX="-5.0" prefHeight="134.0" prefWidth="1550.0" style="-fx-background-color: #004369;">
+               <children>
+                  <Button fx:id="btnprofil" layoutX="1371.0" layoutY="14.0" mnemonicParsing="false" onAction="#profil" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnreclamation" layoutX="1283.0" layoutY="59.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnevenement" layoutX="1080.0" layoutY="59.0" mnemonicParsing="false" onAction="#evenement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Evénement" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnalimentaire" layoutX="885.0" layoutY="59.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnabonnement" layoutX="682.0" layoutY="59.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="#38afb5">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnplanning" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#f2f2f2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnequipement" layoutX="342.0" layoutY="59.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnaccueil" layoutX="147.0" layoutY="52.0" mnemonicParsing="false" onAction="#accueil" prefHeight="66.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="logo1" fitHeight="89.0" fitWidth="107.0" layoutX="14.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Pane layoutX="-14.0" layoutY="134.0" prefHeight="732.0" prefWidth="764.0" style="-fx-background-color: #38afb5;">
+               <children>
+                  <Label layoutX="146.0" layoutY="65.0" text="Description 2 ">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

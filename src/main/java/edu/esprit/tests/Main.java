@@ -12,8 +12,8 @@ public class Main {
         String str = "2024-03-15";
         LocalDate date = LocalDate.parse(str, DateTimeFormatter.ISO_DATE);
         java.sql.Date sqlDate = java.sql.Date.valueOf( date );
-        User us1 =new User (2,"mayssa","hakimi");
-        Abonnement AB1 = new Abonnement(3,500,"Go123","ordinaire",sqlDate,us1);
+        //User us1 =new User (2,"mayssa","hakimi");
+        //Abonnement AB1 = new Abonnement(3,500,"Go123","ordinaire",sqlDate,us1);
         //sa.ajouter(AB1);
        // Abonnement AB2 = new Abonnement(1,400,"Go123","ordinaire",sqlDate);
        // sa.modifier(AB2);
