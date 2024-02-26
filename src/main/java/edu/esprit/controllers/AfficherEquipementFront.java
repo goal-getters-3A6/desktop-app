@@ -112,8 +112,12 @@ public class AfficherEquipementFront {
 
             // Récupérer le contrôleur de la nouvelle interface
             DetailsEquipement controller = loader.getController();
+            // Passer une référence à ce contrôleur (AfficherEquipementBack)
+            controller.setParentController(this);
+
 
             controller.initialize(equipement.getIdEq());
+            controller.initData(equipement);
             detailButton.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

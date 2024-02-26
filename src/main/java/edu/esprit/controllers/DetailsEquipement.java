@@ -45,7 +45,21 @@ public class DetailsEquipement {
 
     @FXML
     private Button publier;
+    private edu.esprit.controllers.AfficherEquipementFront AfficherEquipementFront;
 
+
+    public void initData(Equipement equipement) {
+
+        this.equipement = equipement;
+        String imagePath = equipement.getImageEq();
+          Image image = new Image("file:" + imagePath); // Supposant que le chemin est absolu, sinon ajustez-le en conséquence
+        imageViewF.setImage(image);
+
+    }
+    // Ajoutez une méthode pour définir l'ImageView
+    public void setImageView(ImageView imageView) {
+        this.imageViewF = imageView;
+    }
     @FXML
     void initialize(int idEq) {
         try {
@@ -87,6 +101,10 @@ public class DetailsEquipement {
         }
 
     }
+
+    public void setParentController(AfficherEquipementFront parentController) {
+        this.AfficherEquipementFront = parentController;
+    }
     private void refreshReviews(int idEq) {
         try {
             List<AvisEquipement> comments = AES.getAllByEquipement(idEq);
@@ -104,8 +122,10 @@ public class DetailsEquipement {
     @FXML
     void AjouterAvisEqF(ActionEvent event) {
         try {
-
-            Equipement eq = ES.getOneById(equipement.getIdEq());
+            this.equipement = equipement;
+// Récupérer l'équipement correspondant à l'avis
+            Equipement eq = ES.getOneById(equipement.getIdEq()); // ou utilisez une autre méthode pour obtenir l'équipement
+            System.out.println(equipement.getIdEq());
             if (eq != null) {
                 AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq));
                 refreshReviews(eq.getIdEq()); // Refresh only the reviews section
