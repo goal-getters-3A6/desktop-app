@@ -20,13 +20,13 @@ public class DetailsEquipementBack {
     private Label CategEq;
 
     @FXML
-    private TextField CategEqId;
+    private Label CategEqId;
 
     @FXML
     private Label DescEq;
 
     @FXML
-    private TextArea DescEqId;
+    private Label DescEqId;
 
     @FXML
     private VBox DetailsEq;
@@ -35,10 +35,10 @@ public class DetailsEquipementBack {
     private Label DocEq;
 
     @FXML
-    private TextArea DocEqId;
+    private Label DocEqId;
 
     @FXML
-    private TextField NomEqId;
+    private Label NomEqId;
 
     @FXML
     private Button btnabonnement1;

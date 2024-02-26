@@ -24,6 +24,14 @@ public class AvisEquipement {
         this.equipement = equipement;
     }
 
+    public AvisEquipement() {
+
+    }
+
+    public AvisEquipement(int idAEq, String commAEq) {
+        this.idAEq = idAEq;
+        this.commAEq = commAEq;
+    }
 
 
     public int getIdAEq() {

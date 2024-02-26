@@ -5,7 +5,9 @@ import edu.esprit.entities.Equipement;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ServiceAvisEquipement implements IService<AvisEquipement> {
@@ -79,8 +81,8 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
     }
 
     @Override
-    public Set<AvisEquipement> getAll() throws SQLException {
-        Set<AvisEquipement> avisequipement = new HashSet<>();
+    public List<AvisEquipement> getAll() throws SQLException {
+        List<AvisEquipement> avisequipement = new ArrayList<>();
 
         String req = "SELECT avisequipement.idAEq, avisequipement.commAEq, equipement.idEq, equipement.nomEq, equipement.descEq, equipement.docEq, equipement.imageEq, equipement.categEq, equipement.noteEq " +
                 "FROM avisequipement " +
@@ -110,4 +112,46 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
 
         return avisequipement;
     }
+/*
+    public List<AvisEquipement> getAllByEquipement(int idEquipement) throws SQLException {
+        List<AvisEquipement> avisequipement = new ArrayList<>();
+        String req = "SELECT * FROM avisequipement WHERE idEq = ?";
+
+        PreparedStatement st = cnx.prepareStatement(req);
+        st.setInt(1, idEquipement);
+        ResultSet res = st.executeQuery(req);
+
+        while (res.next()){
+
+            int idAEq = res.getInt("idAEq");
+            String commAEq = res.getString("commAEq");
+
+            AvisEquipement aeq = new AvisEquipement(idAEq,commAEq);
+            avisequipement.add(aeq);
+        }
+
+        return avisequipement;
+
+    }*/
+public List<AvisEquipement> getAllByEquipement(int idEquipement) throws SQLException {
+    List<AvisEquipement> avisequipement = new ArrayList<>();
+    String req = "SELECT * FROM avisequipement WHERE idEq = ?";
+
+    try (PreparedStatement st = cnx.prepareStatement(req)) {
+        st.setInt(1, idEquipement);
+
+        try (ResultSet res = st.executeQuery()) {
+            while (res.next()) {
+                int idAEq = res.getInt("idAEq");
+                String commAEq = res.getString("commAEq");
+
+                AvisEquipement aeq = new AvisEquipement(idAEq, commAEq);
+                avisequipement.add(aeq);
+            }
+        }
+    }
+
+    return avisequipement;
+}
+
 }

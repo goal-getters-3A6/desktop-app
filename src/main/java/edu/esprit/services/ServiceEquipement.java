@@ -84,8 +84,8 @@ public class ServiceEquipement implements IService<Equipement>{
     }
 
     @Override
-    public Set<Equipement> getAll() throws SQLException{
-        Set<Equipement> equipement = new HashSet<>();
+    public List<Equipement> getAll() throws SQLException{
+        List<Equipement> equipement = new ArrayList<>();
 
         String req = "Select * from equipement";
 

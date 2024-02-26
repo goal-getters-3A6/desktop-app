@@ -68,6 +68,10 @@ public class Equipement {
 
     }
 
+    public Equipement() {
+
+    }
+
     public int getIdEq() {
         return idEq;
     }
