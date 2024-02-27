@@ -24,6 +24,15 @@ public class DetailsEquipement {
     private final ServiceEquipement ES = new ServiceEquipement();
     private Equipement equipement;
 
+    @FXML
+    private Label LikeId;
+
+    @FXML
+    private Label dislikeId;
+
+    private int like = 0;
+    private int dislike = 0;
+
 
     @FXML
     private TextArea CommIdAEq;
@@ -126,6 +135,7 @@ public class DetailsEquipement {
                         editIcon.setFitWidth(25);
                         editIcon.setFitHeight(25);
                         editButton.getStyleClass().add("icon-button");
+                        int aeq;
                         editButton.setOnAction(event -> modifierAEquipement(editButton)); // Appeler la méthode modifierEquipement avec l'équipement associé
 
                         // Définir les données utilisateur du bouton editButton avec l'équipement associé
@@ -173,7 +183,8 @@ public class DetailsEquipement {
             Equipement eq = ES.getOneById(equipement.getIdEq()); // ou utilisez une autre méthode pour obtenir l'équipement
           //  System.out.println(equipement.getIdEq());
             if (eq != null) {
-                AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq));
+
+                AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq,false, false));
                 initialize(eq.getIdEq()); // Refresh only the reviews section
                 CommIdAEq.clear();
             } else {
@@ -208,23 +219,58 @@ public class DetailsEquipement {
     }
 
 
-    private void modifierAEquipement(Button editButton) {
-        // Récupérer l'équipement associé au bouton editButton
-       /* AvisEquipement Aequipement = (AvisEquipement) editButton.getUserData();
+    private void modifierAEquipement(Button editButton  ) {
 
+            // Récupérer l'équipement associé au bouton editButton
+            try {
+                ObservableList<AvisEquipement> all, Single;
+                all = listViewAEqF.getItems();
+                Single = listViewAEqF.getSelectionModel().getSelectedItems();
+               AvisEquipement aeqMod = Single.get(0);
+
+                // Vérifier si l'objet Equipement associé à l'AvisEquipement est non nul
+                if (aeqMod.getEquipement() != null) {
+                    aeqMod.setCommAEq(CommIdAEq.getText());
+                    CommIdAEq.setText(aeqMod.getCommAEq());
+                    AES.modifier(aeqMod);
+                    //initialize();
+                    CommIdAEq.clear();
+                } else {
+                    // Gérer le cas où l'objet Equipement est nul
+                    System.out.println("L'objet Equipement associé à cet AvisEquipement est null.");
+                }
+            } catch (SQLException e) {
+                // Gérer l'exception SQLException
+                System.out.println("Une erreur s'est produite lors de la modification de l'AvisEquipement : " + e.getMessage());
+            }
+
+
+    }
+
+    @FXML
+    void dislikeEq(ActionEvent event) {
+        dislike++;
+        dislikeId.setText(Integer.toString(dislike));
         try {
-            this.equipement = equipement;
-            ObservableList<AvisEquipement> all, Single;
-            all = listViewAEqF.getItems();
-            Single = listViewAEqF.getSelectionModel().getSelectedItems();
-            AvisEquipement aeqMod = Single.get(0);
+            // Récupérer l'avis équipement associé à la vue
+            ObservableList<AvisEquipement> selectedItems = listViewAEqF.getSelectionModel().getSelectedItems();
+            if (!selectedItems.isEmpty()) {
+                AvisEquipement selectedAvisEquipement = selectedItems.get(0);
 
-            aeqMod.setCommAEq(CommIdAEq.getText());
-            CommIdAEq.setText(aeqMod.getCommAEq());
-            AES.modifier(aeqMod);
-            //initialize();
-            CommIdAEq.clear();
-        } catch (SQLException e) {}*/
+                // Appeler le service pour incrémenter le nombre de "dislike"
+                AES.incrementDislike(selectedAvisEquipement.getIdAEq());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
+        }
+    }
+
+    @FXML
+    void likeEq(ActionEvent event) {
+
+        like++;
+        LikeId.setText(Integer.toString(like));
+
     }
 
 

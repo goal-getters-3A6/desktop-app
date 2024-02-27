@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static java.lang.Float.parseFloat;
+
 public class AjouterEquipement {
 
     private final ServiceEquipement ES = new ServiceEquipement();
@@ -97,23 +99,39 @@ public class AjouterEquipement {
         categEqId.setItems(list);
     }
 
+    public static void showAlert(Alert.AlertType type, String title, String header, String text) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(text);
+        alert.showAndWait();
 
+    }
     @FXML
     void AjouterEquipement(ActionEvent event) {
 
         try {
+            if (((nomEqId.getText().isEmpty())) || ((descEqId.getText().isEmpty())) || ((docEqId.getText().isEmpty())) || ImageViewerEq.getImage() == null ) {
 
+                showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Veuillez bien remplir tous les champs !");
 
-            ES.ajouter(new Equipement(imageEqId.getText(), nomEqId.getText(), categEqId.getValue(), descEqId.getText(), docEqId.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Validation");
-            alert.setContentText("Equipement added succesfully");
-            alert.showAndWait();
+            }else if (!Character.isUpperCase(nomEqId.getText().charAt(0))  )  {
+                showAlert(Alert.AlertType.ERROR, "Données erronées", "Vérifier les données", "Le nom, doit commencer par une majuscule.");
+            } else if ( !nomEqId.getText().matches("[A-Za-z]+")) {
+                showAlert(Alert.AlertType.ERROR, "Données erronées", "Vérifier les données", " Le nom doit contenir uniquement des lettres alphabétiques.");
+            } else if ( nomEqId.getText().length() > 30) {
+            showAlert(Alert.AlertType.ERROR, "Données erronées", "Vérifier les données", " Le nom doit  avoir une longueur maximale de 30 caractères.");
+        }else{
+                ES.ajouter(new Equipement(imageEqId.getText(), nomEqId.getText(), categEqId.getValue(), descEqId.getText(), docEqId.getText()));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Validation");
+                alert.setContentText("Equipement added succesfully");
+                alert.showAndWait();
 
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
-            Parent root=loader.load();
-            nomEqId.getScene().setRoot(root);
-
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
+                Parent root = loader.load();
+                nomEqId.getScene().setRoot(root);
+            }
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -128,6 +146,9 @@ public class AjouterEquipement {
     @FXML
     private void insert_image(ActionEvent event) {
         FileChooser open = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.bmp");
+        open.getExtensionFilters().add(extFilter);
+
         Stage stage = (Stage) EquipementFX.getScene().getWindow();
         File file = open.showOpenDialog(stage);
         if (file != null) {

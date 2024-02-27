@@ -8,10 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -106,7 +103,14 @@ public class ModifierEquipementBack {
     public void setParentController(AfficherEquipementBack parentController) {
         this.AfficherEquipementBack = parentController;
     }
+    public static void showAlert(Alert.AlertType type, String title, String header, String text) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(text);
+        alert.showAndWait();
 
+    }
     @FXML
     void ModifierEquipement(ActionEvent event) {
         try {
@@ -116,10 +120,21 @@ public class ModifierEquipementBack {
             equipement.setDescEq(descEqId.getText());
             equipement.setDocEq(docEqId.getText());
 
+                if (((nomEqId.getText().isEmpty())) || ((descEqId.getText().isEmpty())) || ((docEqId.getText().isEmpty())) || ImageViewerEq.getImage() == null ) {
+
+                    showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Veuillez bien remplir tous les champs !");
+
+                }else if (!Character.isUpperCase(nomEqId.getText().charAt(0))  )  {
+                    showAlert(Alert.AlertType.ERROR, "Données erronées", "Vérifier les données", "Le nom, doit commencer par une majuscule.");
+                } else if ( !nomEqId.getText().matches("[A-Za-z]+")) {
+                    showAlert(Alert.AlertType.ERROR, "Données erronées", "Vérifier les données", " Le nom doit contenir uniquement des lettres alphabétiques.");
+                } else if ( nomEqId.getText().length() > 30) {
+                    showAlert(Alert.AlertType.ERROR, "Données erronées", "Vérifier les données", " Le nom doit  avoir une longueur maximale de 30 caractères.");
+                }else{
             ES.modifier(equipement);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
             Parent root = loader.load();
-            nomEqId.getScene().setRoot(root);
+            nomEqId.getScene().setRoot(root);}
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

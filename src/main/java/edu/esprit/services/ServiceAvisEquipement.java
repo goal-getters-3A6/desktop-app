@@ -154,4 +154,32 @@ public List<AvisEquipement> getAllByEquipement(int idEquipement) throws SQLExcep
     return avisequipement;
 }
 
+    public void incrementLike(int idAEq) throws SQLException {
+        AvisEquipement avisEquipement = getOneById(idAEq);
+        avisEquipement.setLike(true);
+        avisEquipement.setDislike(false);
+        modifier(avisEquipement);
+    }
+
+    public void incrementDislike(int idAEq) throws SQLException {
+        AvisEquipement avisEquipement = getOneById(idAEq);
+        avisEquipement.setLike(false);
+        avisEquipement.setDislike(true);
+        modifier(avisEquipement);
+    }
+
+    public void decrementLike(int idAEq) throws SQLException {
+        AvisEquipement avisEquipement = getOneById(idAEq);
+        avisEquipement.setLike(false);
+        modifier(avisEquipement);
+    }
+
+    public void decrementDislike(int idAEq) throws SQLException {
+        AvisEquipement avisEquipement = getOneById(idAEq);
+        avisEquipement.setDislike(false);
+        modifier(avisEquipement);
+    }
+
+
+
 }

@@ -7,6 +7,9 @@ public class AvisEquipement {
     private String commAEq ;
     private Equipement equipement;
 
+    private boolean like;
+    private boolean dislike;
+
     public AvisEquipement(String text, int idEq){}
 
     public AvisEquipement(int idAEq, String commAEq, Equipement equipement) {
@@ -24,6 +27,13 @@ public class AvisEquipement {
         this.equipement = equipement;
     }
 
+    public AvisEquipement(String commAEq, Equipement equipement, boolean like, boolean dislike) {
+        // Initialiser les autres propriétés de la classe
+        this.like = like;
+        this.dislike = dislike;
+        this.commAEq = commAEq;
+        this.equipement = equipement;
+    }
     public AvisEquipement() {
 
     }
@@ -56,6 +66,21 @@ public class AvisEquipement {
 
     public void setEquipement(Equipement equipement) {
         this.equipement = equipement;
+    }
+    public boolean isLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
+    }
+
+    public boolean isDislike() {
+        return dislike;
+    }
+
+    public void setDislike(boolean dislike) {
+        this.dislike = dislike;
     }
 
     @Override

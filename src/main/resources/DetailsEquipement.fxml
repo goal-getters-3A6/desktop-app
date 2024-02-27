@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -27,5 +28,19 @@
       <ListView fx:id="listViewAEqF" layoutX="93.0" layoutY="444.0" prefHeight="198.0" prefWidth="582.0" />
       <TextArea fx:id="CommIdAEq" layoutX="94.0" layoutY="371.0" prefHeight="74.0" prefWidth="582.0" promptText="Saisir votre commentaire" />
       <Button fx:id="publier" layoutX="610.0" layoutY="408.0" mnemonicParsing="false" onAction="#AjouterAvisEqF" text="Publier" />
+      <Button layoutX="596.0" layoutY="314.0" mnemonicParsing="false" onAction="#dislikeEq" prefHeight="46.0" prefWidth="45.0" />
+      <Button layoutX="548.0" layoutY="314.0" mnemonicParsing="false" onAction="#likeEq" prefHeight="46.0" prefWidth="46.0" text="Button" />
+      <ImageView fitHeight="38.0" fitWidth="41.0" layoutX="552.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/like.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="599.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/dislike.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="LikeId" layoutX="517.0" layoutY="329.0" text="Label" />
+      <Label fx:id="dislikeId" layoutX="644.0" layoutY="328.0" prefHeight="18.0" prefWidth="38.0" text="Label" />
    </children>
 </AnchorPane>
