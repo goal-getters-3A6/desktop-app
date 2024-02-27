@@ -103,7 +103,7 @@ public class RegisterController {
     }
     @FXML
     void register() throws  IOException{
-        if (!patternMatches(emailTxt.getText(), emailRegex) || emailTxt.getText().isBlank())
+        if ( emailTxt.getText().isBlank() || !patternMatches(emailTxt.getText(), emailRegex))
         {
             String title = "Verify your information!";
             String message = "Email is not valid!";
@@ -113,7 +113,7 @@ public class RegisterController {
             tray.setMessage(message);
             tray.setNotificationType(notification);
             tray.showAndDismiss(Duration.seconds(3));
-        } else if (!patternMatches(phoneNumberField.getRawPhoneNumber(), phoneRegex) || phoneNumberField.getRawPhoneNumber().isBlank()) {
+        } else if (phoneNumberField.getRawPhoneNumber() ==null || !patternMatches(phoneNumberField.getRawPhoneNumber(), phoneRegex) ) {
             String title = "Verify your information!";
             String message = "Phone number is not valid!";
             NotificationType notification = NotificationType.ERROR;
@@ -122,7 +122,7 @@ public class RegisterController {
             tray.setMessage(message);
             tray.setNotificationType(notification);
             tray.showAndDismiss(Duration.seconds(3));
-        } else if (dateNaissance.getValue().isAfter(LocalDate.now().minusYears(14))){
+        } else if (dateNaissance.getValue() == null || dateNaissance.getValue().isAfter(LocalDate.now().minusYears(14))){
             String title = "Warning!";
             String message = "You must be older than 14!";
             NotificationType notification = NotificationType.ERROR;

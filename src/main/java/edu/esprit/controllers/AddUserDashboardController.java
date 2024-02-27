@@ -1,8 +1,10 @@
 package edu.esprit.controllers;
 
 import com.dlsc.phonenumberfx.PhoneNumberField;
+import edu.esprit.entities.Admin;
 import edu.esprit.entities.Client;
 import edu.esprit.entities.Id;
+import edu.esprit.services.AdminService;
 import edu.esprit.services.ClientService;
 import edu.esprit.utils.SessionManagement;
 import javafx.beans.binding.Bindings;
@@ -13,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import tray.notification.NotificationType;
@@ -41,7 +44,7 @@ public class AddUserDashboardController {
     private DatePicker dateNaissance;
 
     @FXML
-    private AnchorPane registerpane;
+    private AnchorPane adduserpane;
 
     @FXML
     private RadioButton radioH;
@@ -65,6 +68,7 @@ public class AddUserDashboardController {
 
     PhoneNumberField phoneNumberField = new PhoneNumberField();
     ClientService clientService = new ClientService();
+    AdminService adminService = new AdminService();
     String photoURL = "";
     String emailRegex = "^(.+)@(\\S+)$";
     String phoneRegex = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
@@ -106,7 +110,8 @@ public class AddUserDashboardController {
     }
     @FXML
     void add() throws IOException {
-        if (!patternMatches(emailTxt.getText(), emailRegex) || emailTxt.getText().isBlank())
+        if( radioClient.isSelected()){
+        if (emailTxt.getText().isBlank() || !patternMatches(emailTxt.getText(), emailRegex) )
         {
             String title = "Verify your information!";
             String message = "Email is not valid!";
@@ -116,7 +121,7 @@ public class AddUserDashboardController {
             tray.setMessage(message);
             tray.setNotificationType(notification);
             tray.showAndDismiss(Duration.seconds(3));
-        } else if (!patternMatches(phoneNumberField.getRawPhoneNumber(), phoneRegex) || phoneNumberField.getRawPhoneNumber().isBlank()) {
+        } else if (phoneNumberField.getRawPhoneNumber() ==null || !patternMatches(phoneNumberField.getRawPhoneNumber(), phoneRegex) ) {
             String title = "Verify your information!";
             String message = "Phone number is not valid!";
             NotificationType notification = NotificationType.ERROR;
@@ -125,7 +130,7 @@ public class AddUserDashboardController {
             tray.setMessage(message);
             tray.setNotificationType(notification);
             tray.showAndDismiss(Duration.seconds(3));
-        } else if (dateNaissance.getValue().isAfter(LocalDate.now().minusYears(14))){
+        } else if (dateNaissance.getValue() == null || dateNaissance.getValue().isAfter(LocalDate.now().minusYears(14))){
             String title = "Warning!";
             String message = "You must be older than 14!";
             NotificationType notification = NotificationType.ERROR;
@@ -176,10 +181,8 @@ public class AddUserDashboardController {
                 tray.setMessage(message);
                 tray.setNotificationType(notification);
                 tray.showAndDismiss(Duration.seconds(3));
-                Id.user = clientService.getOneByEmail(emailTxt.getText()).getId();
-                SessionManagement.saveSession(emailTxt.getText(), mdpRegisterTxt.getText());
-                AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
-                registerpane.getChildren().setAll(pane);
+                Stage stage = (Stage) adduserpane.getScene().getWindow();
+                stage.close();
 
             } catch (SQLException e){
 
@@ -192,6 +195,74 @@ public class AddUserDashboardController {
                 tray.setNotificationType(notification);
                 tray.showAndDismiss(Duration.seconds(3));
             }
+        }
+        }
+        else if (radioAdmin.isSelected()){
+            if (emailTxt.getText().isBlank() || !patternMatches(emailTxt.getText(), emailRegex) ) {
+                String title = "Verify your information!";
+                String message = "Email is not valid!";
+                NotificationType notification = NotificationType.ERROR;
+                TrayNotification tray = new TrayNotification();
+                tray.setTitle(title);
+                tray.setMessage(message);
+                tray.setNotificationType(notification);
+                tray.showAndDismiss(Duration.seconds(3));
+            } else if (!mdpRegisterTxt.getText().equals(mdpRegisterTxt1.getText())) {
+                String title = "Verify your information!";
+                String message = "Passwords don't match!";
+                NotificationType notification = NotificationType.ERROR;
+                TrayNotification tray = new TrayNotification();
+                tray.setTitle(title);
+                tray.setMessage(message);
+                tray.setNotificationType(notification);
+                tray.showAndDismiss(Duration.seconds(3));
+            } else if (
+                    (nomTxt.getText().isBlank())
+                            || (prenomTxt.getText().isBlank())
+                            || (mdpRegisterTxt.getText().isBlank())
+            ) {
+                String title = "Verify your information!";
+                String message = "You must fill all the fields!";
+                NotificationType notification = NotificationType.ERROR;
+                TrayNotification tray = new TrayNotification();
+                tray.setTitle(title);
+                tray.setMessage(message);
+                tray.setNotificationType(notification);
+                tray.showAndDismiss(Duration.seconds(3));
+            }
+            else {
+                try {
+                    adminService.ajouter(new Admin(nomTxt.getText(), prenomTxt.getText(), mdpRegisterTxt.getText(), emailTxt.getText(), photoURL));
+                    String title = "Welcome!";
+                    String message = "Admin was added successfully!";
+                    NotificationType notification = NotificationType.SUCCESS;
+                    TrayNotification tray = new TrayNotification();
+                    tray.setTitle(title);
+                    tray.setMessage(message);
+                    tray.setNotificationType(notification);
+                    tray.showAndDismiss(Duration.seconds(3));
+                    // close window
+                    Stage stage = (Stage) adduserpane.getScene().getWindow();
+                    stage.close();
+                } catch (SQLException e) {
+                    String title = "Something went wrong!";
+                    NotificationType notification = NotificationType.ERROR;
+                    TrayNotification tray = new TrayNotification();
+                    tray.setTitle(title);
+                    tray.setNotificationType(notification);
+                    tray.showAndDismiss(Duration.seconds(3));
+                }
+
+            }
+        } else {
+            String title = "Verify your information!";
+            String message = "You must choose a role!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
         }
     }
     public static boolean patternMatches(String stringToValidate, String regexPattern) {
