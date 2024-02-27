@@ -84,10 +84,15 @@ public class DetailsEquipement {
     void initialize(int idEq) {
         try {
 
-
-
             Equipement equipement1 = ES.getOneById(idEq);
             if (equipement1 != null) {
+                listViewAEqF.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        // Afficher le commAEq dans le TextArea
+                        CommIdAEq.setText(newValue.getCommAEq());
+                    }
+                });
+
                 nomEqF1.setText(equipement1.getNomEq());
                 nomEqF1.setStyle("-fx-font-size: 25px; -fx-background-color: transparent; -fx-border-color: transparent;");
                 // nomEqF1.setEditable(false);
@@ -124,7 +129,6 @@ public class DetailsEquipement {
                         setText(null);
                         setGraphic(null);
                     } else {
-
 
 
                         ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/bin.png")));
@@ -257,6 +261,7 @@ public class DetailsEquipement {
                 // Update the AvisEquipement in the database
                 AES.modifier(aeqMod);
                 initialize(aeqMod.getEquipement().getIdEq());
+                CommIdAEq.clear();
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately (e.g., show an error message)
