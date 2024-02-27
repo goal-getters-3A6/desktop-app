@@ -42,5 +42,6 @@
       </ImageView>
       <Label fx:id="LikeId" layoutX="517.0" layoutY="329.0" text="Label" />
       <Label fx:id="dislikeId" layoutX="644.0" layoutY="328.0" prefHeight="18.0" prefWidth="38.0" text="Label" />
+      <Button layoutX="638.0" layoutY="27.0" mnemonicParsing="false" onAction="#afficherEqF" text="Liste des équipements" />
    </children>
 </AnchorPane>

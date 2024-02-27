@@ -8,6 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,10 +17,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
+
+import static java.lang.Integer.parseInt;
 
 public class DetailsEquipement {
     private final ServiceAvisEquipement AES = new ServiceAvisEquipement();
@@ -234,33 +241,31 @@ public class DetailsEquipement {
 
 
 
-    private void modifierAEquipement(Button editButton  ) {
+    @FXML
+    private void modifierAEquipement(Button editButton) {
+        // Récupérer l'équipement associé au bouton editButton
+        AvisEquipement Aequipement = (AvisEquipement) editButton.getUserData();
 
-            // Récupérer l'équipement associé au bouton editButton
-            try {
-                ObservableList<AvisEquipement> all, Single;
-                all = listViewAEqF.getItems();
-                Single = listViewAEqF.getSelectionModel().getSelectedItems();
-               AvisEquipement aeqMod = Single.get(0);
+        try {
+            // Retrieve the AvisEquipement directly, assuming getOneById returns a single AvisEquipement
+            AvisEquipement aeqMod = AES.getOneById(Aequipement.getIdAEq());
 
-                // Vérifier si l'objet Equipement associé à l'AvisEquipement est non nul
-                if (aeqMod.getEquipement() != null) {
-                    aeqMod.setCommAEq(CommIdAEq.getText());
-                    CommIdAEq.setText(aeqMod.getCommAEq());
-                    AES.modifier(aeqMod);
-                    //initialize();
-                    CommIdAEq.clear();
-                } else {
-                    // Gérer le cas où l'objet Equipement est nul
-                    System.out.println("L'objet Equipement associé à cet AvisEquipement est null.");
-                }
-            } catch (SQLException e) {
-                // Gérer l'exception SQLException
-                System.out.println("Une erreur s'est produite lors de la modification de l'AvisEquipement : " + e.getMessage());
+            if (aeqMod != null) {
+                // Set the modified content from the CommIdAEq TextField
+                aeqMod.setCommAEq(CommIdAEq.getText());
+
+                // Update the AvisEquipement in the database
+                AES.modifier(aeqMod);
+                initialize(aeqMod.getEquipement().getIdEq());
             }
-
-
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception appropriately (e.g., show an error message)
+        }
     }
+
+
+
+
 
     @FXML
     void dislikeEq(ActionEvent event) {
@@ -286,6 +291,17 @@ public class DetailsEquipement {
         like++;
         LikeId.setText(Integer.toString(like));
 
+    }
+
+    @FXML
+    void afficherEqF(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementFront.fxml"));
+            Parent root = loader.load();
+            CommIdAEq.getScene().setRoot(root);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
