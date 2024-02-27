@@ -7,7 +7,9 @@ import edu.esprit.services.ServiceEquipement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -18,6 +20,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +73,19 @@ public class AvisEquipementBack {
             e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
         }
     }
+    @FXML
+    void consulterEq(ActionEvent event) {
+
+    }
 
 
+    public void consulterEq(javafx.event.ActionEvent actionEvent) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
+            Parent root = loader.load();
+            listViewAEqB.getScene().setRoot(root);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

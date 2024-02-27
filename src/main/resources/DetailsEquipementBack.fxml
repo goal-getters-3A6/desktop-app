@@ -15,6 +15,7 @@
       <Pane layoutX="253.0" layoutY="160.0" prefHeight="654.0" prefWidth="1155.0" style="-fx-background-color: #38afb5;">
          <children>
             <Label fx:id="NomEqId" layoutX="507.0" layoutY="98.0" prefHeight="17.0" prefWidth="268.0" text="Label" />
+            <Button layoutX="987.0" layoutY="605.0" mnemonicParsing="false" onAction="#ConsulterEqB" text="Liste des équipements" />
          </children>
       </Pane>
       <VBox fx:id="DetailsEq" layoutX="302.0" layoutY="366.0" prefHeight="412.0" prefWidth="924.0" spacing="10.0">

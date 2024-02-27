@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,5 +16,6 @@
          </font>
       </Label>
       <ListView fx:id="listViewAEqB" layoutX="212.0" layoutY="131.0" prefHeight="330.0" prefWidth="598.0" />
+      <Button layoutX="733.0" layoutY="483.0" mnemonicParsing="false" onAction="#consulterEq" text="Liste des équipements" />
    </children>
 </AnchorPane>

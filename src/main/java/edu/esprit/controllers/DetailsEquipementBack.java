@@ -3,6 +3,8 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Equipement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -10,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public class DetailsEquipementBack {
 
@@ -102,6 +106,17 @@ public class DetailsEquipementBack {
     }
     public void setParentController(AfficherEquipementBack parentController) {
         this.AfficherEquipementBack = parentController;
+    }
+
+    @FXML
+    void ConsulterEqB(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
+            Parent root = loader.load();
+            NomEqId.getScene().setRoot(root);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

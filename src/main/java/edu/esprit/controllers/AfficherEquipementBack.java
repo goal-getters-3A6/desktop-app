@@ -9,10 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -24,6 +23,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -183,13 +183,27 @@ public class AfficherEquipementBack {
             // Récupérer l'équipement associé au bouton de suppression
             Equipement equipement = (Equipement) deleteButton.getUserData();
 
-            // Supprimer l'équipement de la base de données et de la liste
-            ES.supprimer(equipement.getIdEq());
-            ListViewEqId.getItems().remove(equipement);
+            // Afficher une boîte de dialogue de confirmation
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet équipement ?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // L'utilisateur a confirmé la suppression
+                // Supprimer l'équipement de la base de données et de la liste
+                ES.supprimer(equipement.getIdEq());
+                ListViewEqId.getItems().remove(equipement);
+            } else {
+                // L'utilisateur a annulé la suppression
+                // Vous pouvez ajouter un message ou des actions supplémentaires ici si nécessaire
+            }
         } catch (SQLException e) {
             e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
         }
     }
+
 
 
     private void modifierEquipement(Button editButton) {
@@ -221,7 +235,27 @@ public class AfficherEquipementBack {
 
     }
 
+    @FXML
+    void AjouterEqB(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEquipement.fxml"));
+            Parent root = loader.load();
+            ListViewEqId.getScene().setRoot(root);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @FXML
+    void listeAvisB(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AvisEquipementBack.fxml"));
+            Parent root = loader.load();
+            ListViewEqId.getScene().setRoot(root);
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     @FXML

@@ -17,6 +17,7 @@ import javafx.scene.layout.Region;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class DetailsEquipement {
@@ -207,16 +208,30 @@ public class DetailsEquipement {
     }
     private void supprimerAEquipement(Button deleteButton) {
         try {
-            // Récupérer l'équipement associé au bouton de suppression
+            // Récupérer l'avis d'équipement associé au bouton de suppression
             AvisEquipement Aequipement = (AvisEquipement) deleteButton.getUserData();
 
-            // Supprimer l'équipement de la base de données et de la liste
-            AES.supprimer(Aequipement.getIdAEq());
-            listViewAEqF.getItems().remove(Aequipement);
+            // Afficher une boîte de dialogue de confirmation
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet avis d'équipement ?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // L'utilisateur a confirmé la suppression
+                // Supprimer l'avis d'équipement de la base de données et de la liste
+                AES.supprimer(Aequipement.getIdAEq());
+                listViewAEqF.getItems().remove(Aequipement);
+            } else {
+                // L'utilisateur a annulé la suppression
+                // Vous pouvez ajouter un message ou des actions supplémentaires ici si nécessaire
+            }
         } catch (SQLException e) {
             e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
         }
     }
+
 
 
     private void modifierAEquipement(Button editButton  ) {
