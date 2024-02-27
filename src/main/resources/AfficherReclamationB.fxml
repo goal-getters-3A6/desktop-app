@@ -4,26 +4,38 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="619.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherReclamationB">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherReclamationB">
    <children>
-      <TableView fx:id="tabRecid" layoutX="64.0" layoutY="110.0" prefHeight="400.0" prefWidth="632.0">
+      <TableView fx:id="tabRecid" layoutX="103.0" layoutY="155.0" prefHeight="328.0" prefWidth="637.0">
         <columns>
           <TableColumn fx:id="CatégorieRéclamationid" prefWidth="134.40005111694336" text="CatégorieRéclamation" />
           <TableColumn fx:id="DescriptionRéclamtionid" minWidth="0.0" prefWidth="138.3999786376953" text="DescriptionRéclamtion" />
             <TableColumn fx:id="PiéceJointeid" minWidth="0.0" prefWidth="94.4000244140625" text="PiéceJointe" />
             <TableColumn fx:id="ODDid" minWidth="0.0" prefWidth="72.79998779296875" text="ODD" />
-            <TableColumn fx:id="Serviceid" minWidth="0.0" prefWidth="95.20001220703125" text="Service" />
-            <TableColumn fx:id="Etatid" minWidth="0.0" prefWidth="95.20001220703125" text="Etat" />
+            <TableColumn fx:id="Serviceid" minWidth="0.0" prefWidth="86.4000244140625" text="Service" />
+            <TableColumn fx:id="Etatid" minWidth="0.0" prefWidth="106.39990234375" text="Etat" />
         </columns>
       </TableView>
-      <Label layoutX="78.0" layoutY="39.0" prefHeight="40.0" prefWidth="358.0" text="Liste des Réclamations ">
+      <Label layoutX="26.0" layoutY="116.0" prefHeight="33.0" prefWidth="306.0" text="Liste des Réclamations ">
          <font>
-            <Font size="28.0" />
+            <Font size="22.0" />
          </font>
       </Label>
-      <Button layoutX="633.0" layoutY="46.0" mnemonicParsing="false" onAction="#supprimerRec" text="Supprimer" />
+      <Button layoutX="14.0" layoutY="266.0" mnemonicParsing="false" onAction="#supprimerRec" text="Supprimer" />
+      <Pane prefHeight="102.0" prefWidth="800.0" style="-fx-background-color: #004369;">
+         <children>
+            <ImageView fitHeight="84.0" fitWidth="114.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

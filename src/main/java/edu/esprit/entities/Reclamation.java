@@ -122,10 +122,7 @@ public class Reclamation {
                 ", serviceRec='" + serviceRec + '\'' +
                 ", etatRec=" + etatRec +
                 ", utilisateur=[" ;
-
-
         // Concaténer les commentaires des avis
-
             result += utilisateur.getNom() + ", ";
 
         result += "]}";

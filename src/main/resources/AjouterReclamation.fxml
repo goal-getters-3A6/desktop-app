@@ -6,34 +6,47 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="619.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterReclamation">
+<AnchorPane prefHeight="619.0" prefWidth="806.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterReclamation">
    <children>
-      <Label layoutX="42.0" layoutY="14.0" prefHeight="54.0" prefWidth="240.0" text="Réclamation">
+      <Label layoutX="178.0" layoutY="32.0" prefHeight="54.0" prefWidth="240.0" text="Réclamation">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Label layoutX="41.0" layoutY="77.0" prefHeight="18.0" prefWidth="82.0" text="Catégorie" />
-      <Label layoutX="41.0" layoutY="123.0" text="Description " />
-      <Label layoutX="41.0" layoutY="319.0" text="Piéce Jointe" />
-      <TextArea fx:id="descriptionRecid" layoutX="113.0" layoutY="120.0" prefHeight="162.0" prefWidth="158.0" />
-      <TextField fx:id="oddRecid" layoutX="388.0" layoutY="73.0" />
-      <TextField fx:id="piéceJointeRecid" layoutX="115.0" layoutY="307.0" />
-      <Label layoutX="339.0" layoutY="76.0" prefHeight="18.0" prefWidth="38.0" text="ODD" />
-      <Label layoutX="330.0" layoutY="132.0" text="Service" />
-      <ComboBox fx:id="categorieRecid" layoutX="117.0" layoutY="73.0" prefWidth="150.0" />
-      <ComboBox fx:id="serviceRecid" layoutX="387.0" layoutY="128.0" prefWidth="150.0" />
-      <Button layoutX="321.0" layoutY="211.0" mnemonicParsing="false" onAction="#Ajouter" text="Ajouter" />
-      <Button layoutX="387.0" layoutY="211.0" mnemonicParsing="false" onAction="#AfficherRec" text="Afficher" />
-      <ScrollPane layoutX="528.0" layoutY="248.0" prefHeight="200.0" prefWidth="200.0">
+      <Label layoutX="171.0" layoutY="102.0" prefHeight="18.0" prefWidth="82.0" text="Catégorie" />
+      <Label layoutX="170.0" layoutY="214.0" text="Description " />
+      <Label layoutX="171.0" layoutY="365.0" text="Piéce Jointe" />
+      <TextArea fx:id="descriptionRecid" layoutX="246.0" layoutY="142.0" prefHeight="162.0" prefWidth="158.0" />
+      <TextField fx:id="oddRecid" layoutX="467.0" layoutY="142.0" />
+      <TextField fx:id="piéceJointeRecid" layoutX="246.0" layoutY="361.0" />
+      <Label layoutX="420.0" layoutY="145.0" prefHeight="18.0" prefWidth="38.0" text="ODD" />
+      <Label layoutX="420.0" layoutY="192.0" text="Service" />
+      <ComboBox fx:id="categorieRecid" layoutX="250.0" layoutY="99.0" prefWidth="150.0" />
+      <ComboBox fx:id="serviceRecid" layoutX="466.0" layoutY="188.0" prefWidth="150.0" />
+      <Button layoutX="298.0" layoutY="538.0" mnemonicParsing="false" onAction="#Ajouter" text="Ajouter" />
+      <Button layoutX="375.0" layoutY="538.0" mnemonicParsing="false" onAction="#AfficherRec" text="Afficher" />
+      <Pane prefHeight="619.0" prefWidth="150.0" style="-fx-background-color: #004369;">
+         <children>
+            <ImageView fitHeight="98.0" fitWidth="150.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button layoutX="192.0" layoutY="491.0" mnemonicParsing="false" onAction="#afficherAbByUser" text="Mes reclamations " />
+      <ScrollPane layoutX="554.0" layoutY="274.0" prefHeight="200.0" prefWidth="200.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <VBox fx:id="recaffiche" prefHeight="186.0" prefWidth="187.0" />
+                  <VBox fx:id="Vboxid" fillWidth="false" prefHeight="111.0" prefWidth="184.0" />
                </children>
             </AnchorPane>
         </content>

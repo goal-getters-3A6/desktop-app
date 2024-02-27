@@ -139,12 +139,8 @@ String req ="SELECT * FROM reclamation " +
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()){
-                //int id = res.getInt("id");
-                String nom = res.getString("nom");
-               // String prenom = res.getString("prenom");
-                //byte[] image = res.getBytes("image");
-                //String mail = res.getString("mail");
 
+                String nom = res.getString("nom");
                 int idRec = res.getInt(1);
                 String categorieRec = res.getString("categorieRec");
                 String descriptionRec =res.getString("descriptionRec");
