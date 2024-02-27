@@ -82,8 +82,6 @@ public class MesAbonnements {
         }
     }
 
-
-
     public void initialize() {
         // Initialiser la liste observable pour stocker les réservations
         ObservableList<Abonnement> AbonnementsList = FXCollections.observableArrayList();
@@ -139,7 +137,7 @@ public class MesAbonnements {
 
     @FXML
     void modifier(ActionEvent event) {
-
+/*
         String type = kk.getText().trim();
        // String prenomPersonne = textfieldprenom.getText().trim();
 
@@ -175,7 +173,7 @@ public class MesAbonnements {
                 alert.setContentText("Veuillez saisir un prénom valide.");
                 alert.showAndWait();
             }*/
-        }
+        /*}
 
         if (isValid) {
             // Les saisies sont valides, procéder à la modification
@@ -207,7 +205,7 @@ public class MesAbonnements {
             }
 
         }
-
+*/
     }
 
     @FXML
