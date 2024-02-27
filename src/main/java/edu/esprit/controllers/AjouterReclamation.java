@@ -1,8 +1,11 @@
 package edu.esprit.controllers;
 
+import edu.esprit.entities.Client;
 import edu.esprit.entities.Reclamation;
 import edu.esprit.entities.User;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceReclamation;
+import edu.esprit.utils.SessionManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +14,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -40,7 +45,21 @@ public class AjouterReclamation {
     private ComboBox<String> serviceRecid;
     ObservableList<String> list = FXCollections.observableArrayList("Qualité", "Probléme Technique", "Communication","durabilité");
     ObservableList<String> list1 = FXCollections.observableArrayList("Hygiéne", "Sécurité", "Displine");
+    private final ServiceReclamation SA = new ServiceReclamation();
+    SessionManagement ss=new SessionManagement();
+    String mail=ss.getEmail();
+    // UserService us=new UserService();
+    ClientService cs=new ClientService();
+    Client u;
 
+    {
+        try {
+            u = cs.getOneByEmail(mail);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @FXML
     void initialize()
     {
@@ -48,21 +67,35 @@ public class AjouterReclamation {
         serviceRecid.setItems(list1);
 
     }
+    @FXML
+    void choisirfile(ActionEvent event) {
 
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une pièce jointe");
+
+        // Configurer les filtres si nécessaire
+         fileChooser.getExtensionFilters().addAll(
+             new FileChooser.ExtensionFilter("Fichiers PDF", "*.pdf"),
+               new FileChooser.ExtensionFilter("Tous les fichiers", "*.*")
+         );
+
+        // Afficher la boîte de dialogue de sélection de fichier
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            piéceJointeRecid.setText(selectedFile.getAbsolutePath());
+        }
+    }
     @FXML
     void Ajouter(ActionEvent event) {
         try {
 
-            User us1 =new User (1,"mayssa","hakimi");
-            SR.ajouter(new Reclamation(categorieRecid.getSelectionModel().getSelectedItem(),descriptionRecid.getText(), oddRecid.getText(),piéceJointeRecid.getText(),serviceRecid.getSelectionModel().getSelectedItem(),us1));
+           // User us1 =new User (1,"mayssa","hakimi");
+            SR.ajouter(new Reclamation(categorieRecid.getSelectionModel().getSelectedItem(),descriptionRecid.getText(), oddRecid.getText(),piéceJointeRecid.getText(),serviceRecid.getSelectionModel().getSelectedItem(),u));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Validation");
             alert.setContentText("Réclamation added succesfully");
             alert.showAndWait();
-
-          /*  FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherReclamationB.fxml"));
-            Parent root=loader.load();
-            oddRecid.getScene().setRoot(root);*/
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -71,12 +104,12 @@ public class AjouterReclamation {
             alert.showAndWait();
         /*} catch (IOException e) {
             throw new RuntimeException(e);*/
-        }
+       }
     }
-    @FXML
+   @FXML
     void AfficherRec(ActionEvent event) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherReclamationB.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesReclamations.fxml"));
             Parent root = loader.load();
             oddRecid.getScene().setRoot(root);
         } catch (IOException e) {
@@ -85,10 +118,10 @@ public class AjouterReclamation {
     }
 
 
-    @FXML
+   @FXML
     void afficherAbByUser(ActionEvent event) {
         int userId = 1;
-        List<Reclamation> reclamations = SR.getAllByUser(userId);
+        List<Reclamation> reclamations = SR.getAllByUser(u.getMail());
         for (Reclamation reclamation : reclamations) {
             // Créer un Label pour chaque propriété de la réclamation
             Label categorieLabel = new Label("Categorie: " + reclamation.getCategorieRec());
@@ -98,9 +131,7 @@ public class AjouterReclamation {
             // Ajouter un espace entre chaque réclamation
             Vboxid.getChildren().add(new Label("")); // Ajoute un Label vide pour créer un espace
 
-        }
+        }}
 
     }
 
-
-}

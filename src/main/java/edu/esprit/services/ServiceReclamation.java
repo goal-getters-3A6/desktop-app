@@ -34,7 +34,7 @@ public class ServiceReclamation implements IService<Reclamation> {
 
     @Override
     public void modifier(Reclamation rec) {
-        String req = "UPDATE `reclamation` SET categorieRec=?, descriptionRec =?, piéceJointeRec=?, oddRec=?,serviceRec=?,etatRec=?,idU=? WHERE idRec = " + rec.getIdRec();
+        String req = "UPDATE `reclamation` SET categorieRec=?, descriptionRec =?, piéceJointeRec=?, oddRec=?,serviceRec=?,etatRec=? WHERE idRec = " + rec.getIdRec();
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1,rec.getCategorieRec());
@@ -43,7 +43,7 @@ public class ServiceReclamation implements IService<Reclamation> {
             ps.setString(4,rec.getOddRec());
             ps.setString(5,rec.getServiceRec());
             ps.setInt(6,rec.getEtatRec());
-            ps.setInt(7,rec.getUtilisateur().getId());
+            //ps.setInt(7,rec.getUtilisateur().getId());
 
             ps.executeUpdate();
             System.out.println("Reclamation modifié !");
@@ -93,7 +93,7 @@ String req ="SELECT * FROM reclamation " +
                 String oddRec =res.getString("oddRec");
                 String serviceRec =res.getString("ServiceRec");
                 int etatRec = res.getInt("EtatRec");
-                User e = new User(id, nom, prenom,mail,image);
+                User e = new User();
                  recl= new Reclamation(idRec,categorieRec,descriptionRec,piéceJointeRec,oddRec,serviceRec,etatRec,e);
             }
         } catch (SQLException ex) {
@@ -104,8 +104,8 @@ String req ="SELECT * FROM reclamation " +
     }
 
     @Override
-    public Set<Reclamation> getAll() throws SQLException {
-        Set<Reclamation> reclamations= new HashSet<>();
+    public List<Reclamation> getAll() throws SQLException {
+        List<Reclamation> reclamations= new ArrayList<>();
        String req = "SELECT reclamation.idRec, reclamation.categorieRec, reclamation.descriptionRec, reclamation.piéceJointeRec, reclamation.oddRec, reclamation.serviceRec, reclamation.etatRec, user.id, user.nom, user.prenom, user.mdp, user.mail, user.image FROM reclamation INNER JOIN user ON reclamation.idU = user.id ";
 
             Statement st = cnx.createStatement();
@@ -125,19 +125,19 @@ String req ="SELECT * FROM reclamation " +
                String serviceRec =res.getString("ServiceRec");
                 int etatRec = res.getInt("EtatRec");
 
-                User e = new User(id, nom, prenom,mail,image);
+                User e = new User();
                 Reclamation recl= new Reclamation(idRec,categorieRec,descriptionRec,piéceJointeRec,oddRec,serviceRec,etatRec,e);
                 reclamations.add(recl);
             }
 
         return reclamations;
     }
-    public List<Reclamation> getAllByUser(int id)  {
+    public List<Reclamation> getAllByUser(String email)  {
         List<Reclamation> reclamations = new ArrayList<>();
-        String req = "SELECT reclamation.idRec, reclamation.categorieRec, reclamation.descriptionRec, reclamation.piéceJointeRec, reclamation.oddRec, reclamation.serviceRec, reclamation.etatRec,  user.nom FROM reclamation INNER JOIN user ON reclamation.idU = user.id where reclamation.idU ="+id;
-        try {
-            Statement st = cnx.createStatement();
-            ResultSet res = st.executeQuery(req);
+        String req = "SELECT reclamation.idRec, reclamation.categorieRec, reclamation.descriptionRec, reclamation.piéceJointeRec, reclamation.oddRec, reclamation.serviceRec, reclamation.etatRec,  user.nom FROM reclamation INNER JOIN user ON reclamation.idU = user.id WHERE user.mail = ?";
+        try (PreparedStatement st = cnx.prepareStatement(req)) {
+            st.setString(1, email);  // Remplacer le paramètre de substitution par la valeur réelle
+            ResultSet res = st.executeQuery();
             while (res.next()){
 
                 String nom = res.getString("nom");
@@ -146,10 +146,10 @@ String req ="SELECT * FROM reclamation " +
                 String descriptionRec =res.getString("descriptionRec");
                 String piéceJointeRec = res.getString("piéceJointeRec");
                 String oddRec =res.getString("oddRec");
-                String serviceRec =res.getString("ServiceRec");
+                String serviceRec =res.getString("serviceRec");
                 int etatRec = res.getInt("EtatRec");
 
-                User e = new User(nom);
+                User e = new User();
                 Reclamation recl= new Reclamation(idRec,categorieRec,descriptionRec,piéceJointeRec,oddRec,serviceRec,etatRec,e);
                 reclamations.add(recl);
             }
