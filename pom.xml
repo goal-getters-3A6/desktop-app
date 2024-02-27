@@ -29,6 +29,33 @@
             <artifactId>javafx-controls</artifactId>
             <version>21.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13</version>
+        </dependency>
+        <dependency>
+            <groupId>tray</groupId>
+            <artifactId>tray</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/external-dependencies/TrayNotification.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20211205</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dlsc.phonenumberfx</groupId>
+            <artifactId>phonenumberfx</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dropbox.core</groupId>
+            <artifactId>dropbox-core-sdk</artifactId>
+            <version>5.4.3</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

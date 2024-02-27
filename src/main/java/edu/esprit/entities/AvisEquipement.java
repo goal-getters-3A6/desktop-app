@@ -6,17 +6,35 @@ public class AvisEquipement {
     private int idAEq ;
     private String commAEq ;
     private Equipement equipement;
-
+private User user;
     private boolean like;
     private boolean dislike;
 
     public AvisEquipement(String text, int idEq){}
 
-    public AvisEquipement(int idAEq, String commAEq, Equipement equipement) {
+    public AvisEquipement(int idAEq, String commAEq, Equipement equipement ) {
         this.idAEq = idAEq;
         this.commAEq = commAEq;
         this.equipement = equipement;
     }
+
+    public AvisEquipement(int idAEq, String commAEq, Equipement equipement, User user, boolean like, boolean dislike) {
+        this.idAEq = idAEq;
+        this.commAEq = commAEq;
+        this.equipement = equipement;
+        this.user = user;
+        this.like = like;
+        this.dislike = dislike;
+    }
+
+    public AvisEquipement(String commAEq, Equipement equipement, User user, boolean like, boolean dislike) {
+        this.commAEq = commAEq;
+        this.equipement = equipement;
+        this.user = user;
+        this.like = like;
+        this.dislike = dislike;
+    }
+
     public AvisEquipement(String commAEq) {
 
         this.commAEq = commAEq;
@@ -41,6 +59,20 @@ public class AvisEquipement {
     public AvisEquipement(int idAEq, String commAEq) {
         this.idAEq = idAEq;
         this.commAEq = commAEq;
+    }
+
+    public AvisEquipement(int idAEq, String commAEq, Equipement equipement, User user) {
+        this.idAEq = idAEq;
+        this.commAEq = commAEq;
+        this.equipement = equipement;
+        this.user = user;
+
+    }
+
+    public AvisEquipement(String commAEq, Equipement equipement, Client user) {
+        this.commAEq = commAEq;
+        this.equipement = equipement;
+        this.user = user;
     }
 
 
@@ -73,6 +105,14 @@ public class AvisEquipement {
 
     public void setLike(boolean like) {
         this.like = like;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean isDislike() {

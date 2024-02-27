@@ -1,7 +1,10 @@
 package edu.esprit.controllers;
 
+import edu.esprit.entities.Client;
 import edu.esprit.entities.Equipement;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceEquipement;
+import edu.esprit.utils.SessionManagement;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -35,6 +38,20 @@ public class AfficherEquipementFront {
     private ScrollPane scrollPaneEq;
 
     private final ServiceEquipement ES = new ServiceEquipement();
+    SessionManagement ss=new SessionManagement();
+    String mail=ss.getEmail();
+    // UserService us=new UserService();
+    ClientService cs=new ClientService();
+    Client user;
+
+    {
+        try {
+            user = cs.getOneByEmail(mail);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void initialize() {
         setEqGridPaneList();
@@ -107,6 +124,12 @@ public class AfficherEquipementFront {
     private void afficherDetail(Button detailButton, Equipement equipement) {
 
         try {
+            SessionManagement ss = new SessionManagement();
+            String mail = ss.getEmail();
+            ClientService cs = new ClientService();
+
+                Client user = cs.getOneByEmail(mail);
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsEquipement.fxml"));
             Parent root = loader.load();
 
@@ -121,6 +144,9 @@ public class AfficherEquipementFront {
             detailButton.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -1,9 +1,13 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.AvisEquipement;
+import edu.esprit.entities.Client;
 import edu.esprit.entities.Equipement;
+import edu.esprit.entities.User;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceAvisEquipement;
 import edu.esprit.services.ServiceEquipement;
+import edu.esprit.utils.SessionManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,7 +70,20 @@ public class DetailsEquipement {
     @FXML
     private Button publier;
     private edu.esprit.controllers.AfficherEquipementFront AfficherEquipementFront;
+    SessionManagement ss=new SessionManagement();
+    String mail=ss.getEmail();
+    // UserService us=new UserService();
+    ClientService cs=new ClientService();
+    Client user;
 
+    {
+        try {
+            user = cs.getOneByEmail(mail);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void initData(Equipement equipement) {
 
@@ -191,12 +208,14 @@ public class DetailsEquipement {
     void AjouterAvisEqF(ActionEvent event) {
         try {
             this.equipement = equipement;
+
 // Récupérer l'équipement correspondant à l'avis
             Equipement eq = ES.getOneById(equipement.getIdEq()); // ou utilisez une autre méthode pour obtenir l'équipement
-          //  System.out.println(equipement.getIdEq());
-            if (eq != null) {
 
-                AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq,false, false));
+            //  System.out.println(equipement.getIdEq());
+            if (eq != null) {
+System.out.println(user);
+                AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq, user));
                 initialize(eq.getIdEq()); // Refresh only the reviews section
                 CommIdAEq.clear();
             } else {
@@ -257,12 +276,16 @@ public class DetailsEquipement {
             if (aeqMod != null) {
                 // Set the modified content from the CommIdAEq TextField
                 aeqMod.setCommAEq(CommIdAEq.getText());
+                if (user instanceof Client) {
+                    // Si c'est un client, afficher les détails de la réservation dans la cellule
+                    //  Client client = (Client) reservation.getUser();
+                    Client client = (Client) user; // Convertir l'utilisateur en client
 
                 // Update the AvisEquipement in the database
                 AES.modifier(aeqMod);
                 initialize(aeqMod.getEquipement().getIdEq());
                 CommIdAEq.clear();
-            }
+            }}
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately (e.g., show an error message)
         }
