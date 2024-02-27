@@ -21,9 +21,9 @@
       <Hyperlink fx:id="toregister" layoutX="17.0" layoutY="415.0" onAction="#toRegister" prefHeight="26.0" prefWidth="170.0" text="Vous n'avez pas de compte ?" textFill="#6b0b0b" underline="true" />
           <HBox prefHeight="100.0" prefWidth="744.0" style="-fx-background-color: #004369;">
               <children>
-            <HBox prefHeight="50.0" prefWidth="744.0" spacing="1.0">
+            <HBox prefHeight="100.0" prefWidth="642.0">
                <children>
-                        <ImageView fx:id="log" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="log" fitHeight="98.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@imgs/logo.png" />
                             </image>
@@ -68,15 +68,14 @@
                   <Insets />
                </HBox.margin>
             </HBox>
-            <HBox prefHeight="70.0" prefWidth="78.0">
+            <HBox prefHeight="100.0" prefWidth="120.0">
                <children>
-                  <MenuButton fx:id="profilbuttonmenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0">
+                  <MenuButton fx:id="profilbuttonmenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0">
                     <items>
                       <MenuItem fx:id="profilitem" mnemonicParsing="false" onAction="#toProfile" text="Profil" />
                       <MenuItem fx:id="logoutitem" mnemonicParsing="false" onAction="#logout" text="Log out" />
                     </items>
                   </MenuButton>
-                        <ImageView fx:id="userimage" fitHeight="34.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true" />
                </children>
                <HBox.margin>
                   <Insets />

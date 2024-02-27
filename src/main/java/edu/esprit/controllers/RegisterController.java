@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import static edu.esprit.utils.UploadToDropBox.uploadPhoto;
 
@@ -32,9 +33,11 @@ public class RegisterController {
     @FXML
     private TextField prenomTxt;
     @FXML
-    private TextField emailTxt; // Value injected by FXMLLoader
+    private TextField emailTxt;
     @FXML
-    private PasswordField mdpRegisterTxt; // Value injected by FXMLLoader
+    private PasswordField mdpRegisterTxt;
+    @FXML
+    private PasswordField mdpRegisterTxt1;
     @FXML
     private DatePicker dateNaissance;
 
@@ -60,6 +63,8 @@ public class RegisterController {
     PhoneNumberField phoneNumberField = new PhoneNumberField();
     ClientService clientService = new ClientService();
     String photoURL = "";
+    String emailRegex = "^(.+)@(\\S+)$";
+    String phoneRegex = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
 
 
 
@@ -98,11 +103,47 @@ public class RegisterController {
     }
     @FXML
     void register() throws  IOException{
-        if ((emailTxt.getText().isBlank())
-                || (nomTxt.getText().isBlank())
+        if (!patternMatches(emailTxt.getText(), emailRegex) || emailTxt.getText().isBlank())
+        {
+            String title = "Verify your information!";
+            String message = "Email is not valid!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if (!patternMatches(phoneNumberField.getRawPhoneNumber(), phoneRegex) || phoneNumberField.getRawPhoneNumber().isBlank()) {
+            String title = "Verify your information!";
+            String message = "Phone number is not valid!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if (dateNaissance.getValue().isAfter(LocalDate.now().minusYears(14))){
+            String title = "Warning!";
+            String message = "You must be older than 14!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if ( !mdpRegisterTxt.getText().equals(mdpRegisterTxt1.getText())) {
+            String title = "Verify your information!";
+            String message = "Passwords don't match!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if (
+                 (nomTxt.getText().isBlank())
                 || (prenomTxt.getText().isBlank())
                 || (mdpRegisterTxt.getText().isBlank())
-                || (phoneNumberField.getRawPhoneNumber().isBlank())
                 || (dateNaissance.getValue() == null)
                 || (!radioH.isSelected() && !radioF.isSelected())
                 || (poids.getValue() == 0)
@@ -149,6 +190,11 @@ public class RegisterController {
                tray.showAndDismiss(Duration.seconds(3));
            }
         }
+    }
+    public static boolean patternMatches(String stringToValidate, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(stringToValidate)
+                .matches();
     }
 
     @FXML

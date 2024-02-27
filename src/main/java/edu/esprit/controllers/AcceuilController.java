@@ -35,14 +35,12 @@ public class AcceuilController {
     private Hyperlink forgotpassword;
     @FXML
     private Hyperlink toregister;
-    @FXML
-    private ImageView imageuser;
+
     @FXML
     private MenuButton profilbuttonmenu;
     @FXML
     private MenuItem profilitem;
-    @FXML
-    private MenuItem logoutitem;
+
     @FXML
             private Button loginbtn;
     UserService userService = new UserService();
@@ -62,19 +60,20 @@ public class AcceuilController {
             forgotpassword.setVisible(false);
             toregister.setVisible(false);
             loginbtn.setVisible(false);
-            String imageURL = "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png";
-            Image image = new Image(imageURL);
-            javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
-            imageView.setFitHeight(50);
-            imageView.setFitWidth(50);
-            profilbuttonmenu.setGraphic(imageView);
-            profilbuttonmenu.setText(getEmail());
             u = userService.getOneByEmail(getEmail());
             if (u.getRole().equals("ADMIN")) {
                 profilitem.setText("Dashboard");
             } else {
                 profilitem.setText("Profile");
             }
+            String imageURL = "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png";
+            Image image = new Image(imageURL);
+            javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
+            imageView.setFitHeight(25);
+            imageView.setFitWidth(25);
+            profilbuttonmenu.setGraphic(imageView);
+            profilbuttonmenu.setText(u.getNom());
+
         } else {
             mdpTxt.setVisible(true);
             emailTxt.setVisible(true);

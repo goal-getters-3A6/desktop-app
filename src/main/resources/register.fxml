@@ -56,37 +56,37 @@
                         <Image url="@imgs/logo.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+                  <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#accueil" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+                  <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="124.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="28.0" prefWidth="154.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+                  <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="30.0" prefWidth="154.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="28.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+                  <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="28.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+                  <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="28.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+                  <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>

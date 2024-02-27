@@ -6,9 +6,9 @@ import edu.esprit.services.ClientService;
 import edu.esprit.utils.SessionManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import tray.notification.TrayNotification;
 
 import javax.swing.text.html.ImageView;
@@ -18,49 +18,36 @@ import java.util.logging.Logger;
 public class ProfilController {
 
     @FXML
-    private AnchorPane profile;
+    private TextField nomTxt;
     @FXML
-    public ImageView profilepic;
+    private TextField prenomTxt;
     @FXML
-    public TextField nomTxt;
+    private TextField emailTxt;
     @FXML
-    public TextField prenomTxt;
+    private PasswordField mdpRegisterTxt;
+    @FXML
+    private PasswordField mdpRegisterTxt1;
+    @FXML
+    private DatePicker dateNaissance;
 
     @FXML
-    public TextField emailTxt;
-    @FXML
-    private Button modifierBtn;
-    @FXML
-    private Button btnalimentaire;
+    private AnchorPane registerpane;
 
     @FXML
-    private Button btnequipement;
+    private RadioButton radioH;
+    @FXML
+    private RadioButton radioF;
+    @FXML
+    private Slider poids;
+    @FXML
+    private Slider taille;
+    @FXML
+    private Label poidslabel;
+    @FXML
+    private  Label taillelabel;
 
     @FXML
-    private Button btnevenement;
-
-    @FXML
-    private Button btnmodifierreservation;
-
-    @FXML
-    private Button btnplanning;
-
-    @FXML
-    private Button btnprofil;
-
-    @FXML
-    private Button btnreclamation;
-
-    @FXML
-    private Button btnsupprimerreservation;
-
-
-    @FXML
-    private ImageView imageuser;
-
-    @FXML
-    private ImageView logo;
-
+    private VBox profilvbox;
     private ClientService clientService = new ClientService();
     Client client = new Client();
 

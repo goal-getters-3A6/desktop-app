@@ -91,10 +91,18 @@ public class DashboardController implements Initializable {
     @FXML
     private void search(KeyEvent event) throws SQLException{
         userslistview.getItems().clear();
-        new ClientService().getAll().stream().filter(u -> u.getNom().indexOf(search.getText()) != -1)
+        new ClientService().getAll().stream().filter(u -> u.getNom().toLowerCase().contains(search.getText().toLowerCase()))
                 .forEach(u -> userslistview.getItems().add(u));
         userslistview.refresh();
 
+    }
+
+    @FXML void deleteUser(ActionEvent event) throws SQLException {
+        Client u = (Client) userslistview.getSelectionModel().getSelectedItem();
+        new ClientService().supprimer(u.getId());
+        datauser.clear();
+        datauser = FXCollections.observableArrayList(new ClientService().getAll());
+        userslistview.setItems(datauser);
     }
 
     public void tableaudebord(ActionEvent actionEvent) {

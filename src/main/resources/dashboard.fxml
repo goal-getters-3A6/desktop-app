@@ -110,7 +110,7 @@
          </children>
       </AnchorPane>
       <ComboBox fx:id="AddUserBox" layoutX="999.0" layoutY="116.0" prefWidth="150.0" promptText="Add User" />
-      <Button layoutX="985.0" layoutY="444.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Supprimer" textFill="#db1f48" />
+      <Button fx:id="deletebtn" layoutX="985.0" layoutY="444.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="25.0" prefWidth="157.0" text="Supprimer" textFill="#db1f48" />
       
     </children>
 </AnchorPane>
