@@ -9,33 +9,48 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AddUser">
+<AnchorPane prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AddUserDashboardController">
    <children>
-      <AnchorPane fx:id="registerpane" layoutX="-4.0" layoutY="4.0" prefHeight="476.0" prefWidth="694.0">
+      <Button fx:id="addbtn" layoutX="313.0" layoutY="466.0" mnemonicParsing="false" onAction="#add" prefHeight="30.0" prefWidth="119.0" text="Ajouter" textFill="#1a17b5">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <VBox fx:id="adduservbox" layoutX="39.0" layoutY="65.0" prefHeight="348.0" prefWidth="276.0" spacing="10.0">
          <children>
-            <Button fx:id="ajouteruserindashboard" layoutX="287.0" layoutY="391.0" mnemonicParsing="false" onAction="ajouteruserindashboard" prefHeight="30.0" prefWidth="140.0" text="Ajouter " />
-            <VBox fx:id="registervbox" layoutX="33.0" layoutY="143.0" prefHeight="193.0" prefWidth="150.0" spacing="20.0">
-               <children>
-                  <TextField fx:id="nomuser" prefHeight="26.0" prefWidth="150.0" promptText="nom" />
-                  <TextField fx:id="prenomuser" prefHeight="26.0" prefWidth="150.0" promptText="prenom" />
-                  <TextField fx:id="emailuser" prefHeight="26.0" prefWidth="150.0" promptText="email" />
-                  <PasswordField fx:id="mdpuser" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
-                  <DatePicker fx:id="dateNaissanceuser" prefHeight="26.0" prefWidth="150.0" promptText="Date Naissance" />
-               </children>
-            </VBox>
-            <RadioButton fx:id="sexe2user" layoutX="342.0" layoutY="156.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="84.0" text="Femme" />
-            <RadioButton fx:id="sexe1user" layoutX="251.0" layoutY="156.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Homme" />
-            <Slider fx:id="tailleuser" layoutX="277.0" layoutY="221.0" max="300.0" minorTickCount="1" />
-            <Label layoutX="327.0" layoutY="200.0" text="Taille:" />
-            <Slider fx:id="poidsuser" layoutX="277.0" layoutY="277.0" max="300.0" minorTickCount="1" />
-            <Label layoutX="327.0" layoutY="256.0" text="Poids:" />
-            <Button fx:id="importprofilpicuser" layoutX="327.0" layoutY="323.0" mnemonicParsing="false" onAction="#importprofilepicindashboard" text="Photo de profil" textFill="#510505" />
-            <Label fx:id="poidslabel" layoutX="435.0" layoutY="280.0" textFill="#6b0202" />
-            <Label fx:id="taillelabel" layoutX="435.0" layoutY="224.0" textFill="#6b0202" />
-            <RadioButton fx:id="adminuser" layoutX="33.0" layoutY="382.0" mnemonicParsing="false" text="Admin" textFill="#350fbf" />
-            <RadioButton fx:id="clientuser" layoutX="35.0" layoutY="419.0" mnemonicParsing="false" text="Client" textFill="#350fbf" />
+            <Label prefHeight="18.0" prefWidth="57.0" text="Nom" />
+            <TextField fx:id="nomTxt" prefHeight="26.0" prefWidth="150.0" promptText="nom" />
+            <Label text="Prénom" />
+            <TextField fx:id="prenomTxt" prefHeight="26.0" prefWidth="150.0" promptText="prenom" />
+            <Label text="E-mail" />
+            <TextField fx:id="emailTxt" prefHeight="26.0" prefWidth="150.0" promptText="email" />
+            <Label text="Sexe" />
+            <RadioButton fx:id="radioF" mnemonicParsing="false" prefHeight="18.0" prefWidth="84.0" text="Femme" />
+            <RadioButton fx:id="radioH" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Homme" />
+            <Label text="Role" />
+            <RadioButton fx:id="radioClient" mnemonicParsing="false" prefHeight="18.0" prefWidth="84.0" text="Client" />
+            <RadioButton fx:id="radioAdmin" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Admin" />
+            <Label text="Téléphone" />
          </children>
-      </AnchorPane>
+      </VBox>
+      <VBox layoutX="361.0" layoutY="65.0" prefHeight="380.0" prefWidth="347.0" spacing="8.0">
+         <children>
+            <Label text="Date Naissance" />
+            <DatePicker fx:id="dateNaissance" prefHeight="26.0" prefWidth="150.0" promptText="Date Naissance" />
+            <Label text="Mot de passe " />
+            <PasswordField fx:id="mdpRegisterTxt" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
+            <Label text="Confirmer mot de passe" />
+            <PasswordField fx:id="mdpRegisterTxt1" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
+            <Button fx:id="importProfilePic" mnemonicParsing="false" onAction="#importProfilePic" text="Photo de profil" textFill="#510505" />
+            <Label text="Taille:" />
+            <Slider fx:id="taille" max="300.0" minorTickCount="1" />
+            <Label fx:id="taillelabel" textFill="#6b0202" />
+            <Label text="Poids:" />
+            <Slider fx:id="poids" max="300.0" minorTickCount="1" />
+            <Label fx:id="poidslabel" textFill="#6b0202" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

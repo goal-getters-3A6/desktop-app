@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import javafx.util.converter.LocalDateStringConverter;
+import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 import java.sql.SQLException;
@@ -35,10 +36,7 @@ public class ProfilController {
     private TextField prenomTxt;
     @FXML
     private TextField emailTxt;
-    @FXML
-    private PasswordField mdpRegisterTxt;
-    @FXML
-    private PasswordField mdpRegisterTxt1;
+
     @FXML
     private DatePicker dateNaissance;
 
@@ -88,7 +86,7 @@ public class ProfilController {
         taille.setValue(client.getTaille());
         poids.setValue(client.getPoids());
         userimage.setImage(new Image(client.getImage()));
-
+        photoURL = client.getImage();
         phoneNumberField.setMaxWidth(150);
 
         phoneNumberField.setMaxHeight(26);
@@ -111,14 +109,44 @@ public class ProfilController {
 
     }
 
+
     @FXML
     private void modify(ActionEvent modify) throws SQLException {
-        int userId = clientService.getOneByEmail(emailTxt.getText()).getId();
-        System.out.println(userId);
-        Client client = new Client(userId,nomTxt.getText(), prenomTxt.getText(), emailTxt.getText());
-        try {
-            clientService.modifier(client);
+        int userId = client.getId();
+        String pass = client.getMdp();
+        if (nomTxt.getText().isEmpty()
+                || prenomTxt.getText().isEmpty()
+                || emailTxt.getText().isEmpty()
+                || dateNaissance.getValue() == null
+                || phoneNumberField.getRawPhoneNumber().isEmpty()
+                || poids.getValue() == 0
+                || taille.getValue() == 0
+                || photoURL.isEmpty() ) {
             TrayNotification tray = new TrayNotification();
+            NotificationType notification = NotificationType.ERROR;
+            tray.setNotificationType(notification);
+            tray.setTitle("Error");
+            tray.setMessage("All fields are required");
+            tray.showAndDismiss(javafx.util.Duration.seconds(2));
+            return;
+        }
+        try {
+            clientService.modifier( new Client(userId,
+                    nomTxt.getText(),
+                    prenomTxt.getText(),
+                    pass,
+                    emailTxt.getText(),
+                    phoneNumberField.getRawPhoneNumber(),
+                    true, 0,
+                    photoURL,
+                    Date.from(dateNaissance.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                    (float) poids.getValue(),
+                    (float) taille.getValue(),
+                    radioH.isSelected() ? "Homme" : "Femme"));
+
+            TrayNotification tray = new TrayNotification();
+            NotificationType notification = NotificationType.SUCCESS;
+            tray.setNotificationType(notification);
             tray.setTitle("Success");
             tray.setMessage("Profile updated successfully");
             tray.showAndDismiss(javafx.util.Duration.seconds(2));
@@ -126,6 +154,8 @@ public class ProfilController {
         } catch (SQLException e) {
             Logger.getLogger(e.getMessage());
             TrayNotification tray = new TrayNotification();
+            NotificationType notification = NotificationType.ERROR;
+            tray.setNotificationType(notification);
             tray.setTitle("Error");
             tray.setMessage("Profile not updated");
             tray.showAndDismiss(javafx.util.Duration.seconds(2));

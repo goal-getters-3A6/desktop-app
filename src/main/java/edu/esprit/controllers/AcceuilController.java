@@ -66,7 +66,7 @@ public class AcceuilController {
             } else {
                 profilitem.setText("Profile");
             }
-            Image image = new Image(u.getImage());
+            Image image = new Image(u.getImage().isEmpty() ? "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png" : u.getImage());
             javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
             imageView.setFitHeight(25);
             imageView.setFitWidth(25);

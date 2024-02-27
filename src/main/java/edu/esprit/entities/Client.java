@@ -57,6 +57,7 @@ public class Client extends User {
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
+
     }
 
     public Client() {

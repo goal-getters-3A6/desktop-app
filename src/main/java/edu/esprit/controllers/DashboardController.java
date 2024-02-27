@@ -8,15 +8,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -40,16 +42,12 @@ public class DashboardController implements Initializable {
     @FXML
     private CategoryAxis xAxis;
 
-    @FXML
-    private ComboBox<String> AddUserBox;
-    ObservableList<String> list = FXCollections.observableArrayList("ADMIN", "CLIENT");
+
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb)  {
-        AddUserBox.setItems(list);
-        AddUserBox.getValue();
-
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
         monthNames.addAll(Arrays.asList(months));
         xAxis.setCategories(monthNames);
@@ -103,6 +101,16 @@ public class DashboardController implements Initializable {
         datauser.clear();
         datauser = FXCollections.observableArrayList(new ClientService().getAll());
         userslistview.setItems(datauser);
+    }
+
+    @FXML
+    private void openAddUserDashboard(ActionEvent event) throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/adduser.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage newWindow = new Stage();
+        newWindow.setTitle("Add User");
+        newWindow.setScene(scene);
+        newWindow.show();
     }
 
     public void tableaudebord(ActionEvent actionEvent) {

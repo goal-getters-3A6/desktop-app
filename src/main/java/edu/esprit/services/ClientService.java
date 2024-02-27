@@ -40,14 +40,23 @@ public class ClientService implements IService<Client>{
 
     @Override
     public void modifier(Client p) throws SQLException{
-        String req = "UPDATE user SET nom=? , prenom=? , mail=? WHERE id=? AND role='CLIENT'";
+        String req = "UPDATE user SET nom=? , prenom=? , mail=?  , statut=? , nb_tentative=? , image=? , date_naissance=? , tel=? , poids=? , taille=? , sexe=? WHERE id=? AND role='CLIENT'";
       PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setString(1,p.getNom());
             Ps.setString(2, p.getPrenom());
             Ps.setString(3, p.getMail());
-            Ps.setInt(4, p.getId());
+            Ps.setBoolean(4, p.getStatut());
+            Ps.setInt(5, p.getNb_tentative());
+            Ps.setString(6, p.getImage());
+            Ps.setDate(7, new java.sql.Date(p.getDate_naissance().getTime()));
+            Ps.setString(8, p.getTel());
+            Ps.setFloat(9, p.getPoids());
+            Ps.setFloat(10, p.getTaille());
+            Ps.setString(11, p.getSexe());
+            Ps.setInt(12, p.getId());
+
             Ps.executeUpdate();
-            System.out.println("Client modifié avec succès !");
+
 
     }
 
