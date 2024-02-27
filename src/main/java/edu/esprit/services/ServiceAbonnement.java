@@ -33,14 +33,16 @@ public class ServiceAbonnement implements IService<Abonnement> {
 
     @Override
     public void modifier(Abonnement ab)  {
+
         try {
-            String req ="update `abonnement` set montantAb=?,dateExpirationAb=?,codePromoAb=?,typeAb=?,idU=? where idAb=" +ab.getIdA();
+            String req ="update `abonnement` set montantAb=?,dateExpirationAb=?,codePromoAb=?,typeAb=? where idAb=" +ab.getIdA();
+
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setFloat(1,ab.getMontantAb());
             ps.setDate(2,ab.getDateExpirationAb());
             ps.setString(3,ab.getCodePromoAb());
             ps.setString(4,ab.getTypeAb());
-            ps.setInt(5,ab.getUtilisateur().getId());
+           // ps.setInt(5,ab.getUtilisateur().getId());
             ps.executeUpdate();
             System.out.println("abonnements modifié !");
         } catch (SQLException ex) {
@@ -128,16 +130,18 @@ public class ServiceAbonnement implements IService<Abonnement> {
 
         return abonnements;
     }
-    public List<Abonnement> getAllByUser(int id)
+   /* public List<Abonnement> getAllByUser(String email)
     {
+
         List<Abonnement> abonnements = new ArrayList<>();
-        String req = "SELECT abonnement.idAb, abonnement.montantAb, abonnement.dateExpirationAb, abonnement.codePromoAb, abonnement.typeAb , user.nom FROM abonnement INNER JOIN user ON abonnement.idU = user.id where abonnement.idU ="+id;
+        String req = "SELECT abonnement.idAb, abonnement.montantAb, abonnement.dateExpirationAb, abonnement.codePromoAb, abonnement.typeAb , user.nom FROM abonnement INNER JOIN user ON abonnement.idU = user.id WHERE user.mail =" +email ;
         try {
             Statement st = cnx.createStatement();
             ResultSet res = st.executeQuery(req);
             while (res.next()) {
 
                 String nom = res.getString("nom");
+
                 int idA = res.getInt(1);
                 Float montantAb = res.getFloat("montantAb");
                 Date dateExpirationAb = res.getDate("dateExpirationAb");
@@ -155,7 +159,36 @@ public class ServiceAbonnement implements IService<Abonnement> {
         }
 
         return abonnements;
-    }
+    }*/
+   public List<Abonnement> getAllByUser(String email) {
+
+       List<Abonnement> abonnements = new ArrayList<>();
+       String req = "SELECT abonnement.idAb, abonnement.montantAb, abonnement.dateExpirationAb, abonnement.codePromoAb, abonnement.typeAb , user.nom FROM abonnement INNER JOIN user ON abonnement.idU = user.id WHERE user.mail = ?";
+
+       try (PreparedStatement st = cnx.prepareStatement(req)) {
+           st.setString(1, email);
+           ResultSet res = st.executeQuery();
+
+           while (res.next()) {
+               String nom = res.getString("nom");
+               int idA = res.getInt(1);
+               Float montantAb = res.getFloat("montantAb");
+               Date dateExpirationAb = res.getDate("dateExpirationAb");
+               String codePromoAb = res.getString("codePromoAb");
+               String typeAb = res.getString("typeAb");
+
+               User e = new User();
+               e.setNom(nom);
+
+               Abonnement a = new Abonnement(idA, montantAb, codePromoAb, typeAb, dateExpirationAb, e);
+               abonnements.add(a);
+           }
+       } catch (SQLException e) {
+           System.out.println(e.getMessage());
+       }
+
+       return abonnements;
+   }
 
 
 }

@@ -11,10 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -26,7 +23,6 @@ import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -68,7 +64,7 @@ public class AjouterAbonnement {
     private DatePicker dateid;
 
     @FXML
-    private TextField emailid;
+    private Label emailid;
 
     @FXML
     private ImageView logo1;
@@ -97,16 +93,14 @@ public class AjouterAbonnement {
     @FXML
     void initialize()
     {
-        emailid.setText(u.getMail());
-       // String clientEmail = emailid.getText();
-
+        emailid.setText("mayssahakimi@gmail.com");
 
     }
 
     @FXML
     void AjoutAbonnement(ActionEvent event) {
         try {
-            emailid.setText(u.getMail());
+
             String str = String.valueOf(dateid.getValue());
             LocalDate date = LocalDate.parse(str, DateTimeFormatter.ISO_DATE);
             java.sql.Date sqlDate = java.sql.Date.valueOf( date );
@@ -116,14 +110,22 @@ public class AjouterAbonnement {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Validation");
             alert.setContentText("Abonnement added succesfully");
+
             alert.showAndWait();
+            clearForm ();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private void clearForm () {
+        codeid.setText("");
+        montantid.setText("");
+        dateid.setValue(null);
 
+
+    }
     @FXML
     void abonnement(ActionEvent event) {
 

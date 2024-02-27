@@ -64,7 +64,8 @@ public class ProfilController {
 
     @FXML
     private ImageView logo;
-
+    @FXML
+    private Button btnabonnement;
     private ClientService clientService = new ClientService();
     Client client = new Client();
 
@@ -106,6 +107,20 @@ public class ProfilController {
     @FXML
     void abonnement(ActionEvent event) {
 
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TypeAbonnements.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnabonnement.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
 
     @FXML
