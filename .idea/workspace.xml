@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49e1918-2662-4c36-8b46-f23f815cab66" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AddUserDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AddUserDashboard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ForgotPasswordController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ProfilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ProfilController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/services/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/adduser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/adduser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +149,7 @@
       <workItem from="1709028446287" duration="2431000" />
       <workItem from="1709031209003" duration="4740000" />
       <workItem from="1709043380018" duration="7977000" />
-      <workItem from="1709051377927" duration="3885000" />
+      <workItem from="1709051377927" duration="3999000" />
     </task>
     <servers />
   </component>

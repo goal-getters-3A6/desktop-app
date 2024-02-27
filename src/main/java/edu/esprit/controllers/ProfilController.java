@@ -85,7 +85,7 @@ public class ProfilController {
         }
         taille.setValue(client.getTaille());
         poids.setValue(client.getPoids());
-        userimage.setImage(new Image(client.getImage()));
+        userimage.setImage(new Image(client.getImage().isEmpty() ? "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png" : client.getImage()));
         photoURL = client.getImage();
         phoneNumberField.setMaxWidth(150);
 
