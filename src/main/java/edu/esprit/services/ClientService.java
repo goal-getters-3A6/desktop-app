@@ -92,11 +92,17 @@ public class ClientService implements IService<Client>{
                 int id = res.getInt("id");
                 String nom = res.getString("nom");
                 String prenom = res.getString("prenom");
-                Date dateInscription = res.getDate("date_inscription");
                 Date dateNaissance = res.getDate("date_naissance");
                 String image = res.getString("image");
                 String tel = res.getString("tel");
-                return new Client(id, nom, prenom, email,image, dateInscription, dateNaissance, tel);
+                String sexe = res.getString("sexe");
+                Float poids = res.getFloat("poids");
+                Float taille = res.getFloat("taille");
+                String mdp = res.getString("mdp");
+                Boolean staut = res.getBoolean("statut");
+                Integer nb_tentative= res.getInt("nb_tentative");
+                return new Client(id,nom,prenom,mdp,email,tel,staut,nb_tentative,image,dateNaissance,poids,taille,sexe);
+
             }
 
         return null;

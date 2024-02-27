@@ -1,19 +1,31 @@
 package edu.esprit.controllers;
 
+import com.dlsc.phonenumberfx.PhoneNumberField;
 import edu.esprit.entities.Client;
-import edu.esprit.entities.Id;
 import edu.esprit.services.ClientService;
 import edu.esprit.utils.SessionManagement;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import javafx.util.converter.LocalDateStringConverter;
 import tray.notification.TrayNotification;
 
-import javax.swing.text.html.ImageView;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.logging.Logger;
+
+import static edu.esprit.utils.UploadToDropBox.uploadPhoto;
 
 public class ProfilController {
 
@@ -45,23 +57,58 @@ public class ProfilController {
     private Label poidslabel;
     @FXML
     private  Label taillelabel;
+    @FXML
+    private ImageView userimage;
 
     @FXML
     private VBox profilvbox;
+    String photoURL;
     private ClientService clientService = new ClientService();
     Client client = new Client();
+
+    PhoneNumberField phoneNumberField = new PhoneNumberField();
 
     @FXML
     private void initialize() {
         try {
-          client    = clientService.getOneByEmail(SessionManagement.getEmail());
+          client = clientService.getOneByEmail(SessionManagement.getEmail());
         } catch (SQLException e) {
             Logger.getLogger(e.getMessage());
         }
-
         nomTxt.setText(client.getNom());
         prenomTxt.setText(client.getPrenom());
         emailTxt.setText(client.getMail());
+        LocalDate ld = Instant.ofEpochMilli(client.getDate_naissance().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+        dateNaissance.setValue(ld);
+        if (client.getSexe().equals("Femme")){
+            radioF.setSelected(true);
+        }else{
+            radioH.setSelected(true);
+        }
+        taille.setValue(client.getTaille());
+        poids.setValue(client.getPoids());
+        userimage.setImage(new Image(client.getImage()));
+
+        phoneNumberField.setMaxWidth(150);
+
+        phoneNumberField.setMaxHeight(26);
+
+        phoneNumberField.setRawPhoneNumber(client.getTel());
+        profilvbox.getChildren().add(phoneNumberField);
+
+        poidslabel.textProperty().bind(
+                Bindings.format(
+                        "%.2f",
+                        poids.valueProperty()
+                )
+        );
+        taillelabel.textProperty().bind(
+                Bindings.format(
+                        "%.2f",
+                        taille.valueProperty()
+                )
+        );
+
     }
 
     @FXML
@@ -84,7 +131,17 @@ public class ProfilController {
             tray.showAndDismiss(javafx.util.Duration.seconds(2));
         }
     }
-
+    @FXML
+    private void importProfilePic(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose your profile pic");
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+        Window stage = null;
+        String path = fileChooser.showOpenDialog(stage).getAbsolutePath();
+        String name = "/" + fileChooser.showOpenDialog(stage).getName();
+        photoURL = uploadPhoto(path, name);
+    }
 
     @FXML
     void abonnement(ActionEvent event) {

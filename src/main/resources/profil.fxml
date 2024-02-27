@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
@@ -16,8 +15,7 @@
 
 <AnchorPane prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ProfilController">
    <children>
-      <Button fx:id="modifierBtn" layoutX="102.0" layoutY="452.0" mnemonicParsing="false" onAction="#modify" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #db1f48;" text="Modifier" />
-      <ImageView fx:id="userimage" fitHeight="67.0" fitWidth="40.0" layoutX="639.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="modifierBtn" layoutX="118.0" layoutY="462.0" mnemonicParsing="false" onAction="#modify" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #db1f48;" text="Modifier" />
       <HBox prefHeight="100.0" prefWidth="744.0" style="-fx-background-color: #004369;">
          <children>
             <HBox prefHeight="50.0" prefWidth="744.0" spacing="1.0">
@@ -87,17 +85,19 @@
          <children>
             <Label text="Date Naissance" />
             <DatePicker fx:id="dateNaissance" prefHeight="26.0" prefWidth="150.0" promptText="Date Naissance" />
-            <Label text="Mot de passe " />
-            <PasswordField fx:id="mdpRegisterTxt" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
-            <Label text="Confirmer mot de passe" />
-            <PasswordField fx:id="mdpRegisterTxt1" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
-            <Button fx:id="importProfilePic" mnemonicParsing="false" onAction="#importProfilePic" text="Photo de profil" textFill="#510505" />
             <Label text="Taille:" />
             <Slider fx:id="taille" max="300.0" minorTickCount="1" />
             <Label fx:id="taillelabel" textFill="#6b0202" />
             <Label text="Poids:" />
             <Slider fx:id="poids" max="300.0" minorTickCount="1" />
             <Label fx:id="poidslabel" textFill="#6b0202" />
+            <Button fx:id="importProfilePic" mnemonicParsing="false" onAction="#importProfilePic" prefHeight="52.0" prefWidth="239.0" text="Photo de profil" textFill="#510505">
+               <graphic>
+                  <ImageView fx:id="userimage" fitHeight="67.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <VBox.margin>
+                  <Insets left="40.0" top="25.0" />
+               </VBox.margin></Button>
          </children>
       </VBox>
    </children>

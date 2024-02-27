@@ -15,9 +15,6 @@ public class Client extends User {
 
 
 
-
-
-
     public Client(String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance, float poids, float taille, String sexe) {
         super(nom, prenom, mdp, mail,image );
         this.date_naissance = date_naissance;
@@ -30,7 +27,7 @@ public class Client extends User {
     }
 
     public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_inscription, Date date_naissance, float poids, float taille, String sexe) {
-        super(id, nom, prenom, mail, mdp, image);
+        super(id, nom, prenom, mdp, mail, image);
         this.date_inscription = date_inscription;
         this.date_naissance = date_naissance;
         this.tel = tel;
@@ -42,7 +39,7 @@ public class Client extends User {
     }
 
     public Client(int id, String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance, float poids, float taille, String sexe) {
-        super(id, nom, prenom, mail, mdp, image);
+        super(id, nom, prenom, mdp, mail, image);
         this.date_naissance = date_naissance;
         this.tel = tel;
         this.statut = statut;
@@ -65,9 +62,6 @@ public class Client extends User {
     public Client() {
     }
 
-    public Client(String    ext, String text1, String text2) {
-    }
-
     public Date getDate_inscription() {
         return date_inscription;
     }
@@ -82,14 +76,6 @@ public class Client extends User {
 
     public void setDate_naissance(Date date_naissance) {
         this.date_naissance = date_naissance;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
     }
 
     public boolean getStatut() {
@@ -107,6 +93,15 @@ public class Client extends User {
     public void setNb_tentative(int nb_tentative) {
         this.nb_tentative = nb_tentative;
     }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
     public float getPoids() {
         return poids;
     }
@@ -131,16 +126,9 @@ public class Client extends User {
         this.sexe = sexe;
     }
 
-
-
-
-
-
-
     @Override
     public String toString() {
-        return "" +
-                "  Nom:'" + getNom() + '\'' +
+        return "  Nom:'" + getNom() + '\'' +
                 ", Prénom:'" + getPrenom() + '\'' +
                 ", MDP:'" + getMdp() + '\'' +
                 ", E-mail:'" + getMail() + '\'' +
