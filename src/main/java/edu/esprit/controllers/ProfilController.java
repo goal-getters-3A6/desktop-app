@@ -5,23 +5,19 @@ import edu.esprit.entities.Client;
 import edu.esprit.services.ClientService;
 import edu.esprit.utils.SessionManagement;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import javafx.util.converter.LocalDateStringConverter;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -41,9 +37,6 @@ public class ProfilController {
     private DatePicker dateNaissance;
 
     @FXML
-    private AnchorPane registerpane;
-
-    @FXML
     private RadioButton radioH;
     @FXML
     private RadioButton radioF;
@@ -61,7 +54,7 @@ public class ProfilController {
     @FXML
     private VBox profilvbox;
     String photoURL;
-    private ClientService clientService = new ClientService();
+    private final ClientService clientService = new ClientService();
     Client client = new Client();
 
     PhoneNumberField phoneNumberField = new PhoneNumberField();
@@ -111,7 +104,7 @@ public class ProfilController {
 
 
     @FXML
-    private void modify(ActionEvent modify) throws SQLException {
+    private void modify() {
         int userId = client.getId();
         String pass = client.getMdp();
         if (nomTxt.getText().isEmpty()
@@ -162,7 +155,7 @@ public class ProfilController {
         }
     }
     @FXML
-    private void importProfilePic(ActionEvent event) {
+    private void importProfilePic() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose your profile pic");
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
@@ -174,43 +167,38 @@ public class ProfilController {
     }
 
     @FXML
-    void abonnement(ActionEvent event) {
+    void abonnement() {
 
     }
 
     @FXML
-    void accueil(ActionEvent event) {
+    void accueil() {
 
     }
 
     @FXML
-    void alimentaire(ActionEvent event) {
+    void alimentaire() {
 
     }
 
     @FXML
-    void equipement(ActionEvent event) {
+    void equipement() {
 
     }
 
     @FXML
-    void evenement(ActionEvent event) {
+    void evenement() {
 
     }
 
 
     @FXML
-    void planning(ActionEvent event) {
+    void planning() {
 
     }
 
     @FXML
-    void profil(ActionEvent event) {
-
-    }
-
-    @FXML
-    void reclamation(ActionEvent event) {
+    void reclamation() {
 
     }
 }
