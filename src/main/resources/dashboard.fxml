@@ -16,7 +16,7 @@
 <AnchorPane id="AnchorPane" fx:id="DashborardPane" prefHeight="831.0" prefWidth="1156.0" style="-fx-background-color: #fffaed;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.DashboardController">
 
     <children>
-        <TextField fx:id="search" layoutX="204.0" layoutY="477.0" onKeyTyped="#search" prefHeight="26.0" prefWidth="303.0" promptText="Search..">
+        <TextField fx:id="search" layoutX="204.0" layoutY="441.0" onKeyTyped="#search" prefHeight="26.0" prefWidth="303.0" promptText="Search..">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></TextField>
@@ -26,7 +26,7 @@
             </font>
         </Label>
       <ComboBox prefWidth="150.0" />
-        <BarChart fx:id="barChart" barGap="1.0" categoryGap="1.0" layoutX="204.0" layoutY="235.0" prefHeight="218.0" prefWidth="945.0" style="-fx-background-color: white;" title="Users birthday month chart">
+        <BarChart fx:id="barChart" barGap="1.0" categoryGap="1.0" layoutX="204.0" layoutY="208.0" prefHeight="218.0" prefWidth="945.0" style="-fx-background-color: white;" title="Users birthday month chart">
             <xAxis>
                 <CategoryAxis side="BOTTOM" fx:id="xAxis" />
             </xAxis>
@@ -34,7 +34,7 @@
                 <NumberAxis side="LEFT" upperBound="40.0" />
             </yAxis>
         </BarChart>
-      <ListView fx:id="userslistview" layoutX="204.0" layoutY="530.0" prefHeight="292.0" prefWidth="945.0" />
+      <ListView fx:id="userslistview" layoutX="204.0" layoutY="490.0" prefHeight="292.0" prefWidth="945.0" />
       <AnchorPane layoutX="-7.0" prefHeight="852.0" prefWidth="200.0" style="-fx-background-color: #004369;">
          <children>
             <ImageView fx:id="logo11" fitHeight="98.0" fitWidth="155.0" layoutX="20.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
@@ -109,7 +109,8 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <ComboBox fx:id="AddUserBox" layoutX="978.0" layoutY="102.0" prefWidth="150.0" promptText="Add User" />
+      <ComboBox fx:id="AddUserBox" layoutX="999.0" layoutY="116.0" prefWidth="150.0" promptText="Add User" />
+      <Button layoutX="985.0" layoutY="444.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Supprimer" textFill="#db1f48" />
       
     </children>
 </AnchorPane>

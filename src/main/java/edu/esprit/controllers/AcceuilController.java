@@ -18,7 +18,6 @@ import tray.notification.TrayNotification;
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 
 import static edu.esprit.utils.SessionManagement.*;
 
@@ -90,8 +89,18 @@ public class AcceuilController {
         if ((Id.user = userService.checklogin(emailTxt.getText(), mdpTxt.getText())) != null) {
             User u = userService.getOneById(Id.user);
             if (u.getRole().equals("ADMIN")) {
-                AnchorPane panee = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
-                acceuilpane.getChildren().setAll(panee);
+                if (!checkFile()) {
+                    saveSession(emailTxt.getText(), mdpTxt.getText());
+
+                }
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage newWindow = new Stage();
+                newWindow.setTitle("Admin Dashboard");
+                newWindow.setScene(scene);
+                newWindow.show();
+                AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+                acceuilpane.getChildren().setAll(pane);
                 String title = "Welcome!";
                 String message = "";
                 NotificationType notification = NotificationType.SUCCESS;
@@ -100,12 +109,13 @@ public class AcceuilController {
                 tray.setMessage(message);
                 tray.setNotificationType(notification);
                 tray.showAndDismiss(Duration.seconds(4));
+
+
+            } else {
                 if (!checkFile()) {
                     saveSession(emailTxt.getText(), mdpTxt.getText());
 
                 }
-
-            } else {
                 AnchorPane panee = FXMLLoader.load(getClass().getResource("/profil.fxml"));
                 acceuilpane.getChildren().setAll(panee);
                 String title = "Welcome!";
@@ -117,9 +127,7 @@ public class AcceuilController {
                 tray.setMessage(message);
                 tray.setNotificationType(notification);
                 tray.showAndDismiss(Duration.seconds(4));
-                if (!checkFile()) {
-                    saveSession(emailTxt.getText(), mdpTxt.getText());
-                }
+
             }
         } else {
             String title = "Something went wrong!";
@@ -145,8 +153,12 @@ public class AcceuilController {
     @FXML
     private void toProfile(ActionEvent event) throws IOException {
         if (u.getRole().equals("ADMIN")) {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("/dashboard.fxml"));
-            acceuilpane.getChildren().setAll(pane);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Admin Dashboard");
+            newWindow.setScene(scene);
+            newWindow.show();
         } else{
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/profil.fxml"));
             acceuilpane.getChildren().setAll(pane);

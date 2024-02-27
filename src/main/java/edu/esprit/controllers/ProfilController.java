@@ -3,6 +3,7 @@ package edu.esprit.controllers;
 import edu.esprit.entities.Client;
 import edu.esprit.entities.Id;
 import edu.esprit.services.ClientService;
+import edu.esprit.utils.SessionManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -66,7 +67,7 @@ public class ProfilController {
     @FXML
     private void initialize() {
         try {
-          client    = clientService.getOneById(Id.user);
+          client    = clientService.getOneByEmail(SessionManagement.getEmail());
         } catch (SQLException e) {
             Logger.getLogger(e.getMessage());
         }
