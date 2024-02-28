@@ -6,17 +6,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="663.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherListeParticipations">
+<AnchorPane prefHeight="663.0" prefWidth="905.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherListeParticipations">
     <children>
-        <ListView fx:id="listView" layoutX="213.0" layoutY="88.0" onMouseClicked="#SelectData" prefHeight="210.0" prefWidth="659.0" />
+        <ListView fx:id="listView" layoutX="213.0" layoutY="88.0" onMouseClicked="#SelectData" prefHeight="210.0" prefWidth="667.0" />
 
 
 
-        <Button fx:id="supprimer_btn" layoutX="744.0" layoutY="50.0" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="146.0" text="supprimer " />
-        <Button fx:id="modifier_btn" layoutX="711.0" layoutY="612.0" mnemonicParsing="false" onAction="#update" prefHeight="31.0" prefWidth="146.0" text="Modifier" />
+        <Button fx:id="supprimer_btn" layoutX="685.0" layoutY="310.0" mnemonicParsing="false" onAction="#delete" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: db1f48;" text="supprimer " textFill="WHITE" />
+        <Button fx:id="modifier_btn" layoutX="711.0" layoutY="612.0" mnemonicParsing="false" onAction="#update" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: db1f48;" text="Modifier" textFill="#f2f2f2" />
         <TextField fx:id="nom_id" layoutX="683.0" layoutY="444.0" />
         <TextField fx:id="prenom_id" layoutX="682.0" layoutY="488.0" />
         <TextField fx:id="age_id" layoutX="685.0" layoutY="530.0" />
@@ -30,11 +33,35 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button fx:id="genererCertificatsBtn" layoutX="220.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleGenererCertificatsBtn" prefHeight="31.0" prefWidth="146.0" text="CERTIF" />
-      <Button layoutX="213.0" layoutY="51.0" mnemonicParsing="false" onAction="#rechercherPart" text="Rechercher" />
+        <Button fx:id="genererCertificatsBtn" layoutX="220.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleGenererCertificatsBtn" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: db1f48;" text="CERTIF" textFill="WHITE" />
+      <Button layoutX="213.0" layoutY="51.0" mnemonicParsing="false" onAction="#rechercherPart" style="-fx-background-color: db1f48;" text="Rechercher" textFill="WHITE" />
       <TextField fx:id="recherhce_id" layoutX="317.0" layoutY="50.0" promptText="rechecher" />
       <PieChart fx:id="pieChart" layoutX="205.0" layoutY="345.0" prefHeight="302.0" prefWidth="396.0" />
-      <ComboBox fx:id="comboBox" layoutX="570.0" layoutY="50.0" onAction="#comboBoxSelected" prefWidth="150.0" />
+      <ComboBox fx:id="comboBox" layoutX="730.0" layoutY="51.0" onAction="#comboBoxSelected" prefWidth="150.0" style="-fx-background-color: #004369;" />
+      <Pane prefHeight="663.0" prefWidth="172.0" style="-fx-background-color: #004369;">
+         <children>
+            <ImageView fitHeight="116.0" fitWidth="127.0" layoutX="24.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Downloads/Capture%20d'écran%202024-02-28%20192843.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="46.0" fitWidth="40.0" layoutX="513.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/chercher.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="69.0" layoutX="844.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/trash.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="688.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/reload.png" />
+         </image>
+      </ImageView>
 
     </children>
 </AnchorPane>

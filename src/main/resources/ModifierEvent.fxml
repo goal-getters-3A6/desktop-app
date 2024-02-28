@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -12,53 +11,50 @@
 
 <AnchorPane fx:id="scene_id" prefHeight="447.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ModifierEvent">
    <children>
-      <TextField fx:id="nom_id" layoutX="536.0" layoutY="132.0" prefHeight="38.0" prefWidth="194.0" />
-      <TextField fx:id="adresse_id" layoutX="537.0" layoutY="293.0" />
-      <TextField fx:id="nbr_max_id" layoutX="537.0" layoutY="344.0" />
-      <AnchorPane layoutX="324.0" layoutY="111.0" prefHeight="172.0" prefWidth="187.0" stylesheets="@../../../mainFormDesign.css">
-         <styleClass>
-            <String fx:value="white-bg" />
-            <String fx:value="shadow" />
-         </styleClass>
-         <children>
-            <Label layoutX="33.0" layoutY="22.0" text="NOM:">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="26.0" layoutY="76.0" prefHeight="45.0" prefWidth="161.0" text="date début ">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="33.0" layoutY="130.0" text="date fin">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <Button fx:id="Import_btn" layoutX="101.0" layoutY="286.0" mnemonicParsing="false" onAction="#Import_modif" text="Importer" />
-      <DatePicker fx:id="dated_id" layoutX="537.0" layoutY="188.0" prefHeight="31.0" prefWidth="187.0" />
-      <DatePicker fx:id="datef_id" layoutX="538.0" layoutY="240.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="330.0" layoutY="336.0" text="nombre max:">
+      <TextField fx:id="nom_id" layoutX="495.0" layoutY="131.0" minHeight="35.0" prefHeight="31.0" prefWidth="200.0" />
+      <TextField fx:id="adresse_id" layoutX="496.0" layoutY="285.0" minHeight="35.0" prefWidth="200.0" />
+      <TextField fx:id="nbr_max_id" layoutX="496.0" layoutY="336.0" minHeight="35.0" prefWidth="200.0" />
+      <Button fx:id="Import_btn" layoutX="70.0" layoutY="271.0" minHeight="45.0" mnemonicParsing="false" onAction="#Import_modif" prefWidth="130.0" style="-fx-background-color: db1f48;" text="Importer" textFill="WHITE" />
+      <DatePicker fx:id="dated_id" layoutX="496.0" layoutY="180.0" minHeight="35.0" prefHeight="31.0" prefWidth="200.0" />
+      <DatePicker fx:id="datef_id" layoutX="497.0" layoutY="232.0" minHeight="35.0" prefHeight="31.0" prefWidth="200.0" />
+      <Label layoutX="346.0" layoutY="336.0" text="Nombre max">
          <font>
-            <Font size="30.0" />
+            <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="334.0" layoutY="286.0" text="Adresse:">
+      <Label layoutX="397.0" layoutY="285.0" text="Adresse">
          <font>
-            <Font size="30.0" />
+            <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="modif_btn" layoutX="653.0" layoutY="394.0" mnemonicParsing="false" onAction="#update_new" text="Modifier" />
+      <Button fx:id="modif_btn" layoutX="567.0" layoutY="388.0" minHeight="45.0" mnemonicParsing="false" onAction="#update_new" prefWidth="130.0" style="-fx-background-color: db1f48;" text="Modifier" textFill="WHITE" />
       <ImageView fitHeight="93.0" fitWidth="101.0" layoutX="623.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Downloads/Capture%20d'écran%202024-02-27%20150300.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="image_id" fitHeight="209.0" fitWidth="200.0" layoutX="48.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="afficher_id" layoutX="101.0" layoutY="343.0" mnemonicParsing="false" onAction="#BackToEvents" prefWidth="94.0" text="Voir" />
+      <ImageView fx:id="image_id" fitHeight="218.0" fitWidth="232.0" layoutX="41.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="afficher_id" layoutX="70.0" layoutY="366.0" minHeight="45.0" mnemonicParsing="false" onAction="#BackToEvents" prefWidth="130.0" style="-fx-background-color: db1f48;" text="Voir" textFill="WHITE" />
+      <Label layoutX="420.0" layoutY="131.0" text="Nom">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="362.0" layoutY="175.0" prefHeight="45.0" prefWidth="161.0" text="Date Début ">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="397.0" layoutY="233.0" text="Date Fin">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="313.0" layoutY="61.0" prefHeight="45.0" prefWidth="253.0" text="Modifier Evenement">
+         <font>
+            <Font name="Arial Black" size="22.0" />
+         </font>
+      </Label>
       
    </children>
 </AnchorPane>

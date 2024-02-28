@@ -16,7 +16,7 @@ public class MainFX extends Application {
 
 
 
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherEvenementListeView.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/afficher_liste_participations.fxml"));
         Parent root=loader.load();
         Scene scene=new Scene(root);
         stage.setScene(scene);
