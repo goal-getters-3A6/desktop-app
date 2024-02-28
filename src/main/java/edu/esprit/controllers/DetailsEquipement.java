@@ -13,13 +13,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -42,9 +46,12 @@ public class DetailsEquipement {
     @FXML
     private Label dislikeId;
 
-    private int like = 0;
-    private int dislike = 0;
 
+    private int likeCount = 0;
+    private int dislikeCount = 0;
+
+    private boolean liked = false;
+    private boolean disliked = false;
 
     @FXML
     private TextArea CommIdAEq;
@@ -100,6 +107,7 @@ public class DetailsEquipement {
     @FXML
     void initialize(int idEq) {
         try {
+            updateLabels();
 
             Equipement equipement1 = ES.getOneById(idEq);
             if (equipement1 != null) {
@@ -148,6 +156,8 @@ public class DetailsEquipement {
                     } else {
 
 
+
+
                         ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/bin.png")));
                         Button deleteButton = new Button("", deleteIcon);
                         deleteIcon.setFitWidth(25);
@@ -178,12 +188,12 @@ public class DetailsEquipement {
 
 
 
-                        HBox iconsContainer = new HBox(label1,label2,label, deleteButton, editButton);
-                        iconsContainer.setSpacing(50); // Espacement entre les éléments
+                            HBox iconsContainer = new HBox(label1, label2, label, deleteButton, editButton);
+                            iconsContainer.setSpacing(50); // Espacement entre les éléments
 
 // Configurer l'espace flexible pour pousser les boutons à la fin de la ligne
-                        HBox.setHgrow(new Region(), Priority.ALWAYS);
-                        setGraphic(iconsContainer); // Définit le conteneur d'icônes comme élément graphique de la cellule
+                            HBox.setHgrow(new Region(), Priority.ALWAYS);
+                            setGraphic(iconsContainer); // Définit le conteneur d'icônes comme élément graphique de la cellule
 
 
 
@@ -203,6 +213,92 @@ public class DetailsEquipement {
 
     }
 
+    private boolean likeClicked = false;
+    private boolean dislikeClicked = false;
+
+    @FXML
+    void toggleLike(ActionEvent event) {
+try{
+            if (!likeClicked) { // Vérifier si le bouton Like n'a pas encore été cliqué
+                liked = !liked; // Inverser la valeur de liked
+                updateDatabaseLike(); // Mettre à jour la base de données avec la nouvelle valeur
+                refreshLikesAndDislikes(); // Rafraîchir le nombre de likes et dislikes
+                updateLabels();
+                likeClicked = true; // Marquer le bouton Like comme cliqué
+            }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    }
+
+    @FXML
+    void toggleDislike(ActionEvent event) {
+        try {
+            if (!dislikeClicked) { // Vérifier si le bouton Dislike n'a pas encore été cliqué
+                disliked = !disliked; // Inverser la valeur de disliked
+
+                    updateDatabaseDislike(); // Mettre à jour la base de données avec la nouvelle valeur
+
+                refreshLikesAndDislikes(); // Rafraîchir le nombre de likes et dislikes
+                updateLabels();
+                dislikeClicked = true; // Marquer le bouton Dislike comme cliqué
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private void updateDatabaseLike() throws SQLException {
+        AES.ajouter(new AvisEquipement("Cet utilisateur a apprécié cet équipement", equipement, user, liked, false));
+        initialize(equipement.getIdEq());
+    }
+
+    private void updateDatabaseDislike() throws SQLException {
+        AES.ajouter(new AvisEquipement("Cet utilisateur n'a pas aimé ni laissé de commentaire", equipement, user, false, disliked));
+        initialize(equipement.getIdEq());
+
+    }
+
+    private void refreshLikesAndDislikes() {
+        try {
+
+            // Récupérer le nombre total de Likes et Dislikes pour l'équipement actuel
+            int totalLikes = AES.countLikes(equipement.getIdEq());
+           // System.out.println(totalLikes);
+            int totalDislikes = AES.countDislikes(equipement.getIdEq());
+
+            // Mettre à jour les valeurs de LikeCount et DislikeCount
+            likeCount = totalLikes;
+            dislikeCount = totalDislikes;
+
+            if (liked && !disliked ) {
+                likeCount++;
+
+            }
+
+            if (disliked && !liked) {
+                dislikeCount++;
+            }
+
+            // Assurer que le nombre de likes et dislikes ne devienne pas négatif
+            likeCount = likeCount < 0 ? 0 : likeCount;
+            dislikeCount = dislikeCount < 0 ? 0 : dislikeCount;
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
+        }
+
+    }
+
+    private void updateLabels() {
+
+        LikeId.setText("Likes: " + likeCount);
+        dislikeId.setText("Dislikes: " + dislikeCount);
+    }
+
+
+
     public void setParentController(AfficherEquipementFront parentController) {
         this.AfficherEquipementFront = parentController;
     }
@@ -214,11 +310,14 @@ public class DetailsEquipement {
 
 // Récupérer l'équipement correspondant à l'avis
             Equipement eq = ES.getOneById(equipement.getIdEq()); // ou utilisez une autre méthode pour obtenir l'équipement
-
+           // updateDatabaseDislike();
+           // updateDatabaseLike();
+            refreshLikesAndDislikes();
             //  System.out.println(equipement.getIdEq());
             if (eq != null) {
                 System.out.println(user);
                 AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq, user));
+
                 initialize(eq.getIdEq()); // Refresh only the reviews section
                 CommIdAEq.clear();
             } else {
@@ -323,31 +422,9 @@ public class DetailsEquipement {
 
 
 
-    @FXML
-    void dislikeEq(ActionEvent event) {
-        dislike++;
-        dislikeId.setText(Integer.toString(dislike));
-        try {
-            // Récupérer l'avis équipement associé à la vue
-            ObservableList<AvisEquipement> selectedItems = listViewAEqF.getSelectionModel().getSelectedItems();
-            if (!selectedItems.isEmpty()) {
-                AvisEquipement selectedAvisEquipement = selectedItems.get(0);
 
-                // Appeler le service pour incrémenter le nombre de "dislike"
-                AES.incrementDislike(selectedAvisEquipement.getIdAEq());
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
-        }
-    }
 
-    @FXML
-    void likeEq(ActionEvent event) {
 
-        like++;
-        LikeId.setText(Integer.toString(like));
-
-    }
 
     @FXML
     void afficherEqF(ActionEvent event) {

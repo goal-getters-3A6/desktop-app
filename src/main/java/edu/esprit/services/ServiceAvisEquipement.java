@@ -16,12 +16,14 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
     Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void ajouter(AvisEquipement p) throws SQLException {
-        String req = "INSERT INTO `avisequipement`( `commAEq` ,`idEq` , `idUs` ) VALUES (?,?,?)";
+        String req = "INSERT INTO `avisequipement`( `commAEq` ,`idEq` , `idUs` , `like` , `dislike`  ) VALUES (?,?,?,?,?)";
 
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1,p.getCommAEq());
             ps.setInt(2,p.getEquipement().getIdEq());
         ps.setInt(3,p.getUser().getId());
+        ps.setBoolean(4,p.isLike());
+        ps.setBoolean(5,p.isDislike());
             ps.executeUpdate();
             System.out.println("Avis ajouté !");
 
@@ -161,62 +163,31 @@ public List<AvisEquipement> getAllByEquipement(int idEquipement ) throws SQLExce
 
     return avisequipement;
 }
-
-    public List<AvisEquipement> getAllIds(int idEquipement ) throws SQLException {
-        List<AvisEquipement> avisequipement = new ArrayList<>();
-        String req = "SELECT user.id AS user_idU FROM avisequipement INNER JOIN user ON avisequipement.idUs = user.id WHERE avisequipement.idEq = ?";
-
-        try (PreparedStatement st = cnx.prepareStatement(req)) {
-            st.setInt(1, idEquipement);
-
-            try (ResultSet res = st.executeQuery()) {
-                while (res.next()) {
-                    int idAEq = res.getInt("idAEq");
-                    int id = res.getInt("user_idU");
-
-                    User user = new User(id);
-
-
-                    AvisEquipement aeq = new AvisEquipement( idAEq ,user);
-                    avisequipement.add(aeq);
+    public int countLikes(int idEquipement) throws SQLException {
+        String req = "SELECT COUNT(*) FROM avisequipement WHERE idEq = ? AND `like` = true";
+        try (PreparedStatement ps = cnx.prepareStatement(req)) {
+            ps.setInt(1, idEquipement);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
                 }
             }
         }
-
-        return avisequipement;
+        return 0;
     }
 
-
-
-
-
-
-    public void incrementLike(int idAEq) throws SQLException {
-        AvisEquipement avisEquipement = getOneById(idAEq);
-        avisEquipement.setLike(true);
-        avisEquipement.setDislike(false);
-        modifier(avisEquipement);
+    public int countDislikes(int idEquipement) throws SQLException {
+        String req = "SELECT COUNT(*) FROM avisequipement WHERE idEq = ? AND `dislike` = true";
+        try (PreparedStatement ps = cnx.prepareStatement(req)) {
+            ps.setInt(1, idEquipement);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        }
+        return 0;
     }
-
-    public void incrementDislike(int idAEq) throws SQLException {
-        AvisEquipement avisEquipement = getOneById(idAEq);
-        avisEquipement.setLike(false);
-        avisEquipement.setDislike(true);
-        modifier(avisEquipement);
-    }
-
-    public void decrementLike(int idAEq) throws SQLException {
-        AvisEquipement avisEquipement = getOneById(idAEq);
-        avisEquipement.setLike(false);
-        modifier(avisEquipement);
-    }
-
-    public void decrementDislike(int idAEq) throws SQLException {
-        AvisEquipement avisEquipement = getOneById(idAEq);
-        avisEquipement.setDislike(false);
-        modifier(avisEquipement);
-    }
-
 
 
 }
