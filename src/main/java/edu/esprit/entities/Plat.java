@@ -22,6 +22,14 @@ public class Plat {
         this.photop = photop;
         this.calories = calories;
     }
+    public Plat(String nomP, Float prixP,String descP, String alergieP, Boolean etatP  , int calories) {
+        this.nomP = nomP;
+        this.prixP = prixP;
+        this.descP = descP;
+        this.alergieP = alergieP;
+        this.etatP = etatP;
+        this.calories = calories;
+    }
     public Plat(String nomP, Float prixP, String alergieP, Boolean etatP ) {
         this.nomP = nomP;
         this.prixP = prixP;

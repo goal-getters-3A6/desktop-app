@@ -1,10 +1,15 @@
 package edu.esprit.controllers;
 
 import edu.esprit.utils.CalorieCalculator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class CalorieCalculatorController {
 
@@ -44,6 +49,19 @@ public class CalorieCalculatorController {
             return "female";
         } else {
             return ""; // No gender selected
+        }
+    }
+    @FXML
+    private void backToAfficherPlat(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlat.fxml"));
+            Parent root = loader.load();
+
+
+            resultLabel.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

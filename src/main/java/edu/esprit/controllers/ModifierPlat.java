@@ -5,11 +5,16 @@ import edu.esprit.services.ServicesPlat;
 import edu.esprit.services.ServicesAvisPlat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class ModifierPlat {
 
@@ -29,19 +34,18 @@ public class ModifierPlat {
     @FXML
     private CheckBox etatPlatCheckbox;
     @FXML
-    private TextField descPField; // TextField for descP attribute
+    private TextField descPField;
 
     @FXML
-    private TextField photopField; // TextField for photop attribute
+    private TextField photopField;
 
     @FXML
-    private TextField caloriesField; // TextField for calories attribute
+    private TextField caloriesField;
 
-    // Method to initialize the controller with the Plat to modify
-    public void initialize() {
-        int platId = 5; // Set the ID directly
+
+    public void initialize(int platId) {
         try {
-            platToModify = servicePlat.getOneById(platId); // Retrieve the Plat by ID
+            platToModify = servicePlat.getOneById(platId);
             if (platToModify != null) {
                 NomPlatField.setText(platToModify.getNomP());
                 prixPlatField.setText(platToModify.getPrixP().toString());
@@ -51,64 +55,107 @@ public class ModifierPlat {
                 photopField.setText(platToModify.getPhotop());
                 caloriesField.setText(String.valueOf(platToModify.getCalories()));
             } else {
-                // Handle the case where the Plat with the given ID does not exist
-                showAlert("Error", "Plat with ID " + platId + " not found");
+                showAlert("Error", "le plat nexiste pas", Alert.AlertType.ERROR);
             }
         } catch (SQLException e) {
-            // Handle any potential SQL exceptions
-            showAlert("Error", e.getMessage());
+            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
     @FXML
     void ModifierPlat(ActionEvent event) {
         try {
-
-            // Update the attributes of the Plat object with the new values from the input fields
-            platToModify.setNomP(NomPlatField.getText());
-            platToModify.setPrixP(Float.parseFloat(prixPlatField.getText()));
-            platToModify.setAlergieP(alergiePlatField.getText());
-            platToModify.setEtatP(etatPlatCheckbox.isSelected());
-            platToModify.setDescP(descPField.getText());
-            platToModify.setPhotop(photopField.getText());
-            platToModify.setCalories(Integer.parseInt(caloriesField.getText()));
-
-            // Call the service to update the Plat object in the database
-            servicePlat.modifier(platToModify);
-
-            showAlert("Information", "Plat modified successfully");
-        } catch (SQLException e) {
-            // Handle any potential SQL exceptions
-            showAlert("Error", e.getMessage());
-        }
-    }
-    @FXML
-    void SupprimerPlat(ActionEvent event) {
-        int platId = 5;
-        try {
             if (platToModify != null) {
-                // Delete associated AvisP entities first
-                serviceAvisPlat.deleteByPlatId(platId);
 
-                // Then delete the Plat entity
-                servicePlat.supprimer(platToModify.getIdP());
+                if (NomPlatField.getText().isEmpty() || prixPlatField.getText().isEmpty() ||
+                        alergiePlatField.getText().isEmpty() || descPField.getText().isEmpty() ||
+                        caloriesField.getText().isEmpty()) {
+                    showAlert("Error", "Veuillez remplir tous les champs requis.", Alert.AlertType.ERROR);
+                    return;
+                }
 
-                showAlert("Information", "Plat deleted successfully");
+
+                if (!isNumeric(prixPlatField.getText()) || !isNumeric(caloriesField.getText())) {
+                    showAlert("Error", "Le prix et les calories ne peuvent pas contenir des lettres.", Alert.AlertType.ERROR);
+                    return;
+                }
+
+
+                float prix = Float.parseFloat(prixPlatField.getText());
+                int calories = Integer.parseInt(caloriesField.getText());
+                if (prix <= 0 || calories <= 0) {
+                    showAlert("Error", "Le prix et les calories doivent etre des valeurs positives.", Alert.AlertType.ERROR);
+                    return;
+                }
+
+
+                platToModify.setNomP(NomPlatField.getText());
+                platToModify.setPrixP(prix);
+                platToModify.setAlergieP(alergiePlatField.getText());
+                platToModify.setEtatP(etatPlatCheckbox.isSelected());
+                platToModify.setDescP(descPField.getText());
+                platToModify.setCalories(calories);
+
+
+                servicePlat.modifier(platToModify);
+
+                showAlert("Information", "Plat modifié avec succès.", Alert.AlertType.INFORMATION);
             } else {
-                showAlert("Error", "No Plat selected for deletion");
+                showAlert("Error", "Aucun plat sélectionné pour la modification.", Alert.AlertType.ERROR);
             }
         } catch (SQLException e) {
-            showAlert("Error", e.getMessage());
+            // Handle any potential SQL exceptions
+            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
-    // Method to show an alert dialog
-    private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    @FXML
+    void SupprimerPlat(ActionEvent event) {
+        try {
+            if (platToModify != null) {
+                int platId = platToModify.getIdP();
+
+                // Display confirmation dialog
+                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationAlert.setTitle("Confirmation");
+                confirmationAlert.setHeaderText(null);
+                confirmationAlert.setContentText("Voulez-vous vraiment supprimer ce plat ?");
+
+                Optional<ButtonType> result = confirmationAlert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    serviceAvisPlat.deleteByPlatId(platId);
+                    servicePlat.supprimer(platId);
+
+                    showAlert("Information", "Le plat a ete supprime avec succees", Alert.AlertType.INFORMATION);
+                }
+            }
+        } catch (SQLException e) {
+            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void backToAfficherPlat(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlatUser.fxml"));
+            Parent root = loader.load();
+
+            // Set the root of the current scene to the loaded FXML
+            caloriesField.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
     }
-
-
+    private boolean isNumeric(String str) {
+        return str.matches("\\d+");
+    }
 }
+
+
+

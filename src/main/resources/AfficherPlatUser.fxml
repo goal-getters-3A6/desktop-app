@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherPlatUser">
+
+    <ListView fx:id="platListView" layoutX="199.0" layoutY="174.0" prefHeight="270.0" prefWidth="486.0" />
+    <TextField fx:id="searchField" layoutX="451.0" layoutY="135.0" onAction="#searchPlat" prefHeight="26.0" prefWidth="232.0" style="-fx-background-color: #E8E4CE;" />
+    <!-- Your other UI components -->
+
+    <Button fx:id="sortButton" layoutX="199.0" layoutY="135.0" mnemonicParsing="false" onAction="#sortByPrix" style="-fx-background-color: #db1f48;" text="Sort by Prix" textFill="WHITE" />
+    <Text layoutX="385.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recherche :" />
+   <ImageView fitHeight="540.0" fitWidth="223.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@img/zesfdw.PNG" />
+      </image>
+   </ImageView>
+   <Label fx:id="nomLabel" ellipsisString="" layoutX="199.0" layoutY="63.0" prefHeight="50.0" prefWidth="311.0" text="LES PLATS :" textFill="#607dbf">
+      <font>
+         <Font size="49.0" />
+      </font>
+   </Label>
+   <Button layoutX="567.0" layoutY="459.0" onAction="#ajouter" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: #db1f48;" text="ajouter un plat?" textFill="WHITE" />
+</AnchorPane>

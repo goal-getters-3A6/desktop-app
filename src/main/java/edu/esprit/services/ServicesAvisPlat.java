@@ -25,9 +25,8 @@ public class ServicesAvisPlat implements IService<AvisP>{
 
 
     @Override
-    public void supprimer(int idap) {
+    public void supprimer(int idap) throws SQLException{
         String req = "DELETE FROM avisp WHERE idAP = ?";
-        try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, idap);
 
@@ -37,9 +36,7 @@ public class ServicesAvisPlat implements IService<AvisP>{
             } else {
                 System.out.println("id incorrect");
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
 
@@ -134,5 +131,27 @@ public class ServicesAvisPlat implements IService<AvisP>{
         }
         return avisList;
     }
+    public Set<AvisP> getAllU(int ID) {
+        Set<AvisP> avisList = new HashSet<>();
+        String req = "SELECT * FROM avisp WHERE iduap = ?";
+        try {
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int idAP = rs.getInt("idAP");
+                String commAP = rs.getString("commAP");
+                int star = rs.getInt("star");
+                boolean fav = rs.getBoolean("fav");
+
+                AvisP avis = new AvisP(idAP, commAP, star, fav);
+                avisList.add(avis);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving reviews: " + e.getMessage());
+        }
+        return avisList;
+    }
+
 
 }

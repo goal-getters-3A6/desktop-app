@@ -6,10 +6,12 @@ import edu.esprit.services.ServicesAvisPlat;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class ModifierAvis {
 
@@ -25,40 +27,72 @@ public class ModifierAvis {
     @FXML
     private CheckBox favCheckBox;
 
-    public void initialize() {
-        int avisId = 32; // Set the ID for the AvisP to modify
-        avisPToModify = serviceAvisPlat.getOneById(avisId); // Retrieve the AvisP by ID
+    public void initialize(int avisId) {
+
+        avisPToModify = serviceAvisPlat.getOneById(avisId);
         if (avisPToModify != null) {
             commAPField.setText(avisPToModify.getCommAP());
             starField.setText(String.valueOf(avisPToModify.getStar()));
             favCheckBox.setSelected(avisPToModify.isFav());
         } else {
-            showAlert("Error", "AvisP with ID " + avisId + " not found");
+            showAlert("Information", "Avis nexiste pas", Alert.AlertType.ERROR);
         }
     }
 
     @FXML
     void modifierAvis(ActionEvent event) {
         try {
-            // Update the attributes of the AvisP object with the new values from the input fields
-            avisPToModify.setCommAP(commAPField.getText());
-            avisPToModify.setStar(Integer.parseInt(starField.getText()));
-            avisPToModify.setFav(favCheckBox.isSelected());
 
-            // Call the service to update the AvisP object in the03 database
+            avisPToModify.setCommAP(commAPField.getText());
+
+            int star = Integer.parseInt(starField.getText());
+            if (star < 1 || star > 5) {
+                showAlert("Error", "Star rating doit etre entre 1 et 5.", Alert.AlertType.ERROR);
+                return;
+            }
+            avisPToModify.setStar(star);
+            avisPToModify.setFav(favCheckBox.isSelected());
             serviceAvisPlat.modifier(avisPToModify);
 
-            showAlert("Information", "AvisP modified successfully");
+            showAlert("Information", "Avis a été modifie avec success.", Alert.AlertType.INFORMATION);
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Veillez entrer une valeur valide (numeric value).", Alert.AlertType.ERROR);
         } catch (SQLException e) {
-            showAlert("Information", e.getMessage());
+            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
-    // Method to show an alert dialog
-    private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    @FXML
+    void supprimerAvis(ActionEvent event) {
+        try {
+            if (avisPToModify != null) {
+                int avisIdToDelete = avisPToModify.getIdAP();
+
+
+                Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmationAlert.setTitle("Confirmation");
+                confirmationAlert.setHeaderText(null);
+                confirmationAlert.setContentText("Voulez-vous vraiment supprimer cet avis ?");
+
+                Optional<ButtonType> result = confirmationAlert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    // User confirmed, proceed with deletion
+                    serviceAvisPlat.supprimer(avisIdToDelete);
+                    showAlert("Information", "Avis a été supprime avec succss", Alert.AlertType.INFORMATION);
+                }
+            }
+        } catch (SQLException e) {
+            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+
+
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
     }
 }
+

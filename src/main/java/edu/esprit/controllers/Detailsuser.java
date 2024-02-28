@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Set;
 
-public class Details {
+public class Detailsuser {
 
 
 
@@ -46,7 +46,7 @@ public class Details {
     private edu.esprit.controllers.AfficherPlat AfficherPlat;
     private int platId;
 
-    public Details() {
+    public Detailsuser() {
         servicePlat = new ServicesPlat(); // Initialize your service
     }
     public void initData(int platId) {
@@ -62,11 +62,13 @@ public class Details {
                 prixLabel.setText(String.valueOf(plat.getPrixP())+"DT");
                 descLabel.setText(plat.getDescP());
                 alergieLabel.setText(plat.getAlergieP());
-                etatLabel.setText(plat.getEtatP() ? "Enstock" : "rupture stick");
+                etatLabel.setText(plat.getEtatP() ? "Enstock" : "rupture stock");
                 caloriesLabel.setText(String.valueOf(plat.getCalories())+" CAL");
+            } else {
+                // Handle case where Plat is not found
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Handle the exception appropriately
         }
 
         Set<AvisP> comments = servicesAvisPlat.getAllP(platId);
@@ -83,74 +85,17 @@ public class Details {
     private ListView<String> commentsListView;
 
 
-    @FXML
-    private TextField commAPField;
-
-    @FXML
-    private TextField starField;
-
-    @FXML
-    private CheckBox favCheckbox;
-
-
-    public void setParentController(AfficherPlat parentController) {
-        this.AfficherPlat = parentController;
-    }
-    @FXML
-    void Ajout(ActionEvent event) {
-        try {
-            this.platId = platId;
-            String commAP = commAPField.getText();
-            int star = Integer.parseInt(starField.getText());
-            boolean fav = favCheckbox.isSelected();
-
-
-            if (star < 1 || star > 5) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Input Error");
-                alert.setContentText("Please enter a star rating between 1 and 5.");
-                alert.showAndWait();
-                return; // Stop further execution
-            }
-
-            Plat platt = servicePlat.getOneById(platId);
-            serviceAvis.ajouter(new AvisP(commAPField.getText(), star, fav, platt, 1));
-            initialize(platId);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Validation");
-            alert.setContentText("Avis ajouté avec succès");
-            alert.showAndWait();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherAvis.fxml"));
-            Parent root = loader.load();
-            commAPField.getScene().setRoot(root);
-
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Input Error");
-            alert.setContentText("Please enter a valid star rating (numeric value).");
-            alert.showAndWait();
-        } catch (SQLException | IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
-        }
-    }
-
-
 
 
 
     @FXML
     private void goBack(ActionEvent event) {
         try {
-            // Load the AfficherPlat.fxml file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlat.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlatUser.fxml"));
             Parent root = loader.load();
 
-            // Set the scene back to AfficherPlat.fxml
+
             nomLabel.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

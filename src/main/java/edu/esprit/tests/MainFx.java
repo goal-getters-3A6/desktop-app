@@ -17,7 +17,7 @@ public class MainFx extends Application {
 
         Scene scene=new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("ajout");
+        stage.setTitle("gofit!!");
         stage.show();
     }
 

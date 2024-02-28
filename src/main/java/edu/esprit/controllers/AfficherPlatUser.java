@@ -7,10 +7,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class AfficherPlat {
+public class AfficherPlatUser {
 
     @FXML
     private ListView<Plat> platListView;
@@ -49,6 +51,9 @@ public class AfficherPlat {
                             if (empty || plat == null) {
                                 setText(null);
                             } else {
+                                // Create an HBox to hold both buttons
+                                HBox buttonsBox = new HBox();
+
                                 // Customize how each item is displayed
                                 setText(" Nom: " + plat.getNomP() + " | Prix: " + plat.getPrixP()+ " | Etat: " + (plat.getEtatP() ? "En stock" : "rupture stock"));
 
@@ -57,7 +62,18 @@ public class AfficherPlat {
                                 detailsButton.setOnAction(event -> {
                                     openDetails(plat.getIdP());
                                 });
-                                setGraphic(detailsButton);
+
+                                // Add button to modify plat
+                                Button modifierButton = new Button("Modifier");
+                                modifierButton.setOnAction(event -> {
+                                    openModifier(plat.getIdP());
+                                });
+
+                                // Add buttons to the HBox
+                                buttonsBox.getChildren().addAll(detailsButton, modifierButton);
+
+                                // Set the HBox as the graphic of the ListCell
+                                setGraphic(buttonsBox);
                             }
                         }
                     };
@@ -67,6 +83,7 @@ public class AfficherPlat {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void searchPlat() {
@@ -84,11 +101,10 @@ public class AfficherPlat {
 
     private void openDetails(int platId) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Details.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Detailsuser.fxml"));
             Stage stage = (Stage) platListView.getScene().getWindow();
             stage.setScene(new javafx.scene.Scene(loader.load()));
-            Details detailsController = loader.getController();
-            detailsController.setParentController(this);
+            Detailsuser detailsController = loader.getController();
             detailsController.initialize(platId);
             detailsController.initData(platId);
             stage.show();
@@ -96,23 +112,13 @@ public class AfficherPlat {
             e.printStackTrace();
         }
     }
-    @FXML
-    private void openAfficherCommUsr(ActionEvent event) {
+    private void openModifier(int platId) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Affcommuser.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierPlat.fxml"));
             Stage stage = (Stage) platListView.getScene().getWindow();
             stage.setScene(new javafx.scene.Scene(loader.load()));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    private void openCalorieCalculator(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CalorieCalculator.fxml"));
-            Stage stage = (Stage) platListView.getScene().getWindow();
-            stage.setScene(new javafx.scene.Scene(loader.load()));
+            ModifierPlat modifierPlatController = loader.getController();
+            modifierPlatController.initialize(platId);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,5 +131,17 @@ public class AfficherPlat {
         platListView.setItems(sortedList);
     }
 
+    @FXML
+    private void ajouter(ActionEvent event) {
+        try {
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
+            Parent root = loader.load();
+
+
+            searchField.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
