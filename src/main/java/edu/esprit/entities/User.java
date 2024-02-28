@@ -1,6 +1,5 @@
 package edu.esprit.entities;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class User {
@@ -9,17 +8,29 @@ public class User {
     private String prenom;
     private String mdp;
     private String mail;
-    private byte[] image;
+    private String image;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public User() {
     }
 
-    public User(String nom, String prenom) {
+    public User(int id,String nom, String prenom, String mail) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+        this.mail = mail;
     }
 
-    public User(String nom, String prenom, String mdp, String mail, byte[] image) {
+    public User(String nom, String prenom, String mdp, String mail, String image) {
         this.nom = nom;
         this.prenom = prenom;
         this.mdp = mdp;
@@ -27,13 +38,13 @@ public class User {
         this.image = image;
     }
 
-    public User(int id, String nom, String prenom, String mail, byte[] image) {
+    public User(int id, String nom, String prenom, String mail, String image) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
     }
 
-    public User(int id, String nom, String prenom, String mdp, String mail, byte[] image) {
+    public User(int id, String nom, String prenom, String mdp, String mail, String image) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -84,23 +95,23 @@ public class User {
     }
 
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", mdp='" + mdp + '\'' +
                 ", mail='" + mail + '\'' +
-                ", image=" + Arrays.toString(image) +
+                ", image=" + image +
                 '}';
     }
 

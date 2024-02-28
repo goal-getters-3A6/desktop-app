@@ -1,13 +1,20 @@
 package edu.esprit.controllers;
 
+import edu.esprit.entities.Client;
 import edu.esprit.entities.Reservation;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceReservation;
+import edu.esprit.utils.SessionManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,10 +25,20 @@ public class Reservationsclient {
     @FXML
     private TextField Age;
     @FXML
+    private Label nomseance;
+    @FXML
     private Label nompersonne;
 
     @FXML
-    private Label nomseance;
+    private Label labelpoids;
+    @FXML
+    private Label labeltaille;
+
+    @FXML
+    private Label labelprenom;
+    @FXML
+    private Label labelnom;
+
     @FXML
     private TextField Poids;
 
@@ -33,6 +50,39 @@ public class Reservationsclient {
 
     @FXML
     private Button btnsupprimer;
+    @FXML
+    private Button btnabonnement;
+
+    @FXML
+    private Button btnaccueil;
+
+    @FXML
+    private Button btnalimentaire;
+
+    @FXML
+    private Button btnequipement;
+
+    @FXML
+    private Button btnevenement;
+    @FXML
+    private Button btnplanning;
+
+    @FXML
+    private Button btnprofil;
+
+    @FXML
+    private Button btnreclamation;
+
+    @FXML
+    private TextField textfieldnom;
+
+    @FXML
+    private TextField textfieldprenom;
+    @FXML
+    private TextField textfieldtaille;
+
+    @FXML
+    private TextField textfiledpoids;
 
     @FXML
     private GridPane gridpane;
@@ -44,6 +94,20 @@ public class Reservationsclient {
     @FXML
     private ListView<Reservation> listview;
     ServiceReservation sr =new ServiceReservation();
+    SessionManagement ss=new SessionManagement();
+    String mail=ss.getEmail();
+    // UserService us=new UserService();
+    ClientService cs=new ClientService();
+    Client u;
+
+    {
+        try {
+            u = cs.getOneByEmail(mail);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private final ServiceReservation servicereservation= new ServiceReservation();
     private ToggleGroup sexeToggleGroup;
     @FXML
     private ScrollPane scrollpane;
@@ -52,11 +116,7 @@ public class Reservationsclient {
         ObservableList<Reservation> reservationsList = FXCollections.observableArrayList();
         // Récupérer les réservations depuis le service ou tout autre moyen
         List<Reservation> reservations = null; // Récupérer les réservations depuis votre service
-        try {
-            reservations = sr.getAll(); // Suppose que vous avez une méthode getAll() dans votre service
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        reservations = sr.getReservationsByUser(mail); // Suppose que vous avez une méthode getAll() dans votre service
 
         // Ajouter les réservations à la liste observable
         if (reservations != null) {
@@ -74,45 +134,55 @@ public class Reservationsclient {
                 if (empty || reservation == null) {
                     setText(null);
                 } else {
-                    setText("Nom de la séance: " + reservation.getSeance().getNom() + ", Nom de la personne: " + reservation.getNompersonne()+"prenom: "+reservation.getPrenom()+" L'age"+reservation.getAge()+" Poids: "+reservation.getPoids()+" Taille: "+reservation.getTaille()+" Sexe: "+reservation.getSexe());
+                    // Assurez-vous que l'utilisateur associé à la réservation est un client
+                    if (u instanceof Client) {
+                        // Si c'est un client, afficher les détails de la réservation dans la cellule
+                      //  Client client = (Client) reservation.getUser();
+                        Client client = (Client) u; // Convertir l'utilisateur en client
+
+                        setText("Nom de la séance: " + reservation.getSeance().getNom() +
+                                ", Nom de la personne: " + client.getNom() +
+                                ", Prénom de la personne: " + client.getPrenom()+"poids: "+client.getPoids()+"Taille" + client.getTaille());
+                    } else {
+                        // Si l'utilisateur n'est pas un client, afficher un message par défaut
+                        setText("L'utilisateur associé à cette réservation n'est pas un client.");
+                    }
                 }
             }
         });
+
         // Gérer les événements de sélection dans la ListView
         listview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 // Mettre à jour les champs de texte avec les détails de la réservation sélectionnée
-                Age.setText(String.valueOf(newValue.getAge()));
-                Poids.setText(String.valueOf(newValue.getPoids()));
-                Taille.setText(String.valueOf(newValue.getTaille()));
-                // Afficher le nom de la séance et le nom de la personne
-                nomseance.setText(newValue.getSeance().getNom());
-                nompersonne.setText(newValue.getNompersonne() + " " + newValue.getPrenom());
-                // Vérifier le sexe
-                if ("HOMME".equals(newValue.getSexe())) {
-                    homme.setSelected(true);
-                    femme.setSelected(false);
-                } else if ("FEMME".equals(newValue.getSexe())) {
-                    homme.setSelected(false);
-                    femme.setSelected(true);
-                }
+                // Assurez-vous que l'utilisateur associé à la réservation est un client
 
+
+                    labelnom.setText(u.getNom());
+                    labelprenom.setText(u.getPrenom());
+                    nomseance.setText(newValue.getSeance().getNom());
+                   labeltaille.setText(String.valueOf(u.getTaille()));
+                   labelpoids.setText(String.valueOf(u.getPoids()));
+                    // Vous pouvez également mettre à jour d'autres champs du formulaire ici si nécessaire
+               /*  else {
+                    // Si l'utilisateur n'est pas un client, effacer les champs du formulaire ou effectuer une autre action appropriée
+                    textfieldnom.clear();
+                    textfieldprenom.clear();
+                    nomseance.setText("");
+
+                    // Effacer d'autres champs du formulaire si nécessaire
+                }*/
             }
         });
-        sexeToggleGroup = new ToggleGroup();
-
-        // Assurez-vous d'ajouter les boutons radio au ToggleGroup
-        homme.setToggleGroup(sexeToggleGroup);
-        femme.setToggleGroup(sexeToggleGroup);
     }
     private void clearForm () {
-        nompersonne.setText("");
+        labelnom.setText("");
+        labelprenom.setText("");
         nomseance.setText("");
-        Age.clear();
-        Poids.clear();
-        Taille.clear();
+        labelpoids.setText("");
+        labeltaille.setText("");
         // Désélectionner les boutons radio du groupe "sexe"
-        sexeToggleGroup.getSelectedToggle().setSelected(false);
+       // sexeToggleGroup.getSelectedToggle().setSelected(false);
     }
     @FXML
     void modifier(ActionEvent event) {
@@ -268,7 +338,7 @@ public class Reservationsclient {
             alert.setContentText("Please select a reservation to modify.");
             alert.showAndWait();
         }*/
-       //ykhdm fih fazt poids
+        //ykhdm fih fazt poids
         // Récupérer les informations modifiées depuis le formulaire
        /* String nomPersonne = nompersonne.getText();
         String ageStr = Age.getText();
@@ -373,15 +443,13 @@ public class Reservationsclient {
             }
         }*/
         // Récupérer les informations modifiées depuis le formulaire
-        String nomPersonne = nompersonne.getText();
-        String ageStr = Age.getText();
+       /* String nomPersonne = textfieldnom.getText();
+        String prenomPersonne=textfieldprenom.getText();
         String poidsStr = Poids.getText();
         String tailleStr = Taille.getText();
-
         String sexe = getSelectedSexe();
 
-// Expression régulière pour l'âge
-        String ageRegex = "\\d{1,2}";
+
 // Expression régulière pour le poids
         String poidsRegex = "^\\d+(\\.\\d+)?$";
 // Expression régulière pour la taille
@@ -393,7 +461,7 @@ public class Reservationsclient {
 
 // Vérifier que les champs sont remplis
         boolean isValid = true;
-        if (ageStr.isEmpty() || poidsStr.isEmpty() || tailleStr.isEmpty() || sexe == null) {
+        if (poidsStr.isEmpty() || tailleStr.isEmpty() || sexe == null) {
             isValid = false;
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(ERROR_TITLE);
@@ -401,16 +469,7 @@ public class Reservationsclient {
             alert.showAndWait();
         } else {
             // Contrôle de saisie pour l'âge
-            if (!ageStr.matches(ageRegex) || Integer.parseInt(ageStr) <= 0) {
-                isValid = false;
-                Age.setStyle(ERROR_STYLE);
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle(ERROR_TITLE);
-                alert.setContentText("Veuillez saisir un âge valide (entre 1 et 2 chiffres).");
-                alert.showAndWait();
-            } else {
-                Age.setStyle("");
-            }
+
 
             // Contrôle de saisie pour le poids
             if (!poidsStr.matches(poidsRegex) || Float.parseFloat(poidsStr) <= 0) {
@@ -442,11 +501,13 @@ public class Reservationsclient {
             Reservation selectedReservation = listview.getSelectionModel().getSelectedItem();
             if (selectedReservation != null) {
                 // selectedReservation.setSeance(nompersonne);
-                selectedReservation.setAge(Integer.parseInt(ageStr));
-                selectedReservation.setPoids(Float.parseFloat(poidsStr));
-                selectedReservation.setTaille(Float.parseFloat(tailleStr));
+                Client client = (Client) selectedReservation.getUser();
+                // Modifier les propriétés du client
+                client.setPoids(Float.parseFloat(poidsStr));
+                client.setTaille(Float.parseFloat(tailleStr));
+                client.setSexe(sexe);
 
-                selectedReservation.setSexe(sexe);
+
 
                 // Mettre à jour la réservation dans la base de données
                 try {
@@ -471,11 +532,83 @@ public class Reservationsclient {
                 alert.setContentText("Veuillez sélectionner une réservation à modifier.");
                 alert.showAndWait();
             }
+        }*/
+        String nomPersonne = textfieldnom.getText().trim();
+        String prenomPersonne = textfieldprenom.getText().trim();
+
+
+// Expressions régulières pour le nom et le prénom
+        String nomRegex = "^[A-Za-zÀ-ÿ\\s-]{1,50}$"; // Autorise les lettres, les espaces, les tirets et les apostrophes, jusqu'à 50 caractères
+        String prenomRegex = "^[A-Za-zÀ-ÿ-]{1,50}$"; // Autorise les lettres et les tirets, jusqu'à 50 caractères
+
+// Définition des constantes pour les messages d'erreur
+        final String ERROR_TITLE = "Validation Error";
+        final String ERROR_STYLE = "-fx-text-fill: red;";
+
+// Vérifier que les champs sont remplis et respectent les contraintes de saisie
+        boolean isValid = true;
+        if (nomPersonne.isEmpty() || prenomPersonne.isEmpty()) {
+            isValid = false;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle(ERROR_TITLE);
+            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.showAndWait();
+        } else {
+            if (!nomPersonne.matches(nomRegex)) {
+                isValid = false;
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle(ERROR_TITLE);
+                alert.setContentText("Veuillez saisir un nom valide.");
+                alert.showAndWait();
+            }
+            if (!prenomPersonne.matches(prenomRegex)) {
+                isValid = false;
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle(ERROR_TITLE);
+                alert.setContentText("Veuillez saisir un prénom valide.");
+                alert.showAndWait();
+            }
+        }
+
+        if (isValid) {
+            // Les saisies sont valides, procéder à la modification
+            Reservation selectedReservation = listview.getSelectionModel().getSelectedItem();
+            if (selectedReservation != null) {
+                //Client client = (Client) selectedReservation.getUser();
+                // Modifier les propriétés du client
+               // selectedReservation.setPoids(Float.parseFloat(poidsStr));
+               // selectedReservation.setTaille(Float.parseFloat(tailleStr));
+
+               u.setNom(nomPersonne);
+                u.setPrenom(prenomPersonne);
+
+                // Mettre à jour la réservation dans la base de données
+                try {
+                    sr.modifier(selectedReservation);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Modification");
+                    alert.setContentText("Réservation modifiée avec succès.");
+                    alert.showAndWait();
+                } catch (SQLException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("SQL Exception");
+                    alert.setContentText(e.getMessage());
+                    alert.showAndWait();
+                }
+
+                clearForm(); // Effacer les champs du formulaire après la modification
+               listview.refresh();
+            } else {
+                // Afficher un message à l'utilisateur indiquant qu'aucune réservation n'a été sélectionnée
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle(ERROR_TITLE);
+                alert.setContentText("Veuillez sélectionner une réservation à modifier.");
+                alert.showAndWait();
+            }
+
         }
 
     }
-
-
     @FXML
     void supprimer(ActionEvent event) {
         // Récupérer la réservation sélectionnée
@@ -496,7 +629,7 @@ public class Reservationsclient {
                     successAlert.setTitle("Suppression réussie");
                     successAlert.setContentText("La réservation a été supprimée avec succès.");
                     successAlert.showAndWait();
-
+                    clearForm();
                     // Rafraîchir les données dans la ListView
                     listview.getItems().remove(selectedReservation);
                 } catch (SQLException e) {
@@ -518,6 +651,57 @@ public class Reservationsclient {
     private String getSelectedSexe() {
         RadioButton selectedRadioButton = (RadioButton) sexeToggleGroup.getSelectedToggle();
         return selectedRadioButton.getText();
+    }
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void accueil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+    @FXML
+    void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/leseancesfront.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
+    }
+
+    @FXML
+    void profil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
     }
     }
 

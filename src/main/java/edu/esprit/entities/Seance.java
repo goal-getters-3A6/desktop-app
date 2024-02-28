@@ -12,7 +12,7 @@ public class Seance {
     private int numesalle;
     private String duree;
     private String imageseance;
-    final private  int nbMax=3;
+    final private  int nbMax=8;
     private int frequency;
     public Seance()
     {

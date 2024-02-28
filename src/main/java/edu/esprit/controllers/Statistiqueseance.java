@@ -127,7 +127,7 @@ public class Statistiqueseance  implements Initializable {
             chart1.setData(pieChartData);
 
     }
-    @FXML
+    /*@FXML
     void retour(ActionEvent event) {
         try {
             // Charger le fichier FXML de la page "lesseancesfront.fxml"
@@ -143,7 +143,7 @@ public class Statistiqueseance  implements Initializable {
             ex.printStackTrace();
             // Gérer l'exception si le chargement de la vue échoue
         }
-    }
+    }*/
     @FXML
     void abonnement(ActionEvent event) {
 
@@ -168,7 +168,7 @@ public class Statistiqueseance  implements Initializable {
     void planning(ActionEvent event) {
         try {
             // Charger le fichier FXML de la page "lesseancesfront.fxml"
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SeanceFormulaire.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/seanceadmin.fxml"));
             Parent root = loader.load();
             // Créer une nouvelle scène avec la vue chargée
             Scene scene = new Scene(root);

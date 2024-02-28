@@ -6,15 +6,17 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="496.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Adminreservation">
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Adminreservation">
    <children>
-      <ListView fx:id="listview" layoutX="167.0" layoutY="50.0" prefHeight="350.0" prefWidth="492.0" />
+      <ListView fx:id="listview" layoutX="220.0" layoutY="82.0" prefHeight="561.0" prefWidth="1234.0" />
       <GridPane fx:id="gridpane" layoutX="3.0" layoutY="-27.0" prefHeight="26.0" prefWidth="21.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="6.199951171875" minWidth="0.5999755859375" prefWidth="0.5999755859375" />
@@ -25,13 +27,110 @@
          </rowConstraints>
       </GridPane>
       <ScrollPane fx:id="scrollpane" layoutX="-36.0" layoutY="460.0" prefHeight="26.0" prefWidth="29.0" />
-      <Button fx:id="btnannuler" layoutX="601.0" layoutY="408.0" mnemonicParsing="false" onAction="#annuler" text="Annuler" />
-      <Button fx:id="btnrecherche" layoutX="383.0" layoutY="447.0" mnemonicParsing="false" onAction="#recherche" text="Recherche" />
-      <TextField fx:id="textfieldrecherche" layoutX="466.0" layoutY="446.0" prefHeight="26.0" prefWidth="163.0" promptText="chercher" />
-      <Button fx:id="btntri" layoutX="177.0" layoutY="447.0" mnemonicParsing="false" onAction="#tri" text="Tri" />
-      <ComboBox fx:id="comboboxtri" layoutX="220.0" layoutY="446.0" prefWidth="150.0" />
-      <Button fx:id="btnstats" layoutX="315.0" layoutY="408.0" mnemonicParsing="false" onAction="#stats" text="Statistiques" />
-      <Label layoutX="167.0" layoutY="412.0" prefHeight="18.0" prefWidth="140.0" text="Consultez les Statistiques" />
-      <Button fx:id="btnrefraichir" layoutX="592.0" layoutY="24.0" mnemonicParsing="false" onAction="#refraichir" text="Refraichir" />
+      <Button fx:id="btnannuler" layoutX="543.0" layoutY="721.0" mnemonicParsing="false" onAction="#annuler" style="-fx-background-color: #D1C8C1;" text="Annuler" />
+      <Button fx:id="btnrecherche" layoutX="543.0" layoutY="674.0" mnemonicParsing="false" onAction="#recherche" style="-fx-background-color: #D1C8C1;" text="Recherche" />
+      <TextField fx:id="textfieldrecherche" layoutX="629.0" layoutY="674.0" prefHeight="26.0" prefWidth="163.0" promptText="chercher" />
+      <Button fx:id="btntri" layoutX="234.0" layoutY="673.0" mnemonicParsing="false" onAction="#tri" style="-fx-background-color: #D1C8C1;" text="Tri" />
+      <ComboBox fx:id="comboboxtri" layoutX="276.0" layoutY="674.0" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: ffff;" />
+      <Button fx:id="btnstats" layoutX="374.0" layoutY="721.0" mnemonicParsing="false" onAction="#stats" style="-fx-background-color: #D1C8C1;" text="Statistiques" />
+      <Label layoutX="214.0" layoutY="724.0" prefHeight="18.0" prefWidth="163.0" text="Consultez les Statistiques">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Button fx:id="btnrefraichir" layoutX="1387.0" layoutY="40.0" mnemonicParsing="false" onAction="#refraichir" prefHeight="35.0" prefWidth="58.0" style="-fx-background-color: #D1C8C1;" />
+      <AnchorPane layoutX="-8.0" layoutY="-5.0" prefHeight="852.0" prefWidth="200.0" style="-fx-background-color: #004369;">
+         <children>
+            <ImageView fx:id="logo1" fitHeight="98.0" fitWidth="155.0" layoutX="20.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/logo.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btntdb1" layoutX="9.0" layoutY="145.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnequipement1" layoutX="41.0" layoutY="215.0" mnemonicParsing="false" onAction="#equipement" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnabonnement1" layoutX="43.0" layoutY="381.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnalimentaire1" layoutX="35.0" layoutY="465.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnevenement1" layoutX="37.0" layoutY="552.0" mnemonicParsing="false" onAction="#evenement" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnreclamation1" layoutX="41.0" layoutY="641.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnplanning1" layoutX="42.0" layoutY="296.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="planningimg31" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/elliptique.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg21" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/abonnement.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg111" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/aliments.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg1111" fitHeight="35.0" fitWidth="44.0" layoutX="8.0" layoutY="556.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/evenement.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg11111" fitHeight="35.0" fitWidth="44.0" layoutX="8.0" layoutY="645.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Users/lenovo/Downloads/fichier.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="planningimg1" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/plan-daffaires.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="1401.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/reload.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="609.0" layoutY="719.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/trash.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="807.0" layoutY="671.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/chercher.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="463.0" layoutY="719.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/graph.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

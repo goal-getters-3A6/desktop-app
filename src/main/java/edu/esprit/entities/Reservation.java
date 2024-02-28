@@ -5,12 +5,6 @@ import java.util.Objects;
 public class Reservation {
 private int IdReservation;
 private Seance seance;
-private String nompersonne;
-private  String prenom;
-private int age;
-private float poids;
-private float taille;
-private String sexe;
 private User user;
 //private ServiceSeance seanceService;
 
@@ -18,36 +12,19 @@ private User user;
     {
     }
 
-    public Reservation(int idReservation, Seance seance, String nom, String prenom, int age, float poids, float taille, String sexe,User user) {
+    public Reservation(int idReservation, Seance seance,User user) {
         IdReservation = idReservation;
         this.seance = seance;
-        this.nompersonne = nom;
-        this.prenom = prenom;
-        this.age = age;
-        this.poids = poids;
-        this.taille = taille;
-        this.sexe = sexe;
         this.user=user;
 
     }
-    public Reservation( String nom, String prenom, int age, float poids, float taille) {
 
-        this.nompersonne = nom;
-        this.prenom = prenom;
-        this.age = age;
-        this.poids = poids;
-        this.taille = taille;
-    }
-    public Reservation(Seance seance, String nom, String prenom, int age, float poids, float taille, String sexe,User user) {
+    public Reservation(Seance seance,User user) {
         this.seance = seance;
-        this.nompersonne = nom;
-        this.prenom = prenom;
-        this.age = age;
-        this.poids = poids;
-        this.taille = taille;
-        this.sexe = sexe;
+
         this.user=user;
     }
+
 
     public int getIdReservation() {
         return IdReservation;
@@ -57,57 +34,11 @@ private User user;
         return seance;
     }
 
-    public String getNompersonne() {
-        return nompersonne;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public float getPoids() {
-        return poids;
-    }
-
-    public float getTaille() {
-        return taille;
-    }
-    public String getSexe() {
-        return sexe;
-    }
-
     public User getUser(){return user; }
     public void setSeance(Seance seance) {
         this.seance = seance;
     }
 
-    public void setNom(String nom) {
-        this.nompersonne = nom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setPoids(float poids) {
-        this.poids = poids;
-    }
-
-    public void setTaille(float taille) {
-        this.taille = taille;
-    }
-
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
-    }
     public  void setUser(User user){this.user = user; }
 
     @Override
@@ -115,7 +46,7 @@ private User user;
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reservation that = (Reservation) o;
-        return IdReservation == that.IdReservation && Objects.equals(seance, that.seance) && Objects.equals(nompersonne, that.nompersonne) && Objects.equals(prenom, that.prenom) && sexe == that.sexe;
+        return IdReservation == that.IdReservation && Objects.equals(seance, that.seance) ;
     }
 
     @Override
@@ -128,12 +59,7 @@ private User user;
         return "Reservation{" +
                 "IdReservation=" + IdReservation +
                 ", seance=" + seance +
-                ", nom='" + nompersonne + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", age=" + age +
-                ", poids=" + poids +
-                ", taille=" + taille +
-                ", sexe=" + sexe +
+
                 ",user="+user+
                 '}';
     }

@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -40,8 +41,7 @@ public class Statistiquesreservation implements Initializable {
     @FXML
     private Button btnevenement;
 
-    @FXML
-    private Button btnplanning;
+
 
     @FXML
     private Button btnreclamation;
@@ -50,7 +50,7 @@ public class Statistiquesreservation implements Initializable {
     @FXML
     private PieChart chart1;
     @FXML
-    private Button btnretour;
+    private Button btnplanning1;
     @FXML
     private ImageView planningimg;
     @FXML
@@ -75,7 +75,7 @@ public class Statistiquesreservation implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Récupérer les données des séances depuis votre source de données
-        ServiceReservation sr = new ServiceReservation();
+      /*  ServiceReservation sr = new ServiceReservation();
         try {
             List<Reservation> r = sr.getAll();
         } catch (SQLException e) {
@@ -92,7 +92,7 @@ public class Statistiquesreservation implements Initializable {
         for (Map.Entry<String, Integer> entry : seanceFrequencyMap.entrySet()) {
             String nomSeance = entry.getKey();
             int frequency = entry.getValue();
-            PieChart.Data data = new PieChart.Data(nomSeance, frequency);
+            PieChart.Data data = new PieChart.Data(nomSeance,frequency);
             pieChartData.add(data);
         }
 
@@ -104,9 +104,48 @@ public class Statistiquesreservation implements Initializable {
         );
 
         // Ajouter les données du graphique au graphique
+        chart1.setData(pieChartData);*/
+        // Récupérer les données des séances réservées depuis votre source de données
+        ServiceReservation sr = new ServiceReservation();
+        List<Reservation> reservations;
+        try {
+            reservations = sr.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+// Créer une carte pour stocker les fréquences des séances réservées
+        Map<String, Integer> seanceFrequencyMap = new HashMap<>();
+
+// Parcourir la liste des réservations et compter la fréquence de chaque séance
+        for (Reservation reservation : reservations) {
+            String nomSeance = reservation.getSeance().getNom();
+            seanceFrequencyMap.put(nomSeance, seanceFrequencyMap.getOrDefault(nomSeance, 0) + 1);
+        }
+
+// Créer une liste observable pour les données du graphique
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+// Parcourir la carte des fréquences et ajouter les données au graphique
+        for (Map.Entry<String, Integer> entry : seanceFrequencyMap.entrySet()) {
+            String nomSeance = entry.getKey();
+            int frequency = entry.getValue();
+            PieChart.Data data = new PieChart.Data(nomSeance, frequency);
+            pieChartData.add(data);
+        }
+
+// Liens dynamiques pour afficher les valeurs des données dans les libellés
+        pieChartData.forEach(data ->
+                data.nameProperty().bind(
+                        Bindings.concat(data.getName(), " : ", (int) data.getPieValue(), " fois")
+                )
+        );
+
+// Ajouter les données du graphique au graphique
         chart1.setData(pieChartData);
+
     }
-    @FXML
+   /* @FXML
     void retour(ActionEvent event) {
         try {
             // Charger le fichier FXML de la page "lesseancesfront.fxml"
@@ -122,7 +161,7 @@ public class Statistiquesreservation implements Initializable {
             ex.printStackTrace();
             // Gérer l'exception si le chargement de la vue échoue
         }
-    }
+    }*/
     @FXML
     void abonnement(ActionEvent event) {
 
@@ -144,12 +183,12 @@ public class Statistiquesreservation implements Initializable {
     void planning(ActionEvent event) {
         try {
             // Charger le fichier FXML de la page "lesseancesfront.fxml"
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SeanceFormulaire.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Adminreservation.fxml"));
             Parent root = loader.load();
             // Créer une nouvelle scène avec la vue chargée
             Scene scene = new Scene(root);
             // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
-            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            Stage stage = (Stage) btnplanning1.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {

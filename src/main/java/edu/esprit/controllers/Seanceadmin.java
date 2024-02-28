@@ -40,6 +40,8 @@ public class Seanceadmin {
     private ScrollPane scrolpane;
     @FXML
     private ScrollPane scrollpane2;
+    @FXML
+    private Button btnreservations;
 
     @FXML
     private Button btnabonnement;
@@ -73,6 +75,8 @@ public class Seanceadmin {
     private Button btntdb;
     @FXML
     private Button details;
+    @FXML
+    private Button btnajouterseance;
     private List<Seance> seanceList;
     private Set<Seance> uniqueSeances = new HashSet<>();
     ServiceSeance ss = new ServiceSeance();
@@ -394,7 +398,41 @@ public class Seanceadmin {
 
     @FXML
     void planning(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/seanceadmin.fxml"));
+            Parent root = loader.load();
 
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
+    void ajouter(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajoutseance.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnajouterseance.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
 
     @FXML
@@ -588,5 +626,25 @@ public class Seanceadmin {
             throw new RuntimeException(e);
         }
 
+    }
+    @FXML
+    void reservation(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Adminreservation.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

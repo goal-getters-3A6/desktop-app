@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,42 +12,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="553.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Ajoutseance">
    <children>
       <AnchorPane layoutX="-10.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #fffaed;">
          <children>
-            <Pane layoutX="304.0" layoutY="35.0" prefHeight="514.0" prefWidth="534.0" style="-fx-background-color: #fffaed;">
+            <Pane layoutX="303.0" layoutY="30.0" prefHeight="514.0" prefWidth="534.0" style="-fx-background-color: #fffaed;">
                <children>
-                  <AnchorPane layoutX="2.0" layoutY="52.0" prefHeight="410.0" prefWidth="530.0" style="-fx-background-color: #38afb5;">
-                     <children>
-                        <Label layoutX="14.0" text="Les Seances" textFill="#004369">
-                           <font>
-                              <Font name="System Bold" size="30.0" />
-                           </font>
-                           <effect>
-                              <Bloom />
-                           </effect>
-                        </Label>
-                        <ComboBox fx:id="nomid" layoutX="75.0" layoutY="69.0" prefHeight="26.0" prefWidth="208.0" promptText=" La seance" />
-                        <ComboBox fx:id="horaireid" layoutX="75.0" layoutY="117.0" prefHeight="26.0" prefWidth="208.0" promptText="L'horaire" />
-                        <ComboBox fx:id="jourid" layoutX="75.0" layoutY="168.0" prefHeight="26.0" prefWidth="208.0" promptText="Le jour" />
-                        <TextField fx:id="numsalleid" layoutX="75.0" layoutY="222.0" prefHeight="26.0" prefWidth="208.0" promptText="Numero de la salle" />
-                        <TextField fx:id="dureeid" layoutX="75.0" layoutY="275.0" prefHeight="26.0" prefWidth="208.0" promptText="La duree" />
-                        <TextField fx:id="pathimageid" layoutX="75.0" layoutY="325.0" prefHeight="26.0" prefWidth="149.0" promptText="path image" />
-                        <Button fx:id="browseButton" layoutX="228.0" layoutY="325.0" mnemonicParsing="false" onAction="#browseImage" style="-fx-background-color: db1f48;" text="Browse" textFill="WHITE" />
-                        <ImageView fx:id="imageView" fitHeight="139.0" fitWidth="186.0" layoutX="286.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="btnajouterseance" layoutX="113.0" layoutY="374.0" mnemonicParsing="false" onAction="#ajouterseance" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: db1f48;" text="Ajouter" textFill="WHITE" />
-                        <Text fill="#004369" layoutX="25.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jour" />
-                        <Text fill="#004369" layoutX="23.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
-                        <Text fill="#004369" layoutX="16.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaire" />
-                        <Text fill="#004369" layoutX="19.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numsalle" wrappingWidth="55.19999999999999" />
-                        <Text fill="#004369" layoutX="20.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duree" />
-                     </children>
+                  <ComboBox fx:id="nomid" layoutX="129.0" layoutY="45.0" prefHeight="26.0" prefWidth="208.0" promptText=" La seance" />
+                  <Text fill="#004369" layoutX="77.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
+                  <Text fill="#004369" layoutX="70.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaire" />
+                  <ComboBox fx:id="horaireid" layoutX="126.0" layoutY="118.0" prefHeight="26.0" prefWidth="208.0" promptText="L'horaire" />
+                  <ComboBox fx:id="jourid" layoutX="121.0" layoutY="181.0" prefHeight="26.0" prefWidth="208.0" promptText="Le jour" />
+                  <Text fill="#004369" layoutX="79.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jour" />
+                  <TextField fx:id="numsalleid" layoutX="121.0" layoutY="251.0" prefHeight="35.0" prefWidth="208.0" promptText="Numero de la salle" />
+                  <TextField fx:id="dureeid" layoutX="121.0" layoutY="325.0" prefHeight="35.0" prefWidth="208.0" promptText="La duree" />
+                  <TextField fx:id="pathimageid" layoutX="121.0" layoutY="394.0" prefHeight="35.0" prefWidth="149.0" promptText="path image" />
+                  <Button fx:id="browseButton" layoutX="277.0" layoutY="394.0" mnemonicParsing="false" onAction="#browseImage" prefHeight="35.0" prefWidth="55.0" style="-fx-background-color: #D1C8C1;" />
+                  <Button fx:id="btnajouterseance" layoutX="160.0" layoutY="443.0" mnemonicParsing="false" onAction="#ajouterseance" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #D1C8C1;" text="Ajouter" />
+                  <Text fill="#004369" layoutX="62.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numsalle" wrappingWidth="55.19999999999999" />
+                  <Text fill="#004369" layoutX="74.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duree" />
+                  <Label layoutX="31.0" layoutY="-8.0" text="Ajout d'une nouvelle seance" textFill="#004369">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
                      <effect>
-                        <DropShadow />
+                        <Bloom />
                      </effect>
-                  </AnchorPane>
+                  </Label>
+                  <ImageView fitHeight="26.0" fitWidth="55.0" layoutX="311.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/add.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="52.0" fitWidth="39.0" layoutX="285.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/browse.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="labelnumsalle" layoutX="126.0" layoutY="286.0" prefHeight="26.0" prefWidth="208.0" />
+                  <Label fx:id="labelduree" layoutX="121.0" layoutY="360.0" prefHeight="26.0" prefWidth="208.0" />
                </children>
             </Pane>
             <AnchorPane layoutX="-3.0" prefHeight="652.0" prefWidth="174.0" style="-fx-background-color: #004369;">
@@ -92,18 +94,6 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Label layoutX="196.0" layoutY="579.0" prefHeight="26.0" prefWidth="282.0" text="Consultez les statistiques des Seances">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnstats" layoutX="494.0" layoutY="577.0" mnemonicParsing="false" onAction="#statistiques" style="-fx-background-color: db1f48;" text="Statistiques" textFill="WHITE" />
-            <Button fx:id="btnreservation" layoutX="903.0" layoutY="577.0" mnemonicParsing="false" onAction="#reservation" style="-fx-background-color: db1f48;" text="reservations" textFill="WHITE" />
-            <Label layoutX="631.0" layoutY="577.0" text="Consultez la page des Reservations">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
             <ImageView fx:id="planningimg11" fitHeight="35.0" fitWidth="44.0" layoutX="14.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imgs/plan-daffaires.png" />

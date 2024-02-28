@@ -318,6 +318,7 @@ public class leseancesfront{
             // Créer une nouvelle scène avec la vue chargée
             Resformualire controller = loader.getController();
             controller.setSeance(seance);
+            System.out.println("lors qlique "+seance);
             Scene scene = new Scene(root);
             Stage stage = (Stage) grid.getScene().getWindow(); // Obtenez la scène actuelle du bouton ou de tout autre nœud
             stage.setScene(scene);

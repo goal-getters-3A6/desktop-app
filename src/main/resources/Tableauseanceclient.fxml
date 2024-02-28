@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="511.0" prefWidth="927.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Tableauseanceclient">
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Tableauseanceclient">
    <children>
-      <AnchorPane layoutX="176.0" layoutY="100.0" prefHeight="396.0" prefWidth="574.0" style="-fx-background-color: #38afb5;">
+      <AnchorPane layoutX="629.0" layoutY="228.0" prefHeight="388.0" prefWidth="398.0" style="-fx-background-color: #38afb5;">
          <children>
             <Label layoutX="14.0" layoutY="22.0" text="Le planning" textFill="WHITE">
                <font>
@@ -36,22 +36,54 @@
             <DropShadow />
          </effect>
       </AnchorPane>
-      <AnchorPane fx:id="anchorpanedash" prefHeight="94.0" prefWidth="927.0" style="-fx-background-color: #004369;">
+      <AnchorPane fx:id="anchorpanedash" layoutY="-1.0" prefHeight="134.0" prefWidth="1538.0" style="-fx-background-color: #004369;">
          <children>
-            <Button fx:id="btnprofil" layoutX="842.0" layoutY="11.0" mnemonicParsing="false" onAction="#profil" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE" />
-            <Button fx:id="btnreclamation" layoutX="687.0" layoutY="50.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE" />
-            <Button fx:id="btnevenement" layoutX="589.0" layoutY="50.0" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE" />
-            <Button fx:id="btnalimentaire" layoutX="500.0" layoutY="50.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE" />
-            <Button fx:id="btnabonnement" layoutX="393.0" layoutY="50.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE" />
-            <Button fx:id="btnplanning" layoutX="310.0" layoutY="50.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5" />
-            <Button fx:id="btnequipement" layoutX="206.0" layoutY="50.0" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE" />
-            <Button fx:id="btnaccueil" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE" />
+            <Button fx:id="btnprofil" layoutX="1371.0" layoutY="14.0" mnemonicParsing="false" onAction="#profil" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnreclamation" layoutX="1283.0" layoutY="59.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnevenement" layoutX="1080.0" layoutY="59.0" mnemonicParsing="false" onAction="#evenement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnalimentaire" layoutX="885.0" layoutY="59.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnabonnement" layoutX="682.0" layoutY="59.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnplanning" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnequipement" layoutX="342.0" layoutY="59.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnaccueil" layoutX="147.0" layoutY="52.0" mnemonicParsing="false" onAction="#accueil" prefHeight="66.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="logo1" fitHeight="89.0" fitWidth="107.0" layoutX="14.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <ImageView fx:id="logo" fitHeight="98.0" fitWidth="152.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@imgs/logo.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

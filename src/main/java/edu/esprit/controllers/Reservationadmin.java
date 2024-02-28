@@ -1,4 +1,4 @@
-package edu.esprit.controllers;
+/*package edu.esprit.controllers;
 
 import edu.esprit.entities.Reservation;
 import edu.esprit.entities.Seance;
@@ -154,7 +154,12 @@ public class Reservationadmin {
         List<Reservation> filtredResList= new ArrayList<>();
         User user = new User(); // Récupérer l'utilisateur connecté à partir de votre système d'authentification
         ClientService us = new ClientService();
-        User u = us.getClientById(6);
+        User u = null;
+        try {
+            u = us.getOneById(6);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         for (Reservation r:resList) {
             if (r.getUser().equals(u)) {
                 filtredResList.add(r);
@@ -163,7 +168,6 @@ public class Reservationadmin {
         seance.setCellValueFactory(new PropertyValueFactory<>("seance"));
         nom.setCellValueFactory(new PropertyValueFactory<>("nompersonne"));
         prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        age.setCellValueFactory(new PropertyValueFactory<>("age"));
         poids.setCellValueFactory(new PropertyValueFactory<>("poids"));
         taille.setCellValueFactory(new PropertyValueFactory<>("taille"));
         sexe.setCellValueFactory(new PropertyValueFactory<>("sexe"));
@@ -369,4 +373,4 @@ public class Reservationadmin {
     }
 
 
-}
+}*/

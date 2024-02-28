@@ -39,6 +39,53 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.13</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.24</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>fontbox</artifactId>
+            <version>2.0.24</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox-tools</artifactId>
+            <version>2.0.24</version>
+        </dependency>
+        <dependency>
+            <groupId>tray</groupId>
+            <artifactId>tray</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/external-dependencies/TrayNotification.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20211205</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dlsc.phonenumberfx</groupId>
+            <artifactId>phonenumberfx</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dropbox.core</groupId>
+            <artifactId>dropbox-core-sdk</artifactId>
+            <version>5.4.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>javax.activation</artifactId>
+            <version>1.2.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -6,13 +6,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -22,7 +27,11 @@ import java.sql.SQLException;
 import java.sql.Time;
 
 public class Ajoutseance {
+    @FXML
+    private Label labelduree;
 
+    @FXML
+    private Label labelnumsalle;
     @FXML
     private Button browseButton;
     @FXML
@@ -117,7 +126,7 @@ public class Ajoutseance {
     @FXML
     void ajouterseance(ActionEvent event) {
         // Contrôle de la saisie:
-        String duree = dureeid.getText();
+    /*    String duree = dureeid.getText();
         String numSalle = numsalleid.getText();
         String imageUrl = pathimageid.getText();
         imageUrl = imageUrl.replace("file:/", "");
@@ -126,7 +135,16 @@ public class Ajoutseance {
         Object nom = nomid.getValue();
         boolean isInputValidnumsalle = true;
         boolean isInputValidduree = true;
+        boolean isInputEmpty = false;
 
+        if (numSalle.isEmpty() || duree.isEmpty() || imageUrl.isEmpty() || horaire == null || jour == null || nom == null) {
+            isInputEmpty = true;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields.");
+            alert.showAndWait();
+        }
         // Vérification de la saisie
         if (!numSalle.matches("[1-5]")) { // Vérifie si numSalle est un chiffre entre 1 et 5
             isInputValidnumsalle = false;
@@ -172,7 +190,64 @@ public class Ajoutseance {
             }
             alert.showAndWait();
         }
+*/
 
+        // Contrôle de la saisie:
+        String duree = dureeid.getText();
+        String numSalle = numsalleid.getText();
+        String imageUrl = pathimageid.getText();
+        imageUrl = imageUrl.replace("file:/", "");
+        Object horaire = horaireid.getValue();
+        Object jour = jourid.getValue();
+        Object nom = nomid.getValue();
+        boolean isInputValidnumsalle = true;
+        boolean isInputValidduree = true;
+        boolean isInputEmpty = false;
+
+        // Vérification de la saisie
+        if (numSalle.isEmpty() || duree.isEmpty() || imageUrl.isEmpty() || horaire == null || jour == null || nom == null) {
+            isInputEmpty = true;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validation Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill in all fields.");
+            alert.showAndWait();
+        } else {
+            labelnumsalle.setText("");
+        }
+
+        if (!numSalle.matches("[1-5]")) { // Vérifie si numSalle est un chiffre entre 1 et 5
+            isInputValidnumsalle = false;
+            labelnumsalle.setText("Please enter a valid number between 1 and 5.");
+            labelnumsalle.setTextFill(Color.RED);
+        } else {
+            labelnumsalle.setText("");
+        }
+
+        if (!duree.matches("\\d{2}min")) { // Vérifie si duree commence par 2 chiffres et se termine par "min"
+            isInputValidduree = false;
+            labelduree.setText("Please enter a valid duration in the format 'XXmin'.");
+            labelduree.setTextFill(Color.RED);
+        } else {
+            labelduree.setText("");
+        }
+
+        if (!isInputEmpty && isInputValidduree && isInputValidnumsalle) {
+            Seance s = new Seance(nom.toString(), Time.valueOf(horaire.toString()), jour.toString(), Integer.parseInt(numSalle), duree, imageUrl);
+            try {
+                ss.ajouter(s);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Validation");
+                alert.setContentText("Seance added successfully");
+                alert.showAndWait();
+            } catch (SQLException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("SQL Exception");
+                alert.setContentText(e.getMessage());
+                alert.showAndWait();
+            }
+            clearForm();
+        }
 
     }
 
@@ -232,7 +307,20 @@ public class Ajoutseance {
 
     @FXML
     void planning(ActionEvent event) {
-
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/seanceadmin.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning1.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
 
     @FXML

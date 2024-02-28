@@ -16,20 +16,21 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        ServiceSeance ss=new ServiceSeance();
+     //  ServiceSeance ss=new ServiceSeance();
         ClientService clientService = new ClientService();
         ServiceReservation sr=new ServiceReservation();
+        System.out.println(sr.getReservationsByUser("maryem.mounira@esprit.tn"));
         User u=new User();
-        User user_recupere=clientService.getClientById(2);
+        User user_recupere=clientService.getOneById(2);
 
      //   System.out.println("****************user a ajouter***************");
       //  System.out.println(user_recupere);
         //User user_id_add = clientService.getClientById(user_recupere.getId());
 
        // System.out.println(clientService.getClientById(2));
-        Seance s1=new Seance("Boxe", Time.valueOf("12:00:00"),"Lundi",1,"1:30h","../../../../resources/imgs/boxe.jpg");
-        Seance s2=new Seance("BodyPump", Time.valueOf("20:00:00"),"Mercredi",3,"1:00h","../../../resources/imgs/bodypump.jpg");
-        Seance s3=new Seance("crossfit", Time.valueOf("11:30:00"),"Dimanche",2,"45min","../../../resources/imgs/crossfit.jpg");
+     //   Seance s1=new Seance("Boxe", Time.valueOf("12:00:00"),"Lundi",1,"1:30h","../../../../resources/imgs/boxe.jpg");
+     //   Seance s2=new Seance("BodyPump", Time.valueOf("20:00:00"),"Mercredi",3,"1:00h","../../../resources/imgs/bodypump.jpg");
+       // Seance s3=new Seance("crossfit", Time.valueOf("11:30:00"),"Dimanche",2,"45min","../../../resources/imgs/crossfit.jpg");
       //  Reservation r1= new Reservation(s2,"bechikh","emna",15,67,1.64f, "FEMME",user_recupere);
         //  Reservation r2= new Reservation(s2,"khoufi","anwer",22,69,1.75f, "HOMME",user_recupere);
       //  Reservation r3= new Reservation(s3,"bennaser","Selim",22,69,1.75f, "HOMME",Client);
@@ -37,11 +38,11 @@ public class Main {
 
         //ajout dune seance
 
-        try {
+      /*  try {
             ss.ajouter(s3);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            throw new RuntimeException(e);*/
+      /*  }
 
         System.out.println("******seances********");
         System.out.println(ss.getAll());
@@ -102,15 +103,15 @@ public class Main {
 
         //ajouter une reservation
 
-        //1ere methode
-        Seance seance=ss.getOneById(20);
-        Reservation r1= new Reservation(seance,"jabeur","ons",5,69,1.74f, "FEMME",user_recupere);
-        Reservation r4= new Reservation(seance,"khoufi","anwer",22,69,1.75f, "HOMME",user_recupere);
-        try {
-            sr.ajouter(r1);
+        //1ere methode*/
+      //  Seance seance=ss.getOneById(20);
+       // Reservation r1= new Reservation(seance,"jabeur","ons",5,69,1.74f, "FEMME",user_recupere);
+       // Reservation r4= new Reservation(seance,"khoufi","anwer",22,69,1.75f, "HOMME",user_recupere);
+      /*  try {
+         //   sr.ajouter(r1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
         // System.out.println("**********liste des reservations***************");
 
         //2eme methode
@@ -121,22 +122,22 @@ public class Main {
 
 
         //supprimer reservation
-       int idResasupprimer=sr.getIdReservationByNom(r1.getNompersonne());
-        System.out.println("l id a supprimer: "+idResasupprimer);
+    //   int idResasupprimer=sr.getIdReservationByNom(r1.getNompersonne());
+     /*   System.out.println("l id a supprimer: "+idResasupprimer);
         try {
             sr.supprimer((idResasupprimer));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         System.out.println("-----------apres suppression-------------------");
-        System.out.println(sr.getAll());
+        System.out.println(sr.getAll());*/
 
        // System.out.println("**********************************************");
 
         //modifier une reservation
 
         //1eere methode
-        System.out.println("avant modification: "+sr.getOneById(62));
+      /*  System.out.println("avant modification: "+sr.getOneById(62));
         Reservation ReservationAMettreAJour = sr.getOneById(62);
         ReservationAMettreAJour.setNom("jabeur");
         ReservationAMettreAJour.setPoids(87.5f);
@@ -147,7 +148,7 @@ public class Main {
             throw new RuntimeException(e);
         }
         System.out.println(sr.getOneById(62));
-        System.out.println("*****************************************************");
+        System.out.println("*****************************************************");*/
 
         //2eme methode
 

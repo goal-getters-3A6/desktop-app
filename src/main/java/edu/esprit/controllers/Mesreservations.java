@@ -1,4 +1,4 @@
-package edu.esprit.controllers;
+/*package edu.esprit.controllers;
 
 import edu.esprit.entities.Reservation;
 import edu.esprit.entities.User;
@@ -308,4 +308,4 @@ public class Mesreservations {
         RadioButton selectedRadioButton = (RadioButton) sexeToggleGroup.getSelectedToggle();
         return selectedRadioButton.getText();
     }
-}
+}*/
