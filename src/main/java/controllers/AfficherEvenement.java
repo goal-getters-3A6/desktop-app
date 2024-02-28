@@ -92,22 +92,9 @@ public class AfficherEvenement implements Initializable {
         Stage eventDetailsStage = new Stage();
 
         // create the event details layout
-        AnchorPane eventDetailsPane = new AnchorPane();
+        HBox eventDetailsPane = new HBox(10); // spacing between nodes
         eventDetailsPane.setPadding(new Insets(10));
-        eventDetailsPane.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         eventDetailsPane.getStyleClass().add("event-details");
-
-        // create the event details label
-        String details = "Détails de l'événement:\n" +
-                "Adresse: " + evenement.getAdresse_eve() + "\n" +
-                "Date de début: " + evenement.getDated_eve() + "\n" +
-                "Date de fin: " + evenement.getDatef_eve() + "\n" +
-                "Nombre maximum de participants: " + evenement.getNbr_max() + "\n" +
-                "Image: " + evenement.getImage_eve();
-        Label eventDetailsLabel = new Label(details);
-        eventDetailsLabel.setFont(new Font("Arial", 14));
-        eventDetailsLabel.setWrapText(true);
-        eventDetailsLabel.getStyleClass().add("label");
 
         // create the event image
         String imagePath = evenement.getImage_eve();
@@ -129,6 +116,18 @@ public class AfficherEvenement implements Initializable {
         imageView.setFitHeight(200);
         imageView.getStyleClass().add("image-view");
 
+        // create the event details label
+        String details = "Détails de l'événement:\n" +
+                "Non De L'Evenement :" +evenement.getNom_eve() + "\n" +
+                "Adresse: " + evenement.getAdresse_eve() + "\n" +
+                "Date de début: " + evenement.getDated_eve() + "\n" +
+                "Date de fin: " + evenement.getDatef_eve() + "\n" +
+                "Nombre maximum de participants: " + evenement.getNbr_max();
+        Label eventDetailsLabel = new Label(details);
+        eventDetailsLabel.setFont(new Font("Arial", 14));
+        eventDetailsLabel.setWrapText(true);
+        eventDetailsLabel.getStyleClass().add("label");
+
         // create the close button
         Button closeButton = createCloseButton(eventDetailsStage);
         closeButton.getStyleClass().add("close-button");
@@ -137,7 +136,7 @@ public class AfficherEvenement implements Initializable {
         eventDetailsPane.getChildren().addAll(imageView, eventDetailsLabel, closeButton);
 
         // add the layout to the stage
-        Scene eventDetailsScene = new Scene(eventDetailsPane, 400, 300);
+        Scene eventDetailsScene = new Scene(eventDetailsPane, 600, 300); // increased width to accommodate both image and text
         eventDetailsStage.setScene(eventDetailsScene);
         eventDetailsStage.show();
     }

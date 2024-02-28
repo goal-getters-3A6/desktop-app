@@ -60,8 +60,7 @@ public class ModifierEvent implements Initializable {
     @FXML
     private AnchorPane scene_id;
 
-    @FXML
-    private ImageView image;
+
     private final Service_evenement SE = new Service_evenement();
     private Evenement evenement;
 
@@ -82,6 +81,13 @@ public class ModifierEvent implements Initializable {
             datef_id.setValue(new java.sql.Date(evenement.getDatef_eve().getTime()).toLocalDate());
         }
         nbr_max_id.setText(String.valueOf(evenement.getNbr_max()));
+        // Charger et afficher l'image de l'événement
+        String imagePath = evenement.getImage_eve();
+        if (imagePath != null) {
+            File file = new File(imagePath);
+            Image image = new Image(file.toURI().toString());
+            image_id.setImage(image);
+        }
     }
 
     @Override

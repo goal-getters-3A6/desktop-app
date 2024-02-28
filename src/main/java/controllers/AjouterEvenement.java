@@ -130,7 +130,8 @@ public class AjouterEvenement {
             prodData.setDatef_eve(datef_eve);
 
             // Appeler la méthode d'ajout de service avec l'objet Evenement
-            SE.ajouter(prodData);
+            SE.ajouter(prodData , imagePath);
+
 
             // Afficher un message de succès
             showSuccessMessage("Event ajouté avec succès");
