@@ -1,6 +1,6 @@
 package controllers;
 
-import Service.Service_evenement;
+import Service.ServiceEvenement;
 import entities.Evenement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +31,7 @@ import java.util.Set;
 
 public class AfficherEvenement implements Initializable {
 
-    private final Service_evenement SE = new Service_evenement();
+    private final ServiceEvenement SE = new ServiceEvenement();
 
     @FXML
     public GridPane gridPane;

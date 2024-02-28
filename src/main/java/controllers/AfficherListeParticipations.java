@@ -1,7 +1,7 @@
 package controllers;
 
-import Service.Service_Participation;
-import Service.Service_evenement;
+import Service.ServiceParticipation;
+import Service.ServiceEvenement;
 import Utils.PDFGenerator;
 import entities.Evenement;
 import entities.Participation;
@@ -12,20 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
-import javafx.util.Callback;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,7 +30,7 @@ public class AfficherListeParticipations implements Initializable {
     @FXML
     private ComboBox<String> comboBox;
 
-    private final Service_Participation ssp = new Service_Participation();
+    private final ServiceParticipation ssp = new ServiceParticipation();
     private final PDFGenerator pdfGenerator = new PDFGenerator();
 
     @FXML
@@ -139,25 +131,35 @@ public class AfficherListeParticipations implements Initializable {
 
     }
 
-    public void delete () {
-        Participation prodData = listView.getSelectionModel().getSelectedItem();
-        if (prodData == null) {
-            // Aucun élément sélectionné, vous pouvez gérer cela en affichant un message d'erreur ou en retournant simplement
+    public void delete() throws SQLException {
+        Participation participation = listView.getSelectionModel().getSelectedItem();
+        if (participation == null) {
+            // Aucune participation sélectionnée, affichez un message d'erreur ou retournez simplement
             return;
         }
 
-        int id_eve = prodData.getId_p(); // Supposons que getId_eve() renvoie l'identifiant de l'événement
-        ssp.supprimer(id_eve); // Appeler la méthode supprimer avec l'identifiant de l'événement
-        // Afficher une boîte de dialogue pour informer l'utilisateur que la suppression a réussi
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Validation");
-        alert.setContentText("Event supprimé avec succès");
-        alert.showAndWait();
-        // Recharger les données dans la listView
-        initialize(null,null);
-        // Mettre à jour les statistiques
-        updateStatistics();
-    }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cette participation ?");
+        alert.setContentText("Cette action est irréversible.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+
+                int id_participation = participation.getId_p();
+                // Appeler la méthode supprimer avec l'identifiant de la participation
+                ssp.supprimer(id_participation);
+                // Afficher une boîte de dialogue pour informer l'utilisateur que la suppression a réussi
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setTitle("Validation");
+                successAlert.setContentText("Participation supprimée avec succès");
+                successAlert.showAndWait();
+                // Recharger les données dans la listView
+                initialize(null, null);
+                // Mettre à jour les statistiques
+                updateStatistics();
+            }
+        }
 
     public void update () {
 
@@ -226,7 +228,7 @@ public class AfficherListeParticipations implements Initializable {
     }
 
     private String getEventName(int eventId) {
-        Service_evenement serviceEvenement = new Service_evenement();
+        ServiceEvenement serviceEvenement = new ServiceEvenement();
         Evenement event = serviceEvenement.getOneById(eventId);
         return event != null ? event.getNom_eve() : "Nom de l'événement inconnu";
     }

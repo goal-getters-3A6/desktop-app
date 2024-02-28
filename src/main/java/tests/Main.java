@@ -1,7 +1,7 @@
 package tests;
 
-import Service.Service_Participation;
-import Service.Service_evenement;
+import Service.ServiceParticipation;
+import Service.ServiceEvenement;
 import entities.Evenement;
 import entities.Participation;
 
@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        Service_evenement sp = new Service_evenement();
-        Service_Participation ssp = new Service_Participation();
+        ServiceEvenement sp = new ServiceEvenement();
+        ServiceParticipation ssp = new ServiceParticipation();
 
         Evenement ev1 = new Evenement("comar",new Date() , new Date(),40,"tunis","" );
         //Evenement ev2 = new Evenement(20, "evenement2", "menzah6", new Date(), new Date());

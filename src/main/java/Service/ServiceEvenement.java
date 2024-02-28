@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Service_evenement implements IService<Evenement> {
+public class ServiceEvenement implements IService<Evenement> {
     Connection cnx = DataSource.getInstance().getCnx();
 
     @Override

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Service_Participation implements IService<Participation>{
+public class ServiceParticipation implements IService<Participation>{
     Connection cnx = DataSource.getInstance().getCnx();
     @Override
     public void ajouter(Participation p) throws SQLException{
@@ -70,7 +70,7 @@ public class Service_Participation implements IService<Participation>{
             ps.setInt(1, id_p);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Service_evenement se = new Service_evenement();
+                ServiceEvenement se = new ServiceEvenement();
                 Evenement e = se.getOneById(rs.getInt("idf_event"));
                 participation = new Participation(
                         rs.getString("nom_p"),
@@ -96,7 +96,7 @@ public class Service_Participation implements IService<Participation>{
 
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Service_evenement se = new Service_evenement();
+            ServiceEvenement se = new ServiceEvenement();
             Evenement e = se.getOneById(rs.getInt("idf_event"));
             Participation participation = new Participation(
                     rs.getString("nom_p"),

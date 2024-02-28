@@ -12,18 +12,16 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import entities.Evenement;
-import Service.Service_evenement;
+import Service.ServiceEvenement;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
+
 public class AfficherEvenementListeView implements Initializable {
 
 
@@ -53,7 +51,7 @@ public class AfficherEvenementListeView implements Initializable {
     private String imagePath;
     @FXML
     private ComboBox<String> comboBox;
-    private final Service_evenement SE = new Service_evenement();
+    private final ServiceEvenement SE = new ServiceEvenement();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

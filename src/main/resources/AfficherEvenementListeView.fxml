@@ -11,28 +11,52 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AfficherEvenementListeView">
 
-   <ListView fx:id="listView" layoutX="172.0" layoutY="132.0" onMouseClicked="#selectItem" prefHeight="349.0" prefWidth="621.0" />
+   <ListView fx:id="listView" layoutX="152.0" layoutY="126.0" onMouseClicked="#selectItem" prefHeight="349.0" prefWidth="641.0" />
    <Button layoutX="524.0" layoutY="85.0" mnemonicParsing="false" onAction="#rechercher" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: db1f48;" text="Rechercher" />
    <TextField fx:id="recherhce_id" layoutX="634.0" layoutY="91.0" promptText="rechecher" />
    <ComboBox fx:id="comboBox" layoutX="181.0" layoutY="90.0" onAction="#comboBoxSelected" prefWidth="150.0" style="-fx-background-color: #004369;" />
-   <Pane prefHeight="600.0" prefWidth="165.0" style="-fx-background-color: #004369;">
+   <Pane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #004369;">
       <children>
-         <ImageView fitHeight="105.0" fitWidth="121.0" layoutX="27.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="105.0" fitWidth="121.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <image>
-               <Image url="@../../../../../Downloads/Capture%20d'écran%202024-02-28%20192843.png" />
+               <Image url="@Photos/Logo.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="50.0" fitWidth="60.0" layoutX="41.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@Photos/elliptique.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="50.0" fitWidth="58.0" layoutX="41.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@Photos/plan-daffaires.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="61.0" fitWidth="60.0" layoutX="36.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@Photos/abonnement.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="50.0" fitWidth="60.0" layoutX="42.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@Photos/aliments.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="60.0" fitWidth="69.0" layoutX="36.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@Photos/evenement.png" />
+            </image>
+         </ImageView>
+         <ImageView fitHeight="50.0" fitWidth="69.0" layoutX="44.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@Photos/fichier.png" />
             </image>
          </ImageView>
       </children>
    </Pane>
    <ImageView fitHeight="46.0" fitWidth="40.0" layoutX="468.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../../../../Downloads/chercher.png" />
-      </image>
+      <Image url="@Photos/chercher.png" />
    </ImageView>
-   <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="343.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../../../../../Downloads/reload.png" />
-      </image>
-   </ImageView>
+   <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="342.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
 
 </AnchorPane>

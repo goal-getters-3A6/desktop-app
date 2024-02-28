@@ -12,11 +12,11 @@
     </stylesheets>
     <children>
         <HBox fx:id="hBoxEvents" layoutX="75.0" layoutY="216.0" prefHeight="283.0" prefWidth="704.0" spacing="10" />
-      <Label layoutX="292.0" layoutY="140.0" prefHeight="64.0" prefWidth="357.0" text="Nos Evenements" textAlignment="RIGHT">
+      <Label layoutX="390.0" layoutY="135.0" prefHeight="64.0" prefWidth="357.0" text="Nos Evenements">
          <font>
             <Font name="Baskerville Old Face" size="43.0" />
          </font>
       </Label>
-      <AnchorPane prefHeight="114.0" prefWidth="855.0" style="-fx-background-color: #004369;" />
+      <AnchorPane prefHeight="114.0" prefWidth="1204.0" style="-fx-background-color: #004369;" />
     </children>
 </AnchorPane>

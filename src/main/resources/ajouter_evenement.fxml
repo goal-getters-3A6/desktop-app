@@ -37,7 +37,44 @@
          </font></Button>
         <DatePicker fx:id="dated_id" layoutX="366.0" layoutY="325.0" prefHeight="35.0" prefWidth="200.0" />
         <DatePicker fx:id="datef_id" layoutX="366.0" layoutY="369.0" prefHeight="35.0" prefWidth="200.0" />
-      <AnchorPane layoutX="-10.0" prefHeight="114.0" prefWidth="854.0" style="-fx-background-color: #004369;" />
+      <AnchorPane layoutX="-10.0" prefHeight="114.0" prefWidth="854.0" style="-fx-background-color: #004369;">
+         <children>
+            <Label layoutX="145.0" layoutY="73.0" prefHeight="27.0" prefWidth="73.0" text="Accueil" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="217.0" layoutY="73.0" prefHeight="28.0" prefWidth="110.0" text="Equipement" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="324.0" layoutY="73.0" prefHeight="27.0" prefWidth="73.0" text="Planning" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="407.0" layoutY="73.0" prefHeight="28.0" prefWidth="110.0" text="Abonnement" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="523.0" layoutY="73.0" prefHeight="28.0" prefWidth="101.0" text="Alimentaire" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="625.0" layoutY="72.0" prefHeight="28.0" prefWidth="110.0" text="Evenement" textFill="#32a8d3">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="720.0" layoutY="72.0" prefHeight="28.0" prefWidth="121.0" text="Reclamation" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
         <Label layoutX="245.0" layoutY="461.0" text="nombre max:">
          <font>
             <Font size="18.0" />
@@ -70,12 +107,12 @@
       </Label>
       <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="552.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Downloads/add.png" />
+            <Image url="@Photos/add.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="97.0" fitWidth="101.0" layoutX="20.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Downloads/Capture%20d'écran%202024-02-28%20192843.png" />
+            <Image url="@Photos/Logo.png" />
          </image>
       </ImageView>
 

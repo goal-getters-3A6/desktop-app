@@ -30,7 +30,7 @@
       <Button fx:id="modif_btn" layoutX="567.0" layoutY="388.0" minHeight="45.0" mnemonicParsing="false" onAction="#update_new" prefWidth="130.0" style="-fx-background-color: db1f48;" text="Modifier" textFill="WHITE" />
       <ImageView fitHeight="93.0" fitWidth="101.0" layoutX="623.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Downloads/Capture%20d'écran%202024-02-27%20150300.png" />
+            <Image url="@Photos/reload.png" />
          </image>
       </ImageView>
       <ImageView fx:id="image_id" fitHeight="218.0" fitWidth="232.0" layoutX="41.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />

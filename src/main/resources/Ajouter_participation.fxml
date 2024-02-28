@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="NomId" cache="true" cacheHint="QUALITY" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterParticipation">
+<AnchorPane fx:id="NomId" cache="true" cacheHint="QUALITY" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="800.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterParticipation">
     <children>
-      <Pane layoutX="156.0" layoutY="181.0" prefHeight="372.0" prefWidth="489.0" style="-fx-background-color: #38afb5;">
+      <Pane layoutX="156.0" layoutY="145.0" prefHeight="372.0" prefWidth="533.0" style="-fx-background-color: #38afb5;">
          <children>
               <Label layoutX="46.0" layoutY="102.0" text="NOM">
                   <font>
@@ -36,11 +36,11 @@
                       <Font size="18.0" />
                   </font>
             </Label>
-            <Label fx:id="nomMessage" layoutX="331.0" layoutY="99.0" prefHeight="34.0" prefWidth="146.0" />
-            <Label fx:id="emailMessage" layoutX="331.0" layoutY="241.0" prefHeight="34.0" prefWidth="146.0" />
+            <Label fx:id="nomMessage" layoutX="331.0" layoutY="99.0" prefHeight="34.0" prefWidth="192.0" />
+            <Label fx:id="emailMessage" layoutX="331.0" layoutY="241.0" prefHeight="34.0" prefWidth="289.0" />
             <TextField fx:id="nom_id" layoutX="121.0" layoutY="98.0" prefHeight="35.0" prefWidth="200.0" />
-            <Label fx:id="prenomMessage" layoutX="326.0" layoutY="140.0" prefHeight="34.0" prefWidth="155.0" />
-            <Label fx:id="ageMessage" layoutX="331.0" layoutY="197.0" prefHeight="34.0" prefWidth="146.0" />
+            <Label fx:id="prenomMessage" layoutX="326.0" layoutY="140.0" prefHeight="34.0" prefWidth="200.0" />
+            <Label fx:id="ageMessage" layoutX="331.0" layoutY="197.0" prefHeight="34.0" prefWidth="282.0" />
               <Button fx:id="ajouter_btn" layoutX="146.0" layoutY="294.0" mnemonicParsing="false" onAction="#Ajouter_participation" prefHeight="51.0" prefWidth="169.0" style="-fx-background-color: db1f48;" text="Ajouter" textFill="#ffeeee">
                   <font>
                       <Font size="24.0" />
@@ -51,24 +51,59 @@
                       <Font size="45.0" />
                   </font>
               </Label>
-            <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="332.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="332.0" layoutY="296.0" opacity="0.72" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Downloads/add.png" />
+                  <Image url="@Photos/add.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-        <Button fx:id="retour_btn" layoutX="621.0" layoutY="519.0" mnemonicParsing="false" onAction="#retourner" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: db1f48;" text="Retour" textFill="WHITE">
+        <Button fx:id="retour_btn" layoutX="515.0" layoutY="526.0" mnemonicParsing="false" onAction="#retourner" prefHeight="45.0" prefWidth="130.0" style="-fx-background-color: db1f48;" text="Retour" textFill="WHITE">
             <font>
                 <Font size="24.0" />
             </font></Button>
       <Pane prefHeight="109.0" prefWidth="800.0" style="-fx-background-color: #004369;">
          <children>
-            <ImageView fitHeight="97.0" fitWidth="101.0" layoutX="70.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="97.0" fitWidth="101.0" layoutX="14.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Downloads/Capture%20d'écran%202024-02-28%20192843.png" />
+                  <Image url="@Photos/Logo.png" />
                </image>
             </ImageView>
+            <Label layoutX="111.0" layoutY="69.0" prefHeight="27.0" prefWidth="73.0" text="Accueil" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="183.0" layoutY="69.0" prefHeight="28.0" prefWidth="110.0" text="Equipement" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="290.0" layoutY="69.0" prefHeight="27.0" prefWidth="73.0" text="Planning" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="373.0" layoutY="69.0" prefHeight="28.0" prefWidth="110.0" text="Abonnement" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="489.0" layoutY="69.0" prefHeight="28.0" prefWidth="101.0" text="Alimentaire" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="591.0" layoutY="68.0" prefHeight="28.0" prefWidth="110.0" text="Evenement" textFill="#32a8d3">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="686.0" layoutY="68.0" prefHeight="28.0" prefWidth="121.0" text="Reclamation" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
     </children>
