@@ -19,10 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -54,11 +51,14 @@ public class AfficherEvenementListeView implements Initializable {
     private TextField nbr_max_id;
 
     private String imagePath;
-
+    @FXML
+    private ComboBox<String> comboBox;
     private final Service_evenement SE = new Service_evenement();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialiser le ComboBox avec les options de tri
+        comboBox.getItems().addAll("Nom", "Date de début", "Date de fin", "Nombre maximum de participants", "Adresse");
         try {
             ObservableList<Evenement> evenements = FXCollections.observableArrayList(SE.getAll());
             listView.setItems(evenements);
@@ -113,6 +113,42 @@ public class AfficherEvenementListeView implements Initializable {
     }
 
 
+//trie
+
+    @FXML
+    void comboBoxSelected(ActionEvent actionEvent) {
+        String selectedAttribute = comboBox.getValue();
+
+        if (selectedAttribute != null) {
+            ObservableList<Evenement> evenements = listView.getItems();
+
+            // Effectuer le tri en fonction de l'attribut sélectionné
+            switch (selectedAttribute) {
+                case "Nom":
+                    evenements.sort(Comparator.comparing(Evenement::getNom_eve));
+                    break;
+                case "Date de début":
+                    evenements.sort(Comparator.comparing(Evenement::getDated_eve));
+                    break;
+                case "Date de fin":
+                    evenements.sort(Comparator.comparing(Evenement::getDatef_eve));
+                    break;
+                case "Nombre maximum de participants":
+                    evenements.sort(Comparator.comparingInt(Evenement::getNbr_max));
+                    break;
+                case "Adresse":
+                    evenements.sort(Comparator.comparing(Evenement::getAdresse_eve));
+                    break;
+                // Ajoutez d'autres cas pour trier selon d'autres attributs
+                default:
+                    // Gérer le cas par défaut (peut-être afficher un message d'erreur)
+                    break;
+            }
+
+            // Mettre à jour la liste des événements
+            listView.setItems(evenements);
+        }
+    }
 
     private void update_aff(Evenement evenement) {
         try {

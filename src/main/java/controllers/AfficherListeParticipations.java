@@ -75,7 +75,7 @@ public class AfficherListeParticipations implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialiser le ComboBox avec les options de tri
-        comboBox.getItems().addAll("Nom", "Prénom", "Âge", "Autre attribut...");
+        comboBox.getItems().addAll("Nom", "Prénom", "Âge");
         try {
             // Charger le fichier CSS
             String css = Objects.requireNonNull(this.getClass().getResource("/css/listViewStyle.css")).toExternalForm();
@@ -319,9 +319,8 @@ public class AfficherListeParticipations implements Initializable {
                     break;
                 case "Âge":
                     participations.sort(Comparator.comparingInt(Participation::getAge));
-                    break;
-                // Ajoutez d'autres cas pour trier selon d'autres attributs
-                default:
+
+
                     // Gérer le cas par défaut (peut-être afficher un message d'erreur)
                     break;
             }
