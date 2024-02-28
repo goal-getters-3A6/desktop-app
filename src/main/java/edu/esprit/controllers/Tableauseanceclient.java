@@ -56,6 +56,7 @@ public class Tableauseanceclient {
     @FXML
     private TableColumn<Seance,Integer> colonnejour;
 
+
     @FXML
     private HBox hboxtopseancefront;
 

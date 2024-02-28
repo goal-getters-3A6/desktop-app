@@ -119,7 +119,7 @@
             <Image url="@imgs/browse.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelnumsalle" layoutX="554.0" layoutY="422.0" prefHeight="18.0" prefWidth="200.0" />
-      <Label fx:id="labelduree" layoutX="554.0" layoutY="485.0" prefHeight="18.0" prefWidth="200.0" />
+      <Label fx:id="labelnumsalle" layoutX="554.0" layoutY="422.0" prefHeight="18.0" prefWidth="320.0" />
+      <Label fx:id="labelduree" layoutX="554.0" layoutY="485.0" prefHeight="18.0" prefWidth="349.0" />
    </children>
 </AnchorPane>

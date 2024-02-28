@@ -11,9 +11,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import edu.esprit.entities.*;
-import edu.esprit.services.ClientService;
-import edu.esprit.services.UserService;
-import edu.esprit.services.ServiceReservation;
+import edu.esprit.services.*;
 import edu.esprit.services.UserService;
 import edu.esprit.utils.DataSource;
 import edu.esprit.utils.SessionManagement;
@@ -27,6 +25,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -103,8 +102,22 @@ public class Resformualire {
     private RadioButton femme;
 
     @FXML
+    private TableColumn<?, ?> dureeseance;
+    @FXML
     private RadioButton homme;
-  /*  @FXML
+    @FXML
+    private TableView<Seance> tableseance;
+
+    @FXML
+    private TableColumn<?, ?> horaireseance;
+
+    @FXML
+    private TableColumn<?, ?> jourseance;
+
+    @FXML
+    private ListView<Seance> listview;
+
+    /*  @FXML
     private ComboBox<String> jourComboBox;
 
     @FXML
@@ -116,7 +129,8 @@ public class Resformualire {
 
     public void setSeance(Seance seance) {
         this.seance = seance;
-      //  remplirComboBox();
+        updateSeanceInfo();
+
     }
 
 
@@ -128,6 +142,14 @@ public class Resformualire {
 
     @FXML
     private Label labeltaille;
+    @FXML
+    private Label labelduree;
+
+    @FXML
+    private Label labelhoraire;
+
+    @FXML
+    private Label labeljour;
     ServiceReservation sr = new ServiceReservation();
     List<Reservation> resList;
 
@@ -199,37 +221,80 @@ public class Resformualire {
         // Mettre à jour le style des labels pour les rendre non éditables
         labelnom.setDisable(true);
         labelprenom.setDisable(true);
-    }
-
-    /*private void remplirComboBox() {
-        ObservableList<String> horaires = FXCollections.observableArrayList();
-        ObservableList<String> jours = FXCollections.observableArrayList();
-
-        try {
-
-            Connection conn = DataSource.getInstance().getCnx(); // Obtenez la connexion à partir de votre DataSource
-            //PreparedStatement statement = conn.prepareStatement("SELECT horaire, jourseance FROM seance");
-            //ResultSet resultSet = statement.executeQuery();
-            PreparedStatement statement = conn.prepareStatement("SELECT horaire, jourseance FROM seance WHERE nom = ?");
-            statement.setString(1, seance.getNom());
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                String horaire = resultSet.getString("horaire");
-                String jour = resultSet.getString("jourseance");
-                horaires.add(horaire);
-                jours.add(jour);
+        listview.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                labelhoraire.setText(String.valueOf(newSelection.getHoraire()));
+                labeljour.setText(newSelection.getJourseance());
+                labelduree.setText(newSelection.getDuree());
             }
-            horaireComboBox.setItems(horaires);
-            jourComboBox.setItems(jours);
-            System.out.println("la seance " + seance.getNom());
-
-            //conn.close();
+        });
+      /*  tableseance.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                labelhoraire.setText(String.valueOf(newSelection.getHoraire()));
+                labeljour.setText(newSelection.getJourseance());
+                labelduree.setText(newSelection.getDuree());
+            }
+        });*/
+    }
+    private void updateSeanceInfo() {
+        /*ServiceSeance ss = new ServiceSeance();
+        List<Seance> seances = null; // Méthode à implémenter dans ServiceSeance
+        try {
+            seances = ss.getAllByNom(seance.getNom());
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-    }*/
 
+        // Créer une liste observable contenant toutes les séances avec le même nom
+        ObservableList<Seance> seanceList = FXCollections.observableArrayList(seances);
+
+        // Mettre à jour les colonnes avec les informations de toutes les séances
+        horaireseance.setCellValueFactory(new PropertyValueFactory<>("horaire"));
+        jourseance.setCellValueFactory(new PropertyValueFactory<>("jourseance"));
+        dureeseance.setCellValueFactory(new PropertyValueFactory<>("duree"));
+
+        // Mettre à jour le TableView avec la liste observable contenant toutes les séances
+        tableseance.setItems(seanceList);*/
+        ServiceSeance ss = new ServiceSeance();
+        List<Seance> seances = null; // Implémentez la méthode dans ServiceSeance pour récupérer toutes les séances
+        try {
+            seances = ss.getAllByNom(seance.getNom());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Créez une liste observable contenant toutes les séances avec le même nom
+        ObservableList<Seance> seanceList = FXCollections.observableArrayList(seances);
+
+        // Mettez à jour le ListView avec la liste observable contenant toutes les séances
+        listview.setItems(seanceList);
+
+        // Définissez une cell factory pour afficher le nom de la séance dans le ListView
+        listview.setCellFactory(param -> new ListCell<Seance>() {
+            @Override
+            protected void updateItem(Seance item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                   // setText(item.getNom()); // Assurez-vous que getNom() retourne le nom de la séance
+                    // Personnalisez l'affichage pour inclure la durée, le jour et l'horaire
+                    String text = "Jour: " + item.getJourseance() + ", Horaire: " + item.getHoraire() + ", Durée: " + item.getDuree();
+                    setText(text);
+                }
+            }
+        });
+
+        // Ajoutez un écouteur de sélection pour afficher les détails de la séance sélectionnée
+        listview.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                labelhoraire.setText(newSelection.getHoraire().toString());
+                labeljour.setText(newSelection.getJourseance());
+                labelduree.setText(newSelection.getDuree());
+            }
+        });
+    }
 
     @FXML
     void ajouterreservation(ActionEvent event) throws SQLException {

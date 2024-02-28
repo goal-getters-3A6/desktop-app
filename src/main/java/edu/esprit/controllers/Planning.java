@@ -1,4 +1,4 @@
-package edu.esprit.controllers;
+/*package edu.esprit.controllers;
 
 import edu.esprit.utils.CalendarActivity;
 import javafx.event.ActionEvent;
@@ -170,4 +170,4 @@ public class Planning implements Initializable {
 
         return createCalendarMap(calendarActivities);
     }
-}
+}*/

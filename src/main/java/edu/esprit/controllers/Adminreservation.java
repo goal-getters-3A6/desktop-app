@@ -186,7 +186,7 @@ public class Adminreservation {
                         // Vérifier si l'utilisateur associé à la réservation est un client
                         if (reservation.getUser() instanceof Client) {
                             // Si c'est un client, vérifier si le nom correspond au nom recherché
-                            String nomPersonne = ((Client) reservation.getUser()).getNom();
+                            String nomPersonne = (reservation.getSeance()).getNom();
                             return nomPersonne.equalsIgnoreCase(nomRecherche);
                         }
                         return false; // Si l'utilisateur n'est pas un client, exclure cette réservation

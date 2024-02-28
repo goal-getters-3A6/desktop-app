@@ -1,5 +1,7 @@
 package edu.esprit.entities;
 
+import javafx.scene.control.Label;
+
 import java.sql.Time;
 
 import java.util.Objects;
@@ -12,7 +14,7 @@ public class Seance {
     private int numesalle;
     private String duree;
     private String imageseance;
-    final private  int nbMax=8;
+    final private  int nbMax=5;
     private int frequency;
     public Seance()
     {
@@ -29,14 +31,13 @@ public class Seance {
         this.imageseance=image;
 
     }
-    public Seance(String nom,Time horaire,String jour,int numsalle,String duree,String image )
-    {
-        this.nom=nom;
-        this.horaire=horaire;
-        this.jourseance=jour;
-        this.numesalle=numsalle;
-        this.duree=duree;
-        this.imageseance=image;
+    public Seance(String nom,Time horaire,String jour,int numsalle,String duree,String image ) {
+        this.nom = nom;
+        this.horaire = horaire;
+        this.jourseance = jour;
+        this.numesalle = numsalle;
+        this.duree = duree;
+        this.imageseance = image;
 
     }
     public Seance(String nom, int frequency) {

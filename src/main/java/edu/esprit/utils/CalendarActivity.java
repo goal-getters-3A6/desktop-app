@@ -1,14 +1,16 @@
-package edu.esprit.utils;
+/*package edu.esprit.utils;
+import edu.esprit.entities.Seance;
+
 import java.time.ZonedDateTime;
 
     public class CalendarActivity {
         private ZonedDateTime date;
-        private String clientName;
+        private Seance seance;
         private Integer serviceNo;
 
-        public CalendarActivity(ZonedDateTime date, String clientName, Integer serviceNo) {
+        public CalendarActivity(ZonedDateTime date, Seance seance, Integer serviceNo) {
             this.date = date;
-            this.clientName = clientName;
+            this.seance = seance;
             this.serviceNo = serviceNo;
         }
 
@@ -20,13 +22,7 @@ import java.time.ZonedDateTime;
             this.date = date;
         }
 
-        public String getClientName() {
-            return clientName;
-        }
 
-        public void setClientName(String clientName) {
-            this.clientName = clientName;
-        }
 
         public Integer getServiceNo() {
             return serviceNo;
@@ -36,13 +32,23 @@ import java.time.ZonedDateTime;
             this.serviceNo = serviceNo;
         }
 
+        public Seance getSeance() {
+            return seance;
+        }
+
         @Override
         public String toString() {
-            return "CalenderActivity{" +
+            return "CalendarActivity{" +
                     "date=" + date +
-                    ", clientName='" + clientName + '\'' +
+                    ", seanceName=" + seance.getNom() +
+                    ", seanceHoraire=" + seance.getHoraire() +
+                    ", seanceJour=" + seance.getJourseance() +
                     ", serviceNo=" + serviceNo +
                     '}';
         }
-    }
+
+        public void setSeance(Seance seance) {
+            this.seance = seance;
+        }
+    }*/
 
