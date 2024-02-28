@@ -4,6 +4,7 @@ import edu.esprit.entities.AvisEquipement;
 import edu.esprit.entities.Equipement;
 import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
+import javafx.util.Pair;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -115,8 +116,15 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
 
                         Equipement eq = new Equipement(idEq, nomEq, descEq, docEq, imageEq, categEq, noteEq);
 
+                        User user = new User();
+                user.setId(res.getInt("id"));
+                user.setNom(res.getString("nom"));
+                user.setPrenom(res.getString("prenom"));
+                user.setMail(res.getString("mail"));
+                user.setMdp(res.getString("mdp"));
+                user.setImage(res.getString("image"));
+                user.setRole(res.getString("role"));
 
-                User user = new User();
 
                 AvisEquipement aeq = new AvisEquipement(idAEq,commAEq, eq,user);
                 avisequipement.add(aeq);
@@ -126,30 +134,10 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
 
         return avisequipement;
     }
-/*
-    public List<AvisEquipement> getAllByEquipement(int idEquipement) throws SQLException {
-        List<AvisEquipement> avisequipement = new ArrayList<>();
-        String req = "SELECT * FROM avisequipement WHERE idEq = ?";
 
-        PreparedStatement st = cnx.prepareStatement(req);
-        st.setInt(1, idEquipement);
-        ResultSet res = st.executeQuery(req);
-
-        while (res.next()){
-
-            int idAEq = res.getInt("idAEq");
-            String commAEq = res.getString("commAEq");
-
-            AvisEquipement aeq = new AvisEquipement(idAEq,commAEq);
-            avisequipement.add(aeq);
-        }
-
-        return avisequipement;
-
-    }*/
-public List<AvisEquipement> getAllByEquipement(int idEquipement) throws SQLException {
+public List<AvisEquipement> getAllByEquipement(int idEquipement ) throws SQLException {
     List<AvisEquipement> avisequipement = new ArrayList<>();
-    String req = "SELECT * FROM avisequipement WHERE idEq = ?";
+    String req = "SELECT avisequipement.idAEq ,avisequipement.commAEq , user.nom AS user_nom ,user.prenom AS user_prenom FROM avisequipement INNER JOIN user ON avisequipement.idUs = user.id WHERE avisequipement.idEq = ?";
 
     try (PreparedStatement st = cnx.prepareStatement(req)) {
         st.setInt(1, idEquipement);
@@ -157,9 +145,15 @@ public List<AvisEquipement> getAllByEquipement(int idEquipement) throws SQLExcep
         try (ResultSet res = st.executeQuery()) {
             while (res.next()) {
                 int idAEq = res.getInt("idAEq");
-                String commAEq = res.getString("commAEq");
 
-                AvisEquipement aeq = new AvisEquipement(idAEq, commAEq);
+
+                String commAEq = res.getString("commAEq");
+                String userNom = res.getString("user_nom");
+                String userPrenom = res.getString("user_prenom");
+                User user = new User(userNom , userPrenom);
+
+
+                AvisEquipement aeq = new AvisEquipement( idAEq,commAEq ,user);
                 avisequipement.add(aeq);
             }
         }
@@ -168,44 +162,34 @@ public List<AvisEquipement> getAllByEquipement(int idEquipement) throws SQLExcep
     return avisequipement;
 }
 
-    public List<AvisEquipement> getAllByUser(String email) {
-
-        List<AvisEquipement> abonnements = new ArrayList<>();
-        String req = "SELECT avisequipement.idAEq, avisequipement.commAEq, equipement.idEq, equipement.nomEq, equipement.descEq, equipement.docEq, equipement.imageEq, equipement.categEq, equipement.noteEq " +
-                "FROM avisequipement " +
-                "INNER JOIN equipement ON user.id = avisequipement.idUs";
+    public List<AvisEquipement> getAllIds(int idEquipement ) throws SQLException {
+        List<AvisEquipement> avisequipement = new ArrayList<>();
+        String req = "SELECT user.id AS user_idU FROM avisequipement INNER JOIN user ON avisequipement.idUs = user.id WHERE avisequipement.idEq = ?";
 
         try (PreparedStatement st = cnx.prepareStatement(req)) {
-            st.setString(1, email);
-            ResultSet res = st.executeQuery();
+            st.setInt(1, idEquipement);
 
-            while (res.next()) {
-                int idAEq = res.getInt(1);
-                String commAEq = res.getString("commAEq");
+            try (ResultSet res = st.executeQuery()) {
+                while (res.next()) {
+                    int idAEq = res.getInt("idAEq");
+                    int id = res.getInt("user_idU");
 
-                int idEq= res.getInt("idEq");
-                String nomEq = res.getString("nomEq");
-                String descEq = res.getString("descEq");
-                String docEq = res.getString("docEq");
-                String imageEq = res.getString("imageEq");
-                String categEq = res.getString("categEq");
-                int noteEq = res.getInt("noteEq");
-
-                Equipement eq = new Equipement(idEq, nomEq, descEq, docEq, imageEq, categEq, noteEq );
+                    User user = new User(id);
 
 
-                User user = new User();
-                //user.setNom(nom);
-
-                AvisEquipement a = new AvisEquipement(idAEq,commAEq, eq,user);
-                abonnements.add(a);
+                    AvisEquipement aeq = new AvisEquipement( idAEq ,user);
+                    avisequipement.add(aeq);
+                }
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
         }
 
-        return abonnements;
+        return avisequipement;
     }
+
+
+
+
+
 
     public void incrementLike(int idAEq) throws SQLException {
         AvisEquipement avisEquipement = getOneById(idAEq);

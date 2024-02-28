@@ -89,7 +89,7 @@ public class DetailsEquipement {
 
         this.equipement = equipement;
         String imagePath = equipement.getImageEq();
-          Image image = new Image("file:" + imagePath); // Supposant que le chemin est absolu, sinon ajustez-le en conséquence
+        Image image = new Image("file:" + imagePath); // Supposant que le chemin est absolu, sinon ajustez-le en conséquence
         imageViewF.setImage(image);
 
     }
@@ -164,7 +164,6 @@ public class DetailsEquipement {
                         editIcon.setFitWidth(25);
                         editIcon.setFitHeight(25);
                         editButton.getStyleClass().add("icon-button");
-                        int aeq;
                         editButton.setOnAction(event -> modifierAEquipement(editButton)); // Appeler la méthode modifierEquipement avec l'équipement associé
 
                         // Définir les données utilisateur du bouton editButton avec l'équipement associé
@@ -172,11 +171,15 @@ public class DetailsEquipement {
 
                         Label label = new Label();
                         label.setText(item.getCommAEq());
+                        Label label1 = new Label();
+                        label1.setText(item.getUser().getNom());
+                        Label label2 = new Label();
+                        label2.setText(item.getUser().getPrenom());
 
 
 
-                        HBox iconsContainer = new HBox(label, new Region(), deleteButton, editButton);
-                        iconsContainer.setSpacing(150); // Espacement entre les éléments
+                        HBox iconsContainer = new HBox(label1,label2,label, deleteButton, editButton);
+                        iconsContainer.setSpacing(50); // Espacement entre les éléments
 
 // Configurer l'espace flexible pour pousser les boutons à la fin de la ligne
                         HBox.setHgrow(new Region(), Priority.ALWAYS);
@@ -214,7 +217,7 @@ public class DetailsEquipement {
 
             //  System.out.println(equipement.getIdEq());
             if (eq != null) {
-System.out.println(user);
+                System.out.println(user);
                 AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq, user));
                 initialize(eq.getIdEq()); // Refresh only the reviews section
                 CommIdAEq.clear();
@@ -238,29 +241,44 @@ System.out.println(user);
     }
     private void supprimerAEquipement(Button deleteButton) {
         try {
-            // Récupérer l'avis d'équipement associé au bouton de suppression
+              // Récupérer l'avis d'équipement associé au bouton de suppression
+           // AvisEquipement Aequipement = (AvisEquipement) deleteButton.getUserData();
+
+
+// Récupérer l'avis d'équipement
             AvisEquipement Aequipement = (AvisEquipement) deleteButton.getUserData();
 
-            // Afficher une boîte de dialogue de confirmation
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation de suppression");
-            alert.setHeaderText(null);
-            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet avis d'équipement ?");
+            // Vérifier si l'utilisateur actuel est le même que celui associé à l'avis d'équipement
+            if ( user.getNom().equals(Aequipement.getUser().getNom()) ) {
+                // Afficher une boîte de dialogue de confirmation
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation de suppression");
+                alert.setHeaderText(null);
+                alert.setContentText("Êtes-vous sûr de vouloir supprimer cet avis d'équipement ?");
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                // L'utilisateur a confirmé la suppression
-                // Supprimer l'avis d'équipement de la base de données et de la liste
-                AES.supprimer(Aequipement.getIdAEq());
-                listViewAEqF.getItems().remove(Aequipement);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    // L'utilisateur a confirmé la suppression
+                    // Supprimer l'avis d'équipement de la base de données et de la liste
+                    AES.supprimer(Aequipement.getIdAEq());
+                    listViewAEqF.getItems().remove(Aequipement);
+                } else {
+                    // L'utilisateur a annulé la suppression
+                    // Vous pouvez ajouter un message ou des actions supplémentaires ici si nécessaire
+                }
             } else {
-                // L'utilisateur a annulé la suppression
-                // Vous pouvez ajouter un message ou des actions supplémentaires ici si nécessaire
+                // Afficher une alerte indiquant que l'utilisateur actuel ne peut pas supprimer cet avis
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Vous n'êtes pas autorisé à supprimer cet avis d'équipement.");
+                alert.showAndWait();
             }
         } catch (SQLException e) {
             e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
         }
     }
+
 
 
 
@@ -274,18 +292,28 @@ System.out.println(user);
             AvisEquipement aeqMod = AES.getOneById(Aequipement.getIdAEq());
 
             if (aeqMod != null) {
-                // Set the modified content from the CommIdAEq TextField
-                aeqMod.setCommAEq(CommIdAEq.getText());
-                if (user instanceof Client) {
-                    // Si c'est un client, afficher les détails de la réservation dans la cellule
-                    //  Client client = (Client) reservation.getUser();
-                    Client client = (Client) user; // Convertir l'utilisateur en client
+                // Vérifier si l'utilisateur actuel est le même que celui associé à l'avis d'équipement
+                String nomUtilisateurActuel = user.getNom();
 
-                // Update the AvisEquipement in the database
-                AES.modifier(aeqMod);
-                initialize(aeqMod.getEquipement().getIdEq());
-                CommIdAEq.clear();
-            }}
+                if (Aequipement != null && nomUtilisateurActuel.equals(Aequipement.getUser().getNom())) {
+                    // L'utilisateur actuel est le même que celui associé à l'avis d'équipement
+                    // Set the modified content from the CommIdAEq TextField
+                    aeqMod.setCommAEq(CommIdAEq.getText());
+
+                    // Update the AvisEquipement in the database
+                    AES.modifier(aeqMod);
+                    initialize(aeqMod.getEquipement().getIdEq());
+                    CommIdAEq.clear();
+                } else {
+                    // L'utilisateur actuel n'est pas le même que celui associé à l'avis d'équipement
+                    // Afficher une alerte indiquant que l'utilisateur actuel ne peut pas modifier cet avis
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Erreur");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Vous n'êtes pas autorisé à modifier cet avis d'équipement.");
+                    alert.showAndWait();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately (e.g., show an error message)
         }

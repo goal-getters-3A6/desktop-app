@@ -2,6 +2,7 @@ package edu.esprit.controllers;
 
 import edu.esprit.entities.Client;
 import edu.esprit.entities.Equipement;
+import edu.esprit.entities.User;
 import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceEquipement;
 import edu.esprit.utils.SessionManagement;

@@ -75,6 +75,22 @@ private User user;
         this.user = user;
     }
 
+    public AvisEquipement(int idAEq, String commAEq, User user) {
+        this.idAEq = idAEq;
+        this.commAEq = commAEq;
+        this.user = user;
+    }
+
+    public AvisEquipement(String commAEq, User user) {
+        this.commAEq = commAEq;
+        this.user = user;
+    }
+
+    public AvisEquipement(int idAEq, User user) {
+        this.idAEq = idAEq;
+        this.user = user;
+    }
+
 
     public int getIdAEq() {
         return idAEq;

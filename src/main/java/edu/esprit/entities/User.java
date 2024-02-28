@@ -11,6 +11,19 @@ public class User {
     private String image;
     private String role;
 
+
+
+    public User(String nom ,String prenom) {
+
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
+    public User(int id) {
+        this.id=id;
+    }
+
+
     public String getRole() {
         return role;
     }

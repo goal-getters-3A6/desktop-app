@@ -51,15 +51,33 @@ public class AvisEquipementBack {
                         setGraphic(null);
                     } else {
                         // Créer un label pour afficher le nom de l'équipement
-                        Label equipementLabel = new Label(  item.getEquipement().getNomEq());
+                    /*    Label equipementLabel = new Label(  item.getEquipement().getNomEq());
+                        Label userLabel = new Label(  item.getUser().getNom());
+                        Label userLabel1 = new Label(  item.getUser().getPrenom());
                         // Créer un label pour afficher le commentaire de l'avis
-                        Label commAEqLabel = new Label(  item.getCommAEq());
+                        Label commAEqLabel = new Label(  item.getCommAEq());*/
 
                         // Créer un conteneur HBox pour contenir les labels
-                        HBox hbox = new HBox( commAEqLabel,new Region() ,equipementLabel);
+                        HBox hbox = new HBox(10); // Add spacing between elements
+
+                        Label userLabel = new Label("Nom: "+(item.getUser().getNom()));
+                        Label userLabel1 = new Label("Prénom: "+(item.getUser().getPrenom()));
+                        Label commAEqLabel = new Label("Commentaire: "+(item.getCommAEq()));
+                        Label equipementLabel = new Label("Equipement: "+(item.getEquipement().getNomEq()));
+
+// Apply styles if needed
+                        userLabel.setStyle("-fx-font-weight: bold;");
+                        userLabel1.setStyle("-fx-font-weight: bold;");
+                        commAEqLabel.setStyle("-fx-font-weight: bold;");
+                        equipementLabel.setStyle("-fx-font-weight: bold;");
+
+                        hbox.getChildren().addAll(userLabel, userLabel1, commAEqLabel, equipementLabel);
+
+// You can add hbox to your layout or scene as needed
+
                         hbox.setSpacing(50);
                         // Aligner les éléments à gauche dans le conteneur HBox
-                        hbox.setAlignment(Pos.CENTER_LEFT);
+                        hbox.setAlignment(Pos.TOP_LEFT);
 
                         // Définir le conteneur HBox comme contenu graphique de la cellule
                         setGraphic(hbox);

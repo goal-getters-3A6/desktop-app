@@ -15,7 +15,7 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <ListView fx:id="listViewAEqB" layoutX="212.0" layoutY="131.0" prefHeight="330.0" prefWidth="598.0" />
+      <ListView fx:id="listViewAEqB" layoutX="212.0" layoutY="131.0" prefHeight="330.0" prefWidth="598.0" style="-fx-background-color: #365679;" />
       <Button layoutX="733.0" layoutY="483.0" mnemonicParsing="false" onAction="#consulterEq" text="Liste des équipements" />
    </children>
 </AnchorPane>
