@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -22,6 +24,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AjouterReclamation {
+
     private final ServiceReclamation SR = new ServiceReclamation();
     @FXML
     private ComboBox<String> categorieRecid;
@@ -34,11 +37,7 @@ public class AjouterReclamation {
 
     @FXML
     private TextField piéceJointeRecid;
-    @FXML
-    private TableView<?> recid;
 
-    @FXML
-    private TableColumn<?, ?> recidC;
     @FXML
     private VBox Vboxid;
     @FXML
@@ -59,6 +58,12 @@ public class AjouterReclamation {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
     @FXML
     void initialize()
@@ -89,13 +94,34 @@ public class AjouterReclamation {
     @FXML
     void Ajouter(ActionEvent event) {
         try {
+            // Contrôle de saisie pour descriptionRecid
+            String description = descriptionRecid.getText().trim();
+            if (!description.matches("^[A-Z].*\\.$")) {
+                showAlert("Erreur de saisie", "La description doit commencer par une majuscule et se terminer par un point.");
+                return;
+            }
 
-           // User us1 =new User (1,"mayssa","hakimi");
+            // Contrôle de saisie pour oddRecid
+            String oddValue = oddRecid.getText().trim();
+            if (!oddValue.matches("ODD[1-9]|ODD1[0-7]")) {
+                showAlert("Erreur de saisie", "La valeur ODD doit être écrite comme par exemlpe ODD1 .");
+                return;
+            }
+
+            // Contrôle de saisie pour serviceRecid (si nécessaire)
+            String selectedService = serviceRecid.getSelectionModel().getSelectedItem();
+            if (selectedService == null) {
+                // Aucun service sélectionné, vous pouvez afficher une alerte ou prendre une autre action
+                showAlert("Information", "Le service peut être vide.");
+            }
+
+            // User us1 =new User (1,"mayssa","hakimi");
             SR.ajouter(new Reclamation(categorieRecid.getSelectionModel().getSelectedItem(),descriptionRecid.getText(), oddRecid.getText(),piéceJointeRecid.getText(),serviceRecid.getSelectionModel().getSelectedItem(),u));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Validation");
             alert.setContentText("Réclamation added succesfully");
             alert.showAndWait();
+            clearForm();
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -105,6 +131,14 @@ public class AjouterReclamation {
         /*} catch (IOException e) {
             throw new RuntimeException(e);*/
        }
+    }
+    private void clearForm () {
+
+        descriptionRecid.setText("");
+        oddRecid.setText("");
+        piéceJointeRecid.setText("");
+
+
     }
    @FXML
     void AfficherRec(ActionEvent event) throws IOException {
@@ -117,21 +151,77 @@ public class AjouterReclamation {
         }
     }
 
+    @FXML
+    private AnchorPane anchorpanedash1;
 
-   @FXML
-    void afficherAbByUser(ActionEvent event) {
-        int userId = 1;
-        List<Reclamation> reclamations = SR.getAllByUser(u.getMail());
-        for (Reclamation reclamation : reclamations) {
-            // Créer un Label pour chaque propriété de la réclamation
-            Label categorieLabel = new Label("Categorie: " + reclamation.getCategorieRec());
-            Label descriptionLabel = new Label("Description: " + reclamation.getDescriptionRec());
-            // Ajouter les Labels au VBox
-            Vboxid.getChildren().addAll(categorieLabel, descriptionLabel);
-            // Ajouter un espace entre chaque réclamation
-            Vboxid.getChildren().add(new Label("")); // Ajoute un Label vide pour créer un espace
+    @FXML
+    private Button btnabonnement1;
 
-        }}
+    @FXML
+    private Button btnaccueil1;
+
+    @FXML
+    private Button btnalimentaire1;
+
+    @FXML
+    private Button btnequipement1;
+
+    @FXML
+    private Button btnevenement1;
+
+    @FXML
+    private Button btnplanning1;
+
+    @FXML
+    private Button btnprofil1;
+
+    @FXML
+    private Button btnreclamation1;
+
+    @FXML
+    private ImageView logo11;
+
+    @FXML
+    void abonnement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void accueil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void alimentaire(ActionEvent event) {
+
+    }
+
+
+
+    @FXML
+    void equipement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void evenement(ActionEvent event) {
+
+    }
+
+    @FXML
+    void planning(ActionEvent event) {
+
+    }
+
+    @FXML
+    void profil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+
+    }
 
     }
 

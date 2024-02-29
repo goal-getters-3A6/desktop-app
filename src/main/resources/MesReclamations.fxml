@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
@@ -17,7 +18,7 @@
    <children>
       <AnchorPane layoutX="-5.0" layoutY="7.0" prefHeight="858.0" prefWidth="1541.0" style="-fx-background-color: #fffaed;">
          <children>
-            <ListView fx:id="listview" layoutX="429.0" layoutY="175.0" prefHeight="495.0" prefWidth="935.0" />
+            <ListView fx:id="listview" layoutX="514.0" layoutY="356.0" prefHeight="300.0" prefWidth="935.0" style="-fx-background-color: #D1C8C1;" />
             <GridPane fx:id="gridpane" layoutX="142.0" layoutY="89.0" prefHeight="26.0" prefWidth="21.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="6.199951171875" minWidth="0.5999755859375" prefWidth="0.5999755859375" />
@@ -35,7 +36,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnreclamation" layoutX="1283.0" layoutY="59.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+                  <Button fx:id="btnreclamation" layoutX="1283.0" layoutY="59.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="#38afb5">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -55,7 +56,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnplanning" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+                  <Button fx:id="btnplanning" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -77,9 +78,24 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Button fx:id="btnmodifier" layoutX="225.0" layoutY="553.0" minWidth="28.0" mnemonicParsing="false" onAction="#modifier" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: db1f48;" text="Modifier" textFill="WHITE" />
-            <TextField fx:id="aaa" layoutX="130.0" layoutY="279.0" prefHeight="36.0" prefWidth="158.0" />
-            <TextArea fx:id="descriptionRecid" layoutX="130.0" layoutY="341.0" prefHeight="162.0" prefWidth="158.0" />
+            <Button fx:id="btnmodifier" layoutX="203.0" layoutY="660.0" minWidth="28.0" mnemonicParsing="false" onAction="#modifier" prefHeight="66.0" prefWidth="202.0" style="-fx-background-color: db1f48;" text="Reformuler votre récalmation" textFill="WHITE" />
+            <TextField fx:id="aaa" editable="false" layoutX="271.0" layoutY="373.0" prefHeight="36.0" prefWidth="159.0" />
+            <TextArea fx:id="descriptionRecid" layoutX="272.0" layoutY="442.0" prefHeight="162.0" prefWidth="158.0" />
+            <Label layoutX="695.0" layoutY="210.0" prefHeight="86.0" prefWidth="430.0" text="Mes réclamations :" textFill="#004369">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+            <Label layoutX="63.0" layoutY="376.0" text="Catégorie :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="515.0" text="Contenu de récalmation :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

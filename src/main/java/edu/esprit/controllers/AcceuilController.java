@@ -236,7 +236,7 @@ public class AcceuilController {
     void reclamation(ActionEvent event) {
         try{
         // Charger le fichier FXML de la page "lesseancesfront.fxml"
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesReclamations.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
         Parent root = loader.load();
         // Créer une nouvelle scène avec la vue chargée
         Scene scene = new Scene(root);
