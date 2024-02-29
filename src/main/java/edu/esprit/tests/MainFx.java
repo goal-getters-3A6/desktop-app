@@ -9,16 +9,15 @@ import java.io.IOException;
 public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //FXMLLoader loader= new FXMLLoader(getClass().getResource("/TypeAbonnements.fxml"));
-       // FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterAbonnement.fxml"));
-        //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AbonnemntsBack.fxml"));
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/acceuil.fxml"));
+      //  FXMLLoader loader= new FXMLLoader(getClass().getResource("/TypeAbonnements.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("/AbonnemntsBack.fxml"));
+      //  FXMLLoader loader= new FXMLLoader(getClass().getResource("/acceuil.fxml"));
 
         Parent root=loader.load();
         Scene scene=new Scene(root);
         primaryStage.setScene(scene);
 
-        primaryStage.setTitle("ajouter");
+        primaryStage.setTitle("GoFit");
         primaryStage.show();
 
     }

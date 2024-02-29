@@ -64,6 +64,7 @@ public class ProfilController {
 
     @FXML
     private ImageView logo;
+
     @FXML
     private Button btnabonnement;
     private ClientService clientService = new ClientService();
@@ -107,7 +108,7 @@ public class ProfilController {
     @FXML
     void abonnement(ActionEvent event) {
 
-        try {
+      try {
             // Charger le fichier FXML de la page "lesseancesfront.fxml"
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/TypeAbonnements.fxml"));
             Parent root = loader.load();

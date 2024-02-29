@@ -51,8 +51,7 @@ public class AcceuilController {
     @FXML
     private Button btnplanning;
     @FXML
-
-    private Button  btnabonnement;
+    private Button btnabonnement;
     UserService userService = new UserService();
     User u = new User();
 
@@ -84,6 +83,7 @@ public class AcceuilController {
                 profilitem.setText("Profile");
             }
         } else {
+
             mdpTxt.setVisible(true);
             emailTxt.setVisible(true);
             forgotpassword.setVisible(true);
@@ -168,17 +168,20 @@ public class AcceuilController {
         }
     }
 
-
+    @FXML
+    private Button btnor;
     @FXML
     void abonnement(ActionEvent event) {
         try {
             // Charger le fichier FXML de la page "lesseancesfront.fxml"
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesAbonnements.fxml"));
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesAbonnements.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TypeAbonnements.fxml"));
+
             Parent root = loader.load();
             // Créer une nouvelle scène avec la vue chargée
             Scene scene = new Scene(root);
             // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
-            Stage stage = (Stage) btnabonnement.getScene().getWindow();
+            Stage stage = (Stage) btnor.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {

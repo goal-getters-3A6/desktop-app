@@ -9,24 +9,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="845.0" prefWidth="1528.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterAbonnementF">
    <children>
       <AnchorPane layoutX="6.0" layoutY="-3.0" prefHeight="865.0" prefWidth="1546.0" style="-fx-background-color: #fffaed;">
          <children>
-            <Label layoutX="823.0" layoutY="307.0" prefHeight="18.0" prefWidth="42.0" text="Email" />
-            <TextField fx:id="nomid" layoutX="896.0" layoutY="303.0" />
-            <TextField fx:id="montantid" layoutX="1108.0" layoutY="436.0" />
-            <Label layoutX="841.0" layoutY="202.0" prefHeight="45.0" prefWidth="327.0" text="Saisissez vos données de paiement">
+            <Label layoutX="934.0" layoutY="293.0" prefHeight="30.0" prefWidth="97.0" text="Email :">
                <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="1014.0" layoutY="440.0" prefHeight="18.0" prefWidth="67.0" text="Montant" />
-            <Label layoutX="1121.0" layoutY="306.0" prefHeight="18.0" prefWidth="98.0" text="Date d'expiration " />
-            <Button layoutX="1062.0" layoutY="528.0" mnemonicParsing="false" onAction="#AjoutAbonnement" prefHeight="26.0" prefWidth="91.0" text="Ajouter" />
-            <DatePicker fx:id="dateid" layoutX="1246.0" layoutY="302.0" />
+                  <Font size="20.0" />
+               </font></Label>
+            <TextField fx:id="montantid" layoutX="1092.0" layoutY="516.0" />
+            <Label layoutX="934.0" layoutY="514.0" prefHeight="30.0" prefWidth="107.0" text="Montant :">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Label layoutX="933.0" layoutY="406.0" prefHeight="30.0" prefWidth="202.0" text="Date d'expiration :">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Button layoutX="1041.0" layoutY="690.0" mnemonicParsing="false" onAction="#AjoutAbonnement" prefHeight="66.0" prefWidth="202.0" style="-fx-background-color: #db1f48;" text="Créer">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <DatePicker fx:id="dateid" layoutX="1242.0" layoutY="408.0" />
             <AnchorPane fx:id="anchorpanedash" layoutX="-5.0" prefHeight="134.0" prefWidth="1550.0" style="-fx-background-color: #004369;">
                <children>
                   <Button fx:id="btnprofil" layoutX="1371.0" layoutY="14.0" mnemonicParsing="false" onAction="#profil" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
@@ -76,16 +82,27 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Pane layoutX="-14.0" layoutY="134.0" prefHeight="732.0" prefWidth="764.0" style="-fx-background-color: #38afb5;">
-               <children>
-                  <Label layoutX="146.0" layoutY="65.0" text="Description 1 ">
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
+            <Label fx:id="emailid" layoutX="1128.0" layoutY="295.0" prefHeight="26.0" prefWidth="194.0" />
+            <Label layoutX="954.0" layoutY="183.0" prefHeight="45.0" prefWidth="327.0" text="Saisissez vos données" textAlignment="CENTER" textFill="#004369">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
+      <Pane layoutX="-2.0" layoutY="131.0" opacity="0.9" prefHeight="732.0" prefWidth="776.0" style="-fx-background-color: #D1C8C1;">
+         <children>
+            <Text layoutX="120.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Optez pour notre abonnement familial et faites de la remise en forme une expérience partagée ! Notre abonnement familial vous donne accès à notre salle de sport haut de gamme pour toute la famille. Profitez d'un environnement propice à la motivation et à l'activité physique, où chaque membre de la famille peut trouver des activités adaptées à ses besoins. Cet abonnement facilite le renforcement des liens familiaux tout en promouvant un mode de vie sain" wrappingWidth="564.0033264160156">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Label layoutX="260.0" layoutY="93.0" text="Abonnement Familial" textFill="#004369">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

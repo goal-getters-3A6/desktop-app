@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -12,12 +14,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="845.0" prefWidth="1528.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.MesAbonnements">
    <children>
       <AnchorPane layoutX="-1.0" layoutY="-3.0" prefHeight="858.0" prefWidth="1534.0" style="-fx-background-color: #fffaed;">
          <children>
-            <ListView fx:id="listview" layoutX="429.0" layoutY="175.0" prefHeight="495.0" prefWidth="935.0" />
+            <ListView fx:id="listview" layoutX="486.0" layoutY="327.0" prefHeight="300.0" prefWidth="935.0" style="-fx-background-color: #D1C8C1;" />
             <GridPane fx:id="gridpane" layoutX="142.0" layoutY="89.0" prefHeight="26.0" prefWidth="21.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="6.199951171875" minWidth="0.5999755859375" prefWidth="0.5999755859375" />
@@ -50,12 +51,12 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnabonnement" layoutX="682.0" layoutY="59.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+                  <Button fx:id="btnabonnement" layoutX="682.0" layoutY="59.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="#38afb5">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnplanning" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+                  <Button fx:id="btnplanning" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -77,25 +78,28 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Button fx:id="btnmodifier" layoutX="109.0" layoutY="622.0" minWidth="28.0" mnemonicParsing="false" onAction="#modifier" prefHeight="43.0" prefWidth="72.0" style="-fx-background-color: db1f48;" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="26.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../Downloads/Users/lenovo/Downloads/pen.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            <Button fx:id="btnmodifier" layoutX="125.0" layoutY="559.0" minWidth="28.0" mnemonicParsing="false" onAction="#modifier" prefHeight="66.0" prefWidth="202.0" style="-fx-background-color: db1f48;" text="Prolonger mon abonnement" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Button>
-            <Button fx:id="btnsupprimer" layoutX="19.0" layoutY="622.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="43.0" prefWidth="72.0" style="-fx-background-color: db1f48;" textFill="WHITE">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../Downloads/Users/lenovo/Downloads/bin.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <TextField fx:id="kk" layoutX="130.0" layoutY="279.0" />
+            <TextField fx:id="kk" layoutX="191.0" layoutY="467.0" />
+            <DatePicker fx:id="dateid" layoutX="274.0" layoutY="388.0" />
+            <Label layoutX="784.0" layoutY="185.0" prefHeight="86.0" prefWidth="430.0" text="Mes abonnements :" textFill="#004369">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+            <Label layoutX="55.0" layoutY="386.0" prefHeight="30.0" prefWidth="202.0" text="Date d'expiration :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="70.0" layoutY="464.0" prefHeight="30.0" prefWidth="91.0" text="Montant :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

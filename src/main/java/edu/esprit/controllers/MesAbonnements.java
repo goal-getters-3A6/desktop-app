@@ -9,11 +9,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -65,6 +72,9 @@ public class MesAbonnements {
     private TextField kk;
 
     @FXML
+    private DatePicker dateid;
+
+    @FXML
     private ScrollPane scrollpane;
 
     ServiceAbonnement sr =new ServiceAbonnement();
@@ -111,9 +121,8 @@ public class MesAbonnements {
                         //  Client client = (Client) reservation.getUser();
                         Client client = (Client) u; // Convertir l'utilisateur en client
 
-                        setText("Mon Abonnement  : " + abonnement.getTypeAb() +
-                               ", Date d'expiration " + client.getNom());
-                             //  ", Prénom de la personne: " + client.getPrenom()+"poids: "+client.getPoids()+"Taille" + client.getTaille());
+                        setText("Mon Abonnement est de type  : " + abonnement.getTypeAb() +
+                               ", sa date d'expiration est " + abonnement.getDateExpirationAb() +" avec un prix de "+ abonnement.getMontantAb());
                     } else {
                         // Si l'utilisateur n'est pas un client, afficher un message par défaut
                         setText("L'utilisateur associé à cette réservation n'est pas un client.");
@@ -127,8 +136,8 @@ public class MesAbonnements {
             if (newValue != null) {
                 // Mettre à jour les champs de texte avec les détails de la réservation sélectionnée
                 // Assurez-vous que l'utilisateur associé à la réservation est un client
-
-                kk.setText(newValue.getTypeAb());
+                dateid.setValue(newValue.getDateExpirationAb().toLocalDate());
+                kk.setText(String.valueOf(newValue.getMontantAb()));
 
 
             }
@@ -137,80 +146,94 @@ public class MesAbonnements {
 
     @FXML
     void modifier(ActionEvent event) {
-/*
-        String type = kk.getText().trim();
-       // String prenomPersonne = textfieldprenom.getText().trim();
 
-
-// Expressions régulières pour le nom et le prénom
-        String nomRegex = "^[A-Za-zÀ-ÿ\\s-]{1,50}$"; // Autorise les lettres, les espaces, les tirets et les apostrophes, jusqu'à 50 caractères
-        String prenomRegex = "^[A-Za-zÀ-ÿ-]{1,50}$"; // Autorise les lettres et les tirets, jusqu'à 50 caractères
-
+        String cat = kk.getText().trim();
 // Définition des constantes pour les messages d'erreur
-        final String ERROR_TITLE = "Validation Error";
-        final String ERROR_STYLE = "-fx-text-fill: red;";
+        final String ERROR_TITLE = "Error";
 
 // Vérifier que les champs sont remplis et respectent les contraintes de saisie
         boolean isValid = true;
-        if (type.isEmpty() ) {
+        if (cat.isEmpty()) {
             isValid = false;
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(ERROR_TITLE);
-            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.setContentText("Veuillez remplir le montant.");
             alert.showAndWait();
-        } else {
-            if (!type.matches(nomRegex)) {
-                isValid = false;
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle(ERROR_TITLE);
-                alert.setContentText("Veuillez saisir un nom valide.");
-                alert.showAndWait();
-            }
-           /* if (!prenomPersonne.matches(prenomRegex)) {
-                isValid = false;
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle(ERROR_TITLE);
-                alert.setContentText("Veuillez saisir un prénom valide.");
-                alert.showAndWait();
-            }*/
-        /*}
-
+        }
         if (isValid) {
             // Les saisies sont valides, procéder à la modification
             Abonnement selectedReservation = listview.getSelectionModel().getSelectedItem();
             if (selectedReservation != null) {
-                //Client client = (Client) selectedReservation.getUser();
-                // Modifier les propriétés du client
-                // selectedReservation.setPoids(Float.parseFloat(poidsStr));
-                // selectedReservation.setTaille(Float.parseFloat(tailleStr));
+                // Modifier le type d'abonnemnts du client
+                selectedReservation.setMontantAb(Float.parseFloat(cat));
+                Float nouveauMontant = (float) Double.parseDouble(cat);
+                // Vérifier que le nouveau montant est supérieur au montant existant + 50
+                if (nouveauMontant > selectedReservation.getMontantAb() + 50){
+                    // Modifier le type d'abonnement du client
+                    selectedReservation.setTypeAb(cat);}
+                else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Error");
+                    alert.setContentText("Veuillez saisir un montant supérieure de 50 au celle avant prolongement");
+                    alert.showAndWait();
+                    }
 
-               // u.setNom(nomPersonne);
-                //u.setPrenom(prenomPersonne);
+                    LocalDate newExpirationDate = dateid.getValue();
+                    // Check if the expiration date is at least 3 days in the future
+                    LocalDate currentDate = LocalDate.now();
+                    Period period = Period.between(currentDate, selectedReservation.getDateExpirationAb().toLocalDate());
 
-                // Mettre à jour la réservation dans la base de données
-                sr.modifier(selectedReservation);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Modification");
-                alert.setContentText("Réservation modifiée avec succès.");
-                alert.showAndWait();
+                    if (period.getDays() <= 3) {
+                        // Update the expiration date
+                        selectedReservation.setDateExpirationAb(java.sql.Date.valueOf(newExpirationDate));
 
-                // clearForm(); // Effacer les champs du formulaire après la modification
-                listview.refresh();
-            } else {
-                // Afficher un message à l'utilisateur indiquant qu'aucune réservation n'a été sélectionnée
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle(ERROR_TITLE);
-                alert.setContentText("Veuillez sélectionner une abonnement à modifier.");
-                alert.showAndWait();
+
+                        // Mettre à jour l'abonnement dans la base de données
+                        sr.modifier(selectedReservation);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Modification");
+                        alert.setContentText("Votre réclamation est modifiée avec succès.");
+                        alert.showAndWait();
+
+                        //  clearForm(); // Effacer les champs du formulaire après la modification
+                        listview.refresh();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Error");
+                        alert.setContentText("Votre abonnement reste encore valable");
+                        alert.showAndWait();
+                    }
+                }
+            else {
+                    // Afficher un message à l'utilisateur indiquant qu'aucune réservation n'a été sélectionnée
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle(ERROR_TITLE);
+                    alert.setContentText("Veuillez sélectionner une abonnement à modifier.");
+                    alert.showAndWait();
+                }
+
             }
-
         }
-*/
-    }
+
+
 
     @FXML
     void abonnement(ActionEvent event) {
+        try {
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesAbonnements.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/TypeAbonnements.fxml"));
 
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) listview.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
 
     @FXML

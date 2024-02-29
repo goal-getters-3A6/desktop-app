@@ -13,9 +13,7 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -119,10 +117,13 @@ public class AbonnemntsBack {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        setText(item.getTypeAb() + "      " + item.getDateExpirationAb()+ "      " +item.getCodePromoAb() + "      " + item.getMontantAb()+ "      " + item.getUtilisateur().getNom());
+                        //setText(item.getTypeAb() + "      " + item.getDateExpirationAb()+ "      " +item.getCodePromoAb() + "      " + item.getMontantAb()+ "      " + item.getUtilisateur().getNom());
+                        setText("Abonnement est de type  : " + item.getTypeAb() + " " + "et de date d'expiration est " + item.getDateExpirationAb() );
+                        int x =item.getUtilisateur().getId();
+                        System.out.println(x);
 
                         // Créer les boutons avec des icônes
-                       /* ImageView detailIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/document.png")));
+                        ImageView detailIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/document.png")));
                         Button detailButton = new Button("", detailIcon);
                         detailIcon.setFitWidth(25);
                         detailIcon.setFitHeight(25);
@@ -130,7 +131,7 @@ public class AbonnemntsBack {
                         detailButton.setOnAction(event -> {
                             afficherDetail(detailButton); // Appeler la méthode supprimerEquipement avec l'équipement associé
                         });
-                        detailButton.setUserData(item);*/
+                        detailButton.setUserData(item);
 
                         ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/bin.png")));
                         Button deleteButton = new Button("", deleteIcon);
@@ -144,7 +145,7 @@ public class AbonnemntsBack {
 
                         // Créer un HBox pour contenir les boutons et l'espace flexible
                         HBox hbox = new HBox();
-                        hbox.getChildren().addAll(deleteButton);
+                        hbox.getChildren().addAll(deleteButton,detailButton);
 
                         // Créer un espace flexible pour pousser les boutons à la fin de la ligne
                         Region spacer = new Region();
@@ -167,22 +168,21 @@ public class AbonnemntsBack {
     // Méthodes pour gérer les actions des boutons
     private void afficherDetail(Button detailButton) {
         try {
-            // Récupérer l'équipement associé au bouton editButton
+            // Récupérer l'abonnement associé au bouton editButton
             Abonnement abonnement = (Abonnement) detailButton.getUserData();
 
             // Charger le fichier FXML de la nouvelle interface
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsEquipementBack.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AbonnemntsBackDetails.fxml"));
             Parent root = loader.load();
 
 
             // Récupérer le contrôleur de la nouvelle interface
-            //DetailsEquipementBack controller = loader.getController();
+            DetailsAbonnmentB controller = loader.getController();
 
-            // Passer une référence à ce contrôleur (AfficherEquipementBack)
-           // controller.setParentController(this);
+            // Passer une référence à ce contrôleur (AfficherAbonnemntsBack)
+           controller.setParentController(this);
 
-            // Initialiser les données de l'équipement dans ModifierEquipementBack
-            //controller.initData(equipement);
+            controller.initData(abonnement);
 
             detailButton.getScene().setRoot(root);
         } catch (IOException e) {
@@ -192,12 +192,24 @@ public class AbonnemntsBack {
 
 
     private void supprimerEquipement(Button deleteButton) {
-        // Récupérer l'équipement associé au bouton de suppression
+        // Récupérer l'abonnement associé au bouton de suppression
         Abonnement abonnement = (Abonnement) deleteButton.getUserData();
 
-        // Supprimer l'équipement de la base de données et de la liste
-        SA.supprimer(abonnement.getIdA());
-        ListViewAbId.getItems().remove(abonnement);
+        // Afficher une boîte de confirmation
+        Alert confirmationDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationDialog.setTitle("Confirmation de la suppression");
+        confirmationDialog.setHeaderText("Voulez-vous vraiment supprimer cet abonnement ?");
+        confirmationDialog.setContentText("Cette action est irréversible.");
+
+        // Obtenir le résultat de la boîte de confirmation
+        ButtonType result = confirmationDialog.showAndWait().orElse(ButtonType.CANCEL);
+
+        // Si l'utilisateur confirme la suppression, procéder à la suppression
+        if (result == ButtonType.OK) {
+            // Supprimer l'abonnement de la base de données et de la liste
+            SA.supprimer(abonnement.getIdA());
+            ListViewAbId.getItems().remove(abonnement);
+        }
     }
 
 

@@ -1,39 +1,26 @@
 package edu.esprit.controllers;
 
-
 import edu.esprit.entities.Abonnement;
 import edu.esprit.entities.Client;
-import edu.esprit.entities.User;
 import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceAbonnement;
 import edu.esprit.utils.SessionManagement;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-//
-//
-//
 
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-public class AjouterAbonnement {
+public class AjouterAbonnementF {
 
     @FXML
     private AnchorPane anchorpanedash;
@@ -63,9 +50,6 @@ public class AjouterAbonnement {
     private Button btnreclamation;
 
     @FXML
-    private TextField codeid;
-
-    @FXML
     private DatePicker dateid;
 
     @FXML
@@ -76,7 +60,6 @@ public class AjouterAbonnement {
 
     @FXML
     private TextField montantid;
-
     private final ServiceAbonnement SA = new ServiceAbonnement();
     SessionManagement ss=new SessionManagement();
     String mail=ss.getEmail();
@@ -95,31 +78,25 @@ public class AjouterAbonnement {
     @FXML
     void initialize()
     {
-        emailid.setText("mayssahakimi@gmail.com");
+        emailid.setText(mail);
 
     }
 
     @FXML
     void AjoutAbonnement(ActionEvent event) {
         try {
-
-            String code = codeid.getText();
-            if (!code.matches("GoFit[2-5][0-9]")) {
-                showAlert("Validation du Code", "Format de code invalide. Il doit être de GoFit20 à GoFit50.");
-                return;
-            }
-
-
+            // Validate dateid
             LocalDate selectedDate = dateid.getValue();
             if (selectedDate == null || selectedDate.isBefore(LocalDate.now())) {
                 showAlert("Validation de la Date", "Date invalide. Veuillez sélectionner une date future.");
                 return;
             }
 
-
+            // Validate montantid
             String montant = montantid.getText();
-            if (!montant.equals("50")) {
-                showAlert("Validation du Montant", "Montant invalide. Il doit être exactement de 50 Dinars.");
+            if (!montant.equals("150")) {
+                showAlert("Validation du Montant", "Montant invalide. Il doit être exactement de 150 Dinars.");
+
                 return;
             }
             String str = String.valueOf(dateid.getValue());
@@ -127,7 +104,7 @@ public class AjouterAbonnement {
             java.sql.Date sqlDate = java.sql.Date.valueOf( date );
             //User us1 =new User (1,"mayssa","hakimi");
 
-            SA.ajouter(new Abonnement(Float.parseFloat(montantid.getText()),codeid.getText(),"Ordinaire",sqlDate,u));
+            SA.ajouter(new Abonnement(Float.parseFloat(montantid.getText()),"","Familiale",sqlDate,u));
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Validation");
             alert.setContentText("\"Abonnement enregistré\", \"Félicitations ! Votre abonnement a été enregistré avec succès. Merci ! ");
@@ -147,12 +124,12 @@ public class AjouterAbonnement {
     }
 
     private void clearForm () {
-        codeid.setText("");
         montantid.setText("");
         dateid.setValue(null);
 
 
     }
+
     @FXML
     void abonnement(ActionEvent event) {
         try {
@@ -170,10 +147,6 @@ public class AjouterAbonnement {
             ex.printStackTrace();
             // Gérer l'exception si le chargement de la vue échoue
         }
-    }
-    @FXML
-    void test(ActionEvent event) {
-
     }
 
     @FXML
@@ -212,4 +185,3 @@ public class AjouterAbonnement {
     }
 
 }
-

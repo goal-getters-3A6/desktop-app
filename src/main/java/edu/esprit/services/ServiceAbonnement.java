@@ -5,11 +5,8 @@ import edu.esprit.entities.User;
 import edu.esprit.utils.DataSource;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.sql.*;
-import java.util.HashSet;
 
 public class ServiceAbonnement implements IService<Abonnement> {
 
@@ -120,7 +117,7 @@ public class ServiceAbonnement implements IService<Abonnement> {
                 String codePromoAb = res.getString("codePromoAb");
                 String typeAb = res.getString("typeAb");
 
-                User e = new User();
+                User e = new User(id,nom,prenom,mail, Arrays.toString(image));
                 Abonnement a = new Abonnement(idA, montantAb,codePromoAb, typeAb, dateExpirationAb,e);
                 abonnements.add(a);
             }

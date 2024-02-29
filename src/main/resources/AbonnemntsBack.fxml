@@ -94,8 +94,8 @@
             <Image url="@imgs/plan-daffaires.png" />
          </image>
       </ImageView>
-      <ListView fx:id="ListViewAbId" layoutX="345.0" layoutY="199.0" prefHeight="388.0" prefWidth="1115.0" />
-      <Label layoutX="650.0" layoutY="84.0" text="La liste des abonnements " textFill="#365679">
+      <ListView fx:id="ListViewAbId" layoutX="321.0" layoutY="277.0" prefHeight="404.0" prefWidth="1115.0" style="-fx-background-color: #365679;" />
+      <Label layoutX="606.0" layoutY="139.0" text="La liste des abonnements " textFill="#365679">
          <font>
             <Font size="45.0" />
          </font>
