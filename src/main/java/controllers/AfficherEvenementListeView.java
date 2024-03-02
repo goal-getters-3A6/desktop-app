@@ -112,8 +112,8 @@ public class AfficherEvenementListeView implements Initializable {
                                 // Créer une ImageView pour afficher l'image de l'événement
                                 ImageView imageView = new ImageView();
                                 imageView.setImage(new Image("file:" + item.getImage_eve()));
-                                imageView.setFitWidth(100);
-                                imageView.setFitHeight(100);
+                                imageView.setFitWidth(75);
+                                imageView.setFitHeight(75);
 
                                 HBox buttonsContainer = new HBox(deleteButton, editButton , imageView);
                                 buttonsContainer.setSpacing(10);
@@ -137,6 +137,7 @@ public class AfficherEvenementListeView implements Initializable {
             e.printStackTrace();
         }
     }
+
 
 
 //trie
