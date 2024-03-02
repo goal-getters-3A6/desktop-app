@@ -45,6 +45,7 @@ public class AfficherEvenementListeView implements Initializable {
     @FXML
     private DatePicker datef_id;
 
+
     @FXML
     private TextField nbr_max_id;
 
@@ -53,13 +54,24 @@ public class AfficherEvenementListeView implements Initializable {
     private ComboBox<String> comboBox;
     private final ServiceEvenement SE = new ServiceEvenement();
 
+    private List<Evenement> listeEvenements;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Initialiser le ComboBox avec les options de tri
         comboBox.getItems().addAll("Nom", "Date de début", "Date de fin", "Nombre maximum de participants", "Adresse");
         try {
+
+
+
             ObservableList<Evenement> evenements = FXCollections.observableArrayList(SE.getAll());
             listView.setItems(evenements);
+
+
+
+
+
             listView.setCellFactory(new Callback<ListView<Evenement>, ListCell<Evenement>>() {
                 @Override
                 public ListCell<Evenement> call(ListView<Evenement> param) {
@@ -105,6 +117,8 @@ public class AfficherEvenementListeView implements Initializable {
                     };
                 }
             });
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -191,6 +205,7 @@ public class AfficherEvenementListeView implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            initialize(null ,null);
         }
     }
 

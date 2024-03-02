@@ -1,10 +1,15 @@
 package Service;
 
 import Utils.DataSource;
+import controllers.CalendarActivity;
 import entities.Evenement;
 
 import java.sql.*;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ServiceEvenement implements IService<Evenement> {
@@ -129,6 +134,13 @@ public class ServiceEvenement implements IService<Evenement> {
             String image_eve = res.getString(7);
             Evenement evenement = new Evenement(id_eve, nom_eve, dated_eve, datef_eve, nbr_max, adresse_eve, image_eve);
             evenements.add(evenement);
+            // Correction : Créer un objet CalendarActivity pour chaque événement récupéré
+            List<CalendarActivity> calendarActivities = new ArrayList<>();
+
+            CalendarActivity calendarActivity = new CalendarActivity(ZonedDateTime.ofInstant(dated_eve.toInstant(), ZoneId.systemDefault()), nom_eve, id_eve);
+            // Ajouter l'objet CalendarActivity à la liste des activités du calendrier
+            calendarActivities.add(calendarActivity);
+
         }
         return evenements;
     }
@@ -205,4 +217,31 @@ public class ServiceEvenement implements IService<Evenement> {
 //
 //        return resultats;
 //    }
+
+
+
+    public Set<Evenement> getEvenementsByMonth(int year, int month) throws SQLException {
+        Set<Evenement> evenements = new HashSet<>();
+        String req = "SELECT * FROM evenement WHERE YEAR(date_deve) = ? AND MONTH(date_deve) = ?";
+        try (PreparedStatement ps = cnx.prepareStatement(req)) {
+            ps.setInt(1, year);
+            ps.setInt(2, month);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id_eve = rs.getInt(1);
+                String nom_eve = rs.getString(2);
+                Date dated_eve = rs.getDate(3);
+                Date datef_eve = rs.getDate(4);
+                int nbr_max = rs.getInt(5);
+                String adresse_eve = rs.getString(6);
+                String image_eve = rs.getString(7);
+                Evenement evenement = new Evenement(id_eve, nom_eve, dated_eve, datef_eve, nbr_max, adresse_eve, image_eve);
+                evenements.add(evenement);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return evenements;
+    }
+
 }
