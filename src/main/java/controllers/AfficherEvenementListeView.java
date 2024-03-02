@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -21,6 +22,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+
+import javafx.scene.image.ImageView;
 
 public class AfficherEvenementListeView implements Initializable {
 
@@ -65,8 +68,9 @@ public class AfficherEvenementListeView implements Initializable {
 
 
 
-            ObservableList<Evenement> evenements = FXCollections.observableArrayList(SE.getAll());
-            listView.setItems(evenements);
+            Set<Evenement> evenements = SE.getAll();
+            ObservableList<Evenement> observableList = FXCollections.observableArrayList(evenements);
+            listView.setItems(observableList);
 
 
 
@@ -104,8 +108,18 @@ public class AfficherEvenementListeView implements Initializable {
                             if (empty || item == null) {
                                 setGraphic(null);
                             } else {
-                                HBox buttonsContainer = new HBox(deleteButton, editButton);
+
+                                // Créer une ImageView pour afficher l'image de l'événement
+                                ImageView imageView = new ImageView();
+                                imageView.setImage(new Image("file:" + item.getImage_eve()));
+                                imageView.setFitWidth(100);
+                                imageView.setFitHeight(100);
+
+                                HBox buttonsContainer = new HBox(deleteButton, editButton , imageView);
                                 buttonsContainer.setSpacing(10);
+
+
+
                                 setGraphic(buttonsContainer);
                                 setText("    " + item.getNom_eve() + "              " +
                                         "    " + item.getDated_eve() + "              " +

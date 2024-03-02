@@ -107,6 +107,13 @@ public class AjouterEvenement {
             return;
         }
 
+
+        // Vérifier que la date de début de l'événement n'est pas dépassée
+        if (dated_id.getValue().isBefore(LocalDate.now())) {
+            showAlert("Erreur de saisie", "La date de début de l'événement est déjà passée");
+            return;
+        }
+
         // Effectuer l'ajout de l'événement en appelant la méthode d'ajout de service
         Evenement prodData = new Evenement();
         prodData.setNom_eve(nom_id.getText());

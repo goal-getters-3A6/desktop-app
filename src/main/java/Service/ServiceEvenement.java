@@ -137,9 +137,9 @@ public class ServiceEvenement implements IService<Evenement> {
             // Correction : Créer un objet CalendarActivity pour chaque événement récupéré
             List<CalendarActivity> calendarActivities = new ArrayList<>();
 
-            CalendarActivity calendarActivity = new CalendarActivity(ZonedDateTime.ofInstant(dated_eve.toInstant(), ZoneId.systemDefault()), nom_eve, id_eve);
-            // Ajouter l'objet CalendarActivity à la liste des activités du calendrier
-            calendarActivities.add(calendarActivity);
+//            CalendarActivity calendarActivity = new CalendarActivity(ZonedDateTime.ofInstant(dated_eve.toInstant(), ZoneId.systemDefault()), nom_eve, id_eve);
+//            // Ajouter l'objet CalendarActivity à la liste des activités du calendrier
+         //   calendarActivities.add(calendarActivity);
 
         }
         return evenements;
