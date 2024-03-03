@@ -1,15 +1,21 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.AvisP;
+import edu.esprit.entities.Client;
 import edu.esprit.entities.Plat;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServicesAvisPlat;
+import edu.esprit.utils.SessionManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -27,6 +33,20 @@ public class ModifierAvis {
     @FXML
     private CheckBox favCheckBox;
 
+    SessionManagement ss=new SessionManagement();
+    String mail=ss.getEmail();
+    // UserService us=new UserService();
+    ClientService cs=new ClientService();
+    Client u;
+
+    {
+        try {
+            u = cs.getOneByEmail(mail);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void initialize(int avisId) {
 
         avisPToModify = serviceAvisPlat.getOneById(avisId);
@@ -87,6 +107,19 @@ public class ModifierAvis {
     }
 
 
+    @FXML
+    private void goBack(ActionEvent event) {
+        try {
+            // Load the AfficherPlat.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlat.fxml"));
+            Parent root = loader.load();
+
+            // Set the scene back to AfficherPlat.fxml
+            commAPField.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

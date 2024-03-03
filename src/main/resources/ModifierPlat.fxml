@@ -11,40 +11,31 @@
 
 <AnchorPane prefHeight="476.0" prefWidth="694.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierPlat">
     <children>
-        <Label layoutX="77.0" layoutY="165.0" text="Nom Plat:" />
-        <Label layoutX="81.0" layoutY="198.0" text="Prix Plat:" />
-        <Label layoutX="79.0" layoutY="232.0" text="Allergie Plat:" />
-        <Label layoutX="326.0" layoutY="332.0" text="État Plat:" />
-        <Label layoutX="69.0" layoutY="266.0" text="Description Plat:" />
-        <Label layoutX="70.0" layoutY="300.0" text="Calories Plat:" />
-        <TextField fx:id="NomPlatField" layoutX="150.0" layoutY="161.0" prefHeight="26.0" prefWidth="247.0" style="-fx-background-color: #E8E4CE;" />
-        <TextField fx:id="prixPlatField" layoutX="133.0" layoutY="194.0" prefHeight="26.0" prefWidth="264.0" style="-fx-background-color: #E8E4CE;" />
-        <TextField fx:id="alergiePlatField" layoutX="150.0" layoutY="228.0" prefHeight="26.0" prefWidth="247.0" style="-fx-background-color: #E8E4CE;" />
-        <CheckBox fx:id="etatPlatCheckbox" layoutX="380.0" layoutY="332.0" />
-        <TextField fx:id="descPField" layoutX="161.0" layoutY="262.0" prefHeight="26.0" prefWidth="236.0" style="-fx-background-color: #E8E4CE;" />
-        <TextField fx:id="caloriesField" layoutX="150.0" layoutY="295.0" prefHeight="26.0" prefWidth="247.0" style="-fx-background-color: #E8E4CE;" />
-        <Button layoutX="233.0" layoutY="394.0" mnemonicParsing="false" onAction="#ModifierPlat" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: #db1f48;" text="enregistrer modifications" textFill="WHITE" />
-      <ImageView fitHeight="83.0" fitWidth="694.0" layoutY="-3.0">
-         <image>
-            <Image url="@../../../../zefsd.PNG" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="263.0" fitWidth="274.0" layoutX="410.0" layoutY="158.0">
-         <image>
-            <Image url="@img/sessfdzesdq.PNG" />
-         </image>
-      </ImageView>
-      <Label layoutX="75.0" layoutY="107.0" text="MODIFIEZ PLAT :" textFill="#3b6cac">
+        <Label layoutX="413.0" layoutY="125.0" text="Nom Plat:" />
+        <Label layoutX="417.0" layoutY="158.0" text="Prix Plat:" />
+        <Label layoutX="415.0" layoutY="192.0" text="Allergie Plat:" />
+        <Label layoutX="546.0" layoutY="289.0" text="Plat en stock?" />
+        <Label layoutX="405.0" layoutY="226.0" text="Description Plat:" />
+        <Label layoutX="405.0" layoutY="258.0" text="Calories Plat:" />
+        <TextField fx:id="NomPlatField" layoutX="486.0" layoutY="121.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="prixPlatField" layoutX="469.0" layoutY="154.0" prefHeight="26.0" prefWidth="184.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="alergiePlatField" layoutX="486.0" layoutY="188.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #E8E4CE;" />
+        <CheckBox fx:id="etatPlatCheckbox" layoutX="635.0" layoutY="289.0" />
+        <TextField fx:id="descPField" layoutX="497.0" layoutY="222.0" prefHeight="26.0" prefWidth="155.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="caloriesField" layoutX="485.0" layoutY="253.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #E8E4CE;" />
+        <Button layoutX="184.0" layoutY="347.0" mnemonicParsing="false" onAction="#ModifierPlat" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: #db1f48;" text="enregistrer modifications" textFill="WHITE" />
+      <ImageView fx:id="photopImageView" fitHeight="223.0" fitWidth="244.0" layoutX="145.0" layoutY="103.0" />
+      <Label layoutX="133.0" layoutY="37.0" text="MODIFIEZ PLAT " textFill="#3b6cac">
          <font>
             <Font size="37.0" />
          </font>
       </Label>
-      <Button layoutX="62.0" layoutY="394.0" mnemonicParsing="false" onAction="#SupprimerPlat" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #db1f48;" text="supprimer plat" textFill="WHITE" />
-      <ImageView fitHeight="95.0" fitWidth="746.0">
+      <Button layoutX="184.0" layoutY="387.0" mnemonicParsing="false" onAction="#SupprimerPlat" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #db1f48;" text="supprimer plat" textFill="WHITE" />
+      <Button fx:id="butt" layoutX="561.0" layoutY="387.0" onAction="#backToAfficherPlat" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #db1f48;" text="&lt;&lt;Back" textFill="WHITE" />
+      <ImageView fitHeight="484.0" fitWidth="130.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/zefsd.PNG" />
+            <Image url="@img/thumbnail_image.png" />
          </image>
       </ImageView>
-      <Button fx:id="butt" layoutX="604.0" layoutY="428.0" onAction="#backToAfficherPlat" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #db1f48;" text="&lt;&lt;Back" textFill="WHITE" />
     </children>
 </AnchorPane>

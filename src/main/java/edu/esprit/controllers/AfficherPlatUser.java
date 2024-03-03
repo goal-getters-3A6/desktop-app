@@ -8,11 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -51,29 +51,41 @@ public class AfficherPlatUser {
                             if (empty || plat == null) {
                                 setText(null);
                             } else {
-                                // Create an HBox to hold both buttons
-                                HBox buttonsBox = new HBox();
+                                HBox contentBox = new HBox(); // Container for text and image
+                                HBox buttonsBox = new HBox(); // Container for buttons
 
-                                // Customize how each item is displayed
-                                setText(" Nom: " + plat.getNomP() + " | Prix: " + plat.getPrixP()+ " | Etat: " + (plat.getEtatP() ? "En stock" : "rupture stock"));
+                                ImageView imageView = new ImageView(new Image(plat.getPhotop()));
+                                imageView.setFitWidth(100);
+                                imageView.setFitHeight(100);
 
-                                // Add button to view details
+
+                                // Create a VBox to hold text details
+                                VBox detailsBox = new VBox();
+                                // Set text details
+                                detailsBox.getChildren().addAll(
+                                        new Label("Nom: " + plat.getNomP()),
+                                        new Label("Prix: " + plat.getPrixP()),
+                                        new Label("Etat: " + (plat.getEtatP() ? "En stock" : "Rupture stock"))
+                                );
+
+                                // Add detailsBox and buttonsBox to contentBox
+                                contentBox.getChildren().addAll(imageView, detailsBox, buttonsBox);
+
+                                // Set contentBox as the graphic of the ListCell
+                                setGraphic(contentBox);
+
+                                // Button handling remains the same
                                 Button detailsButton = new Button("Details");
                                 detailsButton.setOnAction(event -> {
                                     openDetails(plat.getIdP());
                                 });
 
-                                // Add button to modify plat
                                 Button modifierButton = new Button("Modifier");
                                 modifierButton.setOnAction(event -> {
                                     openModifier(plat.getIdP());
                                 });
 
-                                // Add buttons to the HBox
                                 buttonsBox.getChildren().addAll(detailsButton, modifierButton);
-
-                                // Set the HBox as the graphic of the ListCell
-                                setGraphic(buttonsBox);
                             }
                         }
                     };
@@ -83,7 +95,6 @@ public class AfficherPlatUser {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     void searchPlat() {

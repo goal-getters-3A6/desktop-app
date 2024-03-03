@@ -83,10 +83,22 @@ public class AjouterPlat {
         alert.setContentText(content);
         alert.showAndWait();
     }
+    @FXML
+    private void goBack(ActionEvent event) {
+        try {
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlatUser.fxml"));
+            Parent root = loader.load();
+
+
+            NomPlatField.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     // Method to check if a string is numeric
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");  // tshouf ken da55alt DIGITS wella le
+        return str.matches("\\d+(\\.\\d+)?");  // tshouf ken da55alt DIGITS wella le
     }
 
 }

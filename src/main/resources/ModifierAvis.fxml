@@ -4,16 +4,24 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierAvis">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierAvis">
     <children>
-        <Label layoutX="36.0" layoutY="52.0" text="Comment:" />
-        <TextField fx:id="commAPField" layoutX="128.0" layoutY="49.0" prefHeight="25.0" prefWidth="400.0" />
-        <Label layoutX="36.0" layoutY="111.0" text="Star:" />
-        <TextField fx:id="starField" layoutX="128.0" layoutY="108.0" prefHeight="25.0" prefWidth="100.0" />
-        <CheckBox fx:id="favCheckBox" layoutX="128.0" layoutY="164.0" text="Favorite" />
-        <Button layoutX="240.0" layoutY="220.0" mnemonicParsing="false" onAction="#modifierAvis" text="Modifier" />
-        <Button layoutX="360.0" layoutY="220.0" mnemonicParsing="false" onAction="#supprimerAvis" text="Supprimer" />
+        <Label layoutX="58.0" layoutY="185.0" text="Commentaire:" />
+        <TextField fx:id="commAPField" layoutX="150.0" layoutY="182.0" prefHeight="25.0" prefWidth="400.0" style="-fx-background-color: #E8E4CE;" />
+        <Label layoutX="58.0" layoutY="244.0" text="Star rate:" />
+        <TextField fx:id="starField" layoutX="150.0" layoutY="241.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #E8E4CE;" />
+        <CheckBox fx:id="favCheckBox" layoutX="150.0" layoutY="297.0" text="Favorite" />
+        <Button layoutX="262.0" layoutY="353.0" mnemonicParsing="false" onAction="#modifierAvis" style="-fx-background-color: #db1f48;" text="Modifier" textFill="WHITE" />
+        <Button layoutX="382.0" layoutY="353.0" mnemonicParsing="false" onAction="#supprimerAvis" style="-fx-background-color: #db1f48;" text="Supprimer" textFill="WHITE" />
+      <ImageView fitHeight="95.0" fitWidth="744.0">
+         <image>
+            <Image url="@img/zefsd.PNG" />
+         </image>
+      </ImageView>
+      <Button layoutX="58.0" layoutY="470.0" onAction="#goBack" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #db1f48;" text="&lt;&lt;Back" textFill="WHITE" />
     </children>
 </AnchorPane>

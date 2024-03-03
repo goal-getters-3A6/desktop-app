@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -42,6 +44,8 @@ public class Detailsuser {
     private Label caloriesLabel;
 
     private ServicesPlat servicePlat;
+    @FXML
+    private ImageView photopImageView;
     private final ServicesAvisPlat servicesAvisPlat = new ServicesAvisPlat();
     private edu.esprit.controllers.AfficherPlat AfficherPlat;
     private int platId;
@@ -64,6 +68,9 @@ public class Detailsuser {
                 alergieLabel.setText(plat.getAlergieP());
                 etatLabel.setText(plat.getEtatP() ? "Enstock" : "rupture stock");
                 caloriesLabel.setText(String.valueOf(plat.getCalories())+" CAL");
+                // Display photo
+                Image image = new Image(plat.getPhotop());
+                photopImageView.setImage(image);
             } else {
                 // Handle case where Plat is not found
             }

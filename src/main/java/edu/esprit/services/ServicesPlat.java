@@ -3,7 +3,9 @@ import edu.esprit.entities.Plat;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ServicesPlat implements IService<Plat>{
@@ -103,8 +105,8 @@ public class ServicesPlat implements IService<Plat>{
 
 
     @Override
-    public Set<Plat> getAll() throws SQLException{
-        Set<Plat> plats = new HashSet<>();
+    public List<Plat> getAll() throws SQLException{
+        List<Plat> plats = new ArrayList<>();
 
         String req = "SELECT * FROM plat";
 
@@ -125,4 +127,5 @@ public class ServicesPlat implements IService<Plat>{
 
         return plats;
     }
+
 }

@@ -7,10 +7,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -19,8 +24,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 public class AfficherPlat {
+
 
     @FXML
     private ListView<Plat> platListView;
@@ -38,7 +49,6 @@ public class AfficherPlat {
             platObservableList = FXCollections.observableList(plats);
             platListView.setItems(platObservableList);
 
-            // Customize the appearance of each item in the ListView
             platListView.setCellFactory(new Callback<ListView<Plat>, ListCell<Plat>>() {
                 @Override
                 public ListCell<Plat> call(ListView<Plat> param) {
@@ -48,26 +58,39 @@ public class AfficherPlat {
                             super.updateItem(plat, empty);
                             if (empty || plat == null) {
                                 setText(null);
+                                setGraphic(null); // Clear the graphic if the item is empty
                             } else {
-                                // Customize how each item is displayed
-                                setText(" Nom: " + plat.getNomP() + " | Prix: " + plat.getPrixP()+ " | Etat: " + (plat.getEtatP() ? "En stock" : "rupture stock"));
 
-                                // Add button to view details
+                                // Customize how each item is displayed
+                                setText(  plat.getNomP() + "\nPrix: " + plat.getPrixP() + "\nDescription: " + plat.getDescP() + "\nCalories: " + plat.getCalories() + "\nEtat: " + (plat.getEtatP() ? "En stock" : "rupture stock"));
+
+
+
+                                ImageView imageView = new ImageView(new Image(plat.getPhotop()));
+                                imageView.setFitWidth(100);
+                                imageView.setFitHeight(100);
+
+
                                 Button detailsButton = new Button("Details");
                                 detailsButton.setOnAction(event -> {
                                     openDetails(plat.getIdP());
                                 });
-                                setGraphic(detailsButton);
+
+
+                                VBox vbox = new VBox(imageView, detailsButton);
+                                vbox.setSpacing(5);
+                                vbox.setAlignment(Pos.CENTER);
+                                setGraphic(vbox);
                             }
                         }
                     };
                 }
             });
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
     @FXML
     void searchPlat() {
         String searchText = searchField.getText().trim().toLowerCase();

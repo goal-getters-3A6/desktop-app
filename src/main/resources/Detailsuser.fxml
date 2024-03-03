@@ -10,29 +10,29 @@
 
 <AnchorPane prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Detailsuser">
     <children>
-        <Label fx:id="nomLabel" ellipsisString="" layoutX="337.0" layoutY="184.0" prefHeight="50.0" prefWidth="311.0" text="EXAMPLE" textFill="#607dbf">
+        <Label fx:id="nomLabel" ellipsisString="" layoutX="177.0" layoutY="282.0" prefHeight="50.0" prefWidth="311.0" text="EXAMPLE" textFill="#607dbf">
             <font>
                 <Font size="49.0" />
             </font>
         </Label>
-        <Label fx:id="prixLabel" layoutX="340.0" layoutY="230.0" prefHeight="34.0" prefWidth="311.0" text="5.99 ">
+        <Label fx:id="prixLabel" layoutX="180.0" layoutY="328.0" prefHeight="34.0" prefWidth="311.0" text="5.99 ">
             <font>
                 <Font size="48.0" />
             </font>
         </Label>
-        <Label fx:id="descLabel" layoutX="340.0" layoutY="291.0" prefHeight="18.0" prefWidth="311.0" text="descrption besh tkoun houni" />
-        <Label fx:id="alergieLabel" layoutX="339.0" layoutY="314.0" prefHeight="18.0" prefWidth="351.0" style="-fx-background-color: #db1f48;" text="allergie besh tkoun houni" textFill="WHITE" />
-        <Label fx:id="etatLabel" layoutX="340.0" layoutY="333.0" prefHeight="18.0" prefWidth="311.0" text="en stock wella le" />
-        <Label fx:id="caloriesLabel" layoutX="340.0" layoutY="342.0" prefHeight="18.0" prefWidth="311.0" text="150 cal">
+        <Label fx:id="descLabel" layoutX="180.0" layoutY="389.0" prefHeight="18.0" prefWidth="311.0" text="descrption besh tkoun houni" />
+        <Label fx:id="alergieLabel" layoutX="179.0" layoutY="412.0" prefHeight="18.0" prefWidth="351.0" style="-fx-background-color: #db1f48;" text="allergie besh tkoun houni" textFill="WHITE" />
+        <Label fx:id="etatLabel" layoutX="180.0" layoutY="431.0" prefHeight="18.0" prefWidth="311.0" text="en stock wella le" />
+        <Label fx:id="caloriesLabel" layoutX="180.0" layoutY="440.0" prefHeight="18.0" prefWidth="311.0" text="150 cal">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-        <ImageView fitHeight="262.0" fitWidth="239.0" layoutX="88.0" layoutY="172.0">
+        <ImageView fx:id="photopImageView" fitHeight="205.0" fitWidth="224.0" layoutX="180.0" layoutY="53.0">
          <image>
             <Image url="@img/sessfdzesdq.PNG" />
          </image></ImageView>
-        <Text layoutX="339.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DETAILS:">
+        <Text layoutX="179.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DETAILS:">
             <font>
                 <Font size="23.0" />
             </font>
@@ -41,10 +41,10 @@
 
 
 
-        <Button layoutX="642.0" layoutY="392.0" onAction="#goBack" style="-fx-background-color: #db1f48;" text="Back" textFill="WHITE" />
-      <ImageView fitHeight="95.0" fitWidth="746.0" layoutX="-1.0">
+        <Button layoutX="645.0" layoutY="463.0" onAction="#goBack" style="-fx-background-color: #db1f48;" text="Back" textFill="WHITE" />
+      <ImageView fitHeight="539.0" fitWidth="146.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/zefsd.PNG" />
+            <Image url="@img/thumbnail_image.png" />
          </image>
       </ImageView>
     </children>

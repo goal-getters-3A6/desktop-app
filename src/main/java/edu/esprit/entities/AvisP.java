@@ -9,12 +9,12 @@ public class AvisP {
     private int star;
     private boolean fav;
     private Plat idPlat;
-    private int iduap;
+    private User iduap;
 
     public AvisP() {
     }
 
-    public AvisP(int idAP, String commAP, int star, boolean fav, Plat idPlat , int iduap ) {
+    public AvisP(int idAP, String commAP, int star, boolean fav, Plat idPlat , User iduap ) {
         this.idAP = idAP;
         this.commAP = commAP;
         this.star = star;
@@ -22,7 +22,7 @@ public class AvisP {
         this.idPlat = idPlat;
         this.iduap = iduap;
     }
-    public AvisP( String commAP, int star, boolean fav, Plat idPlat , int iduap ) {
+    public AvisP( String commAP, int star, boolean fav, Plat idPlat , User iduap ) {
         this.commAP = commAP;
         this.star = star;
         this.fav = fav;
@@ -69,11 +69,11 @@ public class AvisP {
         this.fav = fav;
     }
 
-    public int getIduap() {
+    public User getIduap() {
         return iduap;
     }
 
-    public void setIduap(int iduap) {
+    public void setIduap(User iduap) {
         this.iduap = iduap;
     }
 

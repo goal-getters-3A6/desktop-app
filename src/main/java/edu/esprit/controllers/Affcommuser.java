@@ -1,7 +1,11 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.AvisP;
+import edu.esprit.entities.Client;
+import edu.esprit.entities.Plat;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServicesAvisPlat;
+import edu.esprit.utils.SessionManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,18 +20,35 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Set;
 
 public class Affcommuser {
     @FXML
     private ListView<HBox> commentsListView;
+    @FXML
+    private ListView<Plat> platsListView;
 
     private final ServicesAvisPlat servicesAvisPlat = new ServicesAvisPlat();
+    SessionManagement ss=new SessionManagement();
+    String mail=ss.getEmail();
+    // UserService us=new UserService();
+    ClientService cs=new ClientService();
+    Client u;
+
+    {
+        try {
+            u = cs.getOneByEmail(mail);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     public void initialize() {
-        int userid = 1; // Assuming the user ID is 1
-        Set<AvisP> comments = servicesAvisPlat.getAllU(userid);
+
+        Set<AvisP> comments = servicesAvisPlat.getAllU(u.getId());
 
         ObservableList<HBox> commentsList = FXCollections.observableArrayList();
         for (AvisP avis : comments) {
@@ -44,6 +65,15 @@ public class Affcommuser {
             commentsList.add(hbox);
         }
         commentsListView.setItems(commentsList);
+        int userId = 14; // Example user ID
+
+
+        Set<Plat> reviewedPlats = servicesAvisPlat.getReviewedPlatsByUser(userId);
+
+        ObservableList<Plat> platsObservableList = FXCollections.observableArrayList(reviewedPlats);
+        platsListView.setItems(platsObservableList);
+
+        platsListView.setCellFactory(param -> new PlatListCell());
     }
     @FXML
     private void backToAfficherPlat(ActionEvent event) {

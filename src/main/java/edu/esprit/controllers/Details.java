@@ -1,9 +1,12 @@
 package edu.esprit.controllers;
 
 import edu.esprit.entities.AvisP;
+import edu.esprit.entities.Client;
 import edu.esprit.entities.Plat;
+import edu.esprit.services.ClientService;
 import edu.esprit.services.ServicesAvisPlat;
 import edu.esprit.services.ServicesPlat;
+import edu.esprit.utils.SessionManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,11 +46,27 @@ public class Details {
 
     @FXML
     private Label caloriesLabel;
+    @FXML
+    private Rating starRatingTwo;
 
     private ServicesPlat servicePlat;
     private final ServicesAvisPlat servicesAvisPlat = new ServicesAvisPlat();
     private edu.esprit.controllers.AfficherPlat AfficherPlat;
     private int platId;
+    SessionManagement ss=new SessionManagement();
+    String mail=ss.getEmail();
+    // UserService us=new UserService();
+    ClientService cs=new ClientService();
+    Client u;
+
+    {
+        try {
+            u = cs.getOneByEmail(mail);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public Details() {
         servicePlat = new ServicesPlat(); // Initialize your service
@@ -64,6 +86,12 @@ public class Details {
                 alergieLabel.setText(plat.getAlergieP());
                 etatLabel.setText(plat.getEtatP() ? "Enstock" : "rupture stick");
                 caloriesLabel.setText(String.valueOf(plat.getCalories())+" CAL");
+                // Display photo
+                Image image = new Image(plat.getPhotop());
+                photopImageView.setImage(image);
+                double averageStarRating = servicesAvisPlat.calculateAverageStarRating(platId);
+                starRatingTwo.setRating(averageStarRating);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,7 +101,7 @@ public class Details {
 
         ObservableList<String> commentsList = FXCollections.observableArrayList();
         for (AvisP avis : comments) {
-            commentsList.add(avis.getCommAP() + " - Star: " + avis.getStar());
+            commentsList.add(avis.getCommAP() + " | Star: " + avis.getStar());
         }
         commentsListView.setItems(commentsList);
     }
@@ -92,29 +120,43 @@ public class Details {
     @FXML
     private CheckBox favCheckbox;
 
-
+    @FXML
+    private ImageView photopImageView;
+    @FXML
+    private Rating starRating;
     public void setParentController(AfficherPlat parentController) {
         this.AfficherPlat = parentController;
+
     }
     @FXML
     void Ajout(ActionEvent event) {
         try {
             this.platId = platId;
-            String commAP = commAPField.getText();
-            int star = Integer.parseInt(starField.getText());
+            String commAP = commAPField.getText(); // Assuming commAPField is a TextField for comment
+            int star = (int) starRating.getRating(); // Get the rating from the Rating component
             boolean fav = favCheckbox.isSelected();
-
 
             if (star < 1 || star > 5) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Input Error");
-                alert.setContentText("Please enter a star rating between 1 and 5.");
+                alert.setContentText("Entrez un star rate entre 1 et 5.");
                 alert.showAndWait();
-                return; // Stop further execution
+                return;
             }
 
             Plat platt = servicePlat.getOneById(platId);
-            serviceAvis.ajouter(new AvisP(commAPField.getText(), star, fav, platt, 1));
+
+
+            if (serviceAvis.checkIfAvisExistss(platId, u.getId())) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Avis Exist");
+                alert.setContentText("Vous avez déjà ajouté un avis pour ce plat! si vous avez change votre avis vous pouvez le modifier (:");
+                alert.showAndWait();
+                return;
+            }
+
+
+            serviceAvis.ajouter(new AvisP(commAP, star, fav, platt, u));
             initialize(platId);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -129,7 +171,7 @@ public class Details {
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Input Error");
-            alert.setContentText("Please enter a valid star rating (numeric value).");
+            alert.setContentText("Entrez une valeur valide (numeric value).");
             alert.showAndWait();
         } catch (SQLException | IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -138,7 +180,6 @@ public class Details {
             alert.showAndWait();
         }
     }
-
 
 
 
@@ -160,4 +201,3 @@ public class Details {
     public void openModifierPage(ActionEvent actionEvent) {
     }
 }
-

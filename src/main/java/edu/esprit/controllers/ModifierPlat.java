@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -41,6 +43,8 @@ public class ModifierPlat {
 
     @FXML
     private TextField caloriesField;
+    @FXML
+    private ImageView photopImageView;
 
 
     public void initialize(int platId) {
@@ -52,8 +56,10 @@ public class ModifierPlat {
                 alergiePlatField.setText(platToModify.getAlergieP());
                 etatPlatCheckbox.setSelected(platToModify.getEtatP());
                 descPField.setText(platToModify.getDescP());
-                photopField.setText(platToModify.getPhotop());
                 caloriesField.setText(String.valueOf(platToModify.getCalories()));
+                // Display photo
+                Image image = new Image(platToModify.getPhotop());
+                photopImageView.setImage(image);
             } else {
                 showAlert("Error", "le plat nexiste pas", Alert.AlertType.ERROR);
             }
@@ -94,7 +100,7 @@ public class ModifierPlat {
                 platToModify.setAlergieP(alergiePlatField.getText());
                 platToModify.setEtatP(etatPlatCheckbox.isSelected());
                 platToModify.setDescP(descPField.getText());
-                platToModify.setCalories(calories);
+                platToModify.setCalories(Integer.parseInt(caloriesField.getText()));
 
 
                 servicePlat.modifier(platToModify);
@@ -153,7 +159,7 @@ public class ModifierPlat {
         alert.showAndWait();
     }
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");
+        return str.matches("\\d+(\\.\\d+)?");
     }
 }
 
