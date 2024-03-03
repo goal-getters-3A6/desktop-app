@@ -15,6 +15,33 @@ import static edu.esprit.utils.HashWithMD5.hashWithMD5;
 public class UserService implements IService<User> {
 
 
+        public boolean emailExists(String email) {
+            String query = "SELECT COUNT(*) FROM `user` WHERE `mail`=?";
+            try {
+                PreparedStatement ps = cnx.prepareStatement(query);
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     public Integer checklogin(String email, String password) throws SQLException {
         try {
 
@@ -117,4 +144,5 @@ public class UserService implements IService<User> {
         }
         return list;
     }
+
 }

@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49e1918-2662-4c36-8b46-f23f815cab66" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/EmailInputController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/emailinput.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ForgotPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ForgotPasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/GMailer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/GMailer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tokens/StoredCredential" beforeDir="false" afterPath="$PROJECT_DIR$/tokens/StoredCredential" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/EmailInputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/EmailInputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/emailinput.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/emailinput.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +177,7 @@
       <workItem from="1709193281729" duration="109000" />
       <workItem from="1709193404111" duration="5084000" />
       <workItem from="1709207333664" duration="901000" />
-      <workItem from="1709400826794" duration="26403000" />
+      <workItem from="1709400826794" duration="29666000" />
     </task>
     <servers />
   </component>
