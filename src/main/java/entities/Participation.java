@@ -10,6 +10,7 @@ public class Participation {
     private int age;
     private String email;
     private Evenement event;
+
     public void setEvent(Evenement event) {
         this.event = event;
     }
