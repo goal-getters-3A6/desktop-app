@@ -41,86 +41,83 @@ import static javax.mail.Message.RecipientType.TO;
 
 
 
-    public class GMailer {
-        private static final String TEST_EMAIL = "meryemboukraa199@gmail.com";
-        private final Gmail service;
+public class GMailer {
+    private static final String TEST_EMAIL = "meryemboukraa199@gmail.com";
+    private final Gmail service;
 
-        public GMailer() throws Exception {
-            //send email to yourself
-            NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-            GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
-            service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))
-                    .setApplicationName("Test Mailer")
-                    .build();
-        }
+    public GMailer() throws Exception {
+        //send email to yourself
+        NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+        GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
+        service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))
+                .setApplicationName("Test Mailer")
+                .build();
+    }
 
-        private static Credential getCredentials(final NetHttpTransport httpTransport, GsonFactory jsonFactory)
-                throws IOException {
-            // Load client secrets.
-            GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(GMailer.class.getResourceAsStream("/client_secret_560096458182-guh2obtoicn0gvm0o7fu5st1i4ed30fg.apps.googleusercontent.com.json")));
-            // Build flow and trigger user authorization request.
-            GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                    httpTransport, jsonFactory, clientSecrets, Set.of(GMAIL_SEND))
-                    .setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
-                    .setAccessType("offline")
-                    .build();
-            LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-            return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
-            //returns an authorized Credential object.
+    private static Credential getCredentials(final NetHttpTransport httpTransport, GsonFactory jsonFactory)
+            throws IOException {
+        // Load client secrets.
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, new InputStreamReader(GMailer.class.getResourceAsStream("/client_secret_560096458182-guh2obtoicn0gvm0o7fu5st1i4ed30fg.apps.googleusercontent.com.json")));
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                httpTransport, jsonFactory, clientSecrets, Set.of(GMAIL_SEND))
+                .setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
+                .setAccessType("offline")
+                .build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+        //returns an authorized Credential object.
 
-        }
+    }
 
-        public void sendMail(String subject, String message) throws Exception {
+    public void sendMail(String subject, String message,String recipient ) throws Exception {
 
-            // Create the email content
-            // String messageSubject = "Test message";
-            // String bodyText = "lorem ipsum.";
+        // Create the email content
+        // String messageSubject = "Test message";
+        // String bodyText = "lorem ipsum.";
 
-            // Encode as MIME message
-            Properties props = new Properties();
-            Session session = Session.getDefaultInstance(props, null);
-            MimeMessage email = new MimeMessage(session);
-            email.setFrom(new InternetAddress(TEST_EMAIL));
-            email.addRecipient(TO, new InternetAddress(TEST_EMAIL));
-            email.setSubject(subject);
-            email.setText(message);
+        // Encode as MIME message
+        Properties props = new Properties();
+        Session session = Session.getDefaultInstance(props, null);
+        MimeMessage email = new MimeMessage(session);
+        email.setFrom(new InternetAddress(TEST_EMAIL));
+        email.addRecipient(TO, new InternetAddress(recipient));
+        email.setSubject(subject);
+        email.setText(message);
 
 
-            // Encode and wrap the MIME message into a gmail message
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            email.writeTo(buffer);
-            byte[] rawMessageBytes = buffer.toByteArray();
-            String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
-            Message msg = new Message();
-            msg.setRaw(encodedEmail);
+        // Encode and wrap the MIME message into a gmail message
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        email.writeTo(buffer);
+        byte[] rawMessageBytes = buffer.toByteArray();
+        String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
+        Message msg = new Message();
+        msg.setRaw(encodedEmail);
 
-            try {
-                // Create send message
-                // Draft draft = new Draft();
-                // draft.setMessage(message);
-                msg = service.users().messages().send("me", msg).execute();
-                System.out.println("Message id: " + msg.getId());
-                System.out.println(msg.toPrettyString());
+        try {
+            // Create send message
+            // Draft draft = new Draft();
+            // draft.setMessage(message);
+            msg = service.users().messages().send("me", msg).execute();
+            System.out.println("Message id: " + msg.getId());
+            System.out.println(msg.toPrettyString());
 
-            } catch (GoogleJsonResponseException e) {
-                GoogleJsonError error = e.getDetails();
-                if (error.getCode() == 403) {
-                    System.err.println("Unable to create message: " + e.getDetails());
-                } else {
-                    throw e;
-                }
+        } catch (GoogleJsonResponseException e) {
+            GoogleJsonError error = e.getDetails();
+            if (error.getCode() == 403) {
+                System.err.println("Unable to create message: " + e.getDetails());
+            } else {
+                throw e;
             }
-        }
-
-        public static void main(String[] args) throws Exception {
-            new GMailer().sendMail("congratulations", """
-                    Dear reader,
-                    Hello world.
-
-                    Best regards,
-
-                    """);
         }
     }
 
+    public static void main(String[] args) throws Exception {
+        String subject = "Congratulations";
+        String message = "Dear reader,\nHello world.\n\nBest regards,";
+        String recipient = "meryem.boukraa@esprit.tn";
 
+        new GMailer().sendMail(subject, message, recipient);
+    }
+
+}

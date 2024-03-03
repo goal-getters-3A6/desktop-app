@@ -141,7 +141,7 @@ public class AcceuilController {
 
     @FXML
     private void forgotPassword(ActionEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/forgotPassword.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/emailinput.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage newWindow = new Stage();
         newWindow.setTitle("Recover Password");
