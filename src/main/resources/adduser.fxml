@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="adduserpane" prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AddUserDashboardController">
    <children>
-      <Button fx:id="addbtn" layoutX="313.0" layoutY="466.0" mnemonicParsing="false" onAction="#add" prefHeight="30.0" prefWidth="119.0" text="Ajouter" textFill="#1a17b5">
+      <Button fx:id="addbtn" layoutX="313.0" layoutY="466.0" mnemonicParsing="false" onAction="#add" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #db1f48;" text="Ajouter" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

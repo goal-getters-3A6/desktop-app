@@ -42,7 +42,7 @@
                   <Image url="@imgs/logo.png" />
                </image>
             </ImageView>
-            <Button fx:id="btntdb11" layoutX="9.0" layoutY="145.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE">
+            <Button fx:id="btntdb11" layoutX="9.0" layoutY="145.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="#38afb5">
                <font>
                   <Font size="20.0" />
                </font>
@@ -72,19 +72,19 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnplanning11" layoutX="42.0" layoutY="296.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+            <Button fx:id="btnplanning11" layoutX="42.0" layoutY="296.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
             <ImageView fx:id="planningimg311" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Users/lenovo/Downloads/elliptique.png" />
+                  <Image url="@imgs/elliptique.png" />
                </image>
             </ImageView>
             <ImageView fx:id="planningimg211" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Users/lenovo/Downloads/abonnement.png" />
+                  <Image url="@imgs/abonnement.png" />
                </image>
             </ImageView>
             <ImageView fx:id="planningimg1111" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
@@ -94,12 +94,12 @@
             </ImageView>
             <ImageView fx:id="planningimg11111" fitHeight="35.0" fitWidth="44.0" layoutX="8.0" layoutY="556.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Users/lenovo/Downloads/evenement.png" />
+                  <Image url="@imgs/evenement.png" />
                </image>
             </ImageView>
             <ImageView fx:id="planningimg111111" fitHeight="35.0" fitWidth="44.0" layoutX="8.0" layoutY="645.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Users/lenovo/Downloads/fichier.png" />
+                  <Image url="@imgs/fichier.png" />
                </image>
             </ImageView>
             <ImageView fx:id="planningimg11" fitHeight="35.0" fitWidth="44.0" layoutX="10.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
@@ -109,7 +109,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button fx:id="deletebtn" layoutX="985.0" layoutY="444.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="25.0" prefWidth="157.0" text="Supprimer" textFill="#db1f48" />
+      <Button fx:id="deletebtn" layoutX="985.0" layoutY="444.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="25.0" prefWidth="157.0" style="-fx-background-color: #db1f48;" text="Supprimer" textFill="WHITE" />
       <Button fx:id="adduserbn" layoutX="1019.0" layoutY="144.0" mnemonicParsing="false" onAction="#openAddUserDashboard" text="Add new user" />
       
     </children>

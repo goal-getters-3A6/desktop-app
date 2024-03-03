@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="registerpane" prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.RegisterController">
    <children>
-      <Button fx:id="mdpRegisterBtn" layoutX="93.0" layoutY="472.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="119.0" text="Registrer" />
+      <Button fx:id="mdpRegisterBtn" layoutX="93.0" layoutY="472.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #db1f48;" text="Registrer" />
       <VBox fx:id="registervbox" layoutX="14.0" layoutY="132.0" prefHeight="348.0" prefWidth="276.0" spacing="10.0">
          <children>
             <Label prefHeight="18.0" prefWidth="57.0" text="Nom" />
@@ -66,7 +66,7 @@
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>

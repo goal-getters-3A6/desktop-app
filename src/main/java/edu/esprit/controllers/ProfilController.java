@@ -102,7 +102,6 @@ public class ProfilController {
 
     }
 
-
     @FXML
     private void modify() {
         int userId = client.getId();
@@ -114,7 +113,7 @@ public class ProfilController {
                 || phoneNumberField.getRawPhoneNumber().isEmpty()
                 || poids.getValue() == 0
                 || taille.getValue() == 0
-                || photoURL.isEmpty() ) {
+                 ) {
             TrayNotification tray = new TrayNotification();
             NotificationType notification = NotificationType.ERROR;
             tray.setNotificationType(notification);
