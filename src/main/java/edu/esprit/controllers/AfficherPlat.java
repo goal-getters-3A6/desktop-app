@@ -94,13 +94,14 @@ public class AfficherPlat {
     @FXML
     void searchPlat() {
         String searchText = searchField.getText().trim().toLowerCase();
-        ObservableList<Plat> filteredPlats = FXCollections.observableArrayList();
 
-        for (Plat plat : platObservableList) {
-            if (plat.getNomP().toLowerCase().contains(searchText)) {
-                filteredPlats.add(plat);
-            }
-        }
+
+        ObservableList<Plat> filteredPlats = platObservableList.filtered(plat ->
+                plat.getNomP().toLowerCase().contains(searchText) ||
+                        String.valueOf(plat.getCalories()).contains(searchText) ||
+                        plat.getAlergieP().toLowerCase().contains(searchText) ||
+                        String.valueOf(plat.getPrixP()).contains(searchText)
+        );
 
         platListView.setItems(filteredPlats);
     }
@@ -145,6 +146,24 @@ public class AfficherPlat {
     void sortByPrix() {
         ObservableList<Plat> sortedList = platListView.getItems();
         sortedList.sort(Comparator.comparingDouble(Plat::getPrixP));
+        platListView.setItems(sortedList);
+    }
+    @FXML
+    void sortByPrixDESC() {
+        ObservableList<Plat> sortedList = platListView.getItems();
+        sortedList.sort(Comparator.comparingDouble(Plat::getPrixP).reversed());
+        platListView.setItems(sortedList);
+    }
+    @FXML
+    void sortByCaloriesDESC() {
+        ObservableList<Plat> sortedList = platListView.getItems();
+        sortedList.sort(Comparator.comparingInt(Plat::getCalories).reversed());
+        platListView.setItems(sortedList);
+    }
+    @FXML
+    void sortByCalories() {
+        ObservableList<Plat> sortedList = platListView.getItems();
+        sortedList.sort(Comparator.comparingInt(Plat::getCalories));
         platListView.setItems(sortedList);
     }
 

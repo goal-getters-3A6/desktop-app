@@ -101,7 +101,7 @@ public class Details {
 
         ObservableList<String> commentsList = FXCollections.observableArrayList();
         for (AvisP avis : comments) {
-            commentsList.add(avis.getCommAP() + " | Star: " + avis.getStar());
+            commentsList.add(u.getNom()+" "+u.getPrenom()+" : "+avis.getCommAP() + " | Star: " + avis.getStar());
         }
         commentsListView.setItems(commentsList);
     }

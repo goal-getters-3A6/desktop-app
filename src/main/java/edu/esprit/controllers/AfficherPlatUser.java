@@ -155,4 +155,16 @@ public class AfficherPlatUser {
             e.printStackTrace();
         }
     }
+    @FXML
+    void exportToExcel(ActionEvent event) {
+        ObservableList<Plat> plats = platListView.getItems();
+        String filePath = "C:\\Users\\Mohamed Amine\\Desktop\\GESTIONplatt\\src\\main\\resources\\PlatsData.xlsx";
+
+        try {
+            ExcelExporter.exportPlatsToExcel(plats, filePath);
+            System.out.println("Data exported to " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

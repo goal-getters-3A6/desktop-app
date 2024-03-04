@@ -65,10 +65,10 @@ public class Affcommuser {
             commentsList.add(hbox);
         }
         commentsListView.setItems(commentsList);
-        int userId = 14; // Example user ID
 
 
-        Set<Plat> reviewedPlats = servicesAvisPlat.getReviewedPlatsByUser(userId);
+
+        Set<Plat> reviewedPlats = servicesAvisPlat.getReviewedPlatsByUser(u.getId());
 
         ObservableList<Plat> platsObservableList = FXCollections.observableArrayList(reviewedPlats);
         platsListView.setItems(platsObservableList);

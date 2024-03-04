@@ -17,6 +17,8 @@
     <!-- Your other UI components -->
 
     <Button fx:id="sortButton" layoutX="464.0" layoutY="433.0" mnemonicParsing="false" onAction="#sortByPrix" style="-fx-background-color: #db1f48;" text="Tri par prix" textFill="WHITE" />
+    <Button fx:id="exportButton" layoutX="264.0" layoutY="433.0" mnemonicParsing="false" onAction="#exportToExcel" style="-fx-background-color: #db1f48;" text="Export to Excel" textFill="WHITE" />
+
     <Text layoutX="380.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recherche :" />
    <ImageView fitHeight="530.0" fitWidth="137.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
       <image>
