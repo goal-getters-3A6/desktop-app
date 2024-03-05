@@ -1,15 +1,11 @@
 package edu.esprit.utils;
+
 import edu.esprit.entities.Id;
 
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 public class SendEmail {
     private static int CodeGenerator() {
         int min = 1000;
@@ -29,8 +25,8 @@ public class SendEmail {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
-        String myAccountEmail = "appgzone@gmail.com";
-        String password = "123456789.Az";
+        String myAccountEmail = "gofitpro8@gmail.com";
+        String password = "czrr mudh itak iwhy";
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
@@ -54,7 +50,7 @@ public class SendEmail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("G-ZONE Password Recovery");
+            message.setSubject("Go-fit-pro Password Recovery");
             String htmlCode = "<h1>Here is your verification code</h1><br><h2>Use it and enter a new password </h2>\n"
                     + "\n"
                     + "<style>\n"

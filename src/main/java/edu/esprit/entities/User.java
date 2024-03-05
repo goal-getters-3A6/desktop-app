@@ -10,10 +10,34 @@ public class User {
     private String mail;
     private String image;
     private String role;
+    private boolean tfa;
 
-    public User(String nom, String prenom) {
+    private String tfaSecret;
+
+    public User( String nom, String prenom, String mdp, String mail, String image,Boolean tfa,String tfaSecret) {
         this.nom = nom;
         this.prenom = prenom;
+        this.mdp = mdp;
+        this.mail = mail;
+        this.image = image;
+        this.tfa = tfa;
+        this.tfaSecret=tfaSecret;
+    }
+
+    public User(int id, String nom, String prenom, String mdp, String mail, String image,Boolean tfa,String tfaSecret) {
+        this.id=id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mdp = mdp;
+        this.mail = mail;
+        this.image = image;
+        this.tfa = tfa;
+        this.tfaSecret=tfaSecret;
+    }
+
+    public User(String userNom, String userPrenom) {
+        this.nom=userNom;
+        this.prenom=userPrenom;
     }
 
     public String getRole() {
@@ -56,9 +80,27 @@ public class User {
         this.mdp = mdp;
         this.mail = mail;
         this.image = image;
+
     }
 
     // Getters and setters
+
+    public boolean isTfa() {
+        return tfa;
+    }
+
+    public void setTfa(boolean tfa) {
+        this.tfa = tfa;
+    }
+
+    public String getTfaSecret() {
+        return tfaSecret;
+    }
+
+    public void setTfaSecret(String tfaSecret) {
+        this.tfaSecret = tfaSecret;
+    }
+
     public int getId() {
         return id;
     }
@@ -116,7 +158,7 @@ public class User {
                 ", prenom='" + prenom + '\'' +
                 ", mdp='" + mdp + '\'' +
                 ", mail='" + mail + '\'' +
-                ", image=" + image + "role"+role+
+                ", image=" + image +
                 '}';
     }
 

@@ -1,5 +1,5 @@
 package edu.esprit.tests;
-import edu.esprit.entities.Seance;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,10 +13,10 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Afficherlesseances.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/acceuil.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        primaryStage.setTitle("Gofit");
+        primaryStage.setTitle("Go Fit Pro");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
