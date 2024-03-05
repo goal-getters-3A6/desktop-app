@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -18,6 +19,7 @@ import javafx.util.Duration;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -91,7 +93,7 @@ public class RegisterController {
 
     }
     @FXML
-    private void importProfilePic(ActionEvent event) {
+    private void importProfilePic(ActionEvent event) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose your profile pic");
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
@@ -236,5 +238,8 @@ public class RegisterController {
     @FXML
     void reclamation(ActionEvent event) {
 
+    }
+
+    public void chercher(KeyEvent keyEvent) {
     }
 }

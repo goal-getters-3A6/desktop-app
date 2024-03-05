@@ -11,7 +11,7 @@ public final class DropBoxCredentials {
      * JSON file that is generated at auth_output when the ./generate-ci-auth-file script is run
      * with the required parameters.  This is read in CI during integration tests.
      */
-    public static final File authOutputFile = new File("../../auth_output");
+    public static final File authOutputFile = new File("dropbox_auth.json");
 
     public static DbxCredential getDbxCredential() {
         try {

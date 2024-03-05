@@ -31,16 +31,31 @@ public class UserService implements IService<User> {
             return false;
         }
 
+        public boolean changePassword(int id, String password) {
+            String query = "UPDATE `user` SET `mdp`=? WHERE `id`=?";
+            try {
+                PreparedStatement ps = cnx.prepareStatement(query);
+                ps.setString(1, hashWithMD5(password));
+                ps.setInt(2, id);
+                return ps.executeUpdate() > 0;
+            } catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
 
-
-
-
-
-
-
-
-
-
+        public boolean activateTFA(int id, String secret) {
+            String query = "UPDATE `user` SET `tfa`=1, `tfa_secret`=? WHERE `id`=?";
+            try {
+                PreparedStatement ps = cnx.prepareStatement(query);
+                ps.setString(1, secret);
+                ps.setInt(2, id);
+                return ps.executeUpdate() > 0;
+            } catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
 
     public Integer checklogin(String email, String password) throws SQLException {
         try {
@@ -89,6 +104,9 @@ public class UserService implements IService<User> {
                 u.setMdp(Rs.getString("mdp"));
                 u.setImage(Rs.getString("image"));
                 u.setRole(Rs.getString("role"));
+                u.setTfa(Rs.getBoolean("tfa"));
+                u.setTfaSecret(Rs.getString("tfa_secret"));
+
                 return u;
             }
         } catch (SQLException e) {

@@ -29,7 +29,7 @@ public class SendEmail {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
-        String myAccountEmail = "appgzone@gmail.com";
+        String myAccountEmail = "gofitpro8@gmail.com";
         String password = "123456789.Az";
 
         Session session = Session.getInstance(properties, new Authenticator() {
@@ -54,7 +54,7 @@ public class SendEmail {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("G-ZONE Password Recovery");
+            message.setSubject("Go-fit-pro Password Recovery");
             String htmlCode = "<h1>Here is your verification code</h1><br><h2>Use it and enter a new password </h2>\n"
                     + "\n"
                     + "<style>\n"

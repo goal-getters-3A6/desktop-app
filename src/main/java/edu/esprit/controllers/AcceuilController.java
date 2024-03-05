@@ -84,8 +84,20 @@ public class AcceuilController {
 
     @FXML
     void login() throws SQLException, IOException{
-        if ((Id.user = userService.checklogin(emailTxt.getText(), mdpTxt.getText())) != null) {
-            User u = userService.getOneById(Id.user);
+        Integer userId;
+        if ((userId = userService.checklogin(emailTxt.getText(), mdpTxt.getText())) != null) {
+            User u = userService.getOneById(userId);
+            Id.tmpuser= u.getId();
+            if (u.isTfa()){
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/2FA.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage newWindow = new Stage();
+                newWindow.setTitle("Two Factor Authentication");
+                newWindow.setScene(scene);
+                newWindow.showAndWait();
+            }
+            if (Id.tfaVerified || !u.isTfa()) {
+            Id.user = userId;
             if (u.getRole().equals("ADMIN")) {
                 if (!checkFile()) {
                     saveSession(emailTxt.getText(), mdpTxt.getText());
@@ -107,7 +119,6 @@ public class AcceuilController {
                 tray.setMessage(message);
                 tray.setNotificationType(notification);
                 tray.showAndDismiss(Duration.seconds(4));
-
 
             } else {
                 if (!checkFile()) {
@@ -137,11 +148,12 @@ public class AcceuilController {
             tray.setNotificationType(notification);
             tray.showAndDismiss(Duration.seconds(4));
         }
+        }
     }
 
     @FXML
     private void forgotPassword(ActionEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/emailinput.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/forgotPassword.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage newWindow = new Stage();
         newWindow.setTitle("Recover Password");

@@ -22,7 +22,6 @@ public class HashWithMD5 {
             strBuilder.append(String.format("%02x", b));
         }
         String strHash = strBuilder.toString();
-        System.out.println("The MD5 hash: " + strHash);
         return strHash;
 
     }

@@ -1,8 +1,11 @@
 package edu.esprit.controllers;
 
 import com.dlsc.phonenumberfx.PhoneNumberField;
+import com.google.zxing.WriterException;
 import edu.esprit.entities.Client;
 import edu.esprit.services.ClientService;
+import edu.esprit.services.UserService;
+import edu.esprit.utils.GoogleAuthenticator;
 import edu.esprit.utils.SessionManagement;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -15,6 +18,8 @@ import javafx.stage.Window;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -50,11 +55,13 @@ public class ProfilController {
     private  Label taillelabel;
     @FXML
     private ImageView userimage;
-
+    @FXML
+    private Button setup2fabtn;
     @FXML
     private VBox profilvbox;
     String photoURL;
     private final ClientService clientService = new ClientService();
+    private final UserService userService = new UserService();
     Client client = new Client();
 
     PhoneNumberField phoneNumberField = new PhoneNumberField();
@@ -65,6 +72,14 @@ public class ProfilController {
           client = clientService.getOneByEmail(SessionManagement.getEmail());
         } catch (SQLException e) {
             Logger.getLogger(e.getMessage());
+        }
+        System.out.println(client.isTfa());
+        if (client.isTfa()){
+            Image tickImage = new Image("/imgs/tick.png",15,15,false,false);
+            setup2fabtn.setGraphic(new ImageView(tickImage));
+            setup2fabtn.setText("2FA Enabled") ;
+            setup2fabtn.setStyle("-fx-background-color: whitesmoke; ");
+            setup2fabtn.setDisable(true);
         }
         nomTxt.setText(client.getNom());
         prenomTxt.setText(client.getPrenom());
@@ -154,7 +169,7 @@ public class ProfilController {
         }
     }
     @FXML
-    private void importProfilePic() {
+    private void importProfilePic() throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose your profile pic");
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
@@ -163,6 +178,32 @@ public class ProfilController {
         String path = fileChooser.showOpenDialog(stage).getAbsolutePath();
         String name = "/" + fileChooser.showOpenDialog(stage).getName();
         photoURL = uploadPhoto(path, name);
+    }
+
+    @FXML
+    private void setupAuthenticator() throws IOException, WriterException {
+        String secretKey = GoogleAuthenticator.generateSecretKey();
+        String email = client.getMail();
+        String companyName = "Go Fit Pro";
+        String barCodeUrl = GoogleAuthenticator.getGoogleAuthenticatorBarCode(secretKey, email, companyName);
+        GoogleAuthenticator.createQRCode(barCodeUrl, "QRCode.png", 400, 400);
+        //display QR code to the user in a dialog
+        Image image = new Image("file:QRCode.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(400);
+        imageView.setFitWidth(400);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Two Factor Authentication");
+        alert.setHeaderText("Setup Two Factor Authentication");
+        alert.setContentText("Scan the QR code using Google Authenticator App");
+        alert.setGraphic(imageView);
+        alert.showAndWait();
+        userService.activateTFA(client.getId(),secretKey);
+        Image tickImage = new Image("/imgs/tick.png",15,15,false,false);
+        setup2fabtn.setGraphic(new ImageView(tickImage));
+        setup2fabtn.setText("2FA Enabled") ;
+        setup2fabtn.setStyle("-fx-background-color: whitesmoke; ");
+        setup2fabtn.setDisable(true);
     }
 
     @FXML

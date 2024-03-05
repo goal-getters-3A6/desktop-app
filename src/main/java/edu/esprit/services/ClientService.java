@@ -110,7 +110,10 @@ public class ClientService implements IService<Client>{
                 String mdp = res.getString("mdp");
                 Boolean staut = res.getBoolean("statut");
                 Integer nb_tentative= res.getInt("nb_tentative");
-                return new Client(id,nom,prenom,mdp,email,tel,staut,nb_tentative,image,dateNaissance,poids,taille,sexe);
+                Boolean isTfa = res.getBoolean("tfa");
+                String tfaSecret = res.getString("tfa_secret");
+
+                return new Client(id,nom,prenom,mdp,email,tel,staut,nb_tentative,image,dateNaissance,poids,taille,sexe,isTfa,tfaSecret);
 
             }
 

@@ -14,9 +14,19 @@ public class Client extends User {
     private String sexe;
 
 
-
     public Client(String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance, float poids, float taille, String sexe) {
         super(nom, prenom, mdp, mail,image );
+        this.date_naissance = date_naissance;
+        this.tel = tel;
+        this.statut = statut;
+        this.nb_tentative = nb_tentative;
+        this.poids = poids;
+        this.taille = taille;
+        this.sexe = sexe;
+    }
+
+    public Client(int id ,String nom, String prenom, String mdp, String mail, String tel, Boolean statut, int nb_tentative, String image, Date date_naissance, float poids, float taille, String sexe,Boolean tfa, String tfaSecret) {
+        super(id,nom, prenom, mdp, mail,image,tfa,tfaSecret );
         this.date_naissance = date_naissance;
         this.tel = tel;
         this.statut = statut;
@@ -126,6 +136,7 @@ public class Client extends User {
     public void setSexe(String sexe) {
         this.sexe = sexe;
     }
+
 
     @Override
     public String toString() {

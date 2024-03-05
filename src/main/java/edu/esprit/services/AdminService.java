@@ -27,17 +27,16 @@ public class AdminService implements IService<Admin>{
     }
     @Override
     public void modifier(Admin admin) throws SQLException {
-        String req = "UPDATE user SET nom=?, prenom=?, mdp=?, mail=?, image=? WHERE id=? AND role='ADMIN'";
+        String req = "UPDATE user SET nom=?, prenom=?, mail=? WHERE id=? AND role='ADMIN'";
 
             PreparedStatement Ps = cnx.prepareStatement(req);
             Ps.setString(1, admin.getNom());
             Ps.setString(2, admin.getPrenom());
-            Ps.setString(3,HashWithMD5.hashWithMD5(admin.getMdp()));
-            Ps.setString(4, admin.getMail());
-            Ps.setString(5, admin.getImage());
-            Ps.setInt(6, admin.getId());
+            Ps.setString(3, admin.getMail());
+            Ps.setInt(4, admin.getId());
             Ps.executeUpdate();
             System.out.println("Admin modifié avec succès !");
+
 
     }
     @Override
