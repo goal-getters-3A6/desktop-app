@@ -139,7 +139,7 @@ public class AjouterEquipement {
                 ES.ajouter(new Equipement(imageEqId.getText(), nomEqId.getText(), categEqId.getValue(), descEqId.getText(), docEqId.getText()));
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Validation");
-                alert.setContentText("Equipement ajouté avec succès");
+                alert.setContentText("Equipement added succesfully");
                 alert.showAndWait();
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));

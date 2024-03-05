@@ -24,7 +24,6 @@ import javafx.stage.Stage;
 
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -44,27 +43,6 @@ public class AfficherEquipementFront {
 
     @FXML
     private Pagination pagination;
-
-    @FXML
-    private Button btnabonnement;
-
-    @FXML
-    private Button btnaccueil;
-
-    @FXML
-    private Button btnalimentaire;
-
-    @FXML
-    private Button btnequipement;
-
-    @FXML
-    private Button btnevenement;
-
-    @FXML
-    private Button btnplanning;
-
-    @FXML
-    private Button btnreclamation;
     private final int itemsPerPage = 3;
 
 
@@ -152,7 +130,7 @@ public class AfficherEquipementFront {
         // Ajout du bouton "Détails"
         Button detailButton = new Button("Détails");
         detailButton.getStyleClass().add("icon-button"); // Ajoutez des styles CSS au besoin
-        detailButton.setStyle("-fx-font-size: 15px;-fx-background-color: #db1f48;"); // Utilisez la couleur de fond que vous souhaitez
+        detailButton.setStyle("-fx-background-color: #db1f48;"); // Utilisez la couleur de fond que vous souhaitez
 
 // Changer la couleur du texte
         detailButton.setTextFill(javafx.scene.paint.Color.WHITE);
@@ -174,8 +152,9 @@ public class AfficherEquipementFront {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsEquipement.fxml"));
             Parent root = loader.load();
 
-
+            // Récupérer le contrôleur de la nouvelle interface
             DetailsEquipement controller = loader.getController();
+            // Passer une référence à ce contrôleur (AfficherEquipementBack)
             controller.setParentController(this);
 
 
@@ -183,35 +162,11 @@ public class AfficherEquipementFront {
             controller.initData(equipement);
             detailButton.getScene().setRoot(root);
         } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("SQL Exeption");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            e.printStackTrace();
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @FXML
-    public void reclamation(javafx.event.ActionEvent actionEvent) {
-    }
-    @FXML
-    public void evenement(javafx.event.ActionEvent actionEvent) {
-    }
-    @FXML
-    public void alimentaire(javafx.event.ActionEvent actionEvent) {
-    }
-    @FXML
-    public void abonnement(javafx.event.ActionEvent actionEvent) {
-    }
-    @FXML
-    public void planning(javafx.event.ActionEvent actionEvent) {
-    }
-    @FXML
-    public void equipement(javafx.event.ActionEvent actionEvent) {
-    }
-    @FXML
-    public void accueil(javafx.event.ActionEvent actionEvent) {
-    }
 }

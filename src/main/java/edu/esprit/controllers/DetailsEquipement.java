@@ -1,8 +1,5 @@
 package edu.esprit.controllers;
 
-
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message;
 import edu.esprit.entities.AvisEquipement;
 import edu.esprit.entities.Client;
 import edu.esprit.entities.Equipement;
@@ -31,25 +28,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import static java.lang.Integer.parseInt;
-
-
-
-
-import java.net.URI;
-import java.math.BigDecimal;
 
 public class DetailsEquipement {
     private final ServiceAvisEquipement AES = new ServiceAvisEquipement();
     private final ServiceEquipement ES = new ServiceEquipement();
     private Equipement equipement;
-    final String ACCOUNT_SID = "AC3f9de0017be9564b86cb4664a10df6b1";
-    final String AUTH_TOKEN = "67c512333f9c1077be2e0fb2263a4373";
-
-
 
     @FXML
     private Label LikeId;
@@ -93,31 +83,6 @@ public class DetailsEquipement {
     @FXML
     private Button likeId1;
 
-    @FXML
-    private Button btnabonnement;
-
-    @FXML
-    private Button btnaccueil;
-
-    @FXML
-    private Button btnalimentaire;
-
-    @FXML
-    private Button btnequipement;
-
-    @FXML
-    private Button btnevenement;
-
-    @FXML
-    private Button btnplanning;
-
-    @FXML
-    private Button btnreclamation;
-
-
-
-
-
     private edu.esprit.controllers.AfficherEquipementFront AfficherEquipementFront;
     SessionManagement ss=new SessionManagement();
     String mail=ss.getEmail();
@@ -140,6 +105,7 @@ public class DetailsEquipement {
         String imagePath = equipement.getImageEq();
         Image image = new Image("file:" + imagePath); // Supposant que le chemin est absolu, sinon ajustez-le en conséquence
         imageViewF.setImage(image);
+
     }
     // Ajoutez une méthode pour définir l'ImageView
     public void setImageView(ImageView imageView) {
@@ -148,8 +114,6 @@ public class DetailsEquipement {
     @FXML
     void initialize(int idEq) {
         try {
-
-
             ImageView photoIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/like.png")));
             likeId1.setGraphic(photoIcon);  // Utilisez la variable membre ici
             photoIcon.setFitWidth(20);
@@ -161,7 +125,7 @@ public class DetailsEquipement {
             photoIcon1.setFitWidth(20);
             photoIcon1.setFitHeight(20);
             dislikeId1.getStyleClass().add("icon-button");
-            //updateLabels();
+            updateLabels();
 
             ImageView photoIcon2 = new ImageView(new Image(getClass().getResourceAsStream("/imgs/envoyer.png")));
             publier.setGraphic(photoIcon2);  // Utilisez la variable membre ici
@@ -188,21 +152,29 @@ public class DetailsEquipement {
                 descEqF.setText(equipement1.getDescEq());
                 descEqF.setWrapText(true);
                 descEqF.setPrefWidth(200);
-                descEqF.setStyle(" -fx-font-size: 14px;-fx-background-color: transparent; -fx-border-color: transparent;");
+                descEqF.setStyle(" -fx-font-size: 10px;-fx-background-color: transparent; -fx-border-color: transparent;");
                 //descEqF.setEditable(false);
                 docEqF.setText(equipement1.getDocEq());
                 docEqF.setWrapText(true);
                 docEqF.setPrefWidth(200);
-                docEqF.setStyle(" -fx-font-size: 14px;-fx-background-color: transparent; -fx-border-color: transparent;");
+                docEqF.setStyle(" -fx-font-size: 10px;-fx-background-color: transparent; -fx-border-color: transparent;");
 
 
+            } else {
+                // Handle case where Plat is not found
             }
+            //  Equipement equipement = ES.getOneById(equipement.getIdEq());
+            // List<AvisEquipement> Ps = new ArrayList<>(AES.getOneById(equipement.getIdEq()).getIdAEq());
+
             List<AvisEquipement> listeAvis = AES.getAllByEquipement(idEq);
 
             ObservableList<AvisEquipement> observableList = FXCollections.observableList(listeAvis);
             listViewAEqF.setItems(observableList);
 
+            // ObservableList<AvisEquipement> observableList = FXCollections.observableList(Ps);
+            //  listViewAEqF.setItems(observableList);
 
+            // Configuration de la cell factory pour afficher le nom de l'équipement avec des boutons
             listViewAEqF.setCellFactory(param -> new ListCell<>() {
                 @Override
                 protected void updateItem(AvisEquipement item, boolean empty) {
@@ -211,61 +183,66 @@ public class DetailsEquipement {
                         setText(null);
                         setGraphic(null);
                     } else {
+
+
+
+
                         ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/bin.png")));
                         Button deleteButton = new Button("", deleteIcon);
                         deleteIcon.setFitWidth(25);
                         deleteIcon.setFitHeight(25);
                         deleteButton.getStyleClass().add("icon-button");
                         deleteButton.setUserData(item);
-                        deleteButton.setOnAction(event -> supprimerAEquipement(deleteButton));
+                        deleteButton.setOnAction(event -> {
+                            supprimerAEquipement(deleteButton); // Appeler la méthode supprimerEquipement avec l'équipement associé
+                        });
+
 
                         ImageView editIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/pen.png")));
                         Button editButton = new Button("", editIcon);
                         editIcon.setFitWidth(25);
                         editIcon.setFitHeight(25);
                         editButton.getStyleClass().add("icon-button");
-                        editButton.setOnAction(event -> modifierAEquipement(editButton));
+                        editButton.setOnAction(event -> modifierAEquipement(editButton)); // Appeler la méthode modifierEquipement avec l'équipement associé
 
                         // Définir les données utilisateur du bouton editButton avec l'équipement associé
                         editButton.setUserData(item);
-                        String censoredComment = censorBadWord(item.getCommAEq());
 
                         Label label = new Label();
-                        label.setText(censoredComment);
+                        label.setText(item.getCommAEq());
                         Label label1 = new Label();
                         label1.setText(item.getUser().getNom());
                         Label label2 = new Label();
                         label2.setText(item.getUser().getPrenom());
 
-                        // Créer un HBox pour le Label aligné à gauche
-                        HBox textHBox = new HBox(10,label1, label2, label);
 
-                        // Créer un HBox pour les boutons
-                        HBox buttonsHBox = new HBox();
-                        buttonsHBox.setAlignment(Pos.CENTER_RIGHT);
+                        double dynamicSpacing = 11;
 
+                        HBox itemContainer = new HBox(label1, label2, label, deleteButton, editButton);
+                        itemContainer.setSpacing(dynamicSpacing);
+
+// Container for delete and edit buttons
+                        HBox buttonsContainer = new HBox(10,deleteButton, editButton);
+                        buttonsContainer.setAlignment(Pos.CENTER_RIGHT);
+
+// Combine labelsContainer and buttonsContainer conditionally
+                        HBox iconsContainer = new HBox(itemContainer);
                         if (user.getNom().equals(item.getUser().getNom())) {
-                            buttonsHBox.getChildren().addAll(deleteButton, editButton);
+                            iconsContainer.getChildren().add(buttonsContainer);
                         }
 
-                        // Créer un HBox principal pour contenir le texte et les boutons
-                        HBox mainHBox = new HBox(textHBox, buttonsHBox);
-                        HBox.setHgrow(buttonsHBox, Priority.ALWAYS); // Pousse les boutons à droite
+// Configurer l'espace flexible pour pousser les boutons à la fin de la ligne
+                        HBox.setHgrow(new Region(), Priority.ALWAYS);
+                        setGraphic(iconsContainer);
 
-                        setGraphic(mainHBox);
+
                     }
                 }
             });
 
 
-
-
-
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("SQL Exeption");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();// À remplacer par une gestion appropriée des erreurs
+            e.printStackTrace(); // Handle the exception appropriately
         }
 
 
@@ -274,22 +251,7 @@ public class DetailsEquipement {
 
 
     }
-    private String censorBadWord(String comment) {
-        List<String> badListW = Arrays.asList("hell"); // Ajoutez d'autres mots interdits au besoin
 
-        for (String str : badListW) {
-            if (comment.contains(str)) {
-                StringBuilder result = new StringBuilder();
-                result.append(str.charAt(0));
-                for (int i = 0; i < str.length() - 2; ++i) {
-                    result.append("*");
-                }
-                result.append(str.charAt(str.length() - 1));
-                comment = comment.replace(str, result.toString());
-            }
-        }
-        return comment;
-    }
     private boolean likeClicked = false;
     private boolean dislikeClicked = false;
 
@@ -381,15 +343,6 @@ try{
         this.AfficherEquipementFront = parentController;
     }
 
-    public static void showAlert(Alert.AlertType type, String title, String header, String text) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(text);
-        alert.showAndWait();
-
-    }
-
     @FXML
     void AjouterAvisEqF(ActionEvent event) {
         try {
@@ -397,34 +350,17 @@ try{
 
 // Récupérer l'équipement correspondant à l'avis
             Equipement eq = ES.getOneById(equipement.getIdEq()); // ou utilisez une autre méthode pour obtenir l'équipement
-
+           // updateDatabaseDislike();
+           // updateDatabaseLike();
             refreshLikesAndDislikes();
-
+            //  System.out.println(equipement.getIdEq());
             if (eq != null) {
                 System.out.println(user);
-                if (((CommIdAEq.getText().isEmpty())) ) {
+                AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq, user));
 
-                    showAlert(Alert.AlertType.ERROR, "Données erronés", "Verifier les données", "Veuillez bien remplir votre commentaire !");
-
-                }else {
-
-
-                    AES.ajouter(new AvisEquipement(CommIdAEq.getText(), eq, user));
-
-
-                   }
-                    initialize(eq.getIdEq()); // Refresh only the reviews section
-                    CommIdAEq.clear();
-
-
-                //sms
-                // Find your Account Sid and Token at twilio.com/console
-
-
-
-
-
-                } else {
+                initialize(eq.getIdEq()); // Refresh only the reviews section
+                CommIdAEq.clear();
+            } else {
                 // Afficher un message d'erreur si l'équipement n'existe pas
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur");
@@ -444,8 +380,11 @@ try{
     }
     private void supprimerAEquipement(Button deleteButton) {
         try {
-            Equipement eq = ES.getOneById(equipement.getIdEq()); // ou utilisez une autre méthode pour obtenir l'équipement
+              // Récupérer l'avis d'équipement associé au bouton de suppression
+           // AvisEquipement Aequipement = (AvisEquipement) deleteButton.getUserData();
 
+
+// Récupérer l'avis d'équipement
             AvisEquipement Aequipement = (AvisEquipement) deleteButton.getUserData();
 
             // Vérifier si l'utilisateur actuel est le même que celui associé à l'avis d'équipement
@@ -462,18 +401,9 @@ try{
                     // Supprimer l'avis d'équipement de la base de données et de la liste
                     AES.supprimer(Aequipement.getIdAEq());
                     listViewAEqF.getItems().remove(Aequipement);
-                    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-                    String personalizedMessage = String.format("Bonjour %s %s, nous tenons à vous informer que votre avis concernant l'équipement %s a été supprimé.", user.getNom(), user.getPrenom(),eq.getNomEq());
-
-                    Message message = Message.creator(
-                                    new com.twilio.type.PhoneNumber("+21697336009"),
-                                    new com.twilio.type.PhoneNumber("+19123859879"),
-                                    personalizedMessage)
-                            .create();
-
-
-                    System.out.println(message.getSid());
-
+                } else {
+                    // L'utilisateur a annulé la suppression
+                    // Vous pouvez ajouter un message ou des actions supplémentaires ici si nécessaire
                 }
             } else {
                 // Afficher une alerte indiquant que l'utilisateur actuel ne peut pas supprimer cet avis
@@ -493,7 +423,7 @@ try{
 
     @FXML
     private void modifierAEquipement(Button editButton) {
-
+        // Récupérer l'équipement associé au bouton editButton
         AvisEquipement Aequipement = (AvisEquipement) editButton.getUserData();
 
         try {
@@ -505,15 +435,17 @@ try{
                 String nomUtilisateurActuel = user.getNom();
 
                 if (Aequipement != null && nomUtilisateurActuel.equals(Aequipement.getUser().getNom())) {
-
+                    // L'utilisateur actuel est le même que celui associé à l'avis d'équipement
+                    // Set the modified content from the CommIdAEq TextField
                     aeqMod.setCommAEq(CommIdAEq.getText());
 
-
+                    // Update the AvisEquipement in the database
                     AES.modifier(aeqMod);
                     initialize(aeqMod.getEquipement().getIdEq());
                     CommIdAEq.clear();
                 } else {
-
+                    // L'utilisateur actuel n'est pas le même que celui associé à l'avis d'équipement
+                    // Afficher une alerte indiquant que l'utilisateur actuel ne peut pas modifier cet avis
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Erreur");
                     alert.setHeaderText(null);
@@ -543,43 +475,6 @@ try{
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @FXML
-    void abonnement(ActionEvent event) {
-
-    }
-
-    @FXML
-    void accueil(ActionEvent event) {
-
-    }
-
-
-
-    @FXML
-    void alimentaire(ActionEvent event) {
-
-    }
-
-    @FXML
-    void equipement(ActionEvent event) {
-
-    }
-
-    @FXML
-    void evenement(ActionEvent event) {
-
-    }
-
-    @FXML
-    void planning(ActionEvent event) {
-
-    }
-
-    @FXML
-    void reclamation(ActionEvent event) {
-
     }
 
 

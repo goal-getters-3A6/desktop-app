@@ -51,55 +51,20 @@
          </font>
       </Label>
       <Button fx:id="dislikeId1" layoutX="250.0" layoutY="600.0" mnemonicParsing="false" onAction="#toggleDislike" prefHeight="46.0" prefWidth="54.0" style="-fx-background-color: db1f48;" />
-      <Label fx:id="docEqF" layoutX="493.0" layoutY="507.0" prefHeight="138.0" prefWidth="270.0" text="Label">
+      <Label fx:id="docEqF" layoutX="502.0" layoutY="449.0" prefHeight="138.0" prefWidth="270.0" text="Label">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="descEqF" layoutX="493.0" layoutY="320.0" text="Label">
+      <Label fx:id="descEqF" layoutX="502.0" layoutY="379.0" text="Label">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="categEqF" layoutX="493.0" layoutY="270.0" prefHeight="26.0" prefWidth="316.0" text="Label">
+      <Label fx:id="categEqF" layoutX="502.0" layoutY="309.0" prefHeight="26.0" prefWidth="316.0" text="Label">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnreclamation" layoutX="1293.0" layoutY="69.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnevenement" layoutX="1090.0" layoutY="69.0" mnemonicParsing="false" onAction="#evenement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnalimentaire" layoutX="895.0" layoutY="69.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnabonnement" layoutX="692.0" layoutY="69.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnplanning" layoutX="532.0" layoutY="69.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnequipement" layoutX="352.0" layoutY="69.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnaccueil" layoutX="157.0" layoutY="62.0" mnemonicParsing="false" onAction="#accueil" prefHeight="66.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

@@ -92,18 +92,13 @@ public class DetailsEquipementBack {
 
     public void initData(Equipement equipement) {
         this.equipement = equipement;
-
+        // Remplissez les champs avec les données de l'équipement
         NomEqId.setText(equipement.getNomEq());
         NomEqId.setStyle("-fx-font-size: 25px; -fx-background-color: transparent; -fx-border-color: transparent;");
         CategEqId.setText(equipement.getCategEq());
         DescEqId.setText(equipement.getDescEq());
-        DescEqId.setStyle(" -fx-font-size: 14px;-fx-background-color: transparent; -fx-border-color: transparent;");
-        DescEqId.setWrapText(true);
-        DescEqId.setPrefWidth(200);
-        DocEqId.setText(equipement.getDocEq());
-        DocEqId.setWrapText(true);
-        DocEqId.setPrefWidth(200);
-        DocEqId.setStyle(" -fx-font-size: 14px;-fx-background-color: transparent; -fx-border-color: transparent;");
+        DescEqId.setStyle(" -fx-background-color: transparent; -fx-border-color: transparent;");
+        DocEqId.setStyle(" -fx-background-color: transparent; -fx-border-color: transparent;");
 
         String imagePath = equipement.getImageEq();
         Image image = new Image("file:" + imagePath); // Supposant que le chemin est absolu, sinon ajustez-le en conséquence

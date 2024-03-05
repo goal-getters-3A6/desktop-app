@@ -141,13 +141,6 @@ public class ModifierEquipementBack {
                     showAlert(Alert.AlertType.ERROR, "Données erronées", "Vérifier les données", " Le nom doit  avoir une longueur maximale de 30 caractères.");
                 }else{
             ES.modifier(equipement);
-
-
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Validation");
-                    alert.setContentText("Equipement modifié avec succès");
-                    alert.showAndWait();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
             Parent root = loader.load();
             nomEqId.getScene().setRoot(root);}
@@ -177,13 +170,13 @@ public class ModifierEquipementBack {
 
     public void initData(Equipement equipement) {
         this.equipement = equipement;
-
+        // Remplissez les champs avec les données de l'équipement
         nomEqId.setText(equipement.getNomEq());
         categEqId.setValue(equipement.getCategEq());
         descEqId.setText(equipement.getDescEq());
         docEqId.setText(equipement.getDocEq());
         imageEqId.setText(equipement.getImageEq());
-
+        // Remplissez l'ImageViewerEq avec l'image de l'équipement, si nécessaire
 
         String imagePath = equipement.getImageEq();
         Image image = new Image("file:" + imagePath); // Supposant que le chemin est absolu, sinon ajustez-le en conséquence
