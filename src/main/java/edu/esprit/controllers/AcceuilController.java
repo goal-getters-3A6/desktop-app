@@ -8,12 +8,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -53,9 +55,10 @@ public class AcceuilController {
 
     @FXML
     private VBox slideshowvbox;
+    @FXML
+    private HBox slideshowhbox;
     UserService userService = new UserService();
     User u = new User();
-    private List list = new ArrayList();
     int j = 0;
     double orgCliskSceneX, orgReleaseSceneX;
     Button lbutton, rButton;
@@ -138,9 +141,10 @@ public class AcceuilController {
                 stepsLabel.setText(steps[j]);
             });
 
-            imageView.setFitHeight(100);
-            imageView.setFitWidth(300);
-            slideshowvbox.getChildren().addAll(lbutton, imageView, rButton, titleLabel, primerLabel, stepsLabel);
+                imageView.setFitHeight(450);
+                imageView.setFitWidth(1100);
+                slideshowhbox.getChildren().addAll(lbutton, imageView, rButton);
+                slideshowvbox.getChildren().addAll(titleLabel, primerLabel, stepsLabel);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -278,43 +282,96 @@ public class AcceuilController {
 
     @FXML
     void abonnement(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesAbonnements.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) slideshowvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
-
     @FXML
     void accueil(ActionEvent event) {
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+            acceuilpane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @FXML
     void alimentaire(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) slideshowvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     void equipement(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementFront.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) slideshowvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     void evenement(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouter_evenement.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) slideshowvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+    }
     }
 
 
     @FXML
     void planning(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationsclient.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) slideshowvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
-
-    @FXML
-    void profil(ActionEvent event) {
-
-    }
-
     @FXML
     void reclamation(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) slideshowvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
     }
 
+}
 }

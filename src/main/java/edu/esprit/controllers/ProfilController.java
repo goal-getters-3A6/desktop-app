@@ -8,12 +8,18 @@ import edu.esprit.services.UserService;
 import edu.esprit.utils.GoogleAuthenticator;
 import edu.esprit.utils.SessionManagement;
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -52,7 +58,7 @@ public class ProfilController {
     @FXML
     private Label poidslabel;
     @FXML
-    private  Label taillelabel;
+    private Label taillelabel;
     @FXML
     private ImageView userimage;
     @FXML
@@ -69,15 +75,15 @@ public class ProfilController {
     @FXML
     private void initialize() {
         try {
-          client = clientService.getOneByEmail(SessionManagement.getEmail());
+            client = clientService.getOneByEmail(SessionManagement.getEmail());
         } catch (SQLException e) {
             Logger.getLogger(e.getMessage());
         }
         System.out.println(client.isTfa());
-        if (client.isTfa()){
-            Image tickImage = new Image("/imgs/tick.png",15,15,false,false);
+        if (client.isTfa()) {
+            Image tickImage = new Image("/imgs/tick.png", 15, 15, false, false);
             setup2fabtn.setGraphic(new ImageView(tickImage));
-            setup2fabtn.setText("2FA Enabled") ;
+            setup2fabtn.setText("2FA Enabled");
             setup2fabtn.setStyle("-fx-background-color: whitesmoke; ");
             setup2fabtn.setDisable(true);
         }
@@ -86,9 +92,9 @@ public class ProfilController {
         emailTxt.setText(client.getMail());
         LocalDate ld = Instant.ofEpochMilli(client.getDate_naissance().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
         dateNaissance.setValue(ld);
-        if (client.getSexe().equals("Femme")){
+        if (client.getSexe().equals("Femme")) {
             radioF.setSelected(true);
-        }else{
+        } else {
             radioH.setSelected(true);
         }
         taille.setValue(client.getTaille());
@@ -128,7 +134,7 @@ public class ProfilController {
                 || phoneNumberField.getRawPhoneNumber().isEmpty()
                 || poids.getValue() == 0
                 || taille.getValue() == 0
-                 ) {
+        ) {
             TrayNotification tray = new TrayNotification();
             NotificationType notification = NotificationType.ERROR;
             tray.setNotificationType(notification);
@@ -138,7 +144,7 @@ public class ProfilController {
             return;
         }
         try {
-            clientService.modifier( new Client(userId,
+            clientService.modifier(new Client(userId,
                     nomTxt.getText(),
                     prenomTxt.getText(),
                     pass,
@@ -168,6 +174,7 @@ public class ProfilController {
             tray.showAndDismiss(javafx.util.Duration.seconds(2));
         }
     }
+
     @FXML
     private void importProfilePic() throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
@@ -198,47 +205,112 @@ public class ProfilController {
         alert.setContentText("Scan the QR code using Google Authenticator App");
         alert.setGraphic(imageView);
         alert.showAndWait();
-        userService.activateTFA(client.getId(),secretKey);
-        Image tickImage = new Image("/imgs/tick.png",15,15,false,false);
+        userService.activateTFA(client.getId(), secretKey);
+        Image tickImage = new Image("/imgs/tick.png", 15, 15, false, false);
         setup2fabtn.setGraphic(new ImageView(tickImage));
-        setup2fabtn.setText("2FA Enabled") ;
+        setup2fabtn.setText("2FA Enabled");
         setup2fabtn.setStyle("-fx-background-color: whitesmoke; ");
         setup2fabtn.setDisable(true);
     }
 
-    @FXML
-    void abonnement() {
 
+    @FXML
+    void abonnement(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesAbonnements.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) profilvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
-    void accueil() {
+    void accueil(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/acceuil.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) profilvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
 
+        }
     }
 
     @FXML
-    void alimentaire() {
-
+    void alimentaire(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPlat.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) profilvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
-    void equipement() {
-
+    void equipement(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementFront.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) profilvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
-    void evenement() {
-
+    void evenement(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ajouter_evenement.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) profilvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 
     @FXML
-    void planning() {
-
+    void planning(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationsclient.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) profilvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
-    void reclamation() {
-
+    void reclamation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) profilvbox.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
