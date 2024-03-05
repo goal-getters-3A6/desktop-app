@@ -91,10 +91,10 @@ public class Affcommuser {
     private void openModifierAvis(int avisId) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierAvis.fxml"));
-            Stage stage = (Stage) commentsListView.getScene().getWindow(); // Assuming commentsListView is in the same stage
+            Stage stage = (Stage) commentsListView.getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
             ModifierAvis modifierAvisController = loader.getController();
-            modifierAvisController.initialize(avisId); // Pass the Avis ID
+            modifierAvisController.initialize(avisId);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

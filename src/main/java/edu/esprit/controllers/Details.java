@@ -101,7 +101,7 @@ public class Details {
 
         ObservableList<String> commentsList = FXCollections.observableArrayList();
         for (AvisP avis : comments) {
-            commentsList.add(u.getNom()+" "+u.getPrenom()+" : "+avis.getCommAP() + " | Star: " + avis.getStar());
+            commentsList.add(u.getNom()+" "+u.getPrenom()+avis.getCommAP() );
         }
         commentsListView.setItems(commentsList);
     }
@@ -145,7 +145,7 @@ public class Details {
             }
 
             Plat platt = servicePlat.getOneById(platId);
-
+            String platName = platt.getNomP(); // Get the name of the plat
 
             if (serviceAvis.checkIfAvisExistss(platId, u.getId())) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -154,6 +154,9 @@ public class Details {
                 alert.showAndWait();
                 return;
             }
+
+
+            commAP = " sur \"" + platName + " \":" + commAP;
 
 
             serviceAvis.ajouter(new AvisP(commAP, star, fav, platt, u));
@@ -180,7 +183,6 @@ public class Details {
             alert.showAndWait();
         }
     }
-
 
 
 

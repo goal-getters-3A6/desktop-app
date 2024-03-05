@@ -127,5 +127,17 @@ public class ServicesPlat implements IService<Plat>{
 
         return plats;
     }
-
+    public boolean exists(String nomPlat) throws SQLException {
+        String query = "SELECT COUNT(*) FROM plat WHERE nomP = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setString(1, nomPlat);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
 }

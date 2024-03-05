@@ -4,10 +4,7 @@ import edu.esprit.entities.Plat;
 import edu.esprit.utils.DataSource;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ServicesAvisPlat implements IService<AvisP>{
     private Connection cnx = DataSource.getInstance().getCnx();
@@ -227,6 +224,33 @@ public class ServicesAvisPlat implements IService<AvisP>{
         }
         return reviewedPlats;
     }
+
+
+
+        public Map<Integer, Integer> getRatingCounts() throws SQLException {
+            Map<Integer, Integer> ratingCounts = new HashMap<>();
+
+            // Initialize the ratingCounts map with counts initialized to 0
+            for (int i = 1; i <= 5; i++) {
+                ratingCounts.put(i, 0);
+            }
+
+            // Query to count the number of ratings for each star value
+            String query = "SELECT star, COUNT(*) AS count FROM avisp GROUP BY star";
+
+            try (PreparedStatement statement = cnx.prepareStatement(query)) {
+                ResultSet rs = statement.executeQuery();
+
+                // Update the counts in ratingCounts map based on the retrieved data
+                while (rs.next()) {
+                    int star = rs.getInt("star");
+                    int count = rs.getInt("count");
+                    ratingCounts.put(star, count);
+                }
+            }
+
+            return ratingCounts;
+        }
 
 
 

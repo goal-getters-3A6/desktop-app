@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterPlat">
+<AnchorPane  prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterPlat">
    <children>
       <TextField id="NomPlatField" fx:id="NomPlatField" layoutX="354.0" layoutY="148.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: #E8E4CE;" />
       <TextField id="prixPlatField" fx:id="prixPlatField" layoutX="353.0" layoutY="184.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: #E8E4CE;" />

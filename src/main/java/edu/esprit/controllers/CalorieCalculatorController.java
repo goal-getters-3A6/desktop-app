@@ -18,7 +18,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.fxml.FXML;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
+import java.io.File;
     public class CalorieCalculatorController {
 
         @FXML
@@ -84,7 +89,7 @@ import java.util.List;
                 suggestedPlatsListView.getItems().setAll(suggestedPlatNames);
                 suggestedPlatsListView.setVisible(true);
             } catch (NumberFormatException | SQLException e) {
-                resultLabel.setText("Please enter valid numbers.");
+                resultLabel.setText("Inserrez des nombres vaides.");
             }
         }
 

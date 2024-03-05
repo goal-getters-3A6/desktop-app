@@ -39,19 +39,18 @@ public class AjouterPlat {
 
     @FXML
     void Ajout(ActionEvent event) {
-        try { if (NomPlatField.getText().isEmpty() || prixPlatField.getText().isEmpty() ||
-                alergiePlatField.getText().isEmpty() || descfield.getText().isEmpty() ||
-                CaloriesPlatField.getText().isEmpty()) {
-            showAlert("Error", "Veuillez remplir tous les champs requis.", Alert.AlertType.ERROR);
-            return;
-        }
-
+        try {
+            if (NomPlatField.getText().isEmpty() || prixPlatField.getText().isEmpty() ||
+                    alergiePlatField.getText().isEmpty() || descfield.getText().isEmpty() ||
+                    CaloriesPlatField.getText().isEmpty()) {
+                showAlert("Error", "Veuillez remplir tous les champs requis.", Alert.AlertType.ERROR);
+                return;
+            }
 
             if (!isNumeric(prixPlatField.getText()) || !isNumeric(CaloriesPlatField.getText())) {
                 showAlert("Error", "Le prix et les calories ne peuvent pas contenir des lettres.", Alert.AlertType.ERROR);
                 return;
             }
-
 
             float prix = Float.parseFloat(prixPlatField.getText());
             int calories = Integer.parseInt(CaloriesPlatField.getText());
@@ -60,6 +59,11 @@ public class AjouterPlat {
                 return;
             }
 
+            // Check if the dish already exists
+            if (servicePlat.exists(NomPlatField.getText())) {
+                showAlert("Error", "Ce plat existe deja.", Alert.AlertType.ERROR);
+                return;
+            }
 
             // Proceed with adding the Plat
             servicePlat.ajouter(new Plat(NomPlatField.getText(),
@@ -75,6 +79,7 @@ public class AjouterPlat {
             showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
 
     // Method to show an alert dialog
     private void showAlert(String title, String content, Alert.AlertType alertType) {

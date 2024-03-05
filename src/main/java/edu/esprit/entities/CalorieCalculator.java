@@ -1,5 +1,6 @@
 package edu.esprit.entities;
 
+
 public class CalorieCalculator {
     // Constants for Calorie calculation
     private static final int MALE_CONSTANT = 5;

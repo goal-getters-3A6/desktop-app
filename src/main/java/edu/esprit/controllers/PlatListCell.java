@@ -10,7 +10,7 @@ public class PlatListCell extends ListCell<Plat> {
         if (empty || plat == null) {
             setText(null);
         } else {
-            setText("♡ "+plat.getNomP());
+            setText("♡ " + plat.getNomP()+" || "+ plat.getDescP());
         }
     }
 }
