@@ -1,15 +1,12 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.Client;
-import edu.esprit.utils.DataSource;
 import edu.esprit.utils.HashWithMD5;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ClientService implements IService<Client>{
 
