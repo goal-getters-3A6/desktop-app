@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataSource {
-    private String url = "jdbc:mysql://localhost:3306/pidev_final";
+    private String url = "jdbc:mysql://localhost:3306/pidev";
     private String user = "root";
     private String passwd = "";
 
@@ -16,7 +16,7 @@ public class DataSource {
     private DataSource(){
         try {
             cnx = DriverManager.getConnection(url,user,passwd);
-            System.out.println("Connected to DB !");
+            System.out.println("Successffuly Connected to DB !");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
