@@ -58,5 +58,6 @@
       <Image url="@Photos/chercher.png" />
    </ImageView>
    <ImageView fitHeight="40.0" fitWidth="50.0" layoutX="342.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
+   <Button fx:id="calendar_id" layoutX="661.0" layoutY="488.0" mnemonicParsing="false" onAction="#affiche_celendar" prefHeight="32.0" prefWidth="98.0" style="-fx-background-color: db1f48;" text="Calendar" />
 
 </AnchorPane>

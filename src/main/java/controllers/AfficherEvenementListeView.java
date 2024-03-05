@@ -50,6 +50,8 @@ public class AfficherEvenementListeView implements Initializable {
 
 
     @FXML
+    private Button calendar_id;
+    @FXML
     private TextField nbr_max_id;
 
     private String imagePath;
@@ -306,7 +308,17 @@ public class AfficherEvenementListeView implements Initializable {
 
 
 
-
+    @FXML
+    void affiche_celendar(ActionEvent event) throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Calendar.fxml"));
+            Stage stage = (Stage) listView.getScene().getWindow();
+            Parent root = loader.load();
+            stage.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();  // Affichez les détails de l'exception dans la console
+        }
+    }
 
 
 
