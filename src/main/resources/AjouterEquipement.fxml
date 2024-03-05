@@ -13,41 +13,41 @@
 
 <AnchorPane fx:id="EquipementFX" prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterEquipement">
    <children>
-      <Pane layoutX="323.0" layoutY="163.0" prefHeight="546.0" prefWidth="1146.0" style="-fx-background-color: #38afb5;">
+      <Pane layoutX="323.0" layoutY="163.0" prefHeight="546.0" prefWidth="1146.0" style="-fx-background-color: #FBFBEB;">
          <children>
             <TextArea fx:id="descEqId" layoutX="369.0" layoutY="168.0" prefHeight="101.0" prefWidth="269.0" promptText="Description :" />
-            <ImageView fx:id="ImageViewerEq" fitHeight="263.0" fitWidth="283.0" layoutX="747.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ImageViewerEq" fitHeight="263.0" fitWidth="283.0" layoutX="757.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" />
             <TextField fx:id="nomEqId" layoutX="367.0" layoutY="60.0" prefHeight="26.0" prefWidth="170.0" promptText="Nom d'équipement :" />
             <ComboBox fx:id="categEqId" layoutX="369.0" layoutY="119.0" prefHeight="26.0" prefWidth="170.0" promptText="Categorie :" />
             <TextArea fx:id="docEqId" layoutX="371.0" layoutY="304.0" prefHeight="187.0" prefWidth="268.0" promptText="Documentation :" />
-            <TextField fx:id="imageEqId" layoutX="787.0" layoutY="30.0" prefHeight="26.0" prefWidth="165.0" promptText="image" />
-            <Button layoutX="945.0" layoutY="30.0" mnemonicParsing="false" onAction="#insert_image" prefHeight="26.0" prefWidth="33.0" text="Ici" />
-            <Button layoutX="891.0" layoutY="430.0" mnemonicParsing="false" onAction="#AjouterEquipement" prefHeight="50.0" prefWidth="113.0" style="-fx-background-color: db1f48;" text="Ajouter" textFill="WHITE">
+            <TextField fx:id="imageEqId" layoutX="816.0" layoutY="59.0" prefHeight="26.0" prefWidth="165.0" promptText="image" />
+            <Button fx:id="ici" layoutX="963.0" layoutY="58.0" mnemonicParsing="false" onAction="#insert_image" prefHeight="26.0" prefWidth="34.0" textFill="TRANSPARENT" />
+            <Button layoutX="891.0" layoutY="437.0" mnemonicParsing="false" onAction="#AjouterEquipement" prefHeight="45.0" prefWidth="124.0" style="-fx-background-color: db1f48;" text="Ajouter" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button layoutX="776.0" layoutY="488.0" mnemonicParsing="false" onAction="#AfficherEquipement" style="-fx-background-color: db1f48;" text="Consulter la liste des équipements" textFill="WHITE">
+            <Button layoutX="889.0" layoutY="491.0" mnemonicParsing="false" onAction="#AfficherEquipement" prefHeight="43.0" prefWidth="124.0" style="-fx-background-color: db1f48;" text="Consulter " textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Button>
-            <Label layoutX="45.0" layoutY="49.0" text="Nom déquipement :">
+            <Label layoutX="45.0" layoutY="49.0" text="Nom déquipement :" textFill="#365679">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="44.0" layoutY="108.0" text="Categorie :">
+            <Label layoutX="44.0" layoutY="108.0" text="Categorie :" textFill="#365679">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="175.0" text="Description :">
+            <Label layoutX="42.0" layoutY="175.0" text="Description :" textFill="#365679">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="44.0" layoutY="330.0" text="Documentation :">
+            <Label layoutX="44.0" layoutY="330.0" text="Documentation :" textFill="#365679">
                <font>
                   <Font size="30.0" />
                </font>
@@ -63,7 +63,7 @@
             </Button>
          </children>
       </Pane>
-      <Label layoutX="630.0" layoutY="64.0" text="Ajouter un équipement " textFill="#365679">
+      <Label layoutX="717.0" layoutY="64.0" text="Equipements " textFill="#365679">
          <font>
             <Font size="45.0" />
          </font>

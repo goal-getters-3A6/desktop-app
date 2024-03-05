@@ -7,10 +7,7 @@ import edu.esprit.utils.DataSource;
 import javafx.util.Pair;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ServiceAvisEquipement implements IService<AvisEquipement> {
     Connection cnx = DataSource.getInstance().getCnx();
@@ -99,7 +96,7 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
 
         String req = "SELECT * FROM avisequipement " +
                 "INNER JOIN equipement ON avisequipement.idEq = equipement.idEq " +
-                "INNER JOIN user ON avisequipement.idUs = user.id";
+                "INNER JOIN user ON avisequipement.idUs = user.id AND avisequipement.commAEq IS NOT NULL";
 
 
         Statement st = cnx.createStatement();
@@ -139,7 +136,7 @@ public class ServiceAvisEquipement implements IService<AvisEquipement> {
 
 public List<AvisEquipement> getAllByEquipement(int idEquipement ) throws SQLException {
     List<AvisEquipement> avisequipement = new ArrayList<>();
-    String req = "SELECT avisequipement.idAEq ,avisequipement.commAEq , user.nom AS user_nom ,user.prenom AS user_prenom FROM avisequipement INNER JOIN user ON avisequipement.idUs = user.id WHERE avisequipement.idEq = ?";
+    String req = "SELECT avisequipement.idAEq ,avisequipement.commAEq , user.nom AS user_nom ,user.prenom AS user_prenom FROM avisequipement INNER JOIN user ON avisequipement.idUs = user.id WHERE avisequipement.idEq = ? AND avisequipement.commAEq IS NOT NULL";
 
     try (PreparedStatement st = cnx.prepareStatement(req)) {
         st.setInt(1, idEquipement);
@@ -188,6 +185,8 @@ public List<AvisEquipement> getAllByEquipement(int idEquipement ) throws SQLExce
         }
         return 0;
     }
+
+
 
 
 }

@@ -12,35 +12,44 @@
 <AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.DetailsEquipementBack">
    <children>
       <Pane prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #D1C1C5;" />
-      <Pane layoutX="253.0" layoutY="160.0" prefHeight="654.0" prefWidth="1155.0" style="-fx-background-color: #38afb5;">
+      <Pane layoutX="462.0" layoutY="186.0" prefHeight="605.0" prefWidth="863.0" style="-fx-background-color: #FBFBEB;">
          <children>
-            <Label fx:id="NomEqId" layoutX="507.0" layoutY="98.0" prefHeight="17.0" prefWidth="268.0" text="Label" />
-            <Button layoutX="987.0" layoutY="605.0" mnemonicParsing="false" onAction="#ConsulterEqB" text="Liste des équipements" />
+            <Label fx:id="NomEqId" layoutX="507.0" layoutY="98.0" prefHeight="17.0" prefWidth="268.0" text="Label" textFill="#365679">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <VBox fx:id="DetailsEq" layoutX="56.0" layoutY="217.0" prefHeight="362.0" prefWidth="565.0" spacing="10.0">
+               <children>
+                  <Label fx:id="CategEq" text="Categorie" textFill="#365679">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="CategEqId" text="Label" />
+                  <Label />
+                  <Label fx:id="DescEq" text="Description" textFill="#365679">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="DescEqId" text="Label" />
+                  <Label />
+                  <Label fx:id="DocEq" text="Documentation" textFill="#365679">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="DocEqId" text="Label" />
+               </children>
+            </VBox>
+            <ImageView fx:id="imageViewEq" fitHeight="179.0" fitWidth="235.0" layoutX="88.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="762.0" layoutY="536.0" mnemonicParsing="false" onAction="#ConsulterEqB" style="-fx-background-color: db1f48;" text="Retour" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
-      <VBox fx:id="DetailsEq" layoutX="302.0" layoutY="366.0" prefHeight="412.0" prefWidth="924.0" spacing="10.0">
-         <children>
-            <Label fx:id="CategEq" text="Categorie" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="CategEqId" text="Label" />
-            <Label fx:id="DescEq" text="Description" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="DescEqId" text="Label" />
-            <Label fx:id="DocEq" text="Documentation" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="DocEqId" text="Label" />
-         </children>
-      </VBox>
-      <ImageView fx:id="imageViewEq" fitHeight="132.0" fitWidth="200.0" layoutX="356.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="640.0" layoutY="74.0" text="Détail d'un équipement" textFill="#365679">
          <font>
             <Font size="45.0" />

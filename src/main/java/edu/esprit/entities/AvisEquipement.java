@@ -10,6 +10,8 @@ private User user;
     private boolean like;
     private boolean dislike;
 
+
+
     public AvisEquipement(String text, int idEq){}
 
     public AvisEquipement(int idAEq, String commAEq, Equipement equipement ) {

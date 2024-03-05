@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,11 +35,52 @@ import javafx.scene.image.Image;
 public class AfficherEquipementFront {
 
     @FXML
+    private ImageView logo1;
+    @FXML
     private GridPane gridPaneEq;
 
     @FXML
     private ScrollPane scrollPaneEq;
 
+    @FXML
+    private Pagination pagination;
+
+    @FXML
+    private Button btnabonnement;
+
+    @FXML
+    private Button btnaccueil;
+
+    @FXML
+    private Button btnalimentaire;
+
+    @FXML
+    private Button btnequipement;
+
+    @FXML
+    private Button btnevenement;
+
+    @FXML
+    private Button btnplanning;
+
+    @FXML
+    private Button btnreclamation;
+    private final int itemsPerPage = 3;
+
+
+
+    private void setEqPagination() {
+        try {
+            List<Equipement> equipements = ES.getAll();
+            int pageCount = (int) Math.ceil((double) equipements.size() / itemsPerPage);
+
+            pagination.setPageCount(pageCount);
+            pagination.setPageFactory(pageIndex -> createEqGridPane(pageIndex, equipements));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private final ServiceEquipement ES = new ServiceEquipement();
     SessionManagement ss=new SessionManagement();
     String mail=ss.getEmail();
@@ -55,35 +98,28 @@ public class AfficherEquipementFront {
     }
 
     public void initialize() {
-        setEqGridPaneList();
+        setEqPagination();
     }
 
-    private void setEqGridPaneList() {
-        try {
-            List<Equipement> equipements = ES.getAll();
+    private GridPane createEqGridPane(int pageIndex, List<Equipement> equipements) {
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
-            int colIndex = 0;
-            int rowIndex = 0;
+        int startIndex = pageIndex * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, equipements.size());
 
-            for (Equipement equipement : equipements) {
-                // Création de la carte d'équipement
-                VBox eqCard = createEqCard(equipement);
-
-                // Ajout de la carte à la grille
-                gridPaneEq.add(eqCard, colIndex, rowIndex);
-                GridPane.setMargin(eqCard, new Insets(10));
-
-                // Gestion des index pour la prochaine carte
-                colIndex++;
-                if (colIndex == 3) {
-                    colIndex = 0;
-                    rowIndex++;
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        for (int i = startIndex; i < endIndex; i++) {
+            Equipement equipement = equipements.get(i);
+            VBox eqCard = createEqCard(equipement);
+            gridPane.add(eqCard, i % 3, i / 3);
+            GridPane.setMargin(eqCard, new Insets(10));
         }
+
+        return gridPane;
     }
+
 
     private VBox createEqCard(Equipement equipement) {
         // Création de la carte VBox
@@ -116,6 +152,10 @@ public class AfficherEquipementFront {
         // Ajout du bouton "Détails"
         Button detailButton = new Button("Détails");
         detailButton.getStyleClass().add("icon-button"); // Ajoutez des styles CSS au besoin
+        detailButton.setStyle("-fx-font-size: 15px;-fx-background-color: #db1f48;"); // Utilisez la couleur de fond que vous souhaitez
+
+// Changer la couleur du texte
+        detailButton.setTextFill(javafx.scene.paint.Color.WHITE);
         detailButton.setOnAction(event -> afficherDetail(detailButton, equipement)); // Associez l'action de détail
         eqCard.getChildren().add(detailButton);
 
@@ -134,9 +174,8 @@ public class AfficherEquipementFront {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsEquipement.fxml"));
             Parent root = loader.load();
 
-            // Récupérer le contrôleur de la nouvelle interface
+
             DetailsEquipement controller = loader.getController();
-            // Passer une référence à ce contrôleur (AfficherEquipementBack)
             controller.setParentController(this);
 
 
@@ -144,11 +183,35 @@ public class AfficherEquipementFront {
             controller.initData(equipement);
             detailButton.getScene().setRoot(root);
         } catch (IOException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("SQL Exeption");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    @FXML
+    public void reclamation(javafx.event.ActionEvent actionEvent) {
+    }
+    @FXML
+    public void evenement(javafx.event.ActionEvent actionEvent) {
+    }
+    @FXML
+    public void alimentaire(javafx.event.ActionEvent actionEvent) {
+    }
+    @FXML
+    public void abonnement(javafx.event.ActionEvent actionEvent) {
+    }
+    @FXML
+    public void planning(javafx.event.ActionEvent actionEvent) {
+    }
+    @FXML
+    public void equipement(javafx.event.ActionEvent actionEvent) {
+    }
+    @FXML
+    public void accueil(javafx.event.ActionEvent actionEvent) {
+    }
 }
