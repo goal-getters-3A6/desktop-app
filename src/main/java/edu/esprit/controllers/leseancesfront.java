@@ -1,10 +1,14 @@
 package edu.esprit.controllers;
 
+import edu.esprit.entities.Admin;
+import edu.esprit.entities.Client;
 import edu.esprit.entities.Seance;
 import edu.esprit.entities.User;
 import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceSeance;
+import edu.esprit.services.UserService;
 import edu.esprit.utils.DataSource;
+import edu.esprit.utils.SessionManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +18,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -23,19 +29,19 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.ArrayList;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
 
+import static edu.esprit.utils.SessionManagement.*;
+
 
 public class leseancesfront{
-
+    @FXML
+    private AnchorPane anchorpanegrand;
     @FXML
     private BorderPane borderpane;
 
@@ -70,7 +76,8 @@ public class leseancesfront{
 
     @FXML
     private HBox hbox1;
-
+    @FXML
+    private MenuItem profilitem;
     @FXML
     private HBox hbox2;
 
@@ -89,6 +96,26 @@ public class leseancesfront{
     @FXML
     private VBox vbox;
 
+    @FXML
+    private MenuButton profilbuttonmenu;
+    SessionManagement sm = new SessionManagement();
+    String mail = sm.getEmail();
+    // UserService us=new UserService();
+    ClientService cs = new ClientService();
+    Client u;
+    User user;
+    UserService userService=new UserService();
+
+    {
+        // u = cs.getOneByEmail(mail);
+        //System.out.println("client :"+ u);
+        user=userService.getOneByEmail(mail);
+        System.out.println("user?: "+user);
+        if(user.getRole().equals("CLIENT"))
+        {
+            System.out.println("CLIENTTTTTTTTTTTTTTTTTTTTTT");
+        }
+    }
     public leseancesfront() throws SQLException {
     }
 
@@ -99,7 +126,20 @@ public class leseancesfront{
 
     @FXML
     void accueil(ActionEvent event) {
-
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/acceuil.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnaccueil.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
 
     @FXML
@@ -169,6 +209,22 @@ public class leseancesfront{
      List<Seance> seanceList=ss.getAll();
 
     public void initialize(){
+       // Image image = new Image(u.getImage().isEmpty() ? "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png" : u.getImage());
+        //javafx.scene.image.ImageView imageView = new javafx.scene.image.ImageView(image);
+       // imageView.setFitHeight(25);
+        //imageView.setFitWidth(25);
+       // profilbuttonmenu.setGraphic(imageView);
+        if(user.getRole().equals("CLIENT"))
+        {
+            profilitem.setText("Profile");
+        }
+        else
+        {
+            profilitem.setText("Dashbord");
+
+        }
+
+        profilbuttonmenu.setText(user.getNom());
         setSeanceGridPaneList();
     }
     private void setSeanceGridPaneList() {
@@ -326,6 +382,28 @@ public class leseancesfront{
         } catch (IOException ex) {
             ex.printStackTrace();
             // Gérer l'exception, par exemple, afficher un message d'erreur à l'utilisateur
+        }
+    }
+    @FXML
+    void toProfile(ActionEvent event) throws IOException  {
+        if (user.getRole().equals("CLIENT")) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/profil.fxml"));
+            anchorpanegrand.getChildren().setAll(pane);
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Admin Dashboard");
+            newWindow.setScene(scene);
+            newWindow.show();
+        }
+    }
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+        if (checkFile()) {
+            deleteSession();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+            anchorpanegrand.getChildren().setAll(pane);
         }
     }
 

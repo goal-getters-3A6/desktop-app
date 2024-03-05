@@ -1,9 +1,13 @@
 package edu.esprit.controllers;
 
+import edu.esprit.entities.Admin;
 import edu.esprit.entities.Client;
 import edu.esprit.entities.Reservation;
+import edu.esprit.entities.User;
+import edu.esprit.services.AdminService;
 import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceReservation;
+import edu.esprit.services.UserService;
 import edu.esprit.utils.SessionManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,13 +17,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
+
+import static edu.esprit.utils.SessionManagement.checkFile;
+import static edu.esprit.utils.SessionManagement.deleteSession;
 
 public class Reservationsclient {
     @FXML
@@ -69,7 +84,14 @@ public class Reservationsclient {
 
     @FXML
     private Button btnprofil;
+    @FXML
+    private MenuItem logoutitem;
 
+    @FXML
+    private MenuButton profilbuttonmenu;
+
+    @FXML
+    private MenuItem profilitem;
     @FXML
     private Button btnreclamation;
 
@@ -83,7 +105,8 @@ public class Reservationsclient {
 
     @FXML
     private TextField textfiledpoids;
-
+    @FXML
+    private AnchorPane anchorpanegrand;
     @FXML
     private GridPane gridpane;
     @FXML
@@ -103,8 +126,21 @@ public class Reservationsclient {
     {
         try {
             u = cs.getOneByEmail(mail);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+    User user;
+    UserService userService=new UserService();
+
+    {// u = cs.getOneByEmail(mail);
+        //System.out.println("client :"+ u);
+        user=userService.getOneByEmail(mail);
+        System.out.println("user?: "+user);
+        if(user.getRole().equals("CLIENT"))
+        {
+            System.out.println("CLIENTTTTTTTTTTTTTTTTTTTTTT");
         }
     }
     private final ServiceReservation servicereservation= new ServiceReservation();
@@ -112,6 +148,17 @@ public class Reservationsclient {
     @FXML
     private ScrollPane scrollpane;
     public void initialize() {
+        if(user.getRole().equals("CLIENT"))
+        {
+            profilitem.setText("Profile");
+        }
+        else
+        {
+            profilitem.setText("Dashbord");
+
+        }
+
+        profilbuttonmenu.setText(user.getNom());
         // Initialiser la liste observable pour stocker les réservations
         ObservableList<Reservation> reservationsList = FXCollections.observableArrayList();
         // Récupérer les réservations depuis le service ou tout autre moyen
@@ -127,7 +174,7 @@ public class Reservationsclient {
         listview.setItems(reservationsList);
 
         // Personnaliser l'affichage des éléments de la ListView si nécessaire
-        listview.setCellFactory(param -> new ListCell<Reservation>() {
+        /*listview.setCellFactory(param -> new ListCell<Reservation>() {
             @Override
             protected void updateItem(Reservation reservation, boolean empty) {
                 super.updateItem(reservation, empty);
@@ -142,14 +189,79 @@ public class Reservationsclient {
 
                         setText("Nom de la séance: " + reservation.getSeance().getNom() +
                                 ", Nom de la personne: " + client.getNom() +
-                                ", Prénom de la personne: " + client.getPrenom()+"poids: "+client.getPoids()+"Taille" + client.getTaille());
+                                ", Prénom de la personne: " + client.getPrenom()+"poids: "+client.getPoids()+" Taille: " + client.getTaille());
                     } else {
                         // Si l'utilisateur n'est pas un client, afficher un message par défaut
                         setText("L'utilisateur associé à cette réservation n'est pas un client.");
                     }
                 }
             }
+        });*/
+        listview.setCellFactory(param -> new ListCell<Reservation>() {
+            @Override
+            protected void updateItem(Reservation reservation, boolean empty) {
+                super.updateItem(reservation, empty);
+                if (empty || reservation == null) {
+                    setText(null);
+                } else {
+                    // Assurez-vous que l'utilisateur associé à la réservation est un client
+                    //User u = reservation.getUser();
+
+                        // Si c'est un client, afficher les détails de la réservation dans la cellule
+                      //  Client client = (Client) u; // Convertir l'utilisateur en client
+
+                        // Créer une HBox pour contenir l'image et les détails de la réservation
+                        HBox reservationBox = new HBox();
+                        reservationBox.setSpacing(10); // Espacement entre les éléments
+                    Font customFont = Font.font("Arial", FontWeight.BOLD, 12); // Exemple de police Arial, gras, taille 12
+
+                        // Charger l'image de la séance
+                        Image seanceImage = new Image(reservation.getSeance().getImageseance());
+                        ImageView imageView = new ImageView(seanceImage);
+                        imageView.setFitWidth(200); // Largeur de l'image
+                        imageView.setFitHeight(200); // Hauteur de l'image
+
+                        // Créer une VBox pour contenir les informations sur la réservation
+                        VBox reservationInfoBox = new VBox();
+                        reservationInfoBox.setSpacing(5); // Espacement entre les informations
+
+                        // Afficher les détails de la réservation dans la VBox
+
+                        Label seanceLabel = new Label( reservation.getSeance().getNom());
+                        Label jourseance = new Label(reservation.getSeance().getJourseance());
+
+                // Convertir l'objet Time en chaîne de caractères avec le format souhaité
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                    String horaireSeanceStr = timeFormat.format(reservation.getSeance().getHoraire());
+                    // Créer un Label avec la chaîne de caractères formatée
+                    Label horaireSeance = new Label(horaireSeanceStr);
+                    Label userNomLabel = new Label( u.getNom());
+                        Label userPrenomLabel = new Label( u.getPrenom());
+                        Label poidsLabel = new Label("Poids: " + u.getPoids());
+                        Label tailleLabel = new Label("Taille: " + u.getTaille());
+                        horaireSeance.setFont(customFont);
+                        seanceLabel.setFont(customFont);
+                        jourseance.setFont(customFont);
+                        userNomLabel.setFont(customFont);
+                        userPrenomLabel.setFont(customFont);
+                        poidsLabel.setFont(customFont);
+                        tailleLabel.setFont(customFont);
+                        // Ajouter les labels à la VBox
+                        reservationInfoBox.getChildren().addAll(seanceLabel,jourseance,horaireSeance, userNomLabel, userPrenomLabel, poidsLabel, tailleLabel);
+
+                        // Ajouter l'image et les informations de réservation à la HBox
+                        reservationBox.getChildren().addAll(imageView, reservationInfoBox);
+
+                        // Définir la HBox comme contenu de la cellule
+                        setGraphic(reservationBox);
+                        setText(null);
+                        setStyle("-fx-background-color: pink;");
+
+
+                }
+            }
         });
+
 
         // Gérer les événements de sélection dans la ListView
         listview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -702,6 +814,29 @@ public class Reservationsclient {
     @FXML
     void reclamation(ActionEvent event) {
 
+    }
+
+    @FXML
+    void toProfile(ActionEvent event) throws IOException {
+        if (user.getRole().equals("CLIENT")) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/profil.fxml"));
+            anchorpanegrand.getChildren().setAll(pane);
+        } else {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Admin Dashboard");
+            newWindow.setScene(scene);
+            newWindow.show();
+        }
+    }
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+        if (checkFile()) {
+            deleteSession();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+            anchorpanegrand.getChildren().setAll(pane);
+        }
     }
     }
 

@@ -189,6 +189,22 @@ public class Statistiqueseance  implements Initializable {
 
     @FXML
     void tableaudebord(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+            Parent root = loader.load();
 
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

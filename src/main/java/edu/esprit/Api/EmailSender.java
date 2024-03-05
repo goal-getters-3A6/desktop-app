@@ -2,7 +2,7 @@ package edu.esprit.Api;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
-/*public class EmailSender {
+public class EmailSender {
 
     public static void sendConfirmationEmail() throws MessagingException {
         // Configurez les propriétés de la session
@@ -30,4 +30,4 @@ import java.util.Properties;
         // Envoyez le message
         Transport.send(message);
     }
-}*/
+}

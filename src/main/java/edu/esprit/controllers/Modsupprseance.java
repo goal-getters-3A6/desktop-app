@@ -300,6 +300,7 @@ public class Modsupprseance {
         String duree = dureeid.getText();
         String numSalle = numsalleid.getText();
         String imageUrl = pathimageid.getText();
+        imageUrl = imageUrl.replace("file:/", "");
         Time horaire = horaireid.getValue();
         String jour = jourid.getValue();
         String nom = nomid.getValue();

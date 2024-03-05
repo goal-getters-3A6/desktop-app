@@ -11,6 +11,11 @@ public class User {
     private String image;
     private String role;
 
+    public User(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
     public String getRole() {
         return role;
     }
@@ -111,7 +116,7 @@ public class User {
                 ", prenom='" + prenom + '\'' +
                 ", mdp='" + mdp + '\'' +
                 ", mail='" + mail + '\'' +
-                ", image=" + image +
+                ", image=" + image + "role"+role+
                 '}';
     }
 

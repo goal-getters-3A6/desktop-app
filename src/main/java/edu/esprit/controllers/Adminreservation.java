@@ -8,6 +8,7 @@ import edu.esprit.entities.User;
 import edu.esprit.services.AdminService;
 import edu.esprit.services.ClientService;
 import edu.esprit.services.ServiceReservation;
+import edu.esprit.services.UserService;
 import edu.esprit.utils.SessionManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,11 +19,20 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -72,17 +82,23 @@ public class Adminreservation {
 
     @FXML
     private TextField textfieldrecherche;
+    @FXML
+    private ProgressBar progressBar;
     List<Reservation> resList;
     SessionManagement ss=new SessionManagement();
     String mail=ss.getEmail();
-    Client u;
+    User user;
+    //Client u;
+    Admin Ad;
     ClientService A=new ClientService();
+    UserService userService=new UserService();
+    //AdminService adminService=new AdminService();
     {
-        try {
-            u = A.getOneByEmail(mail);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        user = userService.getOneByEmail(mail);
+        System.out.println("mail: "+mail);
+        // Ad=adminService.getOneByEmail(mail);
+        // u = A.getOneByEmail(mail);
+
     }
     private final ObservableList<String> criteresTri = FXCollections.observableArrayList("Nom", "Nomseance", "Prenom");
 
@@ -98,73 +114,6 @@ public class Adminreservation {
 
     @FXML
     void recherche(ActionEvent event) {
-        // Vérifier si resList est null
-       /* if (resList == null) {
-            // Récupérer les réservations depuis le service
-            try {
-                resList = serviceReservation.getAll();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return; // Sortir de la méthode si une exception se produit lors de la récupération des réservations
-            }
-        }
-
-        // Récupérer le poids saisi par l'utilisateur depuis le champ de recherche
-        String poidsRecherche = textfieldrecherche.getText().trim();
-
-        // Vérifier si le champ de recherche n'est pas vide
-        if (!poidsRecherche.isEmpty()) {
-            // Convertir le poids recherché en float
-            float poidsRechercheFloat = Float.parseFloat(poidsRecherche);
-
-            // Filtrer les réservations en fonction du poids recherché
-            List<Reservation> reservationsFiltrees = resList.stream()
-                    .filter(reservation -> reservation.getPoids() == poidsRechercheFloat)
-                    .collect(Collectors.toList());
-
-            // Mettre à jour la liste affichée avec les résultats de la recherche
-            afficherReservations(reservationsFiltrees);
-        } else {
-            // Si le champ de recherche est vide, afficher toutes les réservations
-            afficherReservations(resList);
-        }*/
-        // Vérifier si resList est null
-      /*  if (resList == null) {
-            // Récupérer les réservations depuis le service
-            try {
-                resList = serviceReservation.getAll();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return; // Sortir de la méthode si une exception se produit lors de la récupération des réservations
-            }
-        }
-
-        // Récupérer le poids saisi par l'utilisateur depuis le champ de recherche
-        String poidsRecherche = textfieldrecherche.getText().trim();
-
-        // Vérifier si le champ de recherche n'est pas vide
-        if (!poidsRecherche.isEmpty()) {
-            // Convertir le poids recherché en float
-            float poidsRechercheFloat = Float.parseFloat(poidsRecherche);
-
-            // Filtrer les réservations en fonction du poids recherché
-            List<Reservation> reservationsFiltrees = resList.stream()
-                    .filter(reservation -> {
-                        // Vérifier si l'utilisateur associé à la réservation est un client
-                        if (reservation.getUser() instanceof Client) {
-                            // Si c'est un client, vérifier si le poids correspond au poids recherché
-                            return ((Client) reservation.getUser()).getPoids() == poidsRechercheFloat;
-                        }
-                        return false; // Si l'utilisateur n'est pas un client, exclure cette réservation
-                    })
-                    .collect(Collectors.toList());
-
-            // Mettre à jour la liste affichée avec les résultats de la recherche
-            afficherReservations(reservationsFiltrees);
-        } else {
-            // Si le champ de recherche est vide, afficher toutes les réservations
-            afficherReservations(resList);
-        }*/
         if (resList == null) {
             // Récupérer les réservations depuis le service
             try {
@@ -232,37 +181,6 @@ public class Adminreservation {
 
     }
     public List<Reservation> trierReservations(String critereTri) {
-       /* List<Reservation> reservations = null;
-        try {
-            // Récupérer la liste complète des réservations
-            reservations = serviceReservation.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if (reservations == null) {
-            return new ArrayList<>();
-        }
-
-        // Utiliser Stream pour trier les réservations en fonction du critère sélectionné
-        switch (critereTri) {
-            case "Nom":
-                return reservations.stream()
-                        .sorted(Comparator.comparing(reservation -> reservation.getUser().getNom()))
-                        .collect(Collectors.toList());
-            case "Taille":
-                return reservations.stream()
-                        .sorted(Comparator.comparing(reservation -> reservation.getTaille()))
-                        .collect(Collectors.toList());
-            case "Sexe":
-                return reservations.stream()
-                        .sorted(Comparator.comparing(Reservation::getSexe))
-                        .collect(Collectors.toList());
-            default:
-                // Retourner la liste non triée si le critère de tri n'est pas reconnu
-                return reservations;
-        }*/
-
         List<Reservation> reservations = null;
         try {
             // Récupérer la liste complète des réservations
@@ -298,55 +216,9 @@ public class Adminreservation {
     private final ServiceReservation serviceReservation = new ServiceReservation();
     private final ClientService clientService = new ClientService();
 
-    /* public void initialize() {
-          afficherReservations();
-      }
-      public void afficherReservations() {
-          List<Reservation> reservations;
-          try {
-              reservations = serviceReservation.getAll();
-              afficherReservationsDansGridPane(reservations);
-          } catch (SQLException e) {
-              e.printStackTrace();
-          }
-      }
-
-      public void afficherReservationsDansGridPane(List<Reservation> reservations) {
-          int row = 0;
-          for (Reservation reservation : reservations) {
-              User user = clientService.getClientById(reservation.getUser().getId());
-
-              gridpane.add(new Label("Nom de la séance : " + reservation.getSeance().getNom()), 0, row);
-              gridpane.add(new Label("Nom de l'utilisateur : " + user.getNom()), 1, row);
-              gridpane.add(new Label("Prénom de l'utilisateur : " + user.getPrenom()), 2, row);
-              gridpane.add(new Label("Âge : " + reservation.getAge()), 3, row);
-              gridpane.add(new Label("Poids : " + reservation.getPoids()), 4, row);
-              gridpane.add(new Label("Taille : " + reservation.getTaille()), 5, row);
-              gridpane.add(new Label("Sexe : " + reservation.getSexe()), 6, row);
-
-              row++;
-          }
-      }*/
-
     public void afficherReservations() {
-       /* ObservableList<String> reservationsData = FXCollections.observableArrayList();
-        try {
-            List<Reservation> reservations = serviceReservation.getAll();
-            for (Reservation reservation : reservations) {
-                String reservationDetails = "Nom de la séance: " + reservation.getSeance().getNom() +
-                        ", Nom de l'utilisateur: " + reservation.getUser().getNom() +
-                        ", Prénom de l'utilisateur: " + reservation.getUser().getPrenom() +
-                        ", Âge: " + reservation.getAge() +
-                        ", Poids: " + reservation.getPoids() +
-                        ", Taille: " + reservation.getTaille() +
-                        ", Sexe: " + reservation.getSexe();
-                reservationsData.add(reservationDetails);
-            }
-            listview.setItems(reservationsData);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-      /*  try {
+
+       /* try {
             List<Reservation> reservations = serviceReservation.getAll();
 
             // Créer une ObservableList contenant les réservations
@@ -364,189 +236,11 @@ public class Adminreservation {
                         setText(null);
                     } else {
                         // Afficher les détails de la réservation dans la cellule
-                        String reservationDetails = "Nom de la séance: " + reservation.getSeance().getNom() +
-                                ", Nom de l'utilisateur: " + reservation.getUser().getNom() +
-                                ", Prénom de l'utilisateur: " + reservation.getUser().getPrenom() +
-                                ", Poids: " + reservation.getPoids() +
-                                ", Taille: " + reservation.getTaille() +
-                                ", Sexe: " + reservation.getSexe();
+                        String reservationDetails = "la séance " + reservation.getSeance().getNom() +
+                                " Nom de l'utilisateur: " + reservation.getUser().getNom() +
+                                " Prénom de l'utilisateur: " + reservation.getUser().getPrenom() ;
                         setText(reservationDetails);
-                    }
-                }
-            });
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-       /* try {
-            List<Reservation> reservations = serviceReservation.getAll();
 
-            // Créer une ObservableList contenant les réservations
-            ObservableList<Reservation> reservationsObservableList = FXCollections.observableArrayList(reservations);
-
-            // Lier la liste observable à la ListView
-            listview.setItems(reservationsObservableList);
-
-            // Personnaliser l'affichage des éléments de la ListView avec un ListCell personnalisé
-            listview.setCellFactory(param -> new ListCell<Reservation>() {
-                @Override
-                protected void updateItem(Reservation reservation, boolean empty) {
-                    super.updateItem(reservation, empty);
-                    if (empty || reservation == null) {
-                        setText(null);
-                    } else {
-                        // Vérifier si l'utilisateur associé à la réservation est un client
-                        if (reservation.getUser() instanceof Client) {
-                            // Si c'est un client, afficher les détails de la réservation dans la cellule
-                            Client client = (Client) reservation.getUser();
-                            String reservationDetails = "Nom de la séance: " + reservation.getSeance().getNom() +
-                                    ", Nom de l'utilisateur: " + client.getNom() +
-                                    ", Prénom de l'utilisateur: " + client.getPrenom() +
-                                    ", Poids: " + client.getPoids() +
-                                    ", Taille: " + client.getTaille() +
-                                    ", Sexe: " + client.getSexe();
-                            setText(reservationDetails);
-                        } else {
-                            // Si l'utilisateur n'est pas un client, afficher un message par défaut
-                            setText("L'utilisateur associé à cette réservation n'est pas un client.");
-                        }
-                    }
-                }
-            });
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-      /*  try {
-            List<Reservation> reservations = serviceReservation.getAll();
-
-            // Créer une ObservableList contenant les réservations
-            ObservableList<Reservation> reservationsObservableList = FXCollections.observableArrayList(reservations);
-
-            // Lier la liste observable à la ListView
-            listview.setItems(reservationsObservableList);
-
-            // Personnaliser l'affichage des éléments de la ListView avec un ListCell personnalisé
-            listview.setCellFactory(param -> new ListCell<Reservation>() {
-                @Override
-                protected void updateItem(Reservation reservation, boolean empty) {
-                    super.updateItem(reservation, empty);
-                    if (empty || reservation == null) {
-                        setText(null);
-                    } else {
-                        // Vérifier si l'utilisateur associé à la réservation est un client
-                        if (reservation.getUser() instanceof Client) {
-                            // Si c'est un client, afficher les détails de la réservation dans la cellule
-                            Client client = (Client) reservation.getUser();
-                            String reservationDetails = "Nom de la séance: " + reservation.getSeance().getNom() +
-                                    ", Nom de l'utilisateur: " + client.getNom() +
-                                    ", Prénom de l'utilisateur: " + client.getPrenom();
-                            // Vérifier si le client a des informations de poids et de taille
-                            if (client.getPoids() > 0 && client.getTaille() > 0 && client.getSexe() != null) {
-                                reservationDetails += ", Poids: " + client.getPoids() +
-                                        ", Taille: " + client.getTaille() +
-                                        ", Sexe: " + client.getSexe();
-                            } else {
-                                // Si les informations de poids et de taille ne sont pas disponibles, afficher un message par défaut
-                                reservationDetails += ", Les informations de poids, taille ou sexe ne sont pas disponibles.";
-                            }
-                            setText(reservationDetails);
-                        } else {
-                            // Si l'utilisateur n'est pas un client, afficher un message par défaut
-                            setText("L'utilisateur associé à cette réservation n'est pas un client.");
-                        }
-                    }
-                }
-            });
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-       /* try {
-            List<Reservation> reservations = serviceReservation.getAll();
-
-            // Créer une ObservableList contenant les réservations
-            ObservableList<Reservation> reservationsObservableList = FXCollections.observableArrayList(reservations);
-
-            // Lier la liste observable à la ListView
-            listview.setItems(reservationsObservableList);
-
-            // Personnaliser l'affichage des éléments de la ListView avec un ListCell personnalisé
-            listview.setCellFactory(param -> new ListCell<Reservation>() {
-                @Override
-                protected void updateItem(Reservation reservation, boolean empty) {
-                    super.updateItem(reservation, empty);
-                    if (empty || reservation == null) {
-                        setText(null);
-                    } else {
-                        // Récupérer l'utilisateur associé à la réservation
-                        User user = reservation.getUser();
-                        if (user != null) {
-                            // Vérifier le rôle de l'utilisateur
-                            if ("CLIENT".equals(user.getRole())) {
-                                // Si c'est un client, afficher les détails de la réservation avec les informations du client
-                                Client client = (Client) user;
-                                System.out.println("client"+client);
-                                String reservationDetails = "Nom de la séance: " + reservation.getSeance().getNom() +
-                                        ", Nom de l'utilisateur: " + client.getNom() +
-                                          ", Prénom de l'utilisateur: " + client.getPrenom()+
-                                        ", Poids: " + client.getPoids() +
-                                        ", Taille: " + client.getTaille() +
-                                        ", Sexe: " + client.getSexe();
-                                // Vérifier si le client a des informations de poids et de taille
-                               if (client.getPoids() > 0 && client.getTaille() > 0 && client.getSexe() != null) {
-                                    reservationDetails += ", Poids: " + client.getPoids() +
-                                            ", Taille: " + client.getTaille() +
-                                            ", Sexe: " + client.getSexe();
-                                } else {
-                                    // Si les informations de poids et de taille ne sont pas disponibles, afficher un message par défaut
-                                    reservationDetails += ", Les informations de poids, taille ou sexe ne sont pas disponibles.";
-                                }
-                                setText(reservationDetails);
-                            } else {
-                                // Si ce n'est pas un client, afficher les détails de la réservation avec le nom de l'utilisateur
-                                setText("Nom de la séance: " + reservation.getSeance().getNom() +
-                                        ", Nom de l'utilisateur: " + user.getNom() +
-                                        ", Prénom de l'utilisateur: " + user.getPrenom());
-                            }
-                        } else {
-                            setText("Aucun utilisateur associé à cette réservation.");
-                        }
-                    }
-                }
-            });
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }*/
-       /* try {
-            List<Reservation> reservations = serviceReservation.getAll();
-            System.out.println(reservations);
-
-            // Créer une ObservableList contenant les réservations
-            ObservableList<Reservation> reservationsObservableList = FXCollections.observableArrayList(reservations);
-
-            // Lier la liste observable à la ListView
-            listview.setItems(reservationsObservableList);
-
-            // Personnaliser l'affichage des éléments de la ListView avec un ListCell personnalisé
-            listview.setCellFactory(param -> new ListCell<Reservation>() {
-                @Override
-                protected void updateItem(Reservation reservation, boolean empty) {
-                    super.updateItem(reservation, empty);
-                    if (empty || reservation == null) {
-                        setText(null);
-                    } /*else {
-                        // Récupérer l'utilisateur associé à la réservation
-                        User user = reservation.getUser();
-                        if (user != null && "CLIENT".equals(user.getRole())) {
-                            // Si c'est un client, afficher les détails de la réservation avec les informations du client
-                            Client client = (Client) user;
-                            String reservationDetails = "Nom de la séance: " + reservation.getSeance().getNom()
-                                    ;
-                            setText(reservationDetails);
-                        } else {
-                            // Si ce n'est pas un client ou si l'utilisateur est null, afficher un message par défaut
-                            setText("Nom de la séance: " + reservation.getSeance().getNom() +
-                                    ", Nom de l'utilisateur: " + (user != null ? user.getNom() : "Non défini") +
-                                    ", Prénom de l'utilisateur: " + (user != null ? user.getPrenom() : "Non défini"));
-                        }
                     }
                 }
             });
@@ -570,11 +264,48 @@ public class Adminreservation {
                     if (empty || reservation == null) {
                         setText(null);
                     } else {
-                        // Afficher les détails de la réservation dans la cellule
-                        String reservationDetails = "Nom de la séance: " + reservation.getSeance().getNom() +
-                                ", Nom de l'utilisateur: " + reservation.getUser().getNom() +
-                                ", Prénom de l'utilisateur: " + reservation.getUser().getPrenom() ;
-                        setText(reservationDetails);
+                        // Créer une HBox pour contenir les détails de la réservation
+                        HBox reservationDetailsBox = new HBox();
+                        reservationDetailsBox.setSpacing(10); // Espacement entre les éléments
+
+                        // Créer une VBox pour contenir les informations sur la réservation
+                        VBox reservationInfoBox = new VBox();
+                        reservationInfoBox.setSpacing(5); // Espacement entre les informations
+                        Font customFont = Font.font("Arial", FontWeight.BOLD, 12); // Exemple de police Arial, gras, taille 12
+
+                        // Afficher les détails de la réservation dans la VBox
+                        Label seanceLabel = new Label(reservation.getSeance().getNom());
+                        Label userNomLabel = new Label( reservation.getUser().getNom());
+                        Label userPrenomLabel = new Label( reservation.getUser().getPrenom());
+                        Label jourseance = new Label(reservation.getSeance().getJourseance());
+
+                        // Convertir l'objet Time en chaîne de caractères avec le format souhaité
+                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                        String horaireSeanceStr = timeFormat.format(reservation.getSeance().getHoraire());
+                        // Créer un Label avec la chaîne de caractères formatée
+                        Label horaireSeance = new Label(horaireSeanceStr);
+                        seanceLabel.setFont(customFont);
+                        userNomLabel.setFont(customFont);
+                        userPrenomLabel.setFont(customFont);
+                        jourseance.setFont(customFont);
+                        horaireSeance.setFont(customFont);
+                        // Ajouter les labels à la VBox
+                        reservationInfoBox.getChildren().addAll(seanceLabel,jourseance,horaireSeance, userNomLabel, userPrenomLabel);
+
+                        // Charger l'image de la séance
+                        Image seanceImage = new Image(reservation.getSeance().getImageseance());
+                        ImageView imageView = new ImageView(seanceImage);
+                        imageView.setFitWidth(200); // Largeur de l'image
+                        imageView.setFitHeight(200); // Hauteur de l'image
+
+                        // Ajouter l'image et les informations de réservation à la HBox
+                        reservationDetailsBox.getChildren().addAll(imageView, reservationInfoBox);
+
+                        // Définir la HBox comme contenu de la cellule
+                        setGraphic(reservationDetailsBox);
+                        setText(null);
+                        setStyle("-fx-background-color: pink;");
+
                     }
                 }
             });
@@ -616,7 +347,15 @@ public class Adminreservation {
                     // Mettre à jour l'affichage de la liste des réservations
                     afficherReservations();
                     System.out.println(mail);
-                    SendEmail.send(mail);
+                    SendEmail.send("sarra.hammemi@esprit.tn");
+                    progressBar.setProgress(0.5);
+                    // Créer une pause de 1 seconde avant de mettre à jour la ProgressBar à 100%
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                    pause.setOnFinished(evente -> {
+                        progressBar.setProgress(1.0);
+                    });
+                    pause.play();
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     // Afficher une erreur en cas d'échec de suppression
@@ -645,6 +384,23 @@ public class Adminreservation {
 
     @FXML
     void tableaudebord(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
     @FXML

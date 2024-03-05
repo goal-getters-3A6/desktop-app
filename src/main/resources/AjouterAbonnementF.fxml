@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AjouterAbonnementF">
+   <children>
+      <AnchorPane layoutX="6.0" layoutY="-3.0" prefHeight="865.0" prefWidth="1546.0" style="-fx-background-color: #fffaed;">
+         <children>
+            <Label layoutX="934.0" layoutY="293.0" prefHeight="30.0" prefWidth="97.0" text="Email :">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <TextField fx:id="montantid" layoutX="1092.0" layoutY="516.0" />
+            <Label layoutX="934.0" layoutY="514.0" prefHeight="30.0" prefWidth="107.0" text="Montant :">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Label layoutX="933.0" layoutY="406.0" prefHeight="30.0" prefWidth="202.0" text="Date d'expiration :">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Button layoutX="1041.0" layoutY="690.0" mnemonicParsing="false" onAction="#AjoutAbonnement" prefHeight="66.0" prefWidth="202.0" style="-fx-background-color: #db1f48;" text="Créer">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <DatePicker fx:id="dateid" layoutX="1242.0" layoutY="408.0" />
+            <AnchorPane fx:id="anchorpanedash" layoutX="-5.0" prefHeight="134.0" prefWidth="1550.0" style="-fx-background-color: #004369;">
+               <children>
+                  <Button fx:id="btnprofil" layoutX="1371.0" layoutY="14.0" mnemonicParsing="false" onAction="#profil" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparant;" text="Profil" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnreclamation" layoutX="1283.0" layoutY="59.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnevenement" layoutX="1080.0" layoutY="59.0" mnemonicParsing="false" onAction="#evenement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Evénement" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnalimentaire" layoutX="885.0" layoutY="59.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnabonnement" layoutX="682.0" layoutY="59.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="#38afb5">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnplanning" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#f2f2f2">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnequipement" layoutX="342.0" layoutY="59.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnaccueil" layoutX="147.0" layoutY="52.0" mnemonicParsing="false" onAction="#accueil" prefHeight="66.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <ImageView fx:id="logo1" fitHeight="89.0" fitWidth="107.0" layoutX="14.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Label fx:id="emailid" layoutX="1128.0" layoutY="295.0" prefHeight="26.0" prefWidth="194.0" />
+            <Label layoutX="954.0" layoutY="183.0" prefHeight="45.0" prefWidth="327.0" text="Saisissez vos données" textAlignment="CENTER" textFill="#004369">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="-2.0" layoutY="131.0" opacity="0.9" prefHeight="732.0" prefWidth="776.0" style="-fx-background-color: #D1C8C1;">
+         <children>
+            <Text layoutX="120.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Optez pour notre abonnement familial et faites de la remise en forme une expérience partagée ! Notre abonnement familial vous donne accès à notre salle de sport haut de gamme pour toute la famille. Profitez d'un environnement propice à la motivation et à l'activité physique, où chaque membre de la famille peut trouver des activités adaptées à ses besoins. Cet abonnement facilite le renforcement des liens familiaux tout en promouvant un mode de vie sain" wrappingWidth="564.0033264160156">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Label layoutX="260.0" layoutY="93.0" text="Abonnement Familial" textFill="#004369">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

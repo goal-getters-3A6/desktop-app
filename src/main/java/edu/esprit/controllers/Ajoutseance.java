@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.controlsfx.control.Notifications;
 
 import java.io.File;
 import java.io.IOException;
@@ -236,10 +237,14 @@ public class Ajoutseance {
             Seance s = new Seance(nom.toString(), Time.valueOf(horaire.toString()), jour.toString(), Integer.parseInt(numSalle), duree, imageUrl);
             try {
                 ss.ajouter(s);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                /*Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Validation");
                 alert.setContentText("Seance added successfully");
-                alert.showAndWait();
+                alert.showAndWait();*/
+                Notifications.create()
+                        .title("Validation")
+                        .text("Seance added successfully")
+                        .showInformation();
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("SQL Exception");
@@ -260,7 +265,23 @@ public class Ajoutseance {
 
     @FXML
     void tableaudebord(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+            Parent root = loader.load();
 
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

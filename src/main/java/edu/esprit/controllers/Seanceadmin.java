@@ -16,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -137,24 +139,48 @@ public class Seanceadmin {
                         setText(null);
                         setGraphic(null);
                     } else {
+                        Font customFont = Font.font("Arial", FontWeight.BOLD, 12); // Exemple de police Arial, gras, taille 12
                         // Créer les éléments pour afficher les détails de la séance
-                        Label nameLabel = new Label("Nom: " + seance.getNom());
+                        Label nameLabel = new Label(seance.getNom());
                         Label horaireLabel = new Label("Horaire: " + seance.getHoraire());
-                        Label jourLabel = new Label("Jour: " + seance.getJourseance());
+                        Label jourLabel = new Label( seance.getJourseance());
                         Label numSalleLabel = new Label("Numéro de salle: " + seance.getNumesalle());
                         Label dureeLabel = new Label("Durée: " + seance.getDuree());
                         ImageView imageView = new ImageView(new Image(seance.getImageseance()));
-                        imageView.setFitWidth(100); // Ajustez la largeur de l'image selon votre besoin
-                        imageView.setFitHeight(100); // Ajustez la hauteur de l'image selon votre besoin
+                        imageView.setFitWidth(200); // Ajustez la largeur de l'image selon votre besoin
+                        imageView.setFitHeight(200); // Ajustez la hauteur de l'image selon votre besoin
                         setGraphic(imageView);
+                        nameLabel.setFont(customFont);
+                        horaireLabel.setFont(customFont);
+                        jourLabel.setFont(customFont);
+                        numSalleLabel.setFont(customFont);
+                        dureeLabel.setFont(customFont);
                         // setText(seance.getNom());
                         // Organiser les éléments verticalement
-                        VBox vbox = new VBox(5); // Espacement vertical de 5 pixels
+                        /*VBox vbox = new VBox(5); // Espacement vertical de 5 pixels
                         vbox.getChildren().addAll(nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel, imageView);
 
                         // Afficher les détails de la séance dans la cellule
                         setGraphic(vbox);
+                        setText(null);*/
+                        // Organiser les éléments horizontalement
+                       /* HBox hbox = new HBox(10); // Espacement horizontal de 10 pixels
+                        hbox.getChildren().addAll(imageView, nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel);
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(hbox);
+                        setText(null);*/
+                        // Organiser les éléments horizontalement
+                        HBox hbox = new HBox(10); // Espacement horizontal de 10 pixels
+                        VBox vbox = new VBox(); // VBox pour organiser verticalement les labels
+                        vbox.getChildren().addAll(nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel);
+                        hbox.getChildren().addAll(imageView, vbox); // Ajouter la VBox à la HBox
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(hbox);
                         setText(null);
+                        setStyle("-fx-background-color: pink;");
+
                     }
                 }
             });
@@ -285,7 +311,23 @@ public class Seanceadmin {
 
     @FXML
     void tableaudebord(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard.fxml"));
+            Parent root = loader.load();
 
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -304,7 +346,7 @@ public class Seanceadmin {
         } catch (SQLException e) {
             e.printStackTrace();
         }*/
-        try {
+        /*try {
             // Récupérer toutes les séances
             List<Seance> seances = ss.getAll();
 
@@ -326,6 +368,32 @@ public class Seanceadmin {
 
             // Mettre à jour la liste affichée avec les séances triées
             listview.setItems(FXCollections.observableArrayList(seances));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+        try {
+            // Récupérer toutes les séances
+            List<Seance> seances = ss.getAll();
+
+            // Récupérer la méthode de tri sélectionnée
+            String methodeTri = combobox.getValue();
+
+            // Trier les séances en fonction de la méthode sélectionnée
+            List<Seance> seancesTriees = seances.stream().sorted((s1, s2) -> {
+                switch (methodeTri) {
+                    case "Jour":
+                        return s1.getJourseance().compareTo(s2.getJourseance());
+                    case "Nom de la séance":
+                        return s1.getNom().compareTo(s2.getNom());
+                    case "Horaire":
+                        return s1.getHoraire().compareTo(s2.getHoraire());
+                    default:
+                        return 0;
+                }
+            }).collect(Collectors.toList());
+
+            // Mettre à jour la liste affichée avec les séances triées
+            listview.setItems(FXCollections.observableArrayList(seancesTriees));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -416,7 +484,7 @@ public class Seanceadmin {
             }*/
 
             // Affichez les séances uniques dans le ListView
-            listview.setItems(FXCollections.observableArrayList(seanceList));
+            /*listview.setItems(FXCollections.observableArrayList(seanceList));
             listview.setCellFactory(param -> new ListCell<Seance>() {
                 @Override
                 protected void updateItem(Seance seance, boolean empty) {
@@ -443,6 +511,110 @@ public class Seanceadmin {
                         // Afficher les détails de la séance dans la cellule
                         setGraphic(vbox);
                         setText(null);
+                        setStyle("-fx-background-color: pink;");
+                    }
+                }
+            });*/
+          /*  listview.setItems(FXCollections.observableArrayList(seanceList));
+            listview.setCellFactory(param -> new ListCell<Seance>() {
+                @Override
+                protected void updateItem(Seance seance, boolean empty) {
+                    super.updateItem(seance, empty);
+                    if (empty || seance == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        // Créer les éléments pour afficher les détails de la séance
+                        Label nameLabel = new Label("Nom: " + seance.getNom());
+                        Label horaireLabel = new Label("Horaire: " + seance.getHoraire());
+                        Label jourLabel = new Label("Jour: " + seance.getJourseance());
+                        Label numSalleLabel = new Label("Numéro de salle: " + seance.getNumesalle());
+                        Label dureeLabel = new Label("Durée: " + seance.getDuree());
+                        ImageView imageView = new ImageView(new Image(seance.getImageseance()));
+                        imageView.setFitWidth(200); // Ajustez la largeur de l'image selon votre besoin
+                        imageView.setFitHeight(200); // Ajustez la hauteur de l'image selon votre besoin
+                        setGraphic(imageView);*/
+                        // setText(seance.getNom());
+                        // Organiser les éléments verticalement
+                        /*VBox vbox = new VBox(5); // Espacement vertical de 5 pixels
+                        vbox.getChildren().addAll(nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel, imageView);
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(vbox);
+                        setText(null);*/
+                        // Organiser les éléments horizontalement
+                       /* HBox hbox = new HBox(10); // Espacement horizontal de 10 pixels
+                        hbox.getChildren().addAll(imageView, nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel);
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(hbox);
+                        setText(null);*/
+                        // Organiser les éléments horizontalement
+                      /*  HBox hbox = new HBox(10); // Espacement horizontal de 10 pixels
+                        VBox vbox = new VBox(); // VBox pour organiser verticalement les labels
+                        vbox.getChildren().addAll(nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel);
+                        hbox.getChildren().addAll(imageView, vbox); // Ajouter la VBox à la HBox
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(hbox);
+                        setText(null);
+                        setStyle("-fx-background-color: pink;");
+
+                    }
+                }
+            });*/
+            // Affichez les séances uniques dans le ListView
+            listview.setItems(FXCollections.observableArrayList(seanceList));
+            listview.setCellFactory(param -> new ListCell<Seance>() {
+                @Override
+                protected void updateItem(Seance seance, boolean empty) {
+                    super.updateItem(seance, empty);
+                    if (empty || seance == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        Font customFont = Font.font("Arial", FontWeight.BOLD, 12); // Exemple de police Arial, gras, taille 12
+                        // Créer les éléments pour afficher les détails de la séance
+                        Label nameLabel = new Label(seance.getNom());
+                        Label horaireLabel = new Label("Horaire: " + seance.getHoraire());
+                        Label jourLabel = new Label( seance.getJourseance());
+                        Label numSalleLabel = new Label("Numéro de salle: " + seance.getNumesalle());
+                        Label dureeLabel = new Label("Durée: " + seance.getDuree());
+                        ImageView imageView = new ImageView(new Image(seance.getImageseance()));
+                        imageView.setFitWidth(200); // Ajustez la largeur de l'image selon votre besoin
+                        imageView.setFitHeight(200); // Ajustez la hauteur de l'image selon votre besoin
+                        setGraphic(imageView);
+                        nameLabel.setFont(customFont);
+                        horaireLabel.setFont(customFont);
+                        jourLabel.setFont(customFont);
+                        numSalleLabel.setFont(customFont);
+                        dureeLabel.setFont(customFont);
+                        // setText(seance.getNom());
+                        // Organiser les éléments verticalement
+                        /*VBox vbox = new VBox(5); // Espacement vertical de 5 pixels
+                        vbox.getChildren().addAll(nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel, imageView);
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(vbox);
+                        setText(null);*/
+                        // Organiser les éléments horizontalement
+                       /* HBox hbox = new HBox(10); // Espacement horizontal de 10 pixels
+                        hbox.getChildren().addAll(imageView, nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel);
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(hbox);
+                        setText(null);*/
+                        // Organiser les éléments horizontalement
+                        HBox hbox = new HBox(10); // Espacement horizontal de 10 pixels
+                        VBox vbox = new VBox(); // VBox pour organiser verticalement les labels
+                        vbox.getChildren().addAll(nameLabel, horaireLabel, jourLabel, numSalleLabel, dureeLabel);
+                        hbox.getChildren().addAll(imageView, vbox); // Ajouter la VBox à la HBox
+
+                        // Afficher les détails de la séance dans la cellule
+                        setGraphic(hbox);
+                        setText(null);
+                        setStyle("-fx-background-color: pink;");
+
                     }
                 }
             });
@@ -450,6 +622,8 @@ public class Seanceadmin {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
 
     }
     @FXML
