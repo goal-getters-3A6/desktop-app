@@ -35,7 +35,7 @@ public class ChangePasswordController implements Initializable {
     }
 
     @FXML
-    private void changepassword(ActionEvent event) throws SQLException {
+    private void changePassword(ActionEvent event) throws SQLException {
         if (newpassword.getText().equals(confirmpassword.getText())) {
             UserService u = new UserService();
             User uu = u.getOneById(Id.user);

@@ -5,37 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d49e1918-2662-4c36-8b46-f23f815cab66" name="Changes" comment="add token mechanism to dropbox, add 2fa google authenticator feature and change password">
-      <change afterPath="$PROJECT_DIR$/QRCode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ChangePasswordController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/TfaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/GoogleAuthenticator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/2FA.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/changePassword.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/imgs/tick.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AcceuilController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AddUserDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/AddUserDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/EmailInputController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/QRCode.png" beforeDir="false" afterPath="$PROJECT_DIR$/QRCode.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ChangePasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ChangePasswordController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ForgotPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ForgotPasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ProfilController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/ProfilController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/controllers/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/GMailer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Id.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/Id.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/services/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/services/ClientService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/DropBoxCredentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/DropBoxCredentials.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/HashWithMD5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/HashWithMD5.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/SendEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/SendEmail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/UploadToDropBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/UploadToDropBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/dropbox_auth.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/esprit/utils/dropbox_auth.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/client_secret_560096458182-guh2obtoicn0gvm0o7fu5st1i4ed30fg.apps.googleusercontent.com.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/emailinput.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/forgotPassword.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/profil.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/profil.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/changePassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/changePassword.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,8 +191,18 @@
       <workItem from="1709582093291" duration="620000" />
       <workItem from="1709582723490" duration="645000" />
       <workItem from="1709583377590" duration="13710000" />
-      <workItem from="1709599406673" duration="1486000" />
+      <workItem from="1709599406673" duration="1603000" />
+      <workItem from="1709632227508" duration="2538000" />
     </task>
+    <task id="LOCAL-00001" summary="add token mechanism to dropbox, add 2fa google authenticator feature and change password">
+      <option name="closed" value="true" />
+      <created>1709600946103</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709600946103</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

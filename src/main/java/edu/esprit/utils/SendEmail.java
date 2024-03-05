@@ -30,7 +30,7 @@ public class SendEmail {
         properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         String myAccountEmail = "gofitpro8@gmail.com";
-        String password = "123456789.Az";
+        String password = "czrr mudh itak iwhy";
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override

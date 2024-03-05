@@ -53,6 +53,7 @@ public class ForgotPasswordController implements Initializable {
             label.setVisible(true);
             code.setVisible(true);
             submit.setVisible(true);
+            submitemail.setVisible(false);
             String title = "Code sent";
             String message = "Check your email to get your code !";
             NotificationType notification = NotificationType.SUCCESS;

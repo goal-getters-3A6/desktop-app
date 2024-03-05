@@ -4,6 +4,7 @@ import com.dropbox.core.DbxAuthInfo;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.json.JsonReader;
+import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.FileMetadata;
 
@@ -23,7 +24,8 @@ public class UploadToDropBox {
         } catch (JsonReader.FileLoadException ex) {
             System.err.println("Error loading <auth-file>: " + ex.getMessage());
         }
-        client = new DbxClientV2(config, authInfo.getAccessToken(), authInfo.getHost());
+        DbxCredential dbxCredentials = new DbxCredential(authInfo.getAccessToken(),authInfo.getExpiresAt(),authInfo.getRefreshToken(),"29jc4g04ebdszbm","7el38mr9szx12fu");
+        client = new DbxClientV2(config, dbxCredentials);
         InputStream in = new FileInputStream(path);
         try {
             FileMetadata metadata = client.files().uploadBuilder(name)
