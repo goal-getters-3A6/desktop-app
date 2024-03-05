@@ -142,7 +142,6 @@ public class Client extends User {
     public String toString() {
         return "  Nom:'" + getNom() + '\'' +
                 ", Prénom:'" + getPrenom() + '\'' +
-                ", MDP:'" + getMdp() + '\'' +
                 ", E-mail:'" + getMail() + '\'' +
                 ", Poids:" + poids +
                 ", Taille:" + taille +

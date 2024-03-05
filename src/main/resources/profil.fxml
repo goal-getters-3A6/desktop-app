@@ -36,7 +36,7 @@
                         <Insets top="70.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
                      <HBox.margin>
                         <Insets top="70.0" />
                      </HBox.margin>
