@@ -11,14 +11,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="acceuilpane" prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AcceuilController">
     <children>
-        <PasswordField fx:id="mdpTxt" layoutX="17.0" layoutY="313.0" promptText="Mot de passe" />
-        <TextField fx:id="emailTxt" layoutX="17.0" layoutY="278.0" promptText="Email" />
-        <Button fx:id="loginbtn" layoutX="17.0" layoutY="350.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #db1f48;" text="Se connecter" textFill="WHITE" />
-      <Hyperlink fx:id="forgotpassword" layoutX="17.0" layoutY="390.0" onAction="#forgotPassword" prefHeight="25.0" prefWidth="206.0" text="Mot de passe oublié?" textFill="#680d0d" underline="true" />
-      <Hyperlink fx:id="toregister" layoutX="17.0" layoutY="415.0" onAction="#toRegister" prefHeight="26.0" prefWidth="170.0" text="Vous n'avez pas de compte ?" textFill="#6b0b0b" underline="true" />
+      <VBox layoutX="7.0" layoutY="222.0" spacing="10.0">
+         <children>
+              <TextField fx:id="emailTxt" promptText="Email" />
+              <PasswordField fx:id="mdpTxt" promptText="Mot de passe" />
+              <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #db1f48;" text="Se connecter" textFill="WHITE" />
+            <Hyperlink fx:id="forgotpassword" onAction="#forgotPassword" prefHeight="25.0" prefWidth="206.0" text="Mot de passe oublié?" textFill="#680d0d" underline="true" />
+            <Hyperlink fx:id="toregister" onAction="#toRegister" prefHeight="26.0" prefWidth="170.0" text="Vous n'avez pas de compte ?" textFill="#6b0b0b" underline="true" />
+         </children>
+      </VBox>
           <HBox prefHeight="100.0" prefWidth="744.0" style="-fx-background-color: #004369;">
               <children>
             <HBox prefHeight="100.0" prefWidth="642.0">
@@ -68,7 +73,7 @@
                   <Insets />
                </HBox.margin>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="120.0">
+            <HBox prefHeight="100.0" prefWidth="101.0">
                <children>
                   <MenuButton fx:id="profilbuttonmenu" mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0">
                     <items>
@@ -83,5 +88,6 @@
             </HBox>
               </children>
           </HBox>
+      <VBox fx:id="slideshowvbox" layoutX="249.0" layoutY="115.0" prefHeight="401.0" prefWidth="483.0" />
     </children>
 </AnchorPane>
