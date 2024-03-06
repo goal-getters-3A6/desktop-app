@@ -14,10 +14,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="registerpane" prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.RegisterController">
+<AnchorPane fx:id="registerpane" prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.RegisterController">
    <children>
-      <Button fx:id="mdpRegisterBtn" layoutX="93.0" layoutY="472.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #db1f48;" text="Registrer" />
-      <VBox fx:id="registervbox" layoutX="14.0" layoutY="132.0" prefHeight="348.0" prefWidth="276.0" spacing="10.0">
+      <Button fx:id="mdpRegisterBtn" layoutX="662.0" layoutY="762.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #db1f48;" text="Registrer" />
+      <VBox fx:id="registervbox" layoutX="75.0" layoutY="149.0" prefHeight="543.0" prefWidth="481.0" spacing="20.0">
          <children>
             <Label prefHeight="18.0" prefWidth="57.0" text="Nom" />
             <TextField fx:id="nomTxt" prefHeight="26.0" prefWidth="150.0" promptText="nom" />
@@ -30,7 +30,7 @@
             <RadioButton fx:id="radioH" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Homme" />
             <Label text="Téléphone" />
          </children></VBox>
-      <VBox layoutX="355.0" layoutY="132.0" prefHeight="380.0" prefWidth="347.0" spacing="8.0">
+      <VBox layoutX="721.0" layoutY="149.0" prefHeight="543.0" prefWidth="534.0" spacing="20.0">
          <children>
             <Label text="Date Naissance" />
             <DatePicker fx:id="dateNaissance" prefHeight="26.0" prefWidth="150.0" promptText="Date Naissance" />
@@ -47,9 +47,9 @@
             <Label fx:id="poidslabel" textFill="#6b0202" />
          </children>
       </VBox>
-      <HBox prefHeight="100.0" prefWidth="744.0" style="-fx-background-color: #004369;">
+      <HBox prefHeight="100.0" prefWidth="1528.0" style="-fx-background-color: #004369;">
          <children>
-            <HBox prefHeight="50.0" prefWidth="744.0" spacing="1.0">
+            <HBox prefHeight="50.0" prefWidth="1528.0" spacing="20.0">
                <children>
                   <ImageView fx:id="log" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
                      <image>

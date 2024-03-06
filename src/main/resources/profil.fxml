@@ -19,7 +19,7 @@
       <Button fx:id="modifierBtn" layoutX="680.0" layoutY="746.0" mnemonicParsing="false" onAction="#modify" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #db1f48;" text="Modifier" />
       <HBox prefHeight="100.0" prefWidth="1528.0" style="-fx-background-color: #004369;">
          <children>
-            <HBox prefHeight="50.0" prefWidth="1450.0" spacing="1.0">
+            <HBox prefHeight="50.0" prefWidth="1450.0" spacing="20.0">
                <children>
                   <ImageView fx:id="log" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
                      <image>
