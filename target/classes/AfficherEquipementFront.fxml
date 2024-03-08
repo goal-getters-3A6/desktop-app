@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherEquipementFront">
+   <children>
+      <Pane prefHeight="130.0" prefWidth="1528.0" style="-fx-background-color: #365679;">
+         <children>
+            <ImageView fx:id="logo1" fitHeight="98.0" fitWidth="165.0" layoutX="26.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/thumbnail_unnamed-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <HBox layoutX="194.0" layoutY="237.0" prefHeight="538.0" prefWidth="1140.0" style="-fx-background-color: #FBFBEB;">
+         <children>
+            <ScrollPane fx:id="scrollPaneEq" prefHeight="539.0" prefWidth="1142.0" style="-fx-background-color: #FBFBEB;">
+               <content>
+                  <Pagination fx:id="pagination" prefHeight="536.0" prefWidth="1138.0" style="-fx-background-color: #FBFBEB;" />
+               </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="543.0" layoutY="149.0" text="La liste des équipements " textFill="#365679">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
