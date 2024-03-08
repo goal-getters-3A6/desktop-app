@@ -13,7 +13,8 @@ public class User {
 
 
 
-    public User(String nom ,String prenom) {
+
+    public User(String nom , String prenom) {
 
         this.nom = nom;
         this.prenom = prenom;

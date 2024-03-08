@@ -104,7 +104,8 @@ public class ClientService implements IService<Client>{
             Float poids=res.getFloat("poids");
             Float taille=res.getFloat("taille");
             String sexe=res.getString("sexe");
-            return new Client(id, nom, prenom, email,image, dateInscription, dateNaissance, tel,poids,taille,sexe);
+            Boolean statut=res.getBoolean("statut");
+            return new Client(id, nom, prenom, email,image, dateInscription, dateNaissance, tel,statut,poids,taille,sexe);
 
         }
 

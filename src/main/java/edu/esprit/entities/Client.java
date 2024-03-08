@@ -46,6 +46,7 @@ public class Client extends User {
         this.taille = taille;
         this.sexe = sexe;
     }
+
     public Client(int id, String nom, String prenom,String mail) {
         super(id, nom, prenom, mail);
     }
@@ -65,6 +66,18 @@ public class Client extends User {
 
     public Client(String    ext, String text1, String text2) {
     }
+
+    public Client(int id, String nom, String prenom, String mail, String image, java.sql.Date dateInscription, java.sql.Date dateNaissance, String tel, Boolean statut, Float poids, Float taille, String sexe) {
+        super(id,nom,prenom,mail,image);
+        this.date_inscription = date_inscription;
+        this.date_naissance = date_naissance;
+        this.tel = tel;
+        this.statut=statut;
+        this.poids=poids;
+        this.taille=taille;
+        this.sexe=sexe;
+    }
+
 
     public Date getDate_inscription() {
         return date_inscription;

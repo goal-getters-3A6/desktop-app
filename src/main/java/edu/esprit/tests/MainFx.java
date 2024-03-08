@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class MainFx extends Application {
@@ -12,8 +11,8 @@ public class MainFx extends Application {
     public void start(Stage stage) throws IOException {
      //FXMLLoader loader= new FXMLLoader(getClass().getResource("/AjouterEquipement.fxml"));
 
-        // FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherEquipementFront.fxml"));
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("/acceuil.fxml"));
+         FXMLLoader loader= new FXMLLoader(getClass().getResource("/AfficherEquipementFront.fxml"));
+       // FXMLLoader loader= new FXMLLoader(getClass().getResource("/acceuil.fxml"));
 
         Parent root=loader.load();
         Scene scene=new Scene(root);

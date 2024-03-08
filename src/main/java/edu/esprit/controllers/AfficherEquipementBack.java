@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -27,6 +28,7 @@ import java.util.Optional;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 
 
 public class AfficherEquipementBack {
@@ -84,8 +86,6 @@ public class AfficherEquipementBack {
             List<Equipement> Ps = new ArrayList<>(ES.getAll());
             ObservableList<Equipement> observableList = FXCollections.observableList(Ps);
             ListViewEqId.setItems(observableList);
-
-            // Configuration de la cell factory pour afficher le nom de l'équipement avec des boutons
             ListViewEqId.setCellFactory(param -> new ListCell<>() {
                 @Override
                 protected void updateItem(Equipement item, boolean empty) {
@@ -94,8 +94,13 @@ public class AfficherEquipementBack {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        setText(item.getNomEq() + "      " + item.getCategEq());
 
+                        ImageView imageIcon = new ImageView(new Image("file:" + item.getImageEq()));
+                        imageIcon.setFitWidth(50); // Adjust the width as needed
+                        imageIcon.setFitHeight(50); // Adjust the height as needed
+
+                        Label label = new Label(item.getNomEq() + "      " + item.getCategEq());
+                        HBox im = new HBox(imageIcon, label);
                         // Créer les boutons avec des icônes
                         ImageView detailIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/document.png")));
                         Button detailButton = new Button("", detailIcon);
@@ -128,24 +133,28 @@ public class AfficherEquipementBack {
                         // Définir les données utilisateur du bouton editButton avec l'équipement associé
                         editButton.setUserData(item);
 
-                        // Créer un HBox pour contenir les boutons et l'espace flexible
-                        HBox hbox = new HBox();
-                        hbox.getChildren().addAll(detailButton, deleteButton, editButton);
+                        HBox textHBox = new HBox(im,label);
 
-                        // Créer un espace flexible pour pousser les boutons à la fin de la ligne
-                        Region spacer = new Region();
-                        HBox.setHgrow(spacer, Priority.ALWAYS);
+                        // Créer un HBox pour les boutons alignés à droite
+                        HBox buttonsHBox = new HBox(detailButton, deleteButton, editButton);
+                        buttonsHBox.setAlignment(Pos.CENTER_RIGHT);
 
-                        // Ajouter les boutons et l'espace flexible à la cellule
-                        HBox cellBox = new HBox();
-                        cellBox.getChildren().addAll(spacer, hbox);
-                        setGraphic(cellBox);
+                        // Créer un HBox qui contient les deux HBox précédents
+                        HBox mainHBox = new HBox(textHBox, buttonsHBox);
+                        HBox.setHgrow(buttonsHBox, Priority.ALWAYS); // Pousse les boutons à droite
+
+                        setGraphic(mainHBox);
+
+
                     }
                 }
             });
 
         } catch (SQLException e) {
-            e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("SQL Exeption");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -167,7 +176,7 @@ public class AfficherEquipementBack {
             // Passer une référence à ce contrôleur (AfficherEquipementBack)
             controller.setParentController(this);
 
-            // Initialiser les données de l'équipement dans ModifierEquipementBack
+
             controller.initData(equipement);
 
             detailButton.getScene().setRoot(root);
@@ -195,9 +204,6 @@ public class AfficherEquipementBack {
                 // Supprimer l'équipement de la base de données et de la liste
                 ES.supprimer(equipement.getIdEq());
                 ListViewEqId.getItems().remove(equipement);
-            } else {
-                // L'utilisateur a annulé la suppression
-                // Vous pouvez ajouter un message ou des actions supplémentaires ici si nécessaire
             }
         } catch (SQLException e) {
             e.printStackTrace(); // À remplacer par une gestion appropriée des erreurs
@@ -258,35 +264,36 @@ public class AfficherEquipementBack {
     }
 
 
+
     @FXML
-    void abonnement(javafx.event.ActionEvent event) {
+    void abonnement(ActionEvent event) {
 
     }
 
     @FXML
-    void alimentaire(javafx.event.ActionEvent event) {
+    void alimentaire(ActionEvent event) {
 
     }
 
     @FXML
-    void equipement(javafx.event.ActionEvent event) {
+    void equipement(ActionEvent event) {
 
     }
 
     @FXML
-    void evenement(javafx.event.ActionEvent event) {
+    void evenement(ActionEvent event) {
 
     }
 
 
 
     @FXML
-    void planning(javafx.event.ActionEvent event) {
+    void planning(ActionEvent event) {
 
     }
 
     @FXML
-    void reclamation(javafx.event.ActionEvent event) {
+    void reclamation(ActionEvent event) {
 
     }
 
