@@ -1,9 +1,11 @@
 package edu.esprit.services;
 
 import edu.esprit.entities.User;
-import edu.esprit.utils.DataSource;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +14,48 @@ import static edu.esprit.utils.HashWithMD5.hashWithMD5;
 
 public class UserService implements IService<User> {
 
-    static Connection cnx= DataSource.getInstance().getCnx();
+
+        public boolean emailExists(String email) {
+            String query = "SELECT COUNT(*) FROM `user` WHERE `mail`=?";
+            try {
+                PreparedStatement ps = cnx.prepareStatement(query);
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
+
+        public boolean changePassword(int id, String password) {
+            String query = "UPDATE `user` SET `mdp`=? WHERE `id`=?";
+            try {
+                PreparedStatement ps = cnx.prepareStatement(query);
+                ps.setString(1, hashWithMD5(password));
+                ps.setInt(2, id);
+                return ps.executeUpdate() > 0;
+            } catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
+
+        public boolean activateTFA(int id, String secret) {
+            String query = "UPDATE `user` SET `tfa`=1, `tfa_secret`=? WHERE `id`=?";
+            try {
+                PreparedStatement ps = cnx.prepareStatement(query);
+                ps.setString(1, secret);
+                ps.setInt(2, id);
+                return ps.executeUpdate() > 0;
+            } catch (SQLException ex) {
+                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }
 
     public Integer checklogin(String email, String password) throws SQLException {
         try {
@@ -46,7 +89,7 @@ public class UserService implements IService<User> {
     }
 
     @Override
-    public  User getOneById(int id) throws SQLException {
+    public User getOneById (int id) throws SQLException {
         String req = "SELECT * FROM user WHERE id=?";
         try {
             PreparedStatement Ps = cnx.prepareStatement(req);
@@ -61,6 +104,9 @@ public class UserService implements IService<User> {
                 u.setMdp(Rs.getString("mdp"));
                 u.setImage(Rs.getString("image"));
                 u.setRole(Rs.getString("role"));
+                u.setTfa(Rs.getBoolean("tfa"));
+                u.setTfaSecret(Rs.getString("tfa_secret"));
+
                 return u;
             }
         } catch (SQLException e) {
@@ -68,28 +114,7 @@ public class UserService implements IService<User> {
         }
         return null;
     }
-    public static   User getOneByIde(int id) throws SQLException {
-        String req = "SELECT * FROM user WHERE id=?";
-        try {
-            PreparedStatement Ps = cnx.prepareStatement(req);
-            Ps.setInt(1, id);
-            ResultSet Rs = Ps.executeQuery();
-            if (Rs.next()) {
-                User u = new User();
-                u.setId(Rs.getInt("id"));
-                u.setNom(Rs.getString("nom"));
-                u.setPrenom(Rs.getString("prenom"));
-                u.setMail(Rs.getString("mail"));
-                u.setMdp(Rs.getString("mdp"));
-                u.setImage(Rs.getString("image"));
-                u.setRole(Rs.getString("role"));
-                return u;
-            }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());
-        }
-        return null;
-    }
+
 
     public User getOneByEmail(String email) {
         String req = "SELECT * FROM user WHERE mail=?";
@@ -114,7 +139,7 @@ public class UserService implements IService<User> {
         return null;
     }
 
-    @Override
+@Override
     public List<User> getAll() {
         String req = "SELECT * FROM user";
         List<User> list = null;
@@ -137,6 +162,5 @@ public class UserService implements IService<User> {
         }
         return list;
     }
-
 
 }

@@ -14,6 +14,11 @@
 
 <AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.DetailsEquipement">
    <children>
+      <ImageView fitHeight="664.0" fitWidth="1430.0" layoutX="329.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/avisEq.png" />
+         </image>
+      </ImageView>
       <HBox layoutX="171.0" layoutY="283.0" prefHeight="300.0" prefWidth="299.0">
          <children>
             <ImageView fx:id="imageViewF" fitHeight="301.0" fitWidth="293.0" pickOnBounds="true" preserveRatio="true" />
@@ -26,8 +31,8 @@
             </VBox>
          </children>
       </HBox>
-      <ListView fx:id="listViewAEqF" layoutX="844.0" layoutY="456.0" prefHeight="247.0" prefWidth="551.0" />
-      <TextArea fx:id="CommIdAEq" layoutX="844.0" layoutY="353.0" prefHeight="51.0" prefWidth="551.0" promptText="Saisir votre commentaire" />
+      <ListView fx:id="listViewAEqF" layoutX="992.0" layoutY="407.0" prefHeight="199.0" prefWidth="350.0" />
+      <TextArea fx:id="CommIdAEq" layoutX="992.0" layoutY="333.0" prefHeight="58.0" prefWidth="398.0" promptText="Saisir votre commentaire" />
       <Button fx:id="publier" layoutX="1356.0" layoutY="409.0" mnemonicParsing="false" onAction="#AjouterAvisEqF" prefHeight="26.0" prefWidth="38.0" style="-fx-background-color: db1f48;" />
       <Button fx:id="likeId1" layoutX="189.0" layoutY="600.0" mnemonicParsing="false" onAction="#toggleLike" prefHeight="46.0" prefWidth="54.0" style="-fx-background-color: db1f48;" />
       <Label fx:id="LikeId" layoutX="152.0" layoutY="614.0" prefHeight="18.0" prefWidth="38.0" />
@@ -51,12 +56,12 @@
          </font>
       </Label>
       <Button fx:id="dislikeId1" layoutX="250.0" layoutY="600.0" mnemonicParsing="false" onAction="#toggleDislike" prefHeight="46.0" prefWidth="54.0" style="-fx-background-color: db1f48;" />
-      <Label fx:id="docEqF" layoutX="493.0" layoutY="507.0" prefHeight="138.0" prefWidth="270.0" text="Label">
+      <Label fx:id="docEqF" layoutX="493.0" layoutY="498.0" prefHeight="147.0" prefWidth="459.0" text="Label">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="descEqF" layoutX="493.0" layoutY="320.0" text="Label">
+      <Label fx:id="descEqF" layoutX="493.0" layoutY="346.0" prefHeight="0.0" prefWidth="459.0" text="Label">
          <font>
             <Font size="16.0" />
          </font>
@@ -86,12 +91,12 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnplanning" layoutX="532.0" layoutY="69.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+      <Button fx:id="btnplanning" layoutX="532.0" layoutY="69.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnequipement" layoutX="352.0" layoutY="69.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+      <Button fx:id="btnequipement" layoutX="352.0" layoutY="69.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="#38afb5">
          <font>
             <Font size="20.0" />
          </font>

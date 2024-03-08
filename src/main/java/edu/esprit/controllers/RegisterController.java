@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -18,10 +19,12 @@ import javafx.util.Duration;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import static edu.esprit.utils.UploadToDropBox.uploadPhoto;
 
@@ -32,9 +35,11 @@ public class RegisterController {
     @FXML
     private TextField prenomTxt;
     @FXML
-    private TextField emailTxt; // Value injected by FXMLLoader
+    private TextField emailTxt;
     @FXML
-    private PasswordField mdpRegisterTxt; // Value injected by FXMLLoader
+    private PasswordField mdpRegisterTxt;
+    @FXML
+    private PasswordField mdpRegisterTxt1;
     @FXML
     private DatePicker dateNaissance;
 
@@ -42,17 +47,17 @@ public class RegisterController {
     private AnchorPane registerpane;
 
     @FXML
-    private RadioButton radioH;
+            private RadioButton radioH;
     @FXML
-    private RadioButton radioF;
+            private RadioButton radioF;
     @FXML
-    private Slider poids;
+            private Slider poids;
     @FXML
-    private Slider taille;
+            private Slider taille;
     @FXML
-    private Label poidslabel;
+            private Label poidslabel;
     @FXML
-    private  Label taillelabel;
+            private  Label taillelabel;
 
     @FXML
     private VBox registervbox;
@@ -60,6 +65,8 @@ public class RegisterController {
     PhoneNumberField phoneNumberField = new PhoneNumberField();
     ClientService clientService = new ClientService();
     String photoURL = "";
+    String emailRegex = "^(.+)@(\\S+)$";
+    String phoneRegex = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
 
 
 
@@ -86,7 +93,7 @@ public class RegisterController {
 
     }
     @FXML
-    private void importProfilePic(ActionEvent event) {
+    private void importProfilePic(ActionEvent event) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose your profile pic");
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
@@ -98,11 +105,47 @@ public class RegisterController {
     }
     @FXML
     void register() throws  IOException{
-        if ((emailTxt.getText().isBlank())
-                || (nomTxt.getText().isBlank())
+        if ( emailTxt.getText().isBlank() || !patternMatches(emailTxt.getText(), emailRegex))
+        {
+            String title = "Verify your information!";
+            String message = "Email is not valid!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if (phoneNumberField.getRawPhoneNumber() ==null || !patternMatches(phoneNumberField.getRawPhoneNumber(), phoneRegex) ) {
+            String title = "Verify your information!";
+            String message = "Phone number is not valid!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if (dateNaissance.getValue() == null || dateNaissance.getValue().isAfter(LocalDate.now().minusYears(14))){
+            String title = "Warning!";
+            String message = "You must be older than 14!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if ( !mdpRegisterTxt.getText().equals(mdpRegisterTxt1.getText())) {
+            String title = "Verify your information!";
+            String message = "Passwords don't match!";
+            NotificationType notification = NotificationType.ERROR;
+            TrayNotification tray = new TrayNotification();
+            tray.setTitle(title);
+            tray.setMessage(message);
+            tray.setNotificationType(notification);
+            tray.showAndDismiss(Duration.seconds(3));
+        } else if (
+                 (nomTxt.getText().isBlank())
                 || (prenomTxt.getText().isBlank())
                 || (mdpRegisterTxt.getText().isBlank())
-                || (phoneNumberField.getRawPhoneNumber().isBlank())
                 || (dateNaissance.getValue() == null)
                 || (!radioH.isSelected() && !radioF.isSelected())
                 || (poids.getValue() == 0)
@@ -122,33 +165,38 @@ public class RegisterController {
             LocalDate localDate = dateNaissance.getValue();
             Date date = java.sql.Date.valueOf(localDate);
             Client client = new Client(nomTxt.getText(), prenomTxt.getText(), mdpRegisterTxt.getText(), emailTxt.getText(), phoneNumberField.getRawPhoneNumber(), true, 0,photoURL , date, (float) poids.getValue(), (float) taille.getValue(), radioH.isSelected() ? "Homme" : "Femme");
-            try {
-                clientService.ajouter(client);
-                String title = "Welcome!";
-                String message = "You have been registered successfully!";
-                NotificationType notification = NotificationType.SUCCESS;
-                TrayNotification tray = new TrayNotification();
-                tray.setTitle(title);
-                tray.setMessage(message);
-                tray.setNotificationType(notification);
-                tray.showAndDismiss(Duration.seconds(3));
-                Id.user = clientService.getOneByEmail(emailTxt.getText()).getId();
-                SessionManagement.saveSession(emailTxt.getText(), mdpRegisterTxt.getText());
-                AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
-                registerpane.getChildren().setAll(pane);
+           try {
+               clientService.ajouter(client);
+               String title = "Welcome!";
+               String message = "You have been registered successfully!";
+               NotificationType notification = NotificationType.SUCCESS;
+               TrayNotification tray = new TrayNotification();
+               tray.setTitle(title);
+               tray.setMessage(message);
+               tray.setNotificationType(notification);
+               tray.showAndDismiss(Duration.seconds(3));
+               Id.user = clientService.getOneByEmail(emailTxt.getText()).getId();
+               SessionManagement.saveSession(emailTxt.getText(), mdpRegisterTxt.getText());
+               AnchorPane pane = FXMLLoader.load(getClass().getResource("/acceuil.fxml"));
+               registerpane.getChildren().setAll(pane);
 
-            } catch (SQLException e){
+           } catch (SQLException e){
 
-                String title = "Something went wrong!";
-                String message = "Verify your informations !";
-                NotificationType notification = NotificationType.ERROR;
-                TrayNotification tray = new TrayNotification();
-                tray.setTitle(title);
-                tray.setMessage(message);
-                tray.setNotificationType(notification);
-                tray.showAndDismiss(Duration.seconds(3));
-            }
+               String title = "Something went wrong!";
+               String message = "Verify your informations !";
+               NotificationType notification = NotificationType.ERROR;
+               TrayNotification tray = new TrayNotification();
+               tray.setTitle(title);
+               tray.setMessage(message);
+               tray.setNotificationType(notification);
+               tray.showAndDismiss(Duration.seconds(3));
+           }
         }
+    }
+    public static boolean patternMatches(String stringToValidate, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(stringToValidate)
+                .matches();
     }
 
     @FXML
@@ -190,5 +238,8 @@ public class RegisterController {
     @FXML
     void reclamation(ActionEvent event) {
 
+    }
+
+    public void chercher(KeyEvent keyEvent) {
     }
 }

@@ -224,6 +224,8 @@ public class DetailsEquipement {
                         setText(null);
                         setGraphic(null);
                     } else {
+                        String emotion = detecterEmotion(item.getCommAEq());
+                        ImageView emoji =getSmileyIcon(emotion);
 
                         ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/bin.png")));
                         Button deleteButton = new Button("", deleteIcon);
@@ -239,18 +241,6 @@ public class DetailsEquipement {
                         editIcon.setFitHeight(25);
                         editButton.getStyleClass().add("icon-button");
                         editButton.setOnAction(event -> modifierAEquipement(editButton));
-
-                        ImageView emotionIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/emotif.png")));
-                        Button emotionButton = new Button("", emotionIcon);
-                        emotionIcon.setFitWidth(25);
-                        emotionIcon.setFitHeight(25);
-                        emotionButton.getStyleClass().add("icon-button");
-                        emotionButton.setUserData(item);
-                        emotionButton.setOnAction(event -> {
-                            HBox emojiHBox = emotionAEquipement(emotionButton);
-                            setGraphic(emojiHBox);
-                        });
-                        HBox emojiHBox = emotionAEquipement(emotionButton);
                         // Définir les données utilisateur du bouton editButton avec l'équipement associé
                         editButton.setUserData(item);
                         String censoredComment = censorBadWord(item.getCommAEq());
@@ -262,7 +252,7 @@ public class DetailsEquipement {
                         Label label2 = new Label();
                         label2.setText(item.getUser().getPrenom());
                         Label label3 = new Label();
-                       // label3.setGraphic(emoji);
+                        label3.setGraphic(emoji);
 
 
                         // Créer un HBox pour le Label aligné à gauche
@@ -273,11 +263,11 @@ public class DetailsEquipement {
                         buttonsHBox.setAlignment(Pos.CENTER_RIGHT);
 
                         if (user.getNom().equals(item.getUser().getNom())) {
-                            buttonsHBox.getChildren().addAll(deleteButton, editButton,emotionButton);
+                            buttonsHBox.getChildren().addAll(deleteButton, editButton);
                         }
 
                         // Créer un HBox principal pour contenir le texte et les boutons
-                        HBox mainHBox = new HBox(textHBox,emojiHBox, buttonsHBox);
+                        HBox mainHBox = new HBox(textHBox, buttonsHBox);
                         HBox.setHgrow(buttonsHBox, Priority.ALWAYS); // Pousse les boutons à droite
 
                         setGraphic(mainHBox);
@@ -549,7 +539,7 @@ try{
         }
     }
     private boolean containsInappropriateLanguage(String comment) {
-        List<String> badListW = Arrays.asList("hell", "your_bad_word", "another_bad_word"); // Add other inappropriate words as needed
+        List<String> badListW = Arrays.asList("bad word", "your_bad_word", "another_bad_word"); // Add other inappropriate words as needed
 
         for (String str : badListW) {
             if (Pattern.compile("\\b" + Pattern.quote(str) + "\\b", Pattern.CASE_INSENSITIVE).matcher(comment).find()) {
@@ -636,22 +626,7 @@ try{
 
 
 
-    private HBox emotionAEquipement(Button emotionButton) {
 
-            AvisEquipement Aequipement = (AvisEquipement) emotionButton.getUserData();
-        String emotion = detecterEmotion(Aequipement.getCommAEq());
-        ImageView emoji =getSmileyIcon(emotion);
-Label label3 = new Label();
-        label3.setGraphic(emoji);
-
-
-        // Créer un HBox pour le Label aligné à gauche
-        HBox emojiHBox = new HBox(10,label3);
-
-       return emojiHBox;
-
-
-    }
 
 
 
@@ -670,41 +645,126 @@ Label label3 = new Label();
 
     @FXML
     void abonnement(ActionEvent event) {
-
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/MesAbonnements.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
-
     @FXML
     void accueil(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/acceuil.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
 
     }
-
-
 
     @FXML
     void alimentaire(ActionEvent event) {
-
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlat.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
 
     @FXML
     void equipement(ActionEvent event) {
-
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementFront.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
 
     @FXML
     void evenement(ActionEvent event) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/afficher_evenement.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) btnevenement.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
+
 
     @FXML
     void planning(ActionEvent event) {
-
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/leseancesfront.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
     }
-
     @FXML
     void reclamation(ActionEvent event) {
+        try {
+            // Charger le fichier FXML de la page "lesseancesfront.fxml"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterReclamation.fxml"));
+            Parent root = loader.load();
+            // Créer une nouvelle scène avec la vue chargée
+            Scene scene = new Scene(root);
+            // Récupérer la scène actuelle et la modifier pour afficher la nouvelle vue
+            Stage stage = (Stage) btnplanning.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // Gérer l'exception si le chargement de la vue échoue
+        }
 
     }
-
 
 
 }

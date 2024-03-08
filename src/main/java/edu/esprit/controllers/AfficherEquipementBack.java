@@ -1,5 +1,6 @@
 package edu.esprit.controllers;
 
+import edu.esprit.entities.AvisEquipement;
 import edu.esprit.entities.Equipement;
 import edu.esprit.services.ServiceEquipement;
 import javafx.collections.FXCollections;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,15 +22,18 @@ import javafx.scene.layout.Region;
 
 
 import java.awt.*;
+import java.awt.TextField;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 
 public class AfficherEquipementBack {
@@ -77,6 +82,9 @@ public class AfficherEquipementBack {
 
     @FXML
     private ImageView planningimg31;
+
+    @FXML
+    private ComboBox<String> comboEq;
 
     @FXML
     void initialize() {
@@ -265,41 +273,138 @@ public class AfficherEquipementBack {
 
 
 
-    @FXML
-    void abonnement(ActionEvent event) {
+
+    public void tableaudebord(ActionEvent actionEvent) {
+    }
+
+    public void evenement(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEvenementListeView.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    @FXML
-    void alimentaire(ActionEvent event) {
+    public void equipement(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherEquipementBack.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void abonnement(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AbonnemntsBack.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
-    @FXML
-    void equipement(ActionEvent event) {
+    public void alimentaire(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherPlatUser.fxml"));
+            Parent root = loader.load();
 
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void evenement(ActionEvent event) {
 
+    public void reclamation(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AfficherReclamationB.fxml"));
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void planning(ActionEvent actionEvent) {
+        try {
+            // Charger le fichier FXML de la page Statistiques
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/seanceadmin.fxml"));
+            Parent root = loader.load();
 
+            // Créer une nouvelle scène avec la nouvelle page FXML
+            Scene scene = new Scene(root);
 
-    @FXML
-    void planning(ActionEvent event) {
+            // Obtenir la scène actuelle à partir de l'événement
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
+            // Changer la scène pour afficher la nouvelle page FXML
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @FXML
-    void reclamation(ActionEvent event) {
+   /* @FXML
+    void sortEq(ActionEvent event) {
 
-    }
 
-    @FXML
-    void tableaudebord(ActionEvent event) {
+    }*/
 
-    }
 
 }

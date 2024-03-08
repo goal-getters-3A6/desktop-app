@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ModifierPlat">
+    <children>
+      <ImageView fitHeight="783.0" fitWidth="1407.0" layoutX="126.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/6.png" />
+         </image>
+      </ImageView>
+        <Label layoutX="830.0" layoutY="290.0" text="Nom Plat:" />
+        <Label layoutX="834.0" layoutY="323.0" text="Prix Plat:" />
+        <Label layoutX="832.0" layoutY="357.0" text="Allergie Plat:" />
+        <Label layoutX="963.0" layoutY="454.0" text="Plat en stock?" />
+        <Label layoutX="822.0" layoutY="391.0" text="Description Plat:" />
+        <Label layoutX="822.0" layoutY="423.0" text="Calories Plat:" />
+        <TextField fx:id="NomPlatField" layoutX="903.0" layoutY="286.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="prixPlatField" layoutX="886.0" layoutY="319.0" prefHeight="26.0" prefWidth="184.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="alergiePlatField" layoutX="903.0" layoutY="353.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #E8E4CE;" />
+        <CheckBox fx:id="etatPlatCheckbox" layoutX="1052.0" layoutY="454.0" />
+        <TextField fx:id="descPField" layoutX="914.0" layoutY="387.0" prefHeight="26.0" prefWidth="155.0" style="-fx-background-color: #E8E4CE;" />
+        <TextField fx:id="caloriesField" layoutX="902.0" layoutY="418.0" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #E8E4CE;" />
+        <Button layoutX="903.0" layoutY="491.0" mnemonicParsing="false" onAction="#ModifierPlat" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: #db1f48;" text="enregistrer modifications" textFill="WHITE" />
+      <Label layoutX="1021.0" layoutY="235.0" text="plat">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <Button layoutX="902.0" layoutY="525.0" mnemonicParsing="false" onAction="#SupprimerPlat" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #db1f48;" text="supprimer plat" textFill="WHITE" />
+      <Button fx:id="butt" layoutX="276.0" layoutY="752.0" onAction="#backToAfficherPlat" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: #db1f48;" text="&lt;&lt;Back" textFill="WHITE" />
+      <ImageView fitHeight="302.0" fitWidth="210.0" layoutX="567.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/fghjklhjk.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="photopImageView" fitHeight="223.0" fitWidth="244.0" layoutX="578.0" layoutY="302.0" />
+      <Pane layoutY="-6.0" prefHeight="850.0" prefWidth="200.0" style="-fx-background-color: #004369;">
+         <children>
+            <Button fx:id="btntdb11" layoutX="21.0" layoutY="175.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <ImageView fx:id="logo11" fitHeight="98.0" fitWidth="155.0" layoutX="40.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/logo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnequipement11" layoutX="48.0" layoutY="231.0" mnemonicParsing="false" onAction="#equipement" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnabonnement11" layoutX="55.0" layoutY="397.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnalimentaire11" layoutX="50.0" layoutY="481.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="#38afb5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnevenement11" layoutX="57.0" layoutY="568.0" mnemonicParsing="false" onAction="#evenement" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnreclamation11" layoutX="62.0" layoutY="662.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnplanning11" layoutX="62.0" layoutY="312.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="planningimg311" fitHeight="35.0" fitWidth="44.0" layoutX="15.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/elliptique.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg211" fitHeight="35.0" fitWidth="44.0" layoutX="20.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/abonnement.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg1111" fitHeight="35.0" fitWidth="44.0" layoutX="23.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/aliments.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg11111" fitHeight="35.0" fitWidth="44.0" layoutX="28.0" layoutY="572.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/evenement.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg111111" fitHeight="35.0" fitWidth="44.0" layoutX="23.0" layoutY="665.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/fichier.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg11" fitHeight="35.0" fitWidth="44.0" layoutX="30.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/plan-daffaires.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

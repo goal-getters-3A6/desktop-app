@@ -12,17 +12,22 @@
 
 <AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AvisEquipementBack">
    <children>
+      <ImageView fitHeight="888.0" fitWidth="1558.0" layoutX="2.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/Colorful%20Illustrative%20Food%20Journal%20Presentation%20(14).png" />
+         </image>
+      </ImageView>
       <Label layoutX="640.0" layoutY="74.0" text="Les avis des équipements" textFill="#365679">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <ListView fx:id="listViewAEqB" layoutX="335.0" layoutY="189.0" prefHeight="388.0" prefWidth="1115.0" style="-fx-background-color: #365679;" />
+      <ListView fx:id="listViewAEqB" layoutX="334.0" layoutY="223.0" prefHeight="388.0" prefWidth="1115.0" style="-fx-background-color: #365679;" />
       <Button layoutX="1307.0" layoutY="611.0" mnemonicParsing="false" onAction="#consulterEq" style="-fx-background-color: db1f48;" text="Equipements" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Pane layoutY="-4.0" prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #365679;">
+      <Pane layoutY="-4.0" prefHeight="888.0" prefWidth="206.0" style="-fx-background-color: #365679;">
          <children>
             <Button fx:id="btntdb1" layoutX="16.0" layoutY="161.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE">
                <font>
@@ -66,6 +71,13 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button layoutX="1165.0" layoutY="179.0" mnemonicParsing="false" onAction="#rechercheAEq" prefHeight="43.0" prefWidth="282.0" style="-fx-background-color: db1f48;" text="Recherche" textFill="WHITE">
+         <graphic>
+            <TextField fx:id="rechercheAEqId" />
+         </graphic>
+         <font>
+            <Font size="20.0" />
+         </font></Button>
       <ImageView fx:id="planningimg31" fitHeight="35.0" fitWidth="44.0" layoutX="30.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imgs/elliptique.png" />
@@ -96,7 +108,5 @@
             <Image url="@imgs/plan-daffaires.png" />
          </image>
       </ImageView>
-      <Button layoutX="1091.0" layoutY="620.0" mnemonicParsing="false" onAction="#rechercheAEq" text="Recherche" />
-      <TextField fx:id="rechercheAEqId" layoutX="942.0" layoutY="620.0" />
    </children>
 </AnchorPane>

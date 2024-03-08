@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.Affcommuser">
+    <children>
+      <ImageView fitHeight="835.0" fitWidth="1546.0" layoutX="-33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/Colorful%20Illustrative%20Food%20Journal%20Presentation%20(9).png" />
+         </image>
+      </ImageView>
+        <ListView fx:id="commentsListView" layoutX="496.0" layoutY="446.0" prefHeight="198.0" prefWidth="427.0" />
+      <ListView fx:id="platsListView" layoutX="936.0" layoutY="446.0" prefHeight="198.0" prefWidth="190.0" />
+      <Button fx:id="butt" layoutX="496.0" layoutY="657.0" onAction="#backToAfficherPlat" prefHeight="26.0" prefWidth="252.0" style="-fx-background-color: #db1f48;" text="&lt;&lt;Back" textFill="WHITE" />
+      <ImageView fitHeight="879.0" fitWidth="486.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/Colorful_Illustrative_Food_Journal_Presentation__9_-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="-6.0" prefHeight="130.0" prefWidth="1540.0" style="-fx-background-color: #365679;">
+         <children>
+            <ImageView fx:id="logo1" fitHeight="98.0" fitWidth="165.0" layoutX="26.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/thumbnail_unnamed-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnequipement" layoutX="335.0" layoutY="55.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnplanning" layoutX="512.0" layoutY="51.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnabonnement" layoutX="670.0" layoutY="51.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnalimentaire" layoutX="892.0" layoutY="51.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="#38afb5">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnevenement" layoutX="1082.0" layoutY="47.0" mnemonicParsing="false" onAction="#evenement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnreclamation" layoutX="1304.0" layoutY="51.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnaccueil" layoutX="159.0" layoutY="48.0" mnemonicParsing="false" onAction="#accueil" prefHeight="66.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+    </children>
+</AnchorPane>

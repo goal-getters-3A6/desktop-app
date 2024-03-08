@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherPlat">
+   <ImageView fitHeight="810.0" fitWidth="928.0" layoutX="586.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@imgs/Colorful_Illustrative_Food_Journal_Presentation-removebg.png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="469.0" fitWidth="339.0" layoutX="5.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@imgs/erdgthygjh.PNG" />
+      </image>
+   </ImageView>
+
+        <ListView fx:id="platListView" layoutX="344.0" layoutY="234.0" prefHeight="542.0" prefWidth="514.0" />
+        <TextField fx:id="searchField" layoutX="208.0" layoutY="192.0" onAction="#searchPlat" prefHeight="26.0" prefWidth="232.0" style="-fx-background-color: #E8E4CE;" />
+         <!-- Your other UI components -->
+
+    <Button fx:id="sortButton" layoutX="248.0" layoutY="660.0" mnemonicParsing="false" onAction="#sortByPrix" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: #db1f48;" text="⬈" textFill="WHITE" />
+   <Text layoutX="132.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0 " text="Recherche :" />
+   <Button fx:id="sortButton1" layoutX="24.0" layoutY="591.0" mnemonicParsing="false" onAction="#openCalorieCalculator" prefHeight="26.0" prefWidth="299.0" style="-fx-background-color: #004369;" text="Calculatrice calories" textFill="WHITE" />
+   <Button fx:id="sortButton11" layoutX="25.0" layoutY="626.0" mnemonicParsing="false" onAction="#openAfficherCommUsr" prefHeight="26.0" prefWidth="299.0" style="-fx-background-color: #db1f48;" text="Consulter mes avis" textFill="WHITE" />
+   <ImageView fitHeight="82.0" fitWidth="754.0" layoutX="-4.0">
+      <image>
+         <Image url="@imgs/zefsd.PNG" />
+      </image>
+   </ImageView>
+   <Button fx:id="sortButton2" layoutX="288.0" layoutY="660.0" mnemonicParsing="false" onAction="#sortByPrixDESC" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: #db1f48;" text="⬊" textFill="WHITE" />
+   <Button fx:id="sortButton21" layoutX="248.0" layoutY="690.0" mnemonicParsing="false" onAction="#sortByCalories" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: #db1f48;" text="⬈" textFill="WHITE" />
+   <Button fx:id="sortButton211" layoutX="288.0" layoutY="690.0" mnemonicParsing="false" onAction="#sortByCaloriesDESC" prefHeight="26.0" prefWidth="36.0" style="-fx-background-color: #db1f48;" text="⬊" textFill="WHITE" />
+   <Text layoutX="193.0" layoutY="678.0" strokeType="OUTSIDE" strokeWidth="0.0 " text="Tri prix:" />
+   <Text layoutX="179.0" layoutY="708.0" strokeType="OUTSIDE" strokeWidth="0.0 " text="Tri calories:" wrappingWidth="68.08514404296875" />
+   <Pane layoutX="-4.0" prefHeight="130.0" prefWidth="1540.0" style="-fx-background-color: #365679;">
+      <children>
+         <ImageView fx:id="logo1" fitHeight="98.0" fitWidth="165.0" layoutX="26.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@imgs/thumbnail_unnamed-removebg-preview.png" />
+            </image>
+         </ImageView>
+         <Button fx:id="btnaccueil" layoutX="159.0" layoutY="48.0" mnemonicParsing="false" onAction="#accueil" prefHeight="66.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Button>
+         <Button fx:id="btnequipement" layoutX="335.0" layoutY="55.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Button>
+         <Button fx:id="btnplanning" layoutX="512.0" layoutY="51.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Button>
+         <Button fx:id="btnabonnement" layoutX="670.0" layoutY="51.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Button>
+         <Button fx:id="btnalimentaire" layoutX="892.0" layoutY="51.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="#38afb5">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Button>
+         <Button fx:id="btnevenement" layoutX="1082.0" layoutY="47.0" mnemonicParsing="false" onAction="#evenement" prefHeight="52.0" prefWidth="202.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Button>
+         <Button fx:id="btnreclamation" layoutX="1266.0" layoutY="51.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="52.0" prefWidth="194.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+            <font>
+               <Font size="20.0" />
+            </font>
+         </Button>
+      </children>
+   </Pane>
+</AnchorPane>

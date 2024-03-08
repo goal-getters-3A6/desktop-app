@@ -1,10 +1,8 @@
 package edu.esprit.utils;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import org.json.JSONObject;
+
+import java.io.*;
 public class SessionManagement {
 
     private static final String path = System.getProperty("user.home") + "/.go-fit.json";

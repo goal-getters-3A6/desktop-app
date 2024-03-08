@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="652.0" prefWidth="1053.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.ChatBotController">
+   <children>
+      <TextField fx:id="inputTextField" layoutX="206.0" layoutY="137.0" onAction="#processInput" prefHeight="42.0" prefWidth="292.0" stylesheets="">
+         <styleClass>
+            <String fx:value="border" />
+            <String fx:value="white-form" />
+         </styleClass></TextField>
+      <TextArea fx:id="outputLabel" layoutX="206.0" layoutY="235.0" prefHeight="268.0" prefWidth="478.0" stylesheets="">
+         <styleClass>
+            <String fx:value="border" />
+            <String fx:value="white-form" />
+         </styleClass></TextArea>
+      <ImageView fitHeight="275.0" fitWidth="250.0" layoutX="727.0" layoutY="189.0">
+         <image>
+            <Image url="@imgs/chatbot.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="218.0" layoutY="54.0" prefHeight="31.0" prefWidth="385.0" stylesheets="" text="Des Questions ?" textFill="#0c2d48">
+         <font>
+            <Font name="System Bold Italic" size="37.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

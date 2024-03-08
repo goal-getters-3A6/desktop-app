@@ -14,70 +14,89 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="registerpane" prefHeight="476.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.RegisterController">
+<AnchorPane fx:id="registerpane" prefHeight="530.0" prefWidth="744.0" style="-fx-background-color: #fffaed;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.RegisterController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="694.0" style="-fx-background-color: #004369;">
+      <Button fx:id="mdpRegisterBtn" layoutX="93.0" layoutY="472.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="119.0" style="-fx-background-color: #db1f48;" text="Registrer" />
+      <VBox fx:id="registervbox" layoutX="14.0" layoutY="132.0" prefHeight="348.0" prefWidth="276.0" spacing="10.0">
          <children>
-            <ImageView fx:id="log" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imgs/logo.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#accueil" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="26.0" prefWidth="99.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
-               <HBox.margin>
-                  <Insets top="70.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <Button fx:id="mdpRegisterBtn" layoutX="229.0" layoutY="416.0" mnemonicParsing="false" onAction="#register" prefHeight="30.0" prefWidth="140.0" text="Registrer" />
-      <VBox fx:id="registervbox" layoutX="33.0" layoutY="143.0" prefHeight="193.0" prefWidth="150.0" spacing="20.0">
-         <children>
+            <Label prefHeight="18.0" prefWidth="57.0" text="Nom" />
             <TextField fx:id="nomTxt" prefHeight="26.0" prefWidth="150.0" promptText="nom" />
+            <Label text="Prénom" />
             <TextField fx:id="prenomTxt" prefHeight="26.0" prefWidth="150.0" promptText="prenom" />
+            <Label text="E-mail" />
             <TextField fx:id="emailTxt" prefHeight="26.0" prefWidth="150.0" promptText="email" />
-            <PasswordField fx:id="mdpRegisterTxt" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
+            <Label text="Sexe" />
+            <RadioButton fx:id="radioF" mnemonicParsing="false" prefHeight="18.0" prefWidth="84.0" text="Femme" />
+            <RadioButton fx:id="radioH" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Homme" />
+            <Label text="Téléphone" />
+         </children></VBox>
+      <VBox layoutX="355.0" layoutY="132.0" prefHeight="380.0" prefWidth="347.0" spacing="8.0">
+         <children>
+            <Label text="Date Naissance" />
             <DatePicker fx:id="dateNaissance" prefHeight="26.0" prefWidth="150.0" promptText="Date Naissance" />
+            <Label text="Mot de passe " />
+            <PasswordField fx:id="mdpRegisterTxt" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
+            <Label text="Confirmer mot de passe" />
+            <PasswordField fx:id="mdpRegisterTxt1" prefHeight="26.0" prefWidth="150.0" promptText="Mot de passe" />
+            <Button fx:id="importProfilePic" mnemonicParsing="false" onAction="#importProfilePic" text="Photo de profil" textFill="#510505" />
+            <Label text="Taille:" />
+            <Slider fx:id="taille" max="300.0" minorTickCount="1" />
+            <Label fx:id="taillelabel" textFill="#6b0202" />
+            <Label text="Poids:" />
+            <Slider fx:id="poids" max="300.0" minorTickCount="1" />
+            <Label fx:id="poidslabel" textFill="#6b0202" />
          </children>
       </VBox>
-      <RadioButton fx:id="radioF" layoutX="342.0" layoutY="156.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="84.0" text="Femme" />
-      <RadioButton fx:id="radioH" layoutX="251.0" layoutY="156.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="90.0" text="Homme" />
-      <Slider fx:id="taille" layoutX="277.0" layoutY="221.0" max="300.0" minorTickCount="1" />
-      <Label layoutX="327.0" layoutY="200.0" text="Taille:" />
-      <Slider fx:id="poids" layoutX="277.0" layoutY="277.0" max="300.0" minorTickCount="1" />
-      <Label layoutX="327.0" layoutY="256.0" text="Poids:" />
-      <Button fx:id="importProfilePic" layoutX="280.0" layoutY="326.0" mnemonicParsing="false" onAction="#importProfilePic" text="Photo de profil" textFill="#510505" />
-      <Label fx:id="poidslabel" layoutX="435.0" layoutY="280.0" textFill="#6b0202" />
-      <Label fx:id="taillelabel" layoutX="435.0" layoutY="224.0" textFill="#6b0202" />
+      <HBox prefHeight="100.0" prefWidth="744.0" style="-fx-background-color: #004369;">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="744.0" spacing="1.0">
+               <children>
+                  <ImageView fx:id="log" fitHeight="98.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imgs/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnaccueil" mnemonicParsing="false" onAction="#accueil" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: transparant;" text="Accueil" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnequipement" mnemonicParsing="false" onAction="#equipement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnplanning" mnemonicParsing="false" onAction="#planning" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnabonnement" mnemonicParsing="false" onAction="#abonnement" prefHeight="30.0" prefWidth="154.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnalimentaire" mnemonicParsing="false" onAction="#alimentaire" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnevenement" mnemonicParsing="false" onAction="#evenement" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnreclamation" mnemonicParsing="false" onAction="#reclamation" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="70.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </HBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

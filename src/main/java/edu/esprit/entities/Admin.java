@@ -13,8 +13,6 @@ public class Admin extends User {
         super(id, nom, prenom,mdp,mail,image);
     }
 
-    // Getters and setters pour les attributs supplémentaires
-
 
     @Override
     public String toString() {

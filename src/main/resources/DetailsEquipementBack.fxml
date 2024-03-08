@@ -11,6 +11,11 @@
 
 <AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.DetailsEquipementBack">
    <children>
+      <ImageView fitHeight="888.0" fitWidth="1558.0" layoutX="2.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/Colorful%20Illustrative%20Food%20Journal%20Presentation%20(15).png" />
+         </image>
+      </ImageView>
       <Pane prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #D1C1C5;" />
       <Pane layoutX="462.0" layoutY="186.0" prefHeight="605.0" prefWidth="863.0" style="-fx-background-color: #FBFBEB;">
          <children>

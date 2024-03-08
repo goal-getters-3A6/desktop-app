@@ -11,6 +11,11 @@
 
 <AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherEquipementBack">
    <children>
+      <ImageView fitHeight="888.0" fitWidth="1558.0" layoutX="-8.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/23.png" />
+         </image>
+      </ImageView>
       <Pane layoutY="-8.0" prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #365679;">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
@@ -20,7 +25,7 @@
             </ImageView>
          </children>
       </Pane>
-      <ListView fx:id="ListViewEqId" layoutX="335.0" layoutY="189.0" prefHeight="388.0" prefWidth="1115.0" style="-fx-background-color: #365679;" />
+      <ListView fx:id="ListViewEqId" layoutX="335.0" layoutY="189.0" prefHeight="369.0" prefWidth="833.0" style="-fx-background-color: #365679;" />
       <Pane layoutY="-4.0" prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #365679;">
          <children>
             <Button fx:id="btntdb1" layoutX="16.0" layoutY="161.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE">
@@ -95,16 +100,16 @@
             <Image url="@imgs/thumbnail_unnamed-removebg-preview.png" />
          </image>
       </ImageView>
-      <Label layoutX="640.0" layoutY="74.0" text="La liste des équipements " textFill="#365679">
+      <Label layoutX="689.0" layoutY="59.0" text="La liste des équipements " textFill="#365679">
          <font>
             <Font size="45.0" />
          </font>
       </Label>
-      <Button layoutX="1194.0" layoutY="611.0" mnemonicParsing="false" onAction="#AjouterEqB" prefHeight="43.0" prefWidth="255.0" style="-fx-background-color: db1f48;" text="Ajouter un équipement" textFill="WHITE">
+      <Button layoutX="616.0" layoutY="559.0" mnemonicParsing="false" onAction="#AjouterEqB" prefHeight="43.0" prefWidth="282.0" style="-fx-background-color: db1f48;" text="Ajouter un équipement" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button layoutX="1194.0" layoutY="671.0" mnemonicParsing="false" onAction="#listeAvisB" prefHeight="43.0" prefWidth="255.0" style="-fx-background-color: #db1f48;" text="Les avis" textFill="WHITE">
+      <Button layoutX="913.0" layoutY="559.0" mnemonicParsing="false" onAction="#listeAvisB" prefHeight="43.0" prefWidth="255.0" style="-fx-background-color: #db1f48;" text="Les avis" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font></Button>

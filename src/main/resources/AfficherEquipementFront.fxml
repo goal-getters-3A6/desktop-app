@@ -55,12 +55,12 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnplanning" layoutX="532.0" layoutY="69.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="#38afb5">
+      <Button fx:id="btnplanning" layoutX="532.0" layoutY="69.0" mnemonicParsing="false" onAction="#planning" prefHeight="52.0" prefWidth="159.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnequipement" layoutX="352.0" layoutY="69.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="WHITE">
+      <Button fx:id="btnequipement" layoutX="352.0" layoutY="69.0" mnemonicParsing="false" onAction="#equipement" prefHeight="52.0" prefWidth="179.0" style="-fx-background-color: transparant;" text="Equipement" textFill="#38afb5">
          <font>
             <Font size="20.0" />
          </font>
