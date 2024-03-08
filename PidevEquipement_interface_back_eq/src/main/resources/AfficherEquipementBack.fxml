@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="845.0" prefWidth="1528.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AfficherEquipementBack">
+   <children>
+      <Pane layoutY="-8.0" prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #365679;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/thumbnail_unnamed-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ListView fx:id="ListViewEqId" layoutX="335.0" layoutY="189.0" prefHeight="388.0" prefWidth="1115.0" />
+      <Pane layoutY="-4.0" prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #365679;">
+         <children>
+            <Button fx:id="btntdb1" layoutX="16.0" layoutY="161.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Button fx:id="btnequipement1" layoutX="61.0" layoutY="235.0" mnemonicParsing="false" onAction="#equipement" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Equipement" textFill="#38afb5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnabonnement1" layoutX="63.0" layoutY="401.0" mnemonicParsing="false" onAction="#abonnement" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: transparant;" text="Abonnement" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnalimentaire1" layoutX="55.0" layoutY="485.0" mnemonicParsing="false" onAction="#alimentaire" prefHeight="43.0" prefWidth="150.0" style="-fx-background-color: transparant;" text="Alimentaire" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnevenement1" layoutX="57.0" layoutY="572.0" mnemonicParsing="false" onAction="#evenement" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Evenement" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnreclamation1" layoutX="61.0" layoutY="661.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="43.0" prefWidth="138.0" style="-fx-background-color: transparant;" text="Reclamation" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnplanning1" layoutX="62.0" layoutY="316.0" mnemonicParsing="false" onAction="#planning" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: transparant;" text="Planning" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="planningimg31" fitHeight="35.0" fitWidth="44.0" layoutX="30.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/elliptique.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg21" fitHeight="35.0" fitWidth="44.0" layoutX="30.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/abonnement.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg111" fitHeight="35.0" fitWidth="44.0" layoutX="30.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/aliments.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg1111" fitHeight="34.0" fitWidth="56.0" layoutX="22.0" layoutY="577.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/evenement.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg11111" fitHeight="35.0" fitWidth="44.0" layoutX="28.0" layoutY="665.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/fichier.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="planningimg1" fitHeight="35.0" fitWidth="44.0" layoutX="30.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/plan-daffaires.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logo1" fitHeight="98.0" fitWidth="165.0" layoutX="40.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/thumbnail_unnamed-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="640.0" layoutY="74.0" text="La liste des équipements " textFill="#365679">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

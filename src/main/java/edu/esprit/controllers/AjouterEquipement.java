@@ -13,8 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -92,25 +90,13 @@ public class AjouterEquipement {
     @FXML
     private ImageView planningimg31;
 
-    @FXML
-    private Button ici;
+
     ObservableList<String> list = FXCollections.observableArrayList("Fitness", "Cardio-training", "Musculation");
 
 
     @FXML
     void initialize() {
         categEqId.setItems(list);
-
-
-
-        ImageView photoIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/photo.png")));
-        ici.setGraphic(photoIcon);  // Utilisez la variable membre ici
-        photoIcon.setFitWidth(20);
-        photoIcon.setFitHeight(20);
-        ici.getStyleClass().add("icon-button");
-
-
-
     }
 
     public static void showAlert(Alert.AlertType type, String title, String header, String text) {

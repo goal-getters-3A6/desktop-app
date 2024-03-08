@@ -20,7 +20,7 @@
             </ImageView>
          </children>
       </Pane>
-      <ListView fx:id="ListViewEqId" layoutX="335.0" layoutY="189.0" prefHeight="388.0" prefWidth="1115.0" style="-fx-background-color: #365679;" />
+      <ListView fx:id="ListViewEqId" layoutX="335.0" layoutY="189.0" prefHeight="388.0" prefWidth="1115.0" />
       <Pane layoutY="-4.0" prefHeight="878.0" prefWidth="206.0" style="-fx-background-color: #365679;">
          <children>
             <Button fx:id="btntdb1" layoutX="16.0" layoutY="161.0" mnemonicParsing="false" onAction="#tableaudebord" prefHeight="43.0" prefWidth="174.0" style="-fx-background-color: transparant;" text="Tableau de bord" textFill="WHITE">
@@ -100,13 +100,7 @@
             <Font size="45.0" />
          </font>
       </Label>
-      <Button layoutX="1194.0" layoutY="611.0" mnemonicParsing="false" onAction="#AjouterEqB" prefHeight="43.0" prefWidth="255.0" style="-fx-background-color: db1f48;" text="Ajouter un équipement" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font></Button>
-      <Button layoutX="1194.0" layoutY="671.0" mnemonicParsing="false" onAction="#listeAvisB" prefHeight="43.0" prefWidth="255.0" style="-fx-background-color: #db1f48;" text="Les avis" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
-         </font></Button>
+      <Button layoutX="1286.0" layoutY="598.0" mnemonicParsing="false" onAction="#AjouterEqB" text="Ajouter un équipement" />
+      <Button layoutX="1152.0" layoutY="599.0" mnemonicParsing="false" onAction="#listeAvisB" prefHeight="26.0" prefWidth="107.0" text="Liste des avis" />
    </children>
 </AnchorPane>

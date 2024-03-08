@@ -27,51 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AvisEquipementBack {
-
-    @FXML
-    private Button btnabonnement1;
-
-    @FXML
-    private Button btnalimentaire1;
-
-    @FXML
-    private Button btnequipement1;
-
-    @FXML
-    private Button btnevenement1;
-
-    @FXML
-    private Button btnplanning1;
-
-    @FXML
-    private Button btnreclamation1;
-
-    @FXML
-    private Button btntdb1;
-
-    @FXML
-    private ImageView logo1;
-
-    @FXML
-    private ImageView planningimg1;
-
-    @FXML
-    private ImageView planningimg111;
-
-    @FXML
-    private ImageView planningimg1111;
-
-    @FXML
-    private ImageView planningimg11111;
-
-    @FXML
-    private ImageView planningimg21;
-
-    @FXML
-    private ImageView planningimg31;
-
-
-
     private final ServiceAvisEquipement AES = new ServiceAvisEquipement();
 
     @FXML
@@ -150,35 +105,5 @@ public class AvisEquipementBack {
         }catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-
-    @FXML
-    public void tableaudebord(javafx.event.ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void equipement(javafx.event.ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void abonnement(javafx.event.ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void alimentaire(javafx.event.ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void evenement(javafx.event.ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void reclamation(javafx.event.ActionEvent actionEvent) {
-    }
-
-    @FXML
-    public void planning(javafx.event.ActionEvent actionEvent) {
     }
 }

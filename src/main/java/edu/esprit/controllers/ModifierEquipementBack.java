@@ -85,21 +85,12 @@ public class ModifierEquipementBack {
     @FXML
     private ImageView planningimg31;
 
-    @FXML
-    private Button ici1;
-
     ObservableList<String> list = FXCollections.observableArrayList("Fitness", "Cardio-training", "Musculation");
 
 
     @FXML
     void initialize() {
         categEqId.setItems(list);
-
-        ImageView photoIcon = new ImageView(new Image(getClass().getResourceAsStream("/imgs/photo.png")));
-        ici1.setGraphic(photoIcon);  // Utilisez la variable membre ici
-        photoIcon.setFitWidth(20);
-        photoIcon.setFitHeight(20);
-        ici1.getStyleClass().add("icon-button");
     }
 
 

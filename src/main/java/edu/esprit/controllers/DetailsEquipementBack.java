@@ -89,7 +89,6 @@ public class DetailsEquipementBack {
     @FXML
     private ImageView planningimg31;
 
-
     public void initData(Equipement equipement) {
         this.equipement = equipement;
         // Remplissez les champs avec les données de l'équipement
@@ -98,6 +97,7 @@ public class DetailsEquipementBack {
         CategEqId.setText(equipement.getCategEq());
         DescEqId.setText(equipement.getDescEq());
         DescEqId.setStyle(" -fx-background-color: transparent; -fx-border-color: transparent;");
+        DocEqId.setText(equipement.getDocEq());
         DocEqId.setStyle(" -fx-background-color: transparent; -fx-border-color: transparent;");
 
         String imagePath = equipement.getImageEq();

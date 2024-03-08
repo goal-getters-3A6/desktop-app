@@ -12,7 +12,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -34,31 +33,11 @@ import javafx.scene.image.Image;
 public class AfficherEquipementFront {
 
     @FXML
-    private ImageView logo1;
-    @FXML
     private GridPane gridPaneEq;
 
     @FXML
     private ScrollPane scrollPaneEq;
 
-    @FXML
-    private Pagination pagination;
-    private final int itemsPerPage = 3;
-
-
-
-    private void setEqPagination() {
-        try {
-            List<Equipement> equipements = ES.getAll();
-            int pageCount = (int) Math.ceil((double) equipements.size() / itemsPerPage);
-
-            pagination.setPageCount(pageCount);
-            pagination.setPageFactory(pageIndex -> createEqGridPane(pageIndex, equipements));
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
     private final ServiceEquipement ES = new ServiceEquipement();
     SessionManagement ss=new SessionManagement();
     String mail=ss.getEmail();
@@ -76,28 +55,35 @@ public class AfficherEquipementFront {
     }
 
     public void initialize() {
-        setEqPagination();
+        setEqGridPaneList();
     }
 
-    private GridPane createEqGridPane(int pageIndex, List<Equipement> equipements) {
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
+    private void setEqGridPaneList() {
+        try {
+            List<Equipement> equipements = ES.getAll();
 
-        int startIndex = pageIndex * itemsPerPage;
-        int endIndex = Math.min(startIndex + itemsPerPage, equipements.size());
+            int colIndex = 0;
+            int rowIndex = 0;
 
-        for (int i = startIndex; i < endIndex; i++) {
-            Equipement equipement = equipements.get(i);
-            VBox eqCard = createEqCard(equipement);
-            gridPane.add(eqCard, i % 3, i / 3);
-            GridPane.setMargin(eqCard, new Insets(10));
+            for (Equipement equipement : equipements) {
+                // Création de la carte d'équipement
+                VBox eqCard = createEqCard(equipement);
+
+                // Ajout de la carte à la grille
+                gridPaneEq.add(eqCard, colIndex, rowIndex);
+                GridPane.setMargin(eqCard, new Insets(10));
+
+                // Gestion des index pour la prochaine carte
+                colIndex++;
+                if (colIndex == 3) {
+                    colIndex = 0;
+                    rowIndex++;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        return gridPane;
     }
-
 
     private VBox createEqCard(Equipement equipement) {
         // Création de la carte VBox
@@ -130,10 +116,6 @@ public class AfficherEquipementFront {
         // Ajout du bouton "Détails"
         Button detailButton = new Button("Détails");
         detailButton.getStyleClass().add("icon-button"); // Ajoutez des styles CSS au besoin
-        detailButton.setStyle("-fx-background-color: #db1f48;"); // Utilisez la couleur de fond que vous souhaitez
-
-// Changer la couleur du texte
-        detailButton.setTextFill(javafx.scene.paint.Color.WHITE);
         detailButton.setOnAction(event -> afficherDetail(detailButton, equipement)); // Associez l'action de détail
         eqCard.getChildren().add(detailButton);
 

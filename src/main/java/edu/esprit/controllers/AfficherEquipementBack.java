@@ -258,36 +258,35 @@ public class AfficherEquipementBack {
     }
 
 
-
     @FXML
-    void abonnement(ActionEvent event) {
+    void abonnement(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void alimentaire(ActionEvent event) {
+    void alimentaire(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void equipement(ActionEvent event) {
+    void equipement(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void evenement(ActionEvent event) {
+    void evenement(javafx.event.ActionEvent event) {
 
     }
 
 
 
     @FXML
-    void planning(ActionEvent event) {
+    void planning(javafx.event.ActionEvent event) {
 
     }
 
     @FXML
-    void reclamation(ActionEvent event) {
+    void reclamation(javafx.event.ActionEvent event) {
 
     }
 

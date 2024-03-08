@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="660.0" prefWidth="899.0" style="-fx-background-color: #FBFBEB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.esprit.controllers.AvisEquipementBack">
+   <children>
+      <Pane layoutX="-6.0" layoutY="-66.0" prefHeight="725.0" prefWidth="200.0" style="-fx-background-color: #365679;" />
+      <TableView fx:id="tableViewAEqBack" layoutX="227.0" layoutY="163.0" prefHeight="200.0" prefWidth="563.0">
+        <columns>
+          <TableColumn fx:id="commAEqIdB" prefWidth="396.79998779296875" text="Les avis des équipements" />
+          <TableColumn fx:id="aeqIdB" prefWidth="165.5999755859375" text="Equipement" />
+        </columns>
+      </TableView>
+      <Label layoutX="233.0" layoutY="42.0" text="Les avis des équipements">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
